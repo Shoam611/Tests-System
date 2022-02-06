@@ -1,6 +1,6 @@
 //config
-const config = require('config');
 require("dotenv").config();
+//const config = require('config');
 //envs
 const port =  process.env.port ?  process.env.port : 3000 ;
 //DI
