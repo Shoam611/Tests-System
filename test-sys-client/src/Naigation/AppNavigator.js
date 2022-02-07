@@ -11,7 +11,6 @@ const AppNavigator = () => {
                     <Route path="questions" element={<QuestionsViews />} />
                     <Route path="tests" element={<TestsView />} />
                     <Route path="default" element={<DefaultView />} />
-                    <Route path="*" element={<> <h2>404 not found</h2> </>} />
                 </Route>
             </Routes>
         </div>
