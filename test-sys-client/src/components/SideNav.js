@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { Toggler } from "UIKit"
 const SideNav = (props) => {
     return (
@@ -5,7 +6,7 @@ const SideNav = (props) => {
             <div>
                 <Toggler title={"Manage questions"}>
                     <ul>
-                        <li>Add a question</li>
+                        <li><Link to="/app/questions">Add a question</Link> </li>
                         <li>Edit a question</li>
                     </ul>
                 </Toggler>

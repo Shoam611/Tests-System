@@ -7,7 +7,7 @@ const Header = (props) => {
               <div>Quiz-It</div>
             </Line>
             <Line>
-              <div><a href='#'>GitHub</a></div>
+              <div><a href='https://github.com/Shoam611/Tests-System'>GitHub</a></div>
             </Line>
           </Line>
     )

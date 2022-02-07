@@ -1,5 +1,5 @@
-import { Outlet, Link } from 'react-router-dom';
-import { Rows, Line, Icon, Columns, Toggler, Accordion } from 'UIKit';
+import { Outlet, Routes, Route } from 'react-router-dom';
+import { Rows, Columns } from 'UIKit';
 import Header from 'components/header';
 import SideNav from './components/SideNav'
 import './App.css';
@@ -12,7 +12,7 @@ function App() {
           <Columns>
             <SideNav />
             <div>
-              
+              <Outlet />
             </div>
           </Columns>
         </div>
