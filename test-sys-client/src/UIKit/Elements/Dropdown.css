@@ -1,0 +1,47 @@
+.Dropdown {
+    position: relative;
+    min-width: 200px;
+}
+
+.Dropdown .trigger {
+    border: 1px solid var(--border-color);
+    padding: var(--gap-s);
+}
+
+.Dropdown .trigger:hover  {
+    background-color: var(--light-color);
+    cursor: pointer;
+}
+
+.Dropdown .trigger:active {
+    background-color: var(--background-color);
+}
+
+.Dropdown .list {
+    border: 1px solid var(--border-color);
+    position: absolute;
+    right: 0;
+    top: 100%;
+    left: 0;
+    overflow: auto;
+    height: 120px;
+}
+
+.Dropdown .list li {
+    padding: var(--gap-s);
+    background-color: var(--background-primary);
+    border-top: 1px solid var(--border-color);
+}
+
+.Dropdown .list li:hover {
+    background-color: var(--light-color);
+    cursor: pointer;
+}
+
+.Dropdown .list li:active {
+    opacity: 0.8;
+}
+
+.Dropdown .list li:first-child {
+    border-top: 3px solid var(--border-color);
+}

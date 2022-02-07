@@ -1,0 +1,8 @@
+.Article {
+    text-align: center;
+}
+
+.Article .content {
+    background-color: var(--background-color);
+    padding: var(--gap);
+}

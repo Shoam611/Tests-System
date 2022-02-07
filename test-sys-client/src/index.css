@@ -1,8 +1,43 @@
+:root{
+  --main-color: #202020;
+  --secondary-color: #202020;
+  --accent-color: #202020;
+  --font-family: 'horizon','retro-team','wild-river-a','wild-river-b','Open Sans', sans-serif;
+  
+   --primay-color-2: #292961;
+  --primay-color-3: #c5c5f5;
+  --primay-color: #c5c5c5;
+  --accent: #1f75cb;
+  --light-color: #f9f9f9;
+  
+  --background-primary: #fff;
+  --background-color: #f1f1f1;
+  --border-color: #e1e1e1;
+  
+  --text-color: #fff;
+  --menue-width:320px;
+  --gap: 20px;
+  --gap-m: 15px;
+  --gap-s: 10px;
+}
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+@font-face {
+  font-family: 'horizon';
+  src: local('Rajdhani'), url(./assets/fonts/EventHorizon.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'retro-team';
+  src: local('Rajdhani'), url(./assets/fonts/Retro\ Team.otf) format('truetype');
+}
+@font-face {
+  font-family: 'wild-river-a';
+  src: local('Rajdhani'), url(./assets/fonts/wild\ river.otf) format('truetype');
+}
+@font-face {
+  font-family: 'wild-river-b';
+  src: local('Rajdhani'), url(./assets/fonts/wild\ river.ttf) format('truetype');
 }

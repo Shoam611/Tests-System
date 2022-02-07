@@ -1,0 +1,11 @@
+.Input {
+    border: 1px solid var(--border-color);
+    width: -webkit-fill-available;
+    
+}
+
+.Input input {
+    border: none;
+    width: -webkit-fill-available;
+    padding: var(--gap-s);
+}
