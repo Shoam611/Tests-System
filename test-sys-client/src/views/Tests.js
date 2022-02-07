@@ -6,7 +6,7 @@ const DefaultView = () => {
             <h2>In navigation test view</h2> 
             <ul>
                 <li>
-                    <Link index to="/test/default"> view</Link>
+                    <Link to="/test/default"> view</Link>
                 </li>
                 <li>
                     <Link to="/test/tests">tests view</Link>

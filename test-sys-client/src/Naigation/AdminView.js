@@ -6,7 +6,7 @@ const DefaultView = () => {
             <h2>In App Overview</h2> 
             <ul>
                 <li>
-                    <Link index to="/test">to navigation test view</Link>
+                    <Link to="/test">to navigation test view</Link>
                 </li>
                 <li>
                     <Link to="/app">to app view</Link>

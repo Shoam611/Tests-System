@@ -5,12 +5,12 @@ import DefaultView from 'views/defaultView';
 import TestsView from '../views/TestsView';
 const AppNavigator = () => {
     return (
-        <div>
+        <div id='AppNavigatorContainer'>
             <Routes>
                 <Route path="/" element={<App />}>
                     <Route path="questions" element={<QuestionsViews />} />
-                    <Route path="tests" element={<TestsView />} />
-                    <Route path="default" element={<DefaultView />} />
+                    <Route path="tests"     element={<TestsView />} />
+                    <Route path="default"   element={<DefaultView />} />
                 </Route>
             </Routes>
         </div>

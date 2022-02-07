@@ -13,18 +13,20 @@ const SideNav = (props) => {
                 </Toggler>
             </div>
             <div>
-                <Toggler title={"Manage Tests"}>
+                <Toggler title={"Manage questions"}>
                     <ul>
-                        <li>Add a tests</li>
-                        <li>Edit tests</li>
+                        <li><Link to="/app/questions">Add a question</Link> </li>
+                        <li><Link to="/app/tests">Remove a question</Link> </li>
+                        <li><Link to="/app/default">Remove a question</Link> </li>
                     </ul>
                 </Toggler>
             </div>
             <div>
                 <Toggler title={"Manage questions"}>
                     <ul>
-                        <li>Add a question</li>
-                        <li>Edit a question</li>
+                        <li><Link to="/app/questions">Add a question</Link> </li>
+                        <li><Link to="/app/tests">Remove a question</Link> </li>
+                        <li><Link to="/app/default">Remove a question</Link> </li>
                     </ul>
                 </Toggler>
             </div>
