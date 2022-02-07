@@ -14,6 +14,9 @@ const DefaultView = () => {
                 <li>
                     <Link to="/test/questions">question view</Link>
                 </li>
+                <li>
+                    <Link to="/">back to admin view</Link>
+                </li>
             </ul>
             <hr />
             <Outlet />
