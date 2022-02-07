@@ -6,8 +6,9 @@ const SideNav = (props) => {
             <div>
                 <Toggler title={"Manage questions"}>
                     <ul>
-                        <li><Link to="/app/questions">Add a question</Link> </li>
-                        <li>Edit a question</li>
+                        <li><Link to="/questions">Add a question</Link> </li>
+                        <li><Link to="/tests">Remove a question</Link> </li>
+                        <li><Link to="/default">Remove a question</Link> </li>
                     </ul>
                 </Toggler>
             </div>
