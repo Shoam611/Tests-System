@@ -8,7 +8,6 @@ const Toggler = props => {
 
     const handleDisplay = () => {
         setIsDisplay(!isDisplay);
-        //console.log("to display: " +!isDisplay);
     }
     const renderToggle = () => {
         if (isDisplay) {
@@ -18,12 +17,14 @@ const Toggler = props => {
     }
 
     return (
-   <div>
+   <div style={{height:"min-content"}}>
             <Line justify="between">
                 <h3>{props.title}</h3>
-                <Btn onClick={handleDisplay} i={isDisplay ?"sort-up": "sort-down"}>{!isDisplay ? ("Expand" + "  " ): "Collapse"}</Btn>
+                <Btn onClick={handleDisplay} i={isDisplay ?"sort-up": "sort-down"}>{!isDisplay ? "Expande" : "Collapse"}</Btn>
             </Line>
-            {renderToggle()}
+            <>
+                {renderToggle()}
+            </>
    </div>
     )
 }
