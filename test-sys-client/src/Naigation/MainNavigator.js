@@ -1,18 +1,19 @@
-import { Routes, Route, Outlet } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+
+import AppNavigator from './AppNavigator';
+import TestNavigator from './TestNavigator';
 import App from 'App';
 import DefaultView from 'views/defaultView';
 import TestsView from '../views/TestsView'
 import QuestionsView from '../views/QuestionsView'
+
+
 const MainNavigator = () => {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<App />}>
-          <Route path="questions" element={<QuestionsView />} />
-          <Route path="tests" element={<TestsView />} />
-          <Route path="default" element={<DefaultView />} />
-          <Route path="*" element={<> <h2>404 not found</h2> </>} />
-        </Route>
+          <Route path="/app/*"  element={<AppNavigator  />} />
+          <Route path="/test/*" element={<TestNavigator />} />
       </Routes>
     </div>
 
