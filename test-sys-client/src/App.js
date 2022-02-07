@@ -20,7 +20,6 @@ function App() {
             </div>
           </Columns>
         </div>
-
       </Rows >
     </div >
   );
