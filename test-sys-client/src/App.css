@@ -9,15 +9,15 @@ html, body, #root, .App {
 a{
   color: inherit;
   text-decoration:none;
-}
-a.active {
-  /* color:var(--accent); */
-  color:#7057b1 ;
   font-weight: var(--font-weight-m);
+}
+
+a.active {
+  color:var(--accent);
 }
 ul {
   list-style: none;
-  margin: 0;
+  margin-left: var(--gap-s);
   padding: 0;
 }
 input :active ,input:focus{

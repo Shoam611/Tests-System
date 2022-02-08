@@ -1,5 +1,5 @@
 import './Toggler.css'
-import { useState } from "react";
+import React, { useState } from "react";
 import { Line, Box,Icon } from "UIKit";
 import AnimateHeight from 'react-animate-height';
 
@@ -14,7 +14,7 @@ const Toggler = props => {
         setTogggleIconClass(isDisplay ? 'toggle-icon-right' : 'toggle-icon-down');
     }
     return (
-        < >
+        <React.Fragment>
             <Box onClick={handleDisplay} className={props.className?props.className:' '}>
                 <Line justify="between" >
                     <h3 href='#' className="heading">{props.title}</h3>
@@ -24,7 +24,7 @@ const Toggler = props => {
             <AnimateHeight duration={300} height={height}>
                 {props.children}
             </AnimateHeight>
-        </>
+        </React.Fragment>
     )
 }
 

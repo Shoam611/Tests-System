@@ -75,7 +75,8 @@ export const NavLinkListItem = (props) => {
 
 export const NavLinkItem = (props) => {
     return (
-        <li><Box><NavLink to={props.to}>{props.children}</NavLink></Box></li>
+       // <li><Box><NavLink to={props.to}>{props.children}</NavLink></Box></li>
+         <li><NavLink to={props.to}><Box>{props.children}</Box></NavLink></li>
     )
 }
 export default SideNav

@@ -24,8 +24,8 @@
     max-width: 22em;
     position: relative;
     padding:0;
+    margin: 0;
     box-sizing: border-box;
-    color: #fff;
     background: #fff;
     background-clip: padding-box;
     border: solid 5px transparent;
@@ -39,15 +39,22 @@
     bottom: 0;
     left: 0;
     z-index: -1;
-    margin: 0px -5px 0px 0px;
+    margin-right:-5px;
     border-radius: inherit;
     background: linear-gradient(to bottom, var(--midtone-color), var(--dark-color), var(--midtone-color));
 }
-* li {
-    margin: var(--gap-xs) var(--gap-xs) ;
-    font-weight: var(--font-weight-m);
+
+* li,li {
     color: var(--text-color-dark);
+} 
+* li{
+    padding-left: var(--gap-l); 
+    margin-right: var(--gap-m);
 }
-* a{
-    padding-left: var(--gap-m);
+li{
+    padding-left: var(--gap-xs); 
+}
+a{
+    padding: 0;
+    margin: 0;
 }

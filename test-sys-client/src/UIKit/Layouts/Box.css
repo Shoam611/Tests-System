@@ -2,8 +2,8 @@
   border: none;
   border-radius: 5px;
   padding: var(--gap-s) var(--gap-m);
+  transition: 0.3s;
 }
 .Box:hover {
-  /* background-color: var(--background-light); */
   background-color: var(--midtone-color);
 }
