@@ -1,7 +1,13 @@
-const repo = require("../dal/repository.js");
-
 class QuestionsController {
-  //Get Questions
+  
+  constructor(proxy)
+  {
+
+  }
+  runRequest(){
+    //call service or repository
+  }
+
   getAllQuestions = () => {
     return db.getAllQuestions();
   };
