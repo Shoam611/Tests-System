@@ -9,8 +9,25 @@ const AppNavigator = () => {
             <Routes>
                 <Route path="/" element={<App />} >
                     <Route path="questions/questions" element={<QuestionsViews />} />
-                    <Route path="questions/Edit"     element={<TestsView />} />
-                    <Route path="default"   element={<DefaultView />} />
+                    <Route path="questions/edit" element={<QuestionsViews />} />
+                   
+                    <Route path="qweezes/qweezes" element={<QuestionsViews />} />
+                    <Route path="qweezes/edit" element={<QuestionsViews />} />
+                   
+                    <Route path="topics/topics" element={<QuestionsViews />} />
+                    <Route path="topics/edit" element={<QuestionsViews />} />
+
+                    <Route path="reports/qweezes" element={<QuestionsViews />} />
+                    <Route path="reports/respondant" element={<QuestionsViews />} />
+                    <Route path="reports/statistics" element={<QuestionsViews />} />
+
+                    <Route path="accounts/fields" element={<QuestionsViews />} />
+                    <Route path="accounts/details" element={<QuestionsViews />} />
+                    <Route path="accounts/lang" element={<QuestionsViews />} />
+                    <Route path="accounts/ui" element={<QuestionsViews />} />
+                    
+                    <Route path="admin/permissions" element={<QuestionsViews />} />
+                    <Route path="admin/annount" element={<QuestionsViews />} />
                 </Route>
             </Routes>
         </div>
