@@ -1,13 +1,10 @@
 .Box {
-    padding: var(--gap);
-    box-shadow: 1px 1px 1px #e1e1e1;
-    max-width: 300px;
-    min-height: 100px;
     display: flex;
-    flex-direction: column;
-    gap: var(--gap);
-    justify-content: center;
-    align-items: center;
-    margin: var(--gap);
-    border: 1px solid var(--primay-color);
+    border: none;
+    border-radius:5px;
+    padding: var(--gap-s) 0;
+    /* box-shadow: 1px 1px 1px #e1e1e1; */
+}
+.Box:hover{
+    background-color: var(--background-light);
 }

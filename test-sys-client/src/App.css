@@ -10,11 +10,9 @@ a{
   color: inherit;
   text-decoration:none;
 }
-a:hover {
-  text-decoration: underline;
-}
 a.active {
-  font-weight: 600;
+  color:var(--accent);
+  font-weight: var(--font-weight-m);
 }
 ul {
   list-style: none;

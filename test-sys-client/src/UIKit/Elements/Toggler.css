@@ -1,0 +1,9 @@
+.heading{
+    /* color: var(--text-color-dark); */
+    font-weight:  var(--title-weight);
+    letter-spacing: 0.05rem;
+    font-size: var(--font-size-m);
+}
+.heading.active {
+    color:#7057b1 ;
+}

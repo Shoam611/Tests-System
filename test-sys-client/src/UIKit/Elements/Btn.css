@@ -1,11 +1,12 @@
 .Btn {
     background-color: var(--accent);
     padding: var(--gap-m) var(--gap);
-    color: var(--text-color);
+    color: var(--text-color-light);
     width: -mz-fit-content;
     width: fit-content;
+    color:#fff;
+    font-size: var(--font-size-m);
 }
-
 .Btn:hover {
     cursor: pointer;
     opacity: 0.8;

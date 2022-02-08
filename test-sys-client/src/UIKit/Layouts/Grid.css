@@ -5,7 +5,8 @@
 
 
 .Grid.rows > :nth-child(1) {
-    background-color: var(--primay-color);
+    box-shadow:var(--shadow-bottom);
+    /* background-color: var(--background-light); */
     color: var(--text-color);
     padding: 0 var(--gap);
 }
@@ -18,5 +19,5 @@
 }
 
 .Grid.columns > :nth-child(1) {
-    background-color: var(--light-color);
+    background-color: transparent/* var(--light-color);*/;
 }
