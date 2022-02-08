@@ -1,9 +1,7 @@
 .Box {
-    display: flex;
     border: none;
     border-radius:5px;
     padding: var(--gap-s) 0;
-    /* box-shadow: 1px 1px 1px #e1e1e1; */
 }
 .Box:hover{
     background-color: var(--background-light);
