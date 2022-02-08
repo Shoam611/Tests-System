@@ -4,6 +4,7 @@ const writeFile = util.promisify(fs.writeFile);
 const readFile = util.promisify(fs.readFile);
 
 const file = './db-server/questions-db/questions.json';
+
 class FileDbContext {
     constructor() { /*this.init();*/ }
     init()
@@ -29,3 +30,5 @@ const TestActions = () => {
     })();
 }
 TestActions();
+
+module.exports = FileDbContext;

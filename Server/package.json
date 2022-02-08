@@ -4,6 +4,7 @@
   "description": "backend module for online tests system",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
