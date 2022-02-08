@@ -28,9 +28,7 @@
     color: #fff;
     background: #fff;
     background-clip: padding-box;
-   /* !importanté */
     border: solid 5px transparent;
-   /* !importanté */
     border-radius: 0.5em;
 }
 .gradient-box:before {
@@ -42,16 +40,14 @@
     left: 0;
     z-index: -1;
     margin: 0px -5px 0px 0px;
-   /* !importanté */
     border-radius: inherit;
-   /* !importanté */
     background: linear-gradient(to bottom, var(--midtone-color), var(--dark-color), var(--midtone-color));
 }
-li {
+* li {
     margin: var(--gap-xs) var(--gap-xs) ;
     font-weight: var(--font-weight-m);
     color: var(--text-color-dark);
 }
-a{
+* a{
     padding-left: var(--gap-m);
 }

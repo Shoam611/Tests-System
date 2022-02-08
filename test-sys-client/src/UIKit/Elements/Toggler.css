@@ -1,13 +1,10 @@
-.Toggler {
-  width: 100%;
-}
 .heading {
-  font-weight: var(--title-weight);
+  font-weight: var(--font-weight-m);
   letter-spacing: 0.05rem;
   font-size: var(--font-size-m);
   margin: 0;
 }
-.heading.active {
+.active .heading {
   color: #7057b1;
 }
 .toggle-icon-down {
