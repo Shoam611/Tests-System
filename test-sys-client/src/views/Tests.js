@@ -2,11 +2,11 @@ import { Link, Outlet } from "react-router-dom";
 
 const DefaultView = () => {
     return (
-        <div>
+        <div >
             <h2>In navigation test view</h2> 
             <ul>
                 <li>
-                    <Link to="/test/default"> view</Link>
+                    <Link to="/test/default"> view </Link>
                 </li>
                 <li>
                     <Link to="/test/tests">tests view</Link>

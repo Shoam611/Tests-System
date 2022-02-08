@@ -17,7 +17,7 @@ const Toggler = props => {
         <React.Fragment>
             <Box onClick={handleDisplay} className={props.className?props.className:' '}>
                 <Line justify="between" >
-                    <a href='#' className="heading">{props.title}</h3>
+                    <a href='#' className="heading">{props.title}</a>
                     <div className={togggleIconClass}> <Icon i="chevron-right" /></div>
                 </Line>
             </Box>

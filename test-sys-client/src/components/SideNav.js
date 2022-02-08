@@ -1,10 +1,9 @@
-import { useState } from "react";
+import React ,{ useState } from "react";
 import { NavLink } from "react-router-dom"
 import AnimateHeight from 'react-animate-height';
-import { Toggler, Box, Line, Icon } from "UIKit";
+import { Box, Line, Icon } from "UIKit";
 import './SideNav.css'
 const SideNav = (props) => {
-
     return (
         <div className='SideNav'>
             <NavLinkLists>
@@ -39,6 +38,7 @@ const SideNav = (props) => {
         </div>
     )
 }
+
 export const NavLinkLists = props =>{
     return (
         <ul className='gradient-box'>
@@ -46,11 +46,11 @@ export const NavLinkLists = props =>{
         </ul>
     )
 }
-
 export const NavLinkListItem = (props) => {
     const [isDisplay, setIsDisplay] = useState(false);
     const [height, setHeight] = useState(0);
     const [togggleIconClass, setTogggleIconClass] = useState('toggle-icon-right')
+    
     const handleDisplay = () => {
         setIsDisplay(!isDisplay);
         setHeight(!isDisplay ? 'auto' : 0);
@@ -72,11 +72,9 @@ export const NavLinkListItem = (props) => {
         </li>
     )
 }
-
 export const NavLinkItem = (props) => {
     return (
-       // <li><Box><NavLink to={props.to}>{props.children}</NavLink></Box></li>
-         <li><NavLink to={props.to}><Box>{props.children}</Box></NavLink></li>
+        <li><NavLink to={props.to}><Box>{props.children}</Box></NavLink></li>
     )
 }
 export default SideNav
