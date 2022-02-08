@@ -7,21 +7,23 @@ import Icon from './Icon';
 const Toggler = props => {
     const [isDisplay, setIsDisplay] = useState(false);
     const [height, setHeight] = useState(0);
-
+    const [togggleIconClass, setTogggleIconClass] = useState('toggle-icon-right')
     const handleDisplay = () => {
-        console.log('object');
         setIsDisplay(!isDisplay);
-        setHeight(!isDisplay ? 'auto' : 0)
+        setHeight(!isDisplay ? 'auto' : 0);
+        setTogggleIconClass(isDisplay ? 'toggle-icon-right' : 'toggle-icon-down');
     }
     return (
-        <div >
+        <div className='Toggler'>
+            <Box onClick={handleDisplay}>
                 <Line justify="between">
-            <Box onCklick={()=>{handleDisplay();}}>
                     <h3 className="heading">{props.title}</h3>
-                    <Icon i={isDisplay ? "sort-up" : "sort-down"} ></Icon>
-            </Box>
+                    <div className={togggleIconClass}>
+                        <Icon i="chevron-right" />
+                    </div>
                 </Line>
-            <AnimateHeight duration={400} height={height}>
+            </Box>
+            <AnimateHeight duration={300} height={height}>
                 <div>
                     {props.children}
                 </div>

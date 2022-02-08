@@ -1,8 +1,29 @@
-.heading{
-    font-weight:  var(--title-weight);
-    letter-spacing: 0.05rem;
-    font-size: var(--font-size-m);
+.Toggler {
+  width: 100%;
+}
+.heading {
+  font-weight: var(--title-weight);
+  letter-spacing: 0.05rem;
+  font-size: var(--font-size-m);
+  margin: 0;
 }
 .heading.active {
-    color:#7057b1 ;
+  color: #7057b1;
 }
+.toggle-icon-down {
+  transform: rotate(90deg);
+  transition: 0.3s;
+}
+.toggle-icon-right {
+  transform: rotate(0deg);
+  transition: 0.3s;
+}
+/* .toggle-content-show {
+    height: auto;
+    transition: 5s;
+}
+.toggle-content-collapse {
+    overflow: hidden;
+  height: 0;
+  transition: 5s;
+} */

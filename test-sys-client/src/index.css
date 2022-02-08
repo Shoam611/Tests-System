@@ -17,7 +17,9 @@
   --font-weight-h:700;
   --text-color-light: rgb(223, 223, 223);
   --text-color-dark: rgb(87, 87, 87);
+  --font-size-s:0.7rem;
   --font-size-m:1rem;
+  --font-size-l:1.3rem;
   /* layouts */
   --menue-width:360px;
   --gap: 20px;
