@@ -1,9 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
+import ReactDOM from 'react-dom';
 import Navigator from './Naigation/MainNavigator'
 import {BrowserRouter} from 'react-router-dom'
-import Grid from 'UIKit/Layouts/Grid';
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>

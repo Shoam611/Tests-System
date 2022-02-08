@@ -1,0 +1,51 @@
+/*base settings*/
+.gradient-box {
+    width: 100%;
+    height: fit-content;
+    margin: 0;
+    position: relative;
+    padding:0;
+    box-sizing: border-box;
+    background: #fff;
+    background-clip: padding-box;
+    border: solid 5px transparent;
+    border-radius: 0.5em;
+}
+.gradient-box:before {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: linear-gradient(to bottom, var(--midtone-color), var(--dark-color), var(--midtone-color));
+}
+
+/*flow direction*/
+.gradient-box[to="bottom"]::before{
+    background: linear-gradient(to bottom, var(--midtone-color), var(--dark-color), var(--midtone-color));
+}
+.gradient-box[to="left"]::before{
+    background: linear-gradient(to left, var(--midtone-color), var(--dark-color), var(--midtone-color));
+}
+
+/*present for*/
+.gradient-box[right]:before
+{
+    content: ' ';
+    margin-right: -5px;
+}
+.gradient-box[left]:before{
+    content: ' ';
+    margin-left: -5px;
+}
+.gradient-box[top]:before{
+    content: ' ';
+    margin-top: -5px;
+}
+.gradient-box[bottom]:before{
+    content: ' ';
+    margin-bottom: -5px;
+} 

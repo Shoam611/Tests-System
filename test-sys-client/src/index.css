@@ -20,6 +20,9 @@
   --font-size-s:0.7rem;
   --font-size-m:1rem;
   --font-size-l:1.3rem;
+  --letter-space-s:0.05rem;
+  --letter-space-m:0.1rem;
+  --letter-space-l:0.155rem;
   /* layouts */
   --menue-width:360px;
   --gap: 20px;
@@ -29,9 +32,11 @@
   --gap-xs: 3px;
 }
 body {
-  font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* font-family:'retro-team'; */
+  letter-spacing:  var(--letter-space-s); 
+  font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',sans-serif;
 }
 
 @font-face {

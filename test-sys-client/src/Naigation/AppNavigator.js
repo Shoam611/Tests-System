@@ -8,8 +8,8 @@ const AppNavigator = () => {
         <div id='AppNavigatorContainer'>
             <Routes>
                 <Route path="/" element={<App />} >
-                    <Route path="questions" element={<QuestionsViews />} />
-                    <Route path="tests"     element={<TestsView />} />
+                    <Route path="questions/questions" element={<QuestionsViews />} />
+                    <Route path="questions/Edit"     element={<TestsView />} />
                     <Route path="default"   element={<DefaultView />} />
                 </Route>
             </Routes>
