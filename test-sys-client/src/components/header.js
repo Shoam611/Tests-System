@@ -5,20 +5,17 @@ const Header = (props) => {
   return (
     <Line justify="between">
       <Line>
-        <Box>
-          <Icon i="holly-berry" />
-        </Box>
-        <div>
+          <Icon i="holly-berry" className="header-item" color='#7057b1' fontSize="1.5rem"/>
             <Link to="/" className="header-title">
                 Quiz-It
             </Link>
-        </div>
       </Line>
       <Line>
-        <div>
-          <Box>
+        <div  className="header-item">
             <a href='https://github.com/Shoam611/Tests-System'>GitHub</a>
-          </Box>
+        </div>
+        <div className="header-item">
+            <a  href='https://github.com/Shoam611/Tests-System'>DockerHub</a>
         </div>
       </Line>
     </Line>

@@ -4,5 +4,6 @@
   padding: var(--gap-s) var(--gap-m);
 }
 .Box:hover {
-  background-color: var(--background-light);
+  /* background-color: var(--background-light); */
+  background-color: var(--midtone-color);
 }

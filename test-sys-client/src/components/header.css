@@ -1,10 +1,22 @@
-.header-title{
-    margin: 0;
-    text-align: center;
-    font-weight: var(--font-weight-h);
-    font-size: var(--font-size-l);
-    padding: 0.5em;
+.header-title {
+  margin: 0;
+  text-align: center;
+  font-weight: var(--font-weight-h);
+  padding: 1em;
+  font-size: var(--font-size-m);
+  transition: 0.3s;
 }
-.header-title:hover{
-color: var(--accent);
+.header-title:hover {
+  color: var(--accent);
+}
+.header-item{
+  margin: 0;
+  text-align: center;
+  font-weight: var(--font-weight-m);
+  padding: 0.6em;
+  transition: 0.3s;
+}
+.header-item:hover {
+    color: var(--accent);
+    transform: translateY(-5px);
 }
