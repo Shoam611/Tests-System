@@ -24,7 +24,7 @@
   --letter-space-m:0.1rem;
   --letter-space-l:0.155rem;
   /* layouts */
-  --menue-width:360px;
+  --menue-width: minmax(300px,15vw);
   --gap: 20px;
   --gap-l: 24px;
   --gap-m: 12px;

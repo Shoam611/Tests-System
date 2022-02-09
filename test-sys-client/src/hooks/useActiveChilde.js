@@ -6,7 +6,7 @@ const useActiveChild = (childs) => {
     const [location] = useState(window.location.pathname)
     useEffect(() => {
         setHasActive(pathes.indexOf(location)!== -1)   
-    }, [...childs, ...pathes, setHasActive,window.location.pathname , location] );
+    }, [location,...pathes, setHasActive,window.location.pathname , ] );
     return hasActive;
 }
 export default useActiveChild;

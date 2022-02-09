@@ -8,13 +8,13 @@ const SideNav = () => {
     return (
         <div className='SideNav'>
             <GradientBorder right >
-                <NavLinkListItem title={"Manage questions"} >
-                        <NavLinkItem  to="/app/questions/questions">Add a question </NavLinkItem>
-                        <NavLinkItem  to="/app/questions/edit">Edit questions    </NavLinkItem>
-                </NavLinkListItem>
+                    <NavLinkListItem title={"Manage questions"} >
+                        <NavLinkItem to="/app/questions/questions">Add a question </NavLinkItem>
+                        <NavLinkItem to="/app/questions/edit">Edit questions    </NavLinkItem>
+                    </NavLinkListItem>
                 <NavLinkListItem title={"Manage Qweezes"} className="">
-                        <NavLinkItem to="/app/qweezes/qweezes">Create new qweez</NavLinkItem>
-                        <NavLinkItem to="/app/qweezes/edit">Edit quweezes      </NavLinkItem>
+                    <NavLinkItem to="/app/qweezes/qweezes">Create new qweez</NavLinkItem>
+                    <NavLinkItem to="/app/qweezes/edit">Edit quweezes      </NavLinkItem>
                 </NavLinkListItem>
                 <NavLinkListItem title={"Manage Topics"}>
                     <NavLinkItem to="/app/topics/topics">Add a new topic</NavLinkItem>
