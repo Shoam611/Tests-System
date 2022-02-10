@@ -9,7 +9,7 @@ const Input = (props) => {
                 placeholder={props.placeholder}
                 min={props.min}
                 max={props.max}
-                maxlength={props.maxlength}
+                maxLength={props.maxLength}
             />
         </div>
     )
