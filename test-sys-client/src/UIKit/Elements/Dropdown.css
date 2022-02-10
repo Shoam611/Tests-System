@@ -1,6 +1,7 @@
 .Dropdown {
   position: relative;
   min-width: 200px;
+
 }
 .Dropdown .trigger {
   padding: var(--gap-s);

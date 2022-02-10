@@ -1,6 +1,6 @@
 .AddQForm {
   width: 95%;
-  height:95% ;
+  height:fit-content ;
   overflow-y: scroll;
   background-color: var(--light-color);
   display: grid;
@@ -11,16 +11,21 @@
   color: var(--accent);
 }
 .form-container {
-    overflow-y:scroll;
+    overflow-y:auto;
+    overflow-x: hidden;
     background-color: var(--midtone-color);
     display: flex;
     flex-direction: column;
     gap: var(--gap-l);
     width: 70%;
     padding: 0 var(--gap-m) ;
-    height:100vh;
+    height:fit-content;
     margin-bottom: calc(var(--gap-l) * 300);
 
+}
+form{
+  height: min-content;
+  width: auto;
 }
 hr{
   background-color: var(--accent);
