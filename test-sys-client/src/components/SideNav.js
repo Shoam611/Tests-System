@@ -9,31 +9,31 @@ const SideNav = () => {
         <div className='SideNav'>
             <GradientBorder right >
                 <NavLinkListItem title={"Manage questions"} >
-                    <NavLinkItem to="/app/questions/questions">Add a question </NavLinkItem>
-                    <NavLinkItem to="/app/questions/edit">Edit questions    </NavLinkItem>
+                    <NavLinkItem to="/app/questions/questions">New Question </NavLinkItem>
+                    <NavLinkItem to="/app/questions/edit">Edit a Questions    </NavLinkItem>
                 </NavLinkListItem>
                 <NavLinkListItem title={"Manage Qweezes"} className="">
-                    <NavLinkItem to="/app/qweezes/qweezes">Create new qweez</NavLinkItem>
-                    <NavLinkItem to="/app/qweezes/edit">Edit quweezes      </NavLinkItem>
+                    <NavLinkItem to="/app/qweezes/qweezes">Create a Qweez</NavLinkItem>
+                    <NavLinkItem to="/app/qweezes/edit">Edit Qweezes      </NavLinkItem>
                 </NavLinkListItem>
                 <NavLinkListItem title={"Manage Topics"}>
-                    <NavLinkItem to="/app/topics/topics">Add a new topic</NavLinkItem>
-                    <NavLinkItem to="/app/topics/edit">Edit topics </NavLinkItem>
+                    <NavLinkItem to="/app/topics/topics">Add New Topic</NavLinkItem>
+                    <NavLinkItem to="/app/topics/edit">Edit Topics </NavLinkItem>
                 </NavLinkListItem>
                 <NavLinkListItem title={"Reports"}>
-                    <NavLinkItem to="/app/reports/qweezes"> Generate report by qweez </NavLinkItem>
-                    <NavLinkItem to="/app/reports/respondant">Generate report by respondent</NavLinkItem>
-                    <NavLinkItem to="/app/reports/statistics">Questions statistics </NavLinkItem>
+                    <NavLinkItem to="/app/reports/qweezes"> Generate Report by Qweez </NavLinkItem>
+                    <NavLinkItem to="/app/reports/respondant">Generate Report by Respondent</NavLinkItem>
+                    <NavLinkItem to="/app/reports/statistics">Questions Statistics </NavLinkItem>
                 </NavLinkListItem>
                 <NavLinkListItem title={"Manage Account"}>
-                    <NavLinkItem to="/app/accounts/fields">  Login form fields </ NavLinkItem>
-                    <NavLinkItem to="/app/accounts/details"> Account details      </NavLinkItem>
-                    <NavLinkItem to="/app/accounts/lang">    Customize language     </NavLinkItem>
+                    <NavLinkItem to="/app/accounts/fields">  Login Form Fields </ NavLinkItem>
+                    <NavLinkItem to="/app/accounts/details"> Account Details      </NavLinkItem>
+                    <NavLinkItem to="/app/accounts/lang">    Customize Language     </NavLinkItem>
                     <NavLinkItem to="/app/accounts/ui">      UI Customization    </NavLinkItem>
                 </NavLinkListItem>
                 < NavLinkListItem title={"Manage Administrators"}>
-                    <NavLinkItem to="/app/admin/permissions">Manage admin permissions         </NavLinkItem>
-                    <NavLinkItem to="/app/admin/annount">Create and activate new administartor</NavLinkItem>
+                    <NavLinkItem to="/app/admin/permissions">Manage Admin Permissions         </NavLinkItem>
+                    <NavLinkItem to="/app/admin/annount">Create And Activate New Administartor</NavLinkItem>
                 </NavLinkListItem>
             </GradientBorder>
         </div>
