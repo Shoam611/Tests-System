@@ -55,7 +55,7 @@ const Dropdown = (props) => {
                 return item.value;
             }
         }
-        return 'Select a Type';
+        return 'Select option';
     }
 
     return (

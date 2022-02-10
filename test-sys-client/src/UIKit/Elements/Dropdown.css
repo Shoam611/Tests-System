@@ -1,11 +1,11 @@
 .Dropdown {
   position: relative;
   min-width: 200px;
-
 }
 .Dropdown .trigger {
   padding: var(--gap-s);
   background-color: var(--background-primary);
+  z-index: 10;
 }
 .Dropdown .trigger[display="open"] {
   border: 1px solid var(--accent);
@@ -15,6 +15,7 @@
   display: block;
 }
 .Dropdown .list {
+  z-index: 20;
   border: 1px solid var(--accent);
   border-top: none;
   position: absolute;

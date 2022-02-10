@@ -1,6 +1,6 @@
 .AddQForm {
   width: 95%;
-  height:fit-content ;
+  height:auto;
   overflow-y: scroll;
   background-color: var(--light-color);
   display: grid;
@@ -11,37 +11,35 @@
   color: var(--accent);
 }
 .form-container {
-    overflow-y:auto;
-    overflow-x: hidden;
+    overflow-y:scroll;
     background-color: var(--midtone-color);
     display: flex;
     flex-direction: column;
     gap: var(--gap-l);
-    width: 70%;
+    width: inherit;
     padding: 0 var(--gap-m) ;
     height:fit-content;
     margin-bottom: calc(var(--gap-l) * 300);
 
 }
 form{
-  height: min-content;
   width: auto;
+  overflow-y:scroll;
 }
 hr{
   background-color: var(--accent);
   height: var(--gap-xs);
   width: 100%;
 }
-/* 
-.form-container ::-webkit-scrollbar {
-  height: 5em;
+
+.AddQForm::-webkit-scrollbar {
+  height: 0;
 }
-.form-container  ::-webkit-scrollbar-thumb {
+.AddQForm  ::-webkit-scrollbar-thumb {
   border-radius: 2em;
-  background-color: var(--accent);
+  background-color: transparent;
 }
-.form-container  ::-webkit-scrollbar-track {
+.AddQForm ::-webkit-scrollbar-track {
   width: 5em;
   background: var(--light-color);
 }
- */

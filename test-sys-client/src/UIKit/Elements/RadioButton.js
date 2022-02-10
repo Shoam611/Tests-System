@@ -1,30 +1,25 @@
-import { useState } from "react";
 import Line from "UIKit/Layouts/Line";
-const RadioButton = props => {
-    const renderRadioItem = (id, option, isSelected) => {
-        return (
-            <li key={id} style={{margin:" 10px"}}>
-                <Line justify="evenly">
-                    <div onClick={() => { props.onChange(id) }}>
-                        <i className={isSelected ? "fas fa-circle" : "far fa-circle"}></i>
-                    </div>
-                    <div >{option}</div>
-                </Line>
-            </li>
-        )
-    }
+const RadioButton = ({ list, selected }) => {
     const renderListOptions = () => {
-        return (
-            <ul>
-                {props.list.map(item => renderRadioItem(item.id, item.value, item.id === props.selected))}
-            </ul>
-        )
-    }
+        return list.map(item => <RadioItem id={item.id} value={item.value} isSelected={item.id === selected} />)
+    };
     return (
         <div>
-            {renderListOptions()}
+            <ul>
+                {renderListOptions()}
+            </ul>
         </div>
     )
 }
-
+const RadioItem = ({ id, value, isSelected, onChange }) => {
+    return (
+        <li key={id} style={{ margin: " 10px" }}>
+            <Line justify="evenly">
+                <div onClick={() => { onChange(id) }}>
+                    <i className={isSelected ? "fas fa-circle" : "far fa-circle"}></i>
+                </div>
+                <div >{value}</div>
+            </Line>
+        </li>)
+}
 export default RadioButton;

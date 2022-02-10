@@ -7,7 +7,7 @@ import CreateQuestionForm from "./createQuestionForm";
 const QuestionsView = () => {
     return (
         <div className="QuestionView">
-         <div className="container">
+         {/* <div className="container">
             <GradientBorder to="left" bottom >
                 <ul display="row">
                     <NavLinkItem to="/app/questions/questions">Add a question </NavLinkItem>
@@ -18,7 +18,7 @@ const QuestionsView = () => {
                     <NavLinkItem to="/app/questions/edit">Edit questions    </NavLinkItem>
                 </ul>
             </GradientBorder>
-         </div>
+         </div> */}
          <div className="questions-view-outlet-container">
          <CreateQuestionForm />
          </div>

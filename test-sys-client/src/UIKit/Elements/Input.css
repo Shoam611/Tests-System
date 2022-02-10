@@ -5,6 +5,7 @@
 .Input input {
     width: -webkit-fill-available;
     padding: var(--gap-s);
+    letter-spacing: var(--letter-space-s);
     border: none;
 }
 .Input input,.Input input:active{
