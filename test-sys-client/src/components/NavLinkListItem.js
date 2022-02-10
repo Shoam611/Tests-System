@@ -24,7 +24,11 @@ const NavLinkListItem = (props) => {
                     <div className={togggleIconClass}> <Icon i="chevron-right" /></div>
                 </Line>
             </Box>
-            <AnimateHeight duration={300} height={height} children={props.children} />
+            <AnimateHeight duration={300} height={height} >
+                <ul display="column">
+                    {props.children}
+                </ul>
+            </AnimateHeight>
         </div>
     )
 }

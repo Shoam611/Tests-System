@@ -34,7 +34,7 @@ ul[display="row"] {
     padding-bottom: var(--gap-xs);
     margin-bottom: var(--gap-xs);
 }
-ul[display="row"] a.active::after {
+/* ul[display="row"] a.active::after {
   content: "";
   display: block;
   position: relative;
@@ -44,8 +44,7 @@ ul[display="row"] a.active::after {
   margin: 0 5%;
   background-color: var(--dark-color);
   background-color: var(--accent);
-  
-}
+}  */
 .QuestionView ::-webkit-scrollbar {
   height: 0.5em;
 }

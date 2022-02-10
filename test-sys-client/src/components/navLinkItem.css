@@ -1,0 +1,32 @@
+
+  ul[display="row"] a.active::after {
+    content: "";
+    display: block;
+    position: relative;
+    height: var(--gap-xs);
+    width: 100%;
+    justify-self:center ;
+    margin: 0;
+    background-color: var(--dark-color);
+    background-color: var(--accent);
+  
+}
+ul[display="column"] a.active .Box{
+    border-left: solid var(--gap-xs) var(--accent);
+    border-radius: 0;
+    transition: 0s;
+}
+/* ul[display="column"] a.active::after {
+    content: "";
+    display: inline;
+    position: absolute;
+    height: var(--gap-xs);
+    width: calc(100% - var(--gap-s));
+    justify-self:center ;
+    margin: 0 ;
+    background-color: var(--dark-color);
+    background-color: var(--accent);
+  }
+  ul[display="column"] a.active{
+      display: inline-block;
+  } */
