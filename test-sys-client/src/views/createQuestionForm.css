@@ -22,7 +22,11 @@
     margin-bottom: calc(var(--gap-l) * 300);
 
 }
-
+hr{
+  background-color: var(--accent);
+  height: var(--gap-xs);
+  width: 100%;
+}
 /* 
 .form-container ::-webkit-scrollbar {
   height: 5em;
