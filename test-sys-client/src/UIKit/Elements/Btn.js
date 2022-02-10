@@ -8,7 +8,6 @@ const Btn = (props) => {
                 {props.children}
                 {props.i ? <Icon i={props.i} color="#fff"/> : null}
             </Line>
-        
         </div>
     )
 }

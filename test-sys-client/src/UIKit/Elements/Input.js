@@ -7,6 +7,9 @@ const Input = (props) => {
                 onChange={props.onChange}
                 type={props.type || 'text'}
                 placeholder={props.placeholder}
+                min={props.min}
+                max={props.max}
+                maxlength={props.maxlength}
             />
         </div>
     )
