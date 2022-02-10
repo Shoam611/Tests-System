@@ -1,7 +1,7 @@
 html, body, #root, .App {
+  margin: 0;
   width: 100%;
   height: 100%;
-  margin: 0;
   overflow: hidden;
 }
 .App {
@@ -13,7 +13,7 @@ a{
   font-weight: var(--font-weight-m);
 }
 
-a.active {
+.active {
   color:var(--accent);
 }
 li{
@@ -26,4 +26,11 @@ ul {
 }
 input :active ,input:focus{
   border-width: 0px;
+}
+.app-outlet-container{
+  overflow:hidden;
+  height:100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }

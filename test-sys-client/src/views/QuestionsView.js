@@ -2,6 +2,7 @@ import NavLinkItem from "../components/navLinkItem";
 import { GradientBorder } from "UIKit";
 import React from "react";
 import './QuestionsView.css';
+import CreateQuestionForm from "./createQuestionForm";
 
 const QuestionsView = () => {
     return (
@@ -18,7 +19,10 @@ const QuestionsView = () => {
                 </ul>
             </GradientBorder>
          </div>
-        </div >
+         <div className="questions-view-outlet-container">
+         <CreateQuestionForm />
+         </div>
+        </div>
     )
 }
 export default QuestionsView;

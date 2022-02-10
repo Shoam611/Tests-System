@@ -9,3 +9,10 @@
     width: -webkit-fill-available;
     padding: var(--gap-s);
 }
+.Input input,.Input input:active{
+    border: none;
+    outline: none;
+}
+.Input input:focus{
+border-bottom: 0.4ch solid var(--accent);
+}

@@ -6,16 +6,11 @@ const Dropdown = (props) => {
     //state
     const [isOpen, setIsOpen] = useState(false);
     const wrapTag = useRef();
-
     //cycle 
     useEffect(() => {
         window.addEventListener('click', closeList);
-
-        return () => {
-            //clean up
-            window.removeEventListener('click', closeList);
-        }
-    }, [])
+        return () => {window.removeEventListener('click', closeList);}}, 
+        [])
 
     //handlers
     const closeList = (e) => {
@@ -69,7 +64,7 @@ const Dropdown = (props) => {
             <div className="trigger" onClick={handleToggle}>
                 <Line justify="between">
                     <div>{renderTrigger()}</div>
-                    <Icon i="chevron-down" />
+                    <Icon i={!isOpen? "chevron-down" : "chevron-up"}  />
                 </Line>
             </div>
             {renderList()}

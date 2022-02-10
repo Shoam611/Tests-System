@@ -15,7 +15,7 @@ function App() {
             {/* navigation menue */}
             <SideNav />
             {/* content placeholder*/}
-            <div>
+            <div className='app-outlet-container'>
               <Outlet />
             </div>
           </Columns>
