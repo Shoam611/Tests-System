@@ -1,57 +1,54 @@
 import useInput from 'hooks/useInput';
-import { Btn, Dropdown, Input, Line, RadioButton } from 'UIKit';
-import { useCallback, useEffect, useState } from 'react';
+import { Btn, Dropdown, Input, Line, RadioButton, Rows } from 'UIKit';
+import { Component, useCallback, useEffect, useState } from 'react';
 import Question from 'models/QuestionModel';
 import Awnser from 'models/AwnserModel';
 import './createQuestionForm.css';
 
 const CreateQuestionForm = () => {
-    let qtypestring = "";
+    const handleRemoveAwnser = (id) => {
+        const index = answers.indexOf(answers.find(i => i.id === id));
+        if (index >= 0) {
+            answers.splice(index, 1);
+            console.log(correctAwnserIndex);
+            handleAnswerChanged(correctAwnserIndex!==1 ? 1 : -1)
+        }
+    }
+    const handleAnswerChanged = (newAnswerIndex)=>{setCorrectAwnserIndex(newAnswerIndex)}
     //states
-    const [questionType, setQuestionType] = useState(null);     //selected q type
     const [questionTypes, setQuestionTypes] = useState(null); //list of q types available
     const [topic, setTopic] = useState('');
+    
+    const [questionType, setQuestionType] = useState(null);     //selected q type
     const [correctAwnserIndex, setCorrectAwnserIndex] = useState(-1);
+    const [selectedAwnser, setSelectedAwnser] = useState(-1);
+    const [answers, setAnswers] = useState([
+        { id: 1, value: <AwnserChoice id={1} onRemove={handleRemoveAwnser} /> },
+        { id: 2, value: <AwnserChoice id={2} onRemove={handleRemoveAwnser} /> },
+        { id: 3, value: <AwnserChoice id={3} onRemove={handleRemoveAwnser} /> },
+        { id: 4, value: <AwnserChoice id={4} onRemove={handleRemoveAwnser} /> }
+    ]);
+    //side-effects
+    useEffect(() => {
+        setQuestionTypes([{ id: 1, value: 'Single choice' }, { id: 2, value: 'Multi Choice' }]);
+        setTopic('def-topic');
+    }, []);
+    useEffect(()=>{console.log('component did update answers');},[answers])
     //inputs
     const Question_text = useInput();
     const Text_above_question = useInput();
     const Text_below_question = useInput();
     const tags = useInput();
-    const [awnsState,setawnsState] = useState();
-    const [answers, setAnswers] = useState([new Awnser(1,'', false), new Awnser(2,'', false), new Awnser(3, '', false)]);
     //handlers
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        for (let i = 0; i < awnsers.length; i++) { awnsers[i].isCorrect = (awnsers[i].key === correctAwnserIndex); }
-        const newQuestion = new Question(topic, questionType, Question_text.value, Text_above_question.value, Text_below_question.value, tags.value, awnsers, correctAwnserIndex);
-    }
     const handleQuestionTypeChanged = (qType) => setQuestionType(qType);
     const awnserChangedHandler = (selectedId) => setCorrectAwnserIndex(selectedId);
-    const handleRemoveAwnser = () => 
-    {
-        if (awnsers.indexOf(awnsers)) {awnsers.splice(awnsers.indexOf(awnser), 1);}
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        for (let i = 0; i < answers.length; i++) { answers[i].isCorrect = (answers[i].key === correctAwnserIndex); }
+        const newQuestion = new Question(topic, questionType, Question_text.value, Text_above_question.value, Text_below_question.value, tags.value, answers, correctAwnserIndex);
     }
     //renderers
-    const renderAwnserItem = (awnser) => {
-        return (<Line>
-            <Input {...(awnser.content)} />
-            <Btn i='minus' onClick={() => { handleRemoveAwnser(awnser) }} />
-        </Line>)
-    }
-    const renderAwnserSelector = () => {
-        if (!!questionType) 
-        {
-            // const list = awnsers.map(awnser => ({ id: awnser.key, value: (renderAwnserItem(awnser))} ));
-            return (
-                <div>
-                    <Btn i="plus" />{/* <RadioButton list={list} selected={correctAwnserIndex} onChange={awnserChangedHandler} /> */}
-                    <hr />
-                </div>
-            )
-        }
-        return null;
-    } 
-    
     return (
         <div className='AddQForm'>
             <h1>New Question</h1>
@@ -66,7 +63,7 @@ const CreateQuestionForm = () => {
                         <Input placeholder="Text below question:"  {...Text_below_question} />
                         <Input placeholder="tags (seperate with , charecter)" {...tags} />
                         <hr />
-                        {renderAwnserSelector()}
+                       {questionType && <AwnsersSelector list={answers} onChange={(newIndex)=>{handleAnswerChanged(newIndex)}} selected={correctAwnserIndex} />}
                         <Input type="submit" value="Submit" />
                     </div>
                 </form>
@@ -75,4 +72,38 @@ const CreateQuestionForm = () => {
     )
 
 }
+
+const AwnsersSelector = props => {
+    const onRemove = (id) => {
+        const index = list.indexOf(list.find(i => i.id === id))
+        if (index >= 0) { list.splice(index, 1); }
+    }
+    const [list, setList] = useState(props.list);
+    const [selectedAwnser, setSelectedAwnser] = useState(0);
+    useEffect(() => { console.log('component did mount'); }, []);
+    useEffect(() => { console.log('component did update'); }, [list])
+    const onChange = (newAwnserIndex) => { setSelectedAwnser(newAwnserIndex);props.onChange(newAwnserIndex); }
+    return (
+        <Rows>
+            <Btn i="plus" />
+            <RadioButton selected={props.selected} onChange={onChange} list={list}  />
+            <hr />
+        </Rows>
+    )
+}
+
+const AwnserChoice = props => {
+    const [id, setId] = useState();
+
+    useEffect(() => {
+        setId(props.id)
+    }, []);
+    return (
+        <Line>
+            <Input />
+            <Btn i="minus" onClick={() => { props.onRemove(id) }} />
+        </Line>
+    )
+}
+
 export default CreateQuestionForm;

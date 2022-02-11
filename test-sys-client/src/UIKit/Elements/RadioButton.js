@@ -1,7 +1,7 @@
 import Line from "UIKit/Layouts/Line";
-const RadioButton = ({ list, selected }) => {
+const RadioButton = ({ list, selected, onChange }) => {
     const renderListOptions = () => {
-        return list.map(item => <RadioItem id={item.id} value={item.value} isSelected={item.id === selected} />)
+        return list.map(item => <RadioItem key={item.id} id={item.id} value={item.value} isSelected={item.id === selected} onChange={onChange}/>)
     };
     return (
         <div>
