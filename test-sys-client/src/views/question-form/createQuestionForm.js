@@ -1,8 +1,9 @@
 import useInput from 'hooks/useInput';
-import { Btn, Dropdown, Input, Line, RadioButton, Rows } from 'UIKit';
-import { Component, useCallback, useEffect, useState } from 'react';
+import { Dropdown, Input,  } from 'UIKit';
+import {  useEffect, useState } from 'react';
 import Question from 'models/QuestionModel';
-import Awnser from 'models/AwnserModel';
+import AwnsersSelector from './answerSelector'; 
+import AwnserChoice from './answerChoice';
 import './createQuestionForm.css';
 
 const CreateQuestionForm = () => {
@@ -73,37 +74,8 @@ const CreateQuestionForm = () => {
 
 }
 
-const AwnsersSelector = props => {
-    const onRemove = (id) => {
-        const index = list.indexOf(list.find(i => i.id === id))
-        if (index >= 0) { list.splice(index, 1); }
-    }
-    const [list, setList] = useState(props.list);
-    const [selectedAwnser, setSelectedAwnser] = useState(0);
-    useEffect(() => { console.log('component did mount'); }, []);
-    useEffect(() => { console.log('component did update'); }, [list])
-    const onChange = (newAwnserIndex) => { setSelectedAwnser(newAwnserIndex);props.onChange(newAwnserIndex); }
-    return (
-        <Rows>
-            <Btn i="plus" />
-            <RadioButton selected={props.selected} onChange={onChange} list={list}  />
-            <hr />
-        </Rows>
-    )
-}
 
-const AwnserChoice = props => {
-    const [id, setId] = useState();
 
-    useEffect(() => {
-        setId(props.id)
-    }, []);
-    return (
-        <Line>
-            <Input />
-            <Btn i="minus" onClick={() => { props.onRemove(id) }} />
-        </Line>
-    )
-}
+
 
 export default CreateQuestionForm;
