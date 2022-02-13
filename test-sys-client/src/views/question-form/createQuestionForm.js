@@ -19,6 +19,7 @@ const CreateQuestionForm = () => {
     const handleQuestionTypeChanged = (qType) => setQuestionType(qType);
     const awnserChangedHandler = (selectedId) => setCorrectAwnserIndex(selectedId);
     const onAddingAwnser = () => {
+        if(answers.length>=6) return;
         const id = getId();
         console.log(id);
         const newAnswer = { id: id, value: <AwnserChoice id={id} onRemove={handleRemoveAwnser} /> };
@@ -26,6 +27,7 @@ const CreateQuestionForm = () => {
         forceUpdate();
     }
     const handleRemoveAwnser = (id) => {
+        if(answers.length <=2) return;
         const index = answers.indexOf(answers.find(i => i.id === id));
         if (index >= 0) {
             answers.splice(index, 1);
