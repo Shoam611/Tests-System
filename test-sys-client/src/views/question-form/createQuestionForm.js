@@ -1,28 +1,25 @@
 import useInput from 'hooks/useInput';
 import { Dropdown, Input,  } from 'UIKit';
-import { useEffect, useState,useReducer } from 'react';
+import {  useEffect, useState } from 'react';
 import Question from 'models/QuestionModel';
 import AwnsersSelector from './answerSelector'; 
 import AwnserChoice from './answerChoice';
 import './createQuestionForm.css';
 
 const CreateQuestionForm = () => {
-
-    // const forceUpdate = useForceUpdate();
-    const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
     const handleRemoveAwnser = (id) => {
         const index = answers.indexOf(answers.find(i => i.id === id));
         if (index >= 0) {
             answers.splice(index, 1);
-            console.log(index);
-            handleAnswerChanged(correctAwnserIndex - 1)
+            console.log(correctAwnserIndex);
+            handleAnswerChanged(correctAwnserIndex!==1 ? 1 : -1)
         }
-        forceUpdate();
     }
     const handleAnswerChanged = (newAnswerIndex)=>{setCorrectAwnserIndex(newAnswerIndex)}
     //states
     const [questionTypes, setQuestionTypes] = useState(null); //list of q types available
     const [topic, setTopic] = useState('');
+    
     const [questionType, setQuestionType] = useState(null);     //selected q type
     const [correctAwnserIndex, setCorrectAwnserIndex] = useState(-1);
     const [selectedAwnser, setSelectedAwnser] = useState(-1);
@@ -34,9 +31,10 @@ const CreateQuestionForm = () => {
     ]);
     //side-effects
     useEffect(() => {
-        setQuestionTypes([{ id: 1, value: 'Single choice' },{ id: 2, value: 'Multi Choice' }]);
+        setQuestionTypes([{ id: 1, value: 'Single choice' }, { id: 2, value: 'Multi Choice' }]);
         setTopic('def-topic');
     }, []);
+    useEffect(()=>{console.log('component did update answers');},[answers])
     //inputs
     const Question_text = useInput();
     const Text_above_question = useInput();
@@ -66,10 +64,7 @@ const CreateQuestionForm = () => {
                         <Input placeholder="Text below question:"  {...Text_below_question} />
                         <Input placeholder="tags (seperate with , charecter)" {...tags} />
                         <hr />
-                       {questionType && <AwnsersSelector    list={answers} 
-                                                            onChange={(newIndex)=>{handleAnswerChanged(newIndex)}} 
-                                                            selected={correctAwnserIndex} 
-                                                            questionType={questionType} />}
+                       {questionType && <AwnsersSelector list={answers} onChange={(newIndex)=>{handleAnswerChanged(newIndex)}} selected={correctAwnserIndex} />}
                         <Input type="submit" value="Submit" />
                     </div>
                 </form>
@@ -79,9 +74,8 @@ const CreateQuestionForm = () => {
 
 }
 
-function useForceUpdate(){
-    const [value, setValue] = useState(0); // integer state
-    return () => setValue(value + 1); // update the state to force render
-}
+
+
+
 
 export default CreateQuestionForm;
