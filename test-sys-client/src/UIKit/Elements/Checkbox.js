@@ -3,11 +3,8 @@ import Line from "UIKit/Layouts/Line";
 
 import './Checkbox.css'
 const Checkbox = props =>{
-//const [isSelected,setIsSelected] = useState(!!props.checked );
 
 const onSelectionHandler = () => {
-  //  setIsSelected(!isSelected);
-    //props.onCklick(!isSelected)
     props.onCklick()
 }
 const renderCheckBox = () =>{

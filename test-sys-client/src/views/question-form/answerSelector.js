@@ -1,21 +1,26 @@
-import { useState,useEffect } from "react";
-import {Line,Input,Btn ,Rows , RadioButton} from 'UIKit';
+import { useState, useEffect } from "react";
+import { Btn, Rows, RadioButton, Checkbox } from 'UIKit';
+
 const AwnsersSelector = props => {
-    const onRemove = (id) => {
-        const index = list.indexOf(list.find(i => i.id === id))
-        if (index >= 0) { list.splice(index, 1); }
-    }
-    const [list, setList] = useState(props.list);
+    const [optionList, setOptionList] = useState([]);
     const [selectedAwnser, setSelectedAwnser] = useState(0);
-    useEffect(() => { console.log('component did mount'); }, []);
-    useEffect(() => { console.log('component did update'); }, [list])
-    const onChange = (newAwnserIndex) => { setSelectedAwnser(newAwnserIndex);props.onChange(newAwnserIndex); }
+    useEffect(() => {setOptionList(renderOptionsList()) }, []);
+    const renderOptionsList = () => {
+        return (
+            <>
+                {props.questionType == 1 &&
+                <RadioButton selected={props.selected} onChange={props.onChange} list={props.list} />}
+            </>
+        )
+    }
     return (
         <Rows>
             <Btn i="plus" />
-            <RadioButton selected={props.selected} onChange={onChange} list={list}  />
+            {renderOptionsList()}
             <hr />
         </Rows>
     )
 }
+
+
 export default AwnsersSelector
