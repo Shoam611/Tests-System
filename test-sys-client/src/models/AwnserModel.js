@@ -1,8 +1,8 @@
-class Awnser{
-    constructor(key,content,isCorrect){
+class Awnser {
+    constructor(key, content, isCorrect) {
         this.key = key;
-        this.content=content;
-        this.isCorrect=isCorrect;
+        this.content = content;
+        this.isCorrect = isCorrect;
     }
 }
 export default Awnser;

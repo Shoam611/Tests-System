@@ -10,7 +10,7 @@ const TestsView = () => {
             <GradientBorder to="left" bottom >
                 <ul display="row">
                     <NavLinkItem to="/app/qweezes/qweezes">Test Details    </NavLinkItem>
-                    <NavLinkItem to="/app/reports/statistics">Manage Questions </NavLinkItem>
+                    <NavLinkItem to="">Manage Questions </NavLinkItem>
                 </ul>
             </GradientBorder>
          </div>
