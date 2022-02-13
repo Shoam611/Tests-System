@@ -21,7 +21,7 @@ const CreateQuestionForm = () => {
             case 1: setCorrectAwnserIndex(-1);break;
             case 2: setCorrectAwnserIndex([]); break;
         }
-        answers.forEach(item=>{item.isSelected=false;})
+        answers.forEach(item=>{item.isSelected=false;item.value=''})
         setQuestionType(qType);
     }
     const onAddingAwnser = () => {
@@ -46,9 +46,9 @@ const CreateQuestionForm = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (correctAwnserIndex == -1) { console.log('no answer picked ' + correctAwnserIndex); return; }
-        const index = answers.indexOf(answers.find((i) => i.id === correctAwnserIndex));
-        const newQuestion = new Question(topic, questionType, Question_text.value, Text_above_question.value, Text_below_question.value, tags.value, answers.map(i => i.value), index);
+        // if (correctAwnserIndex == -1) { console.log('no answer picked ' + correctAwnserIndex); return; }
+        // const index = answers.indexOf(answers.find((i) => i.id === correctAwnserIndex));
+        const newQuestion = new Question(topic, questionType, Question_text.value, Text_above_question.value, Text_below_question.value, tags.value, answers.map(({value,isSelected}) => ({value,isCorrect:isSelected})));
         console.log(newQuestion);
     }
     //states
@@ -73,7 +73,6 @@ const CreateQuestionForm = () => {
         <div className='AddQForm'>
             <h1>New Question</h1>
             <div style={{ height: 'min-content' }}>
-
                 <form onSubmit={handleSubmit} >
                     <div className='form-container' >
                         <label > topic : {topic}</label>
@@ -85,10 +84,7 @@ const CreateQuestionForm = () => {
                         <hr />
                         {questionType && <AwnsersSelector onAddingAwnser={onAddingAwnser}
                             list={answers}
-                            questionType={questionType}
-                            // onChange={(newIndex) => { handleAnswerChanged(newIndex) }}
-                            // selected={correctAwnserIndex} 
-                            />}
+                            questionType={questionType} />}
                         <Input type="submit" value="Submit" />
                     </div>
                 </form>

@@ -27,16 +27,14 @@ const RadioButton = ({ list }) => {
 }
 const RadioItem = ({ id, render, onChange,isSelected }) => {
 
-    // const [isSelected,setIsSelected] = useState(false);
-    const onSelectionHandler = () => {
-        // setIsSelected(!isSelected);
+    const onSelectionChangedHandler = () => {
         onChange(id);
     }
 
     return (
         <li key={id} style={{ margin: " 10px" }}>
             <Line justify="evenly">
-                <div onClick={onSelectionHandler}>
+                <div onClick={onSelectionChangedHandler}>
                     <i className={isSelected ? "fas fa-circle" : "far fa-circle"}></i>
                 </div>
                 <div >{render}</div>
