@@ -17,12 +17,10 @@ const CreateQuestionForm = () => {
     }
     //handlers
     const handleQuestionTypeChanged = (qType) => setQuestionType(qType);
-    const awnserChangedHandler = (selectedId) => setCorrectAwnserIndex(selectedId);
     const onAddingAwnser = () => {
         if(answers.length>=6) return;
         const id = getId();
-        console.log(id);
-        const newAnswer = { id: id, value: <AwnserChoice id={id} onRemove={handleRemoveAwnser} /> };
+        const newAnswer = { id: id, render: <AwnserChoice id={id} onRemove={handleRemoveAwnser} onChange={awnserContentChangedHandler}  /> , value:'' };
         answers.push(newAnswer);
         forceUpdate();
     }
@@ -35,22 +33,29 @@ const CreateQuestionForm = () => {
         }
         forceUpdate()
     }
+    const handleAnswerChanged = (newAnswerIndex) => { setCorrectAwnserIndex(newAnswerIndex) }
+    const awnserContentChangedHandler =(value,id) =>{
+        const temp = answers;
+        temp.filter(i=>i.id===id)[0].value=value;
+        setAwnsers(temp);
+    }
     const handleSubmit = (e) => {
         e.preventDefault();
-        for (let i = 0; i < answers.length; i++) { answers[i].isCorrect = (answers[i].key === correctAwnserIndex); }
-        const newQuestion = new Question(topic, questionType, Question_text.value, Text_above_question.value, Text_below_question.value, tags.value, answers, correctAwnserIndex);
+        if(correctAwnserIndex == -1) {console.log('no answer picked ' +correctAwnserIndex); return;}
+        const index = answers.indexOf(answers.find((i) =>i.id===correctAwnserIndex));
+        const newQuestion = new Question(topic, questionType, Question_text.value, Text_above_question.value, Text_below_question.value, tags.value, answers.map(i=>i.value), index);
+        console.log(newQuestion);
     }
-    const handleAnswerChanged = (newAnswerIndex) => { setCorrectAwnserIndex(newAnswerIndex) }
     //states
     const [questionTypes, setQuestionTypes] = useState(null); //list of q types available
     const [topic, setTopic] = useState('');
     const [questionType, setQuestionType] = useState(null);     //selected q type
     const [correctAwnserIndex, setCorrectAwnserIndex] = useState(-1);
-    const [answers] = useState([
-        { id: 1, value: <AwnserChoice id={1} onRemove={handleRemoveAwnser} /> },
-        { id: 2, value: <AwnserChoice id={2} onRemove={handleRemoveAwnser} /> },
-        { id: 3, value: <AwnserChoice id={3} onRemove={handleRemoveAwnser} /> },
-        { id: 4, value: <AwnserChoice id={4} onRemove={handleRemoveAwnser} /> }
+    const [answers,setAwnsers] = useState([
+        { id: 1, render: <AwnserChoice id={1} onRemove={handleRemoveAwnser} onChange={awnserContentChangedHandler} /> , value:''},
+        { id: 2, render: <AwnserChoice id={2} onRemove={handleRemoveAwnser} onChange={awnserContentChangedHandler} /> , value:''},
+        { id: 3, render: <AwnserChoice id={3} onRemove={handleRemoveAwnser} onChange={awnserContentChangedHandler} /> , value:''},
+        { id: 4, render: <AwnserChoice id={4} onRemove={handleRemoveAwnser} onChange={awnserContentChangedHandler} /> , value:''}
     ]);
     //side-effects
     useEffect(() => {
