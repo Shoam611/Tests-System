@@ -1,5 +1,3 @@
-import useInput from "hooks/useInput";
-import { useState,useEffect } from "react";
 import {Line,Input,Btn} from 'UIKit';
 const AnswerChoice = props => {    
     const onValueChange = (e) => {props.onChange(e.target.value,props.id)}

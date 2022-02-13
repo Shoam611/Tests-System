@@ -1,7 +1,13 @@
+import { useEffect } from "react";
 import Line from "UIKit/Layouts/Line";
 const RadioButton = ({ list, selected, onChange }) => {
+
     const renderListOptions = () => {
-        return list.map(item => <RadioItem key={item.id} id={item.id} render={item.render} isSelected={item.id === selected} onChange={onChange}/>)
+        return list.map(item => <RadioItem  key={item.id} 
+                                            id={item.id} 
+                                            render={item.render} 
+                                            isSelected={item.id === selected} 
+                                            onChange={onChange}/>)
     };
     return (
         <div>

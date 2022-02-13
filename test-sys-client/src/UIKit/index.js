@@ -11,3 +11,4 @@ export { default as Input } from './Elements/Input';
 export { default as Dropdown } from './Elements/Dropdown';
 export {default as Toggler} from './Elements/Toggler'
 export {default as RadioButton} from './Elements/RadioButton'
+export {default as Checkbox} from './Elements/Checkbox'
