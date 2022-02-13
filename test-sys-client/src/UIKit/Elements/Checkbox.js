@@ -1,59 +1,47 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import Line from "UIKit/Layouts/Line";
 import Btn from "./Btn";
 import './Checkbox.css'
 const Checkbox = ({ list, onChange }) => {
-    const [selecteds, setSelecteds] = useState([]);
-
-    const onSelectionChanged = (id, value) => {
-        const temp = selecteds;
-        temp.find(item => item.id === id).checked = value;
-        setSelecteds(temp)
-    }
-    const onItemMounted = (id) => { selecteds.push({ id, checked: false }); }
-    const onItemDelete = (id) =>{
-        setSelecteds(selecteds.filter(item=>item.id!==id))
+    //states  
+    //renders
+    const onSelctionChanged = (id,value) => {
+        list.forEach(item => {
+            if(item.id===id) item.isSelected=value;
+        });
+        console.log(list);
+        // onChange(id);
     }
     const renderListOptions = () => {
-        return list.map((value, index) => (
-            <CheckboxItem key={value.id}
-                id={value.id}
-                onChange={onSelectionChanged}
-                onMounted={onItemMounted}
-                onUnmounted={onItemDelete}
-                render={value.render} />
-        ));
+        return list.map((value) => <CheckboxItem key={value.id}
+                                                id={value.id}
+                                                selected={value.checked}
+                                                onChange={onSelctionChanged}
+                                                render={value.render} />);
     }
+
     return (
-        <div className="CheckBox">
+        <div >
             <ul>
                 {renderListOptions()}
             </ul>
-            <Btn onClick={() => { console.log(selecteds); }} />
+            {/* <Btn onClick={() => { }} /> */}
         </div>
     )
 }
+
 const CheckboxItem = props => {
 
-    //state
     const [checked, setChecked] = useState(false);
-    //effects
-    useEffect(() => {
-        props.onMounted(props.id);
-        return () => { console.log(props.id); props.onUnmounted(props.id, false) }
-    },[])
-    //handlers
     const onSelectionHandler = () => {
         setChecked(!checked);
         props.onChange(props.id,!checked);
     }
-    //renders
-    const renderCheckBox = () => <i className={checked ? "fas fa-check-square" : "far fa-check-square"} />
     return (
         <li key={props.id} >
             <Line justify="start" >
-                <div className="iconContainer" onClick={onSelectionHandler}>
-                    {renderCheckBox()}
+                <div className="iconContainer" onClick={() => { onSelectionHandler() }}>
+                    <i className={checked ? "fas fa-check-square" : "far fa-check-square"} />
                 </div>
                 <div>{props.render}</div>
             </Line>

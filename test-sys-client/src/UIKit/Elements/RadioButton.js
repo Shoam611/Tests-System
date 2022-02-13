@@ -1,13 +1,21 @@
-import { useEffect } from "react";
+import { useState,useReducer } from "react";
 import Line from "UIKit/Layouts/Line";
-const RadioButton = ({ list, selected, onChange }) => {
+const RadioButton = ({ list }) => {
+    const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
 
+    const onSelectionChanged =(id)=>{
+        list.forEach(element => {
+            element.isSelected = (id===element.id)
+        });
+        console.log(list);
+        forceUpdate();
+    }
     const renderListOptions = () => {
         return list.map(item => <RadioItem  key={item.id} 
                                             id={item.id} 
                                             render={item.render} 
-                                            isSelected={item.id === selected} 
-                                            onChange={onChange}/>)
+                                            isSelected={item.isSelected} 
+                                            onChange={onSelectionChanged}/>)
     };
     return (
         <div>
@@ -17,11 +25,18 @@ const RadioButton = ({ list, selected, onChange }) => {
         </div>
     )
 }
-const RadioItem = ({ id, render, isSelected, onChange }) => {
+const RadioItem = ({ id, render, onChange,isSelected }) => {
+
+    // const [isSelected,setIsSelected] = useState(false);
+    const onSelectionHandler = () => {
+        // setIsSelected(!isSelected);
+        onChange(id);
+    }
+
     return (
         <li key={id} style={{ margin: " 10px" }}>
             <Line justify="evenly">
-                <div onClick={() => { onChange(id) }}>
+                <div onClick={onSelectionHandler}>
                     <i className={isSelected ? "fas fa-circle" : "far fa-circle"}></i>
                 </div>
                 <div >{render}</div>
