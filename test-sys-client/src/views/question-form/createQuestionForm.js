@@ -1,12 +1,13 @@
 import useInput from 'hooks/useInput';
 import { Dropdown, Input,  } from 'UIKit';
-import {  useEffect, useState } from 'react';
+import {  useEffect, useState,useReducer } from 'react';
 import Question from 'models/QuestionModel';
 import AwnsersSelector from './answerSelector'; 
 import AwnserChoice from './answerChoice';
 import './createQuestionForm.css';
 
 const CreateQuestionForm = () => {
+    const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
     const handleRemoveAwnser = (id) => {
         const index = answers.indexOf(answers.find(i => i.id === id));
         if (index >= 0) {
@@ -14,16 +15,15 @@ const CreateQuestionForm = () => {
             console.log(correctAwnserIndex);
             handleAnswerChanged(correctAwnserIndex!==1 ? 1 : -1)
         }
+        forceUpdate()
     }
     const handleAnswerChanged = (newAnswerIndex)=>{setCorrectAwnserIndex(newAnswerIndex)}
     //states
     const [questionTypes, setQuestionTypes] = useState(null); //list of q types available
     const [topic, setTopic] = useState('');
-    
     const [questionType, setQuestionType] = useState(null);     //selected q type
     const [correctAwnserIndex, setCorrectAwnserIndex] = useState(-1);
-    const [selectedAwnser, setSelectedAwnser] = useState(-1);
-    const [answers, setAnswers] = useState([
+    const [answers] = useState([
         { id: 1, value: <AwnserChoice id={1} onRemove={handleRemoveAwnser} /> },
         { id: 2, value: <AwnserChoice id={2} onRemove={handleRemoveAwnser} /> },
         { id: 3, value: <AwnserChoice id={3} onRemove={handleRemoveAwnser} /> },
