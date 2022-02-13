@@ -17,10 +17,6 @@ const CreateQuestionForm = () => {
     }
     //handlers
     const handleQuestionTypeChanged = (qType) => {
-        switch (qType) {
-            case 1: setCorrectAwnserIndex(-1);break;
-            case 2: setCorrectAwnserIndex([]); break;
-        }
         answers.forEach(item=>{item.isSelected=false;item.value=''})
         setQuestionType(qType);
     }
@@ -38,7 +34,6 @@ const CreateQuestionForm = () => {
             forceUpdate()
         }
     }
-
     const awnserContentChangedHandler = (value, id) => {
         const temp = answers;
         temp.filter(i => i.id === id)[0].value = value;
@@ -46,23 +41,20 @@ const CreateQuestionForm = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        // if (correctAwnserIndex == -1) { console.log('no answer picked ' + correctAwnserIndex); return; }
-        // const index = answers.indexOf(answers.find((i) => i.id === correctAwnserIndex));
-        const newQuestion = new Question(topic, questionType, Question_text.value, Text_above_question.value, Text_below_question.value, tags.value, answers.map(({value,isSelected}) => ({value,isCorrect:isSelected})));
+        const newQuestion = new Question(topic, questionType, Question_text.value, Text_above_question.value, Text_below_question.value, tags.value, answers.map(({value},index) => ({value,id:index})) ,answers.map(({isSelected},index)=> ({isCorrect:isSelected,index})).filter(({isCorrect})=>isCorrect).map(({index})=>index));
         console.log(newQuestion);
     }
     //states
-    const [questionTypes, setQuestionTypes] = useState(null); //list of q types available
+    const [questionTypes, setQuestionTypes] = useState(null);   //list of q types available
     const [topic, setTopic] = useState('');
     const [questionType, setQuestionType] = useState(null);     //selected q type
-    const [correctAwnserIndex, setCorrectAwnserIndex] = useState();
     const [answers, setAwnsers] = useState([]);
     //side-effects
     useEffect(() => {
         onAddingAwnser(); onAddingAwnser();
         setQuestionTypes([{ id: 1, value: 'Single choice' }, { id: 2, value: 'Multi Choice' }]);
         setTopic('def-topic');
-    }, []);
+    },[]);
     //inputs
     const Question_text = useInput();
     const Text_above_question = useInput();
@@ -82,9 +74,9 @@ const CreateQuestionForm = () => {
                         <Input placeholder="Text below question:"  {...Text_below_question} />
                         <Input placeholder="tags (seperate with , charecter)" {...tags} />
                         <hr />
-                        {questionType && <AwnsersSelector onAddingAwnser={onAddingAwnser}
-                            list={answers}
-                            questionType={questionType} />}
+                        {questionType && <AwnsersSelector   onAddingAwnser={onAddingAwnser}
+                                                            list={answers}
+                                                            questionType={questionType} />}
                         <Input type="submit" value="Submit" />
                     </div>
                 </form>

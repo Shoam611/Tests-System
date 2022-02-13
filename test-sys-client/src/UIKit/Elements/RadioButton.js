@@ -2,12 +2,10 @@ import { useState,useReducer } from "react";
 import Line from "UIKit/Layouts/Line";
 const RadioButton = ({ list }) => {
     const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
-
     const onSelectionChanged =(id)=>{
         list.forEach(element => {
             element.isSelected = (id===element.id)
         });
-        console.log(list);
         forceUpdate();
     }
     const renderListOptions = () => {
@@ -32,8 +30,8 @@ const RadioItem = ({ id, render, onChange,isSelected }) => {
     }
 
     return (
-        <li key={id} style={{ margin: " 10px" }}>
-            <Line justify="evenly">
+        <li key={id} style={{ marginTop:"10px"}}>
+            <Line justify="start">
                 <div onClick={onSelectionChangedHandler}>
                     <i className={isSelected ? "fas fa-circle" : "far fa-circle"}></i>
                 </div>
