@@ -2,9 +2,8 @@ import useInput from 'hooks/useInput';
 import { Btn, Dropdown, Input } from 'UIKit';
 import { useState } from 'react';
 import './createQuestionForm.css';
-import { Navigate } from 'react-router-dom';
 
-const CreateTestForm = () => {
+const CreateTestForm = (props) => {
     const fields = {
         Manager_email: useInput(),
         Test_name: useInput(),
@@ -23,11 +22,10 @@ const CreateTestForm = () => {
     const [lang, setLang] = useState(0);
     const [toCheck, setToCheck] = useState(false);
     const [message, setMessage] = useState("");
-    const [questions, setQuestions] = useState([]);
 
     const handleSubmit = (e) => {
         if (testValidation()) {
-            console.log('was submitted');
+            console.log('next');
 
             const submitForm = {
                 id: Math.random().toString(),
@@ -37,7 +35,8 @@ const CreateTestForm = () => {
                 lang,
                 toCheck,
             }
-            console.log(submitForm);
+
+            props.next(submitForm);
             setMessage("");
         }
     }
@@ -83,10 +82,10 @@ const CreateTestForm = () => {
             setMessage('Email On Failure Cannot Be Empty!');
             return false;
         }
-        if(questions.length === 0){
-            setMessage("No Questions Were Selected - Refer To The Manage Questions Tab");
-            return false;
-        }
+        // if(questions.length === 0){
+        //     setMessage("No Questions Were Selected - Refer To The Manage Questions Tab");
+        //     return false;
+        // }
         return true;
     }
 
