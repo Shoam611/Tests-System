@@ -1,0 +1,45 @@
+.AddQForm {
+  width: 95%;
+  height:auto;
+  overflow-y: scroll;
+  background-color: var(--light-color);
+  display: grid;
+  grid-template-rows: 90px 1fr;
+  color: var(--text-color-dark);
+}
+.AddQForm h1 {
+  color: var(--accent);
+}
+.form-container {
+    overflow-y:scroll;
+    background-color: var(--midtone-color);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-l);
+    width: inherit;
+    padding: 0 var(--gap-m) ;
+    height:fit-content;
+    margin-bottom: calc(var(--gap-l) * 300);
+
+}
+form{
+  width: auto;
+  overflow-y:scroll;
+}
+hr{
+  background-color: var(--accent);
+  height: var(--gap-xs);
+  width: 100%;
+}
+
+.AddQForm::-webkit-scrollbar {
+  height: 0;
+}
+.AddQForm  ::-webkit-scrollbar-thumb {
+  border-radius: 2em;
+  background-color: transparent;
+}
+.AddQForm ::-webkit-scrollbar-track {
+  width: 5em;
+  background: var(--light-color);
+}

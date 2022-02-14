@@ -1,13 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { BrowserRouter } from 'react-router-dom';
+
+import { applyMiddleware, combineReducers, createStore } from 'redux';
+import ReduxThunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+
 import Navigator from './Naigation/MainNavigator'
-import {BrowserRouter} from 'react-router-dom'
+import questionReducer from 'Store/reducers/question';
+import './index.css';
+
+const rootReducer = combineReducers({
+  questions: questionReducer
+});
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Navigator />
-    </BrowserRouter>
-  </React.StrictMode>,
+    <Provider store={store}>
+      <BrowserRouter>
+        <Navigator />
+      </BrowserRouter>
+    </Provider>
+  </React.StrictMode>
+  ,
   document.getElementById('root')
 );

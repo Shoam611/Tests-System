@@ -15,9 +15,7 @@ const [accordionSelectedId,setAccordionSelectedId]=useState(undefined);
 
 const renderAccordion = ()=>{
     return props.list.map(
-        item => <Rows key={item.id} 
-                    // className="accordionItem"
-                >
+        item => <Rows key={item.id} >
                     <div onClick={() =>{accordionChangeHandler(item.id)}} className={accordionSelectedId === item.id ? "header isselected":"header" }>
                         <Line justify="between">
                            <Line justify="start">

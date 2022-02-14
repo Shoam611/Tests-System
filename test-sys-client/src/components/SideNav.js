@@ -1,65 +1,41 @@
-import './SideNav.css'
-import { Link } from "react-router-dom"
-import { Toggler ,Box} from "UIKit"
-const SideNav = (props) => {
+import React from 'react';
+import './SideNav.css';
+import { GradientBorder } from 'UIKit';
+import NavLinkListItem from './NavLinkListItem'
+import NavLinkItem from './navLinkItem'
+const SideNav = () => {
+
     return (
         <div className='SideNav'>
-            <div className='gradient-box'>
-
-            <ul>
-                <li>
-                    <Toggler title={"Manage questions"}>
-                        <ul> 
-                            <li><Link to="/app/questions"><Box> Add a question</Box></Link></li>
-                            <li><Box><Link to="/app/tests">Edit questions</Link></Box></li>
-                        </ul>
-                    </Toggler>
-                </li>
-                <li>
-                    <Toggler title={"Manage Qweezes"}>
-                        <ul>
-                            <li><Box><Link to="/app/questions">Create new qweez</Link></Box> </li>
-                            <li><Box><Link to="/app/tests">Edit quweezes</Link>       </Box>   </li>
-                        </ul>
-                    </Toggler>
-                </li>
-                <li>
-                    <Toggler title={"Manage Topics"}>
-                        <ul>
-                            <li><Box><Link to="/app/questions">Add a new topic</Link> </Box></li>
-                            <li><Box><Link to="/app/tests">Edit topics</Link>         </Box>  </li>
-                        </ul>
-                    </Toggler>
-                </li>
-                <li>
-                    <Toggler title={"Reports"}>
-                        <ul>
-                            <li><Box><Link to="/app/questions">Generate report by qweez</Link> </Box></li>
-                            <li><Box><Link to="/app/tests">Generate report by respondent</Link> </Box></li>
-                            <li><Box><Link to="/app/default">Questions statistics</Link> </Box></li>
-                        </ul>
-                    </Toggler>
-                </li>
-                <li>
-                    <Toggler title={"Manage Account"}>
-                        <ul>
-                            <li><Box><Link to="/app/questions">Login form fields</Link> </Box></li>
-                            <li><Box><Link to="/app/tests">Account details</Link> </Box></li>
-                            <li><Box><Link to="/app/default">Customize language</Link> </Box></li>
-                            <li><Box><Link to="/app/default">UI Customization</Link> </Box></li>
-                        </ul>
-                    </Toggler>
-                </li>
-                <li>
-                    <Toggler title={"Manage Administrators"}>
-                        <ul>
-                            <li><Box><Link to="/app/questions">Manage admin permissions         </Link> </Box>          </li>
-                            <li><Box><Link to="/app/tests">Create and activate new administartor</Link> </Box> </li>
-                        </ul>
-                    </Toggler>
-                </li>
-            </ul>
-            </div>
+            <GradientBorder right >
+                <NavLinkListItem title={"Manage questions"} >
+                    <NavLinkItem to="/app/questions/questions">New Question </NavLinkItem>
+                    <NavLinkItem to="/app/questions/edit">Edit a Questions    </NavLinkItem>
+                </NavLinkListItem>
+                <NavLinkListItem title={"Manage Qweezes"} className="">
+                    <NavLinkItem to="/app/qweezes/qweezes">Create a Qweez</NavLinkItem>
+                    <NavLinkItem to="/app/qweezes/edit">Edit Qweezes      </NavLinkItem>
+                </NavLinkListItem>
+                <NavLinkListItem title={"Manage Topics"}>
+                    <NavLinkItem to="/app/topics/topics">Add New Topic</NavLinkItem>
+                    <NavLinkItem to="/app/topics/edit">Edit Topics </NavLinkItem>
+                </NavLinkListItem>
+                <NavLinkListItem title={"Reports"}>
+                    <NavLinkItem to="/app/reports/qweezes"> Generate Report by Qweez </NavLinkItem>
+                    <NavLinkItem to="/app/reports/respondant">Generate Report by Respondent</NavLinkItem>
+                    <NavLinkItem to="/app/reports/statistics">Questions Statistics </NavLinkItem>
+                </NavLinkListItem>
+                <NavLinkListItem title={"Manage Account"}>
+                    <NavLinkItem to="/app/accounts/fields">  Login Form Fields </ NavLinkItem>
+                    <NavLinkItem to="/app/accounts/details"> Account Details      </NavLinkItem>
+                    <NavLinkItem to="/app/accounts/lang">    Customize Language     </NavLinkItem>
+                    <NavLinkItem to="/app/accounts/ui">      UI Customization    </NavLinkItem>
+                </NavLinkListItem>
+                < NavLinkListItem title={"Manage Administrators"}>
+                    <NavLinkItem to="/app/admin/permissions">Manage Admin Permissions         </NavLinkItem>
+                    <NavLinkItem to="/app/admin/annount">Create And Activate New Administartor</NavLinkItem>
+                </NavLinkListItem>
+            </GradientBorder>
         </div>
     )
 }

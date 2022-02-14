@@ -4,13 +4,10 @@ import { Line, Icon, Box } from 'UIKit';
 const Btn = (props) => {
     return (
         <div className="Btn" onClick={props.onClick}>
-        
-
             <Line justify="between">
                 {props.children}
-                {props.i ? <Icon i={props.i} /> : null}
+                {props.i ? <Icon i={props.i} color="#fff"/> : null}
             </Line>
-        
         </div>
     )
 }

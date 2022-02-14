@@ -1,11 +1,31 @@
 .Input {
-    border: 1px solid var(--border-color);
     width: -webkit-fill-available;
-    
+    border: 1px solid var(--border-color);
 }
-
 .Input input {
-    border: none;
     width: -webkit-fill-available;
     padding: var(--gap-s);
+    letter-spacing: var(--letter-space-s);
+    border: none;
+}
+.Input input,.Input input:active{
+    border: none;
+    outline: none;
+}
+.Input input:focus{
+    border-left: 0.4ch solid var(--accent);
+}
+
+.Input input[type="submit"] {
+    font-weight: var(--font-weight-h);
+    background-color: var(--accent);
+    color: #fff;
+    letter-spacing: var(--letter-space-m);
+}
+.Input input:hover[type="submit"] {
+    opacity: 0.8;    
+}
+.Input input:focus[type="submit"]{
+    opacity: 0.9;
+    border:none;
 }

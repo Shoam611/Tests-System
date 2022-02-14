@@ -1,7 +1,8 @@
 html, body, #root, .App {
+  margin: 0;
   width: 100%;
   height: 100%;
-  margin: 0;
+  overflow: hidden;
 }
 .App {
   display: block;
@@ -9,16 +10,27 @@ html, body, #root, .App {
 a{
   color: inherit;
   text-decoration:none;
-}
-a.active {
-  color:var(--accent);
   font-weight: var(--font-weight-m);
+}
+
+.active {
+  color:var(--accent);
+}
+li{
+  list-style: none;
 }
 ul {
   list-style: none;
-  margin: 0;
+  margin-left: var(--gap-s);
   padding: 0;
 }
 input :active ,input:focus{
   border-width: 0px;
+}
+.app-outlet-container{
+  overflow:hidden;
+  height:100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }

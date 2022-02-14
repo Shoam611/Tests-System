@@ -1,47 +1,50 @@
 .Dropdown {
-    position: relative;
-    min-width: 200px;
+  position: relative;
+  min-width: 200px;
 }
-
 .Dropdown .trigger {
-    border: 1px solid var(--border-color);
-    padding: var(--gap-s);
+  padding: var(--gap-s);
+  background-color: var(--background-primary);
+  z-index: 10;
 }
-
-.Dropdown .trigger:hover  {
-    background-color: var(--light-color);
-    cursor: pointer;
+.Dropdown .trigger[display="open"] {
+  border: 1px solid var(--accent);
+  border-bottom: dashed 1px var(--accent);
 }
-
 .Dropdown .trigger:active {
-    background-color: var(--background-color);
+  display: block;
 }
-
 .Dropdown .list {
-    border: 1px solid var(--border-color);
-    position: absolute;
-    right: 0;
-    top: 100%;
-    left: 0;
-    overflow: auto;
-    height: 120px;
+  z-index: 20;
+  border: 1px solid var(--accent);
+  border-top: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  left: 0;
+  overflow: auto;
+  max-height: 120px;
 }
-
 .Dropdown .list li {
-    padding: var(--gap-s);
-    background-color: var(--background-primary);
-    border-top: 1px solid var(--border-color);
+  background-color: var(--background-primary);
+  padding: var(--gap-s);
+  border-top: 1px solid var(--border-color);
 }
 
-.Dropdown .list li:hover {
-    background-color: var(--light-color);
-    cursor: pointer;
+.Dropdown .list li:hover
+/* ,.Dropdown .trigger[display="open"]:hover  */ {
+  background-color: var(--light-color);
+  cursor: pointer;
 }
 
 .Dropdown .list li:active {
-    opacity: 0.8;
+  opacity: 0.8;
 }
-
-.Dropdown .list li:first-child {
-    border-top: 3px solid var(--border-color);
+.trigger[display="close"] .Icon {
+  transform: rotate(180deg);
+  transition: 0.4s;
+}
+.trigger[display="open"] .Icon {
+  transform: rotate(0deg);
+  transition: 0.4s;
 }

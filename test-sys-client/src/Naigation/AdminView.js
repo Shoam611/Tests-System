@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 const DefaultView = () => {
     return (
@@ -6,10 +6,10 @@ const DefaultView = () => {
             <h2>In App Overview</h2> 
             <ul>
                 <li>
-                    <Link to="/test">to navigation test view</Link>
+                    <NavLink to="/test">to navigation test view</NavLink>
                 </li>
                 <li>
-                    <Link to="/app">to app view</Link>
+                    <NavLink to="/app">to app view</NavLink>
                 </li>
             </ul>
             <hr />

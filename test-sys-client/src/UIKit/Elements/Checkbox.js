@@ -1,29 +1,44 @@
-import { useState } from "react";
+import {  useState } from "react";
 import Line from "UIKit/Layouts/Line";
-
 import './Checkbox.css'
-const Checkbox = props =>{
-//const [isSelected,setIsSelected] = useState(!!props.checked );
+const Checkbox = ({ list }) => {
 
-const onSelectionHandler = () => {
-  //  setIsSelected(!isSelected);
-    //props.onCklick(!isSelected)
-    props.onCklick()
-}
-const renderCheckBox = () =>{
-    return  props.value?
-            <i className="fas fa-check-square"></i> :
-            <i className="far fa-check-square"></i>
-}
+    const onSelctionChanged = (id,value) => {
+        list.forEach(item => {
+            if(item.id===id) item.isSelected=value;
+        });
+    }
+    const renderListOptions = () => {
+        return list.map((value) => <CheckboxItem key={value.id}
+                                                id={value.id}
+                                                selected={value.checked}
+                                                onChange={onSelctionChanged}
+                                                render={value.render} />);
+    }
     return (
-        <div className="CheckBox"  onClick = {onSelectionHandler} >
-        <Line justify="start" >
-           <div className="iconContainer">
-           {renderCheckBox()}        
+        <div >
+            <ul>
+                {renderListOptions()}
+            </ul>
         </div>
-            <p>{props.content}</p>
-        </Line>
-        </div>
+    )
+}
+
+const CheckboxItem = ({onChange,render,id}) => {
+    const [checked, setChecked] = useState(false);
+    const onSelectionHandler = () => {
+        setChecked(!checked);
+        onChange(id,!checked);
+    }
+    return (
+        <li key={id} style={{ marginTop:"10px"}}>
+            <Line justify="start" >
+                <div className="iconContainer" onClick={() => { onSelectionHandler() }}>
+                    <i className={checked ? "fas fa-check-square" : "far fa-check-square"} />
+                </div>
+                <div>{render}</div>
+            </Line>
+        </li>
     )
 }
 
