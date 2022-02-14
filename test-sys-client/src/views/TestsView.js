@@ -2,8 +2,8 @@ import NavLinkItem from "../components/navLinkItem";
 import { GradientBorder } from "UIKit";
 import React, { useState } from "react";
 import './QuestionsView.css';
-import CreateTestForm from "./createTestForm";
-import QuestionsForTest from "./questionsForTest";
+import CreateTestForm from "./test-form/createTestForm";
+import QuestionsForTest from "./test-form/questionsForTest";
 const TestsView = () => {
     const [testData, setTestData] = useState('');
     const [currentStep, setCurrentStep] = useState(0);
