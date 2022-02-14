@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import App from "App";
 import QuestionsView from "../views/QuestionsView";
 import DefaultView from "views/defaultView";
-import TestsView from "../views/TestsView";
+import TestsView from "../views/test-form/TestsView";
 const AppNavigator = () => {
   return (
     <div id="AppNavigatorContainer">
