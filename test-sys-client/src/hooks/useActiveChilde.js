@@ -6,21 +6,11 @@ const useActiveChild = (childs) => {
     const [location] = useState(window.location.pathname)
     useEffect(() => {
         setHasActive(pathes.indexOf(location)!== -1)   
-    }, [location,...pathes, setHasActive,window.location.pathname , ] );
+    }, [location,...pathes, setHasActive,window.location.pathname ] );
     return hasActive;
 }
 export default useActiveChild;
 
-//popstate
-// const onPopstate = (event) => {
-//     setLocation(window.location.pathname);
-//     console.log('popstate called');
-// }
-// useEffect(()=>{
-//     window.addEventListener('popstate',onPopstate);
-//     return () =>{ window.removeEventListener('popstate',onPopstate);}
-// },[] );
-//end popstate
 // function isClassComponent(component) {
 //     return (
 //         typeof component === 'function' &&
