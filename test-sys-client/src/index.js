@@ -9,7 +9,6 @@ import { Provider } from 'react-redux';
 import Navigator from './Naigation/MainNavigator'
 import questionReducer from 'Store/reducers/question';
 import './index.css';
-// import { createServer } from 'http-proxy';
 
 const rootReducer = combineReducers({
   questions: questionReducer
