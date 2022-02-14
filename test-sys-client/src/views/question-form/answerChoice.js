@@ -1,15 +1,10 @@
-import { useState,useEffect } from "react";
 import {Line,Input,Btn} from 'UIKit';
-const AnswerChoice = props => {
-    const [id, setId] = useState();
-
-    useEffect(() => {
-        setId(props.id)
-    }, []);
+const AnswerChoice = props => {    
+    const onValueChange = (e) => {props.onChange(e.target.value,props.id)}
     return (
         <Line>
-            <Input />
-            <Btn i="minus" onClick={() => { props.onRemove(id) }} />
+            <Input onChange={(e)=>{onValueChange(e)}} value = {props.value}/>
+            <Btn i="minus" onClick={() => { props.onRemove(props.id) }}  />
         </Line>
     )
 }

@@ -1,14 +1,15 @@
-import { useState,useEffect } from "react";
-import {Line,Input,Btn ,Rows , RadioButton} from 'UIKit';
+import { Btn, Rows, RadioButton, Checkbox } from 'UIKit';
 const AwnsersSelector = props => {
-
-    const getId = () =>{return props.list.length > 0 ? props.list.at(-1).id : 1 ;}
-    const [list] = useState(props.list);
-
+    const renderSelector = () => {
+        switch (props.questionType) {
+            case 1: return <RadioButton selected={props.selected} list={props.list} />;
+            case 2: return <Checkbox    selected={props.selected} list={props.list} />;
+        }
+    }
     return (
         <Rows>
             <Btn i="plus" onClick={props.onAddingAwnser} />
-            <RadioButton selected={props.selected} onChange={props.onChange} list={list}  />
+            {renderSelector()}
             <hr />
         </Rows>
     )
