@@ -1,6 +1,6 @@
 class Test {
     constructor(testType, lang, managerEmail, name, passingGrade, header, msgOnSucc,
-        msgOnFail, showIfWrong, emailSubOnSucc, emailBodyOnSucc, emailSubOnFail, emailBodyOnFail) {
+        msgOnFail, showIfWrong, emailSubOnSucc, emailBodyOnSucc, emailSubOnFail, emailBodyOnFail, questions) {
 
         this.testType = testType;
         this.lang = lang;
@@ -15,6 +15,7 @@ class Test {
         this.emailBodyOnSucc = emailBodyOnSucc;
         this.emailSubOnFail = emailSubOnFail;
         this.emailBodyOnFail = emailBodyOnFail;
+        this.questions = questions;
     }
 }
 

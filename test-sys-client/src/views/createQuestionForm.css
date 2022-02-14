@@ -43,3 +43,7 @@ hr{
   width: 5em;
   background: var(--light-color);
 }
+
+.errorMessage {
+  color:red;
+}

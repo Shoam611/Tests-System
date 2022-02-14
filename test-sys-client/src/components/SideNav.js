@@ -12,8 +12,8 @@ const SideNav = () => {
                     <NavLinkItem to="/app/questions/questions">New Question </NavLinkItem>
                     <NavLinkItem to="/app/questions/edit">Edit a Questions    </NavLinkItem>
                 </NavLinkListItem>
-                <NavLinkListItem title={"Manage Qweezes"} className="">
-                    <NavLinkItem to="/app/qweezes/qweezes">Create a Qweez</NavLinkItem>
+                <NavLinkListItem title={"Manage Qweezes"}>
+                    <NavLinkItem to="/app/qweezes/create">Create a Qweez</NavLinkItem>
                     <NavLinkItem to="/app/qweezes/edit">Edit Qweezes      </NavLinkItem>
                 </NavLinkListItem>
                 <NavLinkListItem title={"Manage Topics"}>

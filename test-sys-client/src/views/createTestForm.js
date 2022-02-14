@@ -12,30 +12,82 @@ const CreateTestForm = () => {
         Test_header: useInput(),
         Text_msgOnSuccess: useInput(),
         Text_msgOnFailure: useInput(),
-        Show_answers: useInput(false),
         Email_succSub: useInput(),
         Email_succBody: useInput(),
         Email_failSub: useInput(),
         Email_failBody: useInput(),
-
     }
+
     const [topic, setTopic] = useState('def-topic');
     const [testType, setTestType] = useState(0);
     const [lang, setLang] = useState(0);
     const [toCheck, setToCheck] = useState(false);
+    const [message, setMessage] = useState("");
+    const [questions, setQuestions] = useState([]);
 
     const handleSubmit = (e) => {
-        console.log('was submitted');
+        if (testValidation()) {
+            console.log('was submitted');
 
-        const submitForm = {
-            ...fields,
-            topic,
-            testType,
-            lang,
-            toCheck,
+            const submitForm = {
+                id: Math.random().toString(),
+                ...fields,
+                topic,
+                testType,
+                lang,
+                toCheck,
+            }
+            console.log(submitForm);
+            setMessage("");
         }
+    }
 
-        console.log(submitForm);
+    const testValidation = () => {
+        if (+testType < 1 || +testType > 3) {
+            setMessage('Please Choose a Test Type.');
+            return false;
+        }
+        if (+lang < 1 || +lang > 2) {
+            setMessage('Please Choose a Language.');
+            return false;
+        }
+        if (fields.Manager_email.value.trim().length === 0) {
+            setMessage('Manager Email Cannot Be Empty!');
+            return false;
+        }
+        if (fields.Test_name.value.trim().length === 0) {
+            setMessage('Test Name Cannot Be Empty!');
+            return false;
+        }
+        if (+fields.Passing_grade.value < 1 || +fields.Passing_grade.value > 100) {
+            setMessage('Invalid Passing Grade!');
+            return false;
+        }
+        if (fields.Test_header.value.trim().length === 0) {
+            setMessage('Test Header Cannot Be Empty!');
+            return false;
+        }
+        if (fields.Text_msgOnSuccess.value.trim().length === 0) {
+            setMessage('Message On Succes Cannot Be Empty!');
+            return false;
+        }
+        if (fields.Text_msgOnFailure.value.trim().length === 0) {
+            setMessage('Message On Failure Cannot Be Empty!');
+            return false;
+        }
+        if (fields.Email_succBody.value.trim().length === 0 || fields.Email_succSub.value.trim().length === 0) {
+            setMessage('Email On Succes Cannot Be Empty!');
+            return false;
+        }
+        if (fields.Email_failBody.value.trim().length === 0 || fields.Email_failSub.value.trim().length === 0) {
+            setMessage('Email On Failure Cannot Be Empty!');
+            return false;
+        }
+        if(questions.length === 0){
+            setMessage("No Questions Were Selected - Refer To The Manage Questions Tab");
+            return false;
+        }
+        return true;
     }
 
     const handleCheckboxChange = (e) => {
@@ -91,6 +143,7 @@ const CreateTestForm = () => {
                     <textarea placeholder='Body' {...fields.Email_failBody} />
 
                     <Btn i="sort" onClick={handleSubmit}>Next</Btn>
+                    <p className='errorMessage'>{message}</p>
                 </div>
             </form>
         </div >
