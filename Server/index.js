@@ -4,7 +4,7 @@ require("dotenv").config();
 //envs
 const port = process.env.port ?  process.env.port : 8080;
 //DI
-require('./di-setup').setup();
+require('./app-container').setup();
 //app
 const app = require('./app');
 //swagger

@@ -1,20 +1,20 @@
 class QuestionsController {
   
-  constructor(proxy)
+  constructor({proxy})
   {
-
+    this.db = []
   }
   runRequest(){
-    //call service or repository
   }
-
   getAllQuestions = () => {
     return db.getAllQuestions();
   };
 
-  addQuestion = (question) => {
+  addQuestion = (req) => {
+    const {newQuestion} = req.body;
+    console.log("new question: ",newQuestion);
     if (!question) return "Invalid Question";
-    return db.addQuestion(question);
+    
   };
 }
 
