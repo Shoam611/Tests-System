@@ -1,11 +1,12 @@
 import useInput from 'hooks/useInput';
-import { Dropdown, Input, } from 'UIKit';
+import { Btn, Dropdown, Input, } from 'UIKit';
 import { useEffect, useState, useReducer } from 'react';
 import Question from 'models/QuestionModel';
 import AwnsersSelector from './answerSelector';
 import AwnserChoice from './answerChoice';
 import './createQuestionForm.css';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { addQuestion,fetchQuestions } from 'Store/actions/question';
 const CreateQuestionForm = () => {
     //helpers
     const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
@@ -15,6 +16,7 @@ const CreateQuestionForm = () => {
         }
         else return 1;
     }
+    const dispatch = useDispatch();
     //handlers
     const handleQuestionTypeChanged = (qType) => {
         answers.forEach(item=>{item.isSelected=false;item.value=''})
@@ -43,6 +45,13 @@ const CreateQuestionForm = () => {
         e.preventDefault();
         const newQuestion = new Question(topic, questionType, Question_text.value, Text_above_question.value, Text_below_question.value, tags.value, answers.map(({value},index) => ({value,id:index})) ,answers.map(({isSelected},index)=> ({isCorrect:isSelected,index})).filter(({isCorrect})=>isCorrect).map(({index})=>index));
         console.log(newQuestion);
+        dispatch(addQuestion(newQuestion))
+    }
+    
+    const questions = useSelector(state => state.questions.questions)
+    const printToConsole=()=>{
+        
+        console.log(questions);
     }
     //states
     const [questionTypes, setQuestionTypes] = useState(null);   //list of q types available
@@ -63,7 +72,8 @@ const CreateQuestionForm = () => {
     //renderers
     return (
         <div className='AddQForm'>
-            <h1>New Question</h1>
+            <h1>New Question</h1> 
+            <Btn onClick={printToConsole}>print to console</Btn>
             <div style={{ height: 'min-content' }}>
                 <form onSubmit={handleSubmit} >
                     <div className='form-container' >
