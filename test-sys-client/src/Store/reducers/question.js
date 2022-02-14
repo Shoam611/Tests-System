@@ -10,8 +10,11 @@ export default (state=initialState,action) =>{
         const questions =state.questions;
         questions.push(action.newQuestion)
         return {...state,questions:questions }
-        case FETCH : break;
+       
+        case FETCH : /* */ return state;
+       
         case DELETE :  break;
+       
         default:return state;
     }
 }

@@ -50,7 +50,6 @@ const CreateQuestionForm = () => {
     
     const questions = useSelector(state => state.questions.questions)
     const printToConsole=()=>{
-        
         console.log(questions);
     }
     //states

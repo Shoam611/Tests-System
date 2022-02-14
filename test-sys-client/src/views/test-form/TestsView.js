@@ -57,8 +57,8 @@ const TestsView = () => {
             <div className="container">
                 <GradientBorder to="left" bottom >
                     <ul display="row">
-                        <NavLinkItem to="/app/qweezes/create">Test Details</NavLinkItem>
-                        <NavLinkItem to="/app/qweezes/addQuestions">Manage Questions</NavLinkItem>
+                        <NavLinkItem to="/app/qweezes/create/form">Test Details</NavLinkItem>
+                        <NavLinkItem to="/app/qweezes/create/selectQuestions">Manage Questions</NavLinkItem>
                     </ul>
                 </GradientBorder>
                 <Btn onClick={()=>{console.log(testData);console.log(fields);}}/>
