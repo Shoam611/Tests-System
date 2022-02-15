@@ -3,27 +3,32 @@ class QuestionsController {
   constructor({ mongoRepository }) {
     this.mongoRepository = mongoRepository;
   }
+  addQuestion = ({ body }) => {
+    console.log('inController');
+    const { newQuestion, } = body;
+    if (!newQuestion) { console.log("Invalid Question"); return; }
+    this.mongoRepository.addAsync(newQuestion);
+  }
+  deleteQuestion = ({ body }) => {
+    const { id } = body;
+    console.log('in delete controller', id);
+    this.mongoRepository.DeleteOneAsync(id)
+  }
+  //--------------------------------------
 
   getQuestions = (req) => {
-     this.mongoRepository.getAsync();
-    // const {oneOrMany} = req;
+    this.mongoRepository.getAsync();
+    // const {oneOrMany,skip,take} = req.body;
     // if(fetch=="many")
     // if(fetch=="one")
     // this.mongoRepository.getOneAsync();
-   };
+  };
+  updateQuestion = ({ body }) => {
+    throw new Error('not implimented')
+    // const {id,newQuestion} = body
+    // this.mongoRepository.updateOne(id,newQuestion)
+  }
 
-  addQuestion = (req) => {
-    console.log('inController');
-    const { newQuestion } = req.body;
-    if (!newQuestion) {console.log("Invalid Question");return;}
-    this.mongoRepository.addAsync(newQuestion);
-  }
-  deleteQuestion = (req)=>{
-    console.log('in delete controller');
-    const {id} = req.body;
-    console.log('delete id' , id);
-    this.mongoRepository.DeleteOneAsync(id)
-  }
 }
 
 module.exports = QuestionsController;
