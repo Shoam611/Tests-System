@@ -1,13 +1,13 @@
-.AddQForm {
+.AddTForm {
   width: 95%;
-  height:auto;
+  height:min-content;
   overflow-y: scroll;
   background-color: var(--light-color);
   display: grid;
   grid-template-rows: 90px 1fr;
   color: var(--text-color-dark);
 }
-.AddQForm h1 {
+.AddTForm h1 {
   color: var(--accent);
 }
 .form-container {
@@ -17,12 +17,13 @@
     flex-direction: column;
     gap: var(--gap-l);
     width: inherit;
-    padding: 0 var(--gap-m) ;
-    height:fit-content;
-    margin-bottom: calc(var(--gap-l) * 300);
 
+    padding: 0 var(--gap-m) ;
+    height:min-content;
+    margin-bottom: 0;
 }
 form{
+  height: min-content;
   width: auto;
   overflow-y:scroll;
 }
@@ -43,7 +44,6 @@ hr{
   width: 5em;
   background: var(--light-color);
 }
-
 .errorMessage {
   color:red;
 }

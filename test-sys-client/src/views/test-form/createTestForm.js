@@ -85,7 +85,7 @@ const CreateTestForm = (props) => {
     ]
 
     return (
-        <div className='AddQForm'>
+        <div className='AddTForm'>
             <h1>New Test</h1>
             <form>
                 <div className='form-container' >
