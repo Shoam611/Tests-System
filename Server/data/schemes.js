@@ -4,7 +4,6 @@ const answerSchema=new Schema({
     id:Number
 })
 const questionSchema = new Schema({
-    id:Types.ObjectId,
     topic:String,
     questionType:Number,
     questionText:String ,
@@ -13,9 +12,11 @@ const questionSchema = new Schema({
     tags:[],
     answers:[answerSchema],
     correctAwnserIndex:[],
-    // questionTitle:String,
-});
-
+},{timestamps:true}
+);
+questionSchema.statics.deleteByIdAsync =async function(id) {
+    return  this.deleteOne({ _id: id })
+  };
 const QuestionModel = model('QuestionModel',questionSchema);
 
 module.exports={
