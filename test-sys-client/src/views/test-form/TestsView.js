@@ -5,18 +5,19 @@ import useInput from "hooks/useInput";
 import './QuestionsView.css';
 import CreateTestForm from "./createTestForm";
 import QuestionsForTest from "./questionsForTest";
+import { Outlet, Routes,Route } from "react-router-dom";
 
 
 const TestsView = () => {
     //states
     const [testData, setTestData] = useState('');
-    const [currentStep, setCurrentStep] = useState(1);
+    // const [currentStep, setCurrentStep] = useState(1);
     const [testType, setTestType] = useState(0);
     const [lang, setLang] = useState(0);
     const [toShowMistakes, setToShowMistakes] = useState(false);
-    
+
     const fields = {
-        step_1_fields:{
+        step_1_fields: {
             Manager_email: useInput(),
             Test_name: useInput(),
             Passing_grade: useInput(),
@@ -32,21 +33,17 @@ const TestsView = () => {
             toShowMistakes,
             topic: 'def-topic',
         },
-        step_2_fields:{
+        step_2_fields: {
 
         }
     }
 
-    // const makeRequest = () => {
-    //     console.log('Form Submitted', testData);
-    // }
-    
     //handlers
     const handleNextStep = () => {
-        setCurrentStep(prev => prev + 1);
+
     }
     const handlePrevStep = () => {
-        setCurrentStep(prev => prev - 1);
+
     }
     const testTypeChangedHandler = (e) => {
         setTestType(e);
@@ -57,13 +54,11 @@ const TestsView = () => {
     const toShowChangedHandler = (e) => {
         setToShowMistakes(!e);
     }
-    
     //views
     const steps = [
-          <CreateTestForm next={handleNextStep} onTestTypeChange={testTypeChangedHandler} onLangChange={langChangedHandler} onToShowChange={toShowChangedHandler} data={testData} {...fields.step_1_fields} />
+        <CreateTestForm next={handleNextStep} onTestTypeChange={testTypeChangedHandler} onLangChange={langChangedHandler} onToShowChange={toShowChangedHandler} data={testData} {...fields.step_1_fields} />
         , <QuestionsForTest prev={handlePrevStep} next={handleNextStep} data={testData} />
     ]
-
     return (
         <div className="QuestionView">
             <div className="container">
@@ -73,10 +68,14 @@ const TestsView = () => {
                         <NavLinkItem to="/app/qweezes/create/selectQuestions">Manage Questions</NavLinkItem>
                     </ul>
                 </GradientBorder>
-                <Btn onClick={()=>{console.log(testData);console.log(fields);}}/>
+                <Btn onClick={() => { console.log(testData); console.log(fields); }} />
             </div>
             <div className="questions-view-outlet-container">
-                {steps[currentStep]}
+            <Routes >
+                <Route path="form" element={steps[0]} />
+                <Route path="selectQuestions" element={steps[1]} />
+            </Routes>
+                <Outlet />
             </div>
         </div>
     )
