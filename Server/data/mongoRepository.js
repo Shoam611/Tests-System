@@ -1,6 +1,6 @@
 //const Enumerable = require('node-enumerable');
 const { QuestionModel } = require('./schemes');
-const { connect,disconnect } = require('mongoose');
+const { connect, disconnect } = require('mongoose');
 class MongoRepository {
     constructor({ schemes }) {
         this.QuestionModel = schemes.QuestionModel;
@@ -9,40 +9,39 @@ class MongoRepository {
         this.databaseName = 'questionsPool';
         this.init()
     }
-    async init() {connect(`mongodb://${this.domain}:${this.port}/${this.databaseName}`)}
+    async init() { connect(`mongodb://${this.domain}:${this.port}/${this.databaseName}`) }
     //Create
     async addAsync(object) {
         console.log('in add async');
         const q = new QuestionModel({ ...object });
-        await q.save();
-    }
-    //Read
-    async getOneAsync(id){
-        const query = QuestionModel.findOne({_id:id});
-        const doc =await query.next();
-        return doc;
-    }
-    async getAsync(skip=0,take=10) {
-        console.log('in get async');
-        const query = QuestionModel.find({sort:'-createdAt'}).skip(skip).limit(take).cursor();
-        const list=[];
-        for (let /*i = 1,*/ doc = await query.next(); doc != null; doc = await query.next()) {
-            // console.log(`**********start ${i}************`);
-            // console.log(doc);
-            // console.log(`**********end  ${i++}************`);
-            list.push(doc)
-        }
-        return list;
-    }
-    //Update
-    async UpdateOne(id,newQuestion){
+        q.save();
     }
     //Delete
-    async DeleteOneAsync(id){
-        console.log('id in repo' , id);
+    async DeleteOneAsync(id) {
+        console.log('id in repo', id);
         QuestionModel.deleteByIdAsync(id);
     }
-    async deleteManyAsync(filter){
+    //Read
+    //Update
+
+
+    async getOneAsync(id) {
+        const query = QuestionModel.findOne({ _id: id });
+        const doc = await query.next();
+        return doc;
+    }
+    async getAsync(skip = 0, take = 10) {
+        const query = QuestionModel.find({ sort: '-createdAt' }).skip(skip).limit(take).cursor();
+        const list = [];
+        for (let doc = await query.next(); doc != null; doc = await query.next()){
+            list.push(doc);
+        }
+            console.log("list",list);
+        return list;
+    }
+    async UpdateOne(id, newQuestion) {
+    }
+    async deleteManyAsync(filter) {
 
     }
 }
