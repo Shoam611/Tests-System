@@ -4,6 +4,7 @@
   "description": "backend module for online tests system",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -13,6 +14,8 @@
     "config": "^3.3.7",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
+    "mongoose": "^6.2.1",
+    "node-enumerable": "^6.0.0",
     "nodemon": "^2.0.15"
   }
 }
