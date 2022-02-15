@@ -43,9 +43,11 @@ const TestsView = () => {
 
     //handlers
     const handleNextStep = () => {
+        console.log('next');
         navigate("/app/qweezes/create/selectQuestions");
     }
     const handlePrevStep = () => {
+        console.log('prev');
         navigate("/app/qweezes/create/form");
     }
     const testTypeChangedHandler = (e) => {

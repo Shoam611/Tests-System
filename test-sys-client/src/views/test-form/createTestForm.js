@@ -9,13 +9,11 @@ const CreateTestForm = (props) => {
     //handlers
     const handleSubmit = () => {
         if (testValidation()) {
-            console.log('nexted');
-
             props.next();
             setMessage("");
         }
     }
-    
+
     //regEx validation
     const ValidateEmail = (mail) => {
         if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(mail)) {
