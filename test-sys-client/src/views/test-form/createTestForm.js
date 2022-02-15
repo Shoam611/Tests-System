@@ -122,7 +122,7 @@ const CreateTestForm = (props) => {
                     </label>
                     <textarea placeholder='Body' {...props.Email_failBody} />
 
-                    <Btn i="sort" onClick={handleSubmit}>Next</Btn>
+                    <Btn i="chevron-right" onClick={handleSubmit}>Next</Btn>
                     <p className='errorMessage'>{message}</p>
                 </div>
             </form>
