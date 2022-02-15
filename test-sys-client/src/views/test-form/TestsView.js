@@ -6,6 +6,7 @@ import './QuestionsView.css';
 import CreateTestForm from "./createTestForm";
 import QuestionsForTest from "./questionsForTest";
 import { Outlet, Routes,Route } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 const TestsView = () => {
@@ -15,6 +16,8 @@ const TestsView = () => {
     const [testType, setTestType] = useState(0);
     const [lang, setLang] = useState(0);
     const [toShowMistakes, setToShowMistakes] = useState(false);
+
+    let navigate = useNavigate();
 
     const fields = {
         step_1_fields: {
@@ -40,10 +43,10 @@ const TestsView = () => {
 
     //handlers
     const handleNextStep = () => {
-
+        navigate("/app/qweezes/create/form");
     }
     const handlePrevStep = () => {
-
+        navigate("/app/qweezes/create/selectQuestions");
     }
     const testTypeChangedHandler = (e) => {
         setTestType(e);

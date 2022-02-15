@@ -14,8 +14,6 @@ const AppNavigator = () => {
           <Route path="questions/edit" element={<DefaultView />} />
 
           <Route path="qweezes/create/*" element={<TestsView />}>
-            {/* <Route path="form" element={<CreateTestForm />} />
-            <Route path="selectQuestions" element={<QuestionsForTest />} /> */}
           </Route>
 
           <Route path="qweezes/edit" element={<DefaultView />} />
