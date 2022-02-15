@@ -5,7 +5,7 @@ import useInput from "hooks/useInput";
 import './QuestionsView.css';
 import CreateTestForm from "./createTestForm";
 import QuestionsForTest from "./questionsForTest";
-import { Outlet, Routes,Route } from "react-router-dom";
+import { Outlet, Routes, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 
@@ -73,13 +73,15 @@ const TestsView = () => {
                         <NavLinkItem to="/app/qweezes/create/selectQuestions">Manage Questions</NavLinkItem>
                     </ul>
                 </GradientBorder>
-                <Btn onClick={() => { console.log(testData); console.log(fields); }} />
+                {/* <Btn onClick={() => { console.log(testData); console.log(fields); }} /> */}
             </div>
             <div className="questions-view-outlet-container">
-            <Routes >
-                <Route path="form" element={steps[0]} />
-                <Route path="selectQuestions" element={steps[1]} />
-            </Routes>
+                <Btn>Submit</Btn>
+                <Routes >
+                    <Route path="/" element={steps[0]} />
+                    <Route path="form" element={steps[0]} />
+                    <Route path="selectQuestions" element={steps[1]} />
+                </Routes>
                 <Outlet />
             </div>
         </div>

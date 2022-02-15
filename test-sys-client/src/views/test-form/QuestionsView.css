@@ -46,3 +46,8 @@ ul[display="row"] {
   width: 0.1em;
   background: var(--light-color);
 }
+
+.expenses-list {
+  list-style: none;
+  padding: 0;
+}

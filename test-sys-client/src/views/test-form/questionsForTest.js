@@ -1,13 +1,25 @@
-import { useState } from "react";
-const axios = require('axios')
-
-const { Btn } = require("UIKit")
+import { useEffect, useState } from "react";
+import Card from "UIKit/Layouts/Card";
+import QuestionItem from "./questionItem";
+const { Btn } = require("UIKit");
+const axios = require('axios');
 
 const QuestionsForTest = (props) => {
     const [questions, setQuestions] = useState([]);
+    const [fetchedData, setFetchedData] = useState([]);
 
-    const addQuestion = () => {
-        setQuestions(oldArray => [...oldArray, 1]);
+    const getQuestion = () => {
+        axios.get('http://localhost:4200/questions?oneOrMany=many&skip=0&take=20')
+            .then((response) => {
+                const myData = response.data;
+                setFetchedData(myData);
+            })
+    }
+
+    useEffect(() => getQuestion(), []);
+
+    const addQuestion = (obj) => {
+        setQuestions(oldArray => [...oldArray, obj]);
         console.log(questions);
     }
     const removeQuestion = (index = 1) => {
@@ -18,19 +30,24 @@ const QuestionsForTest = (props) => {
         console.log(questions);
     }
 
-     const getQuestions = async () => {
-        let result = await axios.get('http://localhost:4200/questions?oneOrMany=many&skip=0&take=20');
-        console.log(result.data);
-    }
-
     return (
         <>
             <h1>Choose Questions</h1>
-            <button onClick={addQuestion}>Plus 1</button>
-            <button onClick={removeQuestion}>Minus 1</button>
-            <Btn onClick={() => props.prev()}>Back</Btn>
-            <Btn onClick={() => props.next()}>Submit</Btn>
-            <Btn onClick={getQuestions}>Get Questions</Btn>
+            <Card>
+                <ul>
+                    {fetchedData.map((question) => (
+                        <QuestionItem 
+                            key={Math.random()}
+                            id={question.id}
+                            textAbove={question.textAbove}
+                            tags={question.tags}
+                            myself={question}
+                            onClick={addQuestion}
+                        />
+                    ))}
+                </ul>
+            </Card>
+            <Btn i="chevron-left" onClick={() => props.prev()}>Back</Btn>
         </>
     );
 }
