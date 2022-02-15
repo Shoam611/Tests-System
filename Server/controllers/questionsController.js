@@ -1,20 +1,23 @@
 class QuestionsController {
-  
-  constructor({proxy})
-  {
-    this.db = []
+
+  constructor({ mongoRepository }) {
+    this.mongoRepository = mongoRepository;
   }
-  runRequest(){
-  }
-  getAllQuestions = () => {
-    return db.getAllQuestions();
-  };
+  runRequest() {   }
+
+  getQuestions = () => {
+    this.mongoRepository.getAllAsync();
+   };
 
   addQuestion = (req) => {
-    const {newQuestion} = req.body;
-    console.log("new question: ",newQuestion);
-    if (!question) return "Invalid Question";
-    
+    console.log('inController');
+    const { newQuestion } = req.body;
+    // console.log("new question: ", newQuestion);
+    if (!newQuestion) {
+      console.log("Invalid Question");
+      return;
+    }
+    this.mongoRepository.addAsync(newQuestion);
   };
 }
 

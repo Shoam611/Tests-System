@@ -5,10 +5,9 @@ class Question{
         this.questionText=questionText;
         this.textAbove=textAbove;
         this.textBelow=textBelow;
-        this.tags= tags
-        .split(',')
-        .map(tag => { if(tag.trim().length > 0) return tag.trim() })
-        .filter(tag => (!!tag) && tag);
+        this.tags=  tags.split(',')
+                        .map(tag =>  tag.trim() )
+                        .filter(tag => (!!tag) && tag);
         this.awnsers=awnsers;
         this.correctAwnserIndex=correctAwnserIndex;
     }
