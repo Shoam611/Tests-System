@@ -43,10 +43,10 @@ const TestsView = () => {
 
     //handlers
     const handleNextStep = () => {
-        navigate("/app/qweezes/create/form");
+        navigate("/app/qweezes/create/selectQuestions");
     }
     const handlePrevStep = () => {
-        navigate("/app/qweezes/create/selectQuestions");
+        navigate("/app/qweezes/create/form");
     }
     const testTypeChangedHandler = (e) => {
         setTestType(e);
