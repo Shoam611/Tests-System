@@ -1,6 +1,6 @@
 import NavLinkItem from "../../components/navLinkItem";
 import { Btn, GradientBorder } from "UIKit";
-import React, { useState,useReducer } from "react";
+import React, { useState } from "react";
 import useInput from "hooks/useInput";
 import './QuestionsView.css';
 import CreateTestForm from "./createTestForm";
@@ -8,8 +8,12 @@ import QuestionsForTest from "./questionsForTest";
 
 
 const TestsView = () => {
+    //states
     const [testData, setTestData] = useState('');
-    const [currentStep, setCurrentStep] = useState(0);
+    const [currentStep, setCurrentStep] = useState(1);
+    const [testType, setTestType] = useState(0);
+    const [lang, setLang] = useState(0);
+    const [toShowMistakes, setToShowMistakes] = useState(false);
     
     const fields = {
         step_1_fields:{
@@ -23,32 +27,40 @@ const TestsView = () => {
             Email_succBody: useInput(),
             Email_failSub: useInput(),
             Email_failBody: useInput(),
+            testType,
+            lang,
+            toShowMistakes,
+            topic: 'def-topic',
         },
         step_2_fields:{
 
         }
     }
 
-    const makeRequest = () => {
-        console.log('Form Submitted', testData);
-    }
+    // const makeRequest = () => {
+    //     console.log('Form Submitted', testData);
+    // }
     
-    const handleNextStep = (newData, final) => {
-        setTestData((prev) => ({ ...prev, ...newData }));
-        if (final) 
-        {
-            //makeRequest();
-            console.log("fields",fields,newData);
-            console.log('Form Submitted', testData); return;
-        }
+    //handlers
+    const handleNextStep = () => {
         setCurrentStep(prev => prev + 1);
     }
-    const handlePrevStep = (newData) => {
-        setTestData((prev) => ({ ...prev, ...newData }));
+    const handlePrevStep = () => {
         setCurrentStep(prev => prev - 1);
     }
+    const testTypeChangedHandler = (e) => {
+        setTestType(e);
+    }
+    const langChangedHandler = (e) => {
+        setLang(e);
+    }
+    const toShowChangedHandler = (e) => {
+        setToShowMistakes(!e);
+    }
+    
+    //views
     const steps = [
-          <CreateTestForm next={handleNextStep} data={testData} {...fields.step_1_fields} />
+          <CreateTestForm next={handleNextStep} onTestTypeChange={testTypeChangedHandler} onLangChange={langChangedHandler} onToShowChange={toShowChangedHandler} data={testData} {...fields.step_1_fields} />
         , <QuestionsForTest prev={handlePrevStep} next={handleNextStep} data={testData} />
     ]
 

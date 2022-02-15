@@ -4,25 +4,29 @@ const { Btn } = require("UIKit")
 
 const QuestionsForTest = (props) => {
 
-    const [test, setTest] = useState(0);
+    const [questions, setQuestions] = useState([]);
 
-    const testing = () => {
-        setTest(test + 1);
-        console.log(test);
+    const addQuestion = () => {
+        setQuestions(oldArray => [...oldArray, 1]);
+        console.log(questions);
     }
-    const testing1 = () => {
-        setTest(test - 1);
-        console.log(test);
+    const removeQuestion = (index = 1) => {
+        var tempArray = [...questions];
+        var index = tempArray.indexOf(index);
+        tempArray.splice(index, 1);
+        setQuestions(tempArray);
+        console.log(questions);
     }
 
     return (
         <>
+            <h1>Choose Questions</h1>
             <div>
-                <button onClick={testing}>Plus 1</button>
-                <button onClick={testing1}>Minus 1</button>
+                <button onClick={addQuestion}>Plus 1</button>
+                <button onClick={removeQuestion}>Minus 1</button>
             </div>
-            <Btn i="sort" onClick={() => props.prev()}>Back</Btn>
-            <Btn i="sort" onClick={() => props.next({test}, true)}>Submit</Btn>
+            <Btn onClick={() => props.prev()}>Back</Btn>
+            <Btn onClick={() => props.next()}>Submit</Btn>
         </>
     );
 }

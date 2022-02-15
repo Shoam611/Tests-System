@@ -1,59 +1,45 @@
-import useInput from 'hooks/useInput';
 import { Btn, Dropdown, Input } from 'UIKit';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './createQuestionForm.css';
 
 const CreateTestForm = (props) => {
-    // const fields = {
-    //     Manager_email: useInput(),
-    //     Test_name: useInput(),
-    //     Passing_grade: useInput(),
-    //     Test_header: useInput(),
-    //     Text_msgOnSuccess: useInput(),
-    //     Text_msgOnFailure: useInput(),
-    //     Email_succSub: useInput(),
-    //     Email_succBody: useInput(),
-    //     Email_failSub: useInput(),
-    //     Email_failBody: useInput(),
-    // }
-
-    const [topic, setTopic] = useState('def-topic');
-    const [testType, setTestType] = useState(0);
-    const [lang, setLang] = useState(0);
-    const [toCheck, setToCheck] = useState(false);
+    //states
     const [message, setMessage] = useState("");
 
+    //handlers
     const handleSubmit = () => {
         if (testValidation()) {
-            console.log('next');
-            const submitForm = {
-                id: Math.random().toString(),
-                topic,
-                testType,
-                lang,
-                toCheck,
-            }
+            console.log('nexted');
 
-            props.next(submitForm);
+            props.next();
             setMessage("");
         }
     }
-
-    const FieldsContentChangeHandler = () =>{
-
+    
+    //regEx validation
+    const ValidateEmail = (mail) => {
+        if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(mail)) {
+            return true;
+        }
+        return false;
     }
 
+    //validations
     const testValidation = () => {
-        if (+testType < 1 || +testType > 3) {
+        if (+props.testType < 1 || +props.testType > 3) {
             setMessage('Please Choose a Test Type.');
             return false;
         }
-        if (+lang < 1 || +lang > 2) {
+        if (+props.lang < 1 || +props.lang > 2) {
             setMessage('Please Choose a Language.');
             return false;
         }
         if (props.Manager_email.value.trim().length === 0) {
-            setMessage('Manager Email Cannot Be Empty!');
+            setMessage('Email Address Cannot Be Empty!');
+            return false;
+        }
+        if (!ValidateEmail(props.Manager_email.value)) {
+            setMessage('Invalid Email Address!');
             return false;
         }
         if (props.Test_name.value.trim().length === 0) {
@@ -61,7 +47,7 @@ const CreateTestForm = (props) => {
             return false;
         }
         if (+props.Passing_grade.value < 1 || +props.Passing_grade.value > 100) {
-            setMessage('Invalid Passing Grade!');
+            setMessage('Invalid Passing Grade! Must Be Between 1 and 100.');
             return false;
         }
         if (props.Test_header.value.trim().length === 0) {
@@ -84,17 +70,10 @@ const CreateTestForm = (props) => {
             setMessage('Email On Failure Cannot Be Empty!');
             return false;
         }
-        // if(questions.length === 0){
-        //     setMessage("No Questions Were Selected - Refer To The Manage Questions Tab");
-        //     return false;
-        // }
         return true;
     }
 
-    const handleCheckboxChange = (e) => {
-        setToCheck(!toCheck);
-    }
-
+    //lists
     const testTypes = [
         { id: 1, value: ' Predefined Test - Same questions for all respondents ' },
         { id: 2, value: ' Random Test - Different questions for each respondent ' },
@@ -104,22 +83,20 @@ const CreateTestForm = (props) => {
         { id: 1, value: 'English' },
         { id: 2, value: 'Hebrew' }
     ]
-    useEffect(()=>{
-        return ()=>{console.log('state goes brrrrr');}
-    },[]);
+
     return (
         <div className='AddQForm'>
             <h1>New Test</h1>
             <form>
                 <div className='form-container' >
-                    <label>Topic: {topic}</label>
+                    <label>Topic: {props.topic}</label>
                     <label>
                         Type of Test:
-                        <Dropdown list={testTypes} selected={testType} onChange={(value) => { setTestType(value); }} />
+                        <Dropdown list={testTypes} selected={props.testType} onChange={(value) => props.onTestTypeChange(value)} />
                     </label>
                     <label>
                         Language:
-                        <Dropdown list={languages} selected={lang} onChange={(value) => { setLang(value); }} />
+                        <Dropdown list={languages} selected={props.lang} onChange={(value) => props.onLangChange(value)} />
                     </label>
                     <Input placeholder="Manager Email:" type="email" {...props.Manager_email} />
                     <Input placeholder="Test Name:" maxLength="200" {...props.Test_name} />
@@ -130,7 +107,7 @@ const CreateTestForm = (props) => {
 
                     <label>
                         Show Student Where He Was Wrong?
-                        <input type="checkbox" onChange={handleCheckboxChange} />
+                        <input type="checkbox" checked={props.toShowMistakes} onChange={() => { props.onToShowChange(props.toShowMistakes) }} />
                     </label>
 
                     <label>
