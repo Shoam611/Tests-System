@@ -1,19 +1,17 @@
+;import axios from 'axios'
 export const ADD = 'ADD';
 export const FETCH = 'FETCH';
 export const DELETE = 'DELETE';
 
 export const addQuestion = (newQuestion) => {
     return async (dispatch, getState) => {
-        //can use axios here to push a product to the server
-        // const response = await fetch(
-        //     'url from .env',
-        //     {
-        //         method: 'POST',
-        //         headers: { 'Content-Type': 'aplication/json'},
-        //         body: JSON.stringify(newQuestion)
-        //     }
-        // );
-        // const responseData = await response.json();
+        const response = axios.post('http://localhost:9200/questions',newQuestion);
+        const resStatus = await response.status
+        if(resStatus.toString()[0]!='2')
+        {
+            throw new Error('failed to post new question');
+        }
+        const responseData = await response.json();
         dispatch({ type: ADD, newQuestion })
     }
 }
