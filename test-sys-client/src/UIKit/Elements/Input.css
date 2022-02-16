@@ -25,6 +25,8 @@
 .Input input:hover[type="submit"] {
     opacity: 0.8;    
 }
+
+
 .Input input:focus[type="submit"]{
     opacity: 0.9;
     border:none;

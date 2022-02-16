@@ -40,7 +40,7 @@ const CheckboxItem = ({ onChange, render, id }) => {
     }
     return (
         <li key={id} style={{ marginTop: "10px" }}>
-            <Line justify="evenly" >
+            <Line >
                 <div className="iconContainer" onClick={() => { onSelectionHandler() }}>
                     <i className={checked ? "fas fa-check-square" : "far fa-check-square"} />
                 </div>
