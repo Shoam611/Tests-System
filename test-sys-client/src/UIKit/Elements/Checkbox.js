@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Line from "UIKit/Layouts/Line";
 import './Checkbox.css'
 const Checkbox = ({ list }) => {
@@ -8,7 +8,7 @@ const Checkbox = ({ list }) => {
         list.forEach(item => {
             if (item.id === id) {
                 item.isSelected = value;
-                // item.onChange(id,value)
+                item.onChange(item.value, value);
             }
         });
 
@@ -36,11 +36,15 @@ const CheckboxItem = ({ onChange, render, id }) => {
     const onSelectionHandler = () => {
         setChecked(!checked);
         onChange(id, !checked);
-        setRender({...render,props:{...render.props,className:!checked? 'active':'' }})
+        setRender({ ...render, props: { ...render.props, className: !checked ? 'active' : '' } })
     }
     return (
         <li key={id} style={{ marginTop: "10px" }}>
+<<<<<<< Updated upstream
             <Line >
+=======
+            <Line>
+>>>>>>> Stashed changes
                 <div className="iconContainer" onClick={() => { onSelectionHandler() }}>
                     <i className={checked ? "fas fa-check-square" : "far fa-check-square"} />
                 </div>
