@@ -3,29 +3,30 @@ class QuestionsController {
   constructor({ mongoRepository }) {
     this.mongoRepository = mongoRepository;
   }
-  addQuestion = ({ body }) => {
+  addQuestion =async ({ body }) => {
     console.log('inController');
     const { newQuestion, } = body;
     if (!newQuestion) { console.log("Invalid Question"); return; }
-    this.mongoRepository.addAsync(newQuestion);
+   return await this.mongoRepository.addAsync(newQuestion);
   }
+  
   deleteQuestion = ({ body }) => {
     const { id } = body;
     console.log('in delete controller', id);
     this.mongoRepository.DeleteOneAsync(id)
   }
   //--------------------------------------
-  getQuestions = async (req) => {
+  getQuestions = async ({query}) => {
     console.log('in get questions');
-    const { oneOrMany } = req.query;
+    const { oneOrMany } = query;
     console.log('one or Many', oneOrMany);
     switch (oneOrMany) {
       case "one":
         console.log('in one case');
-        const { id } = req.query;
+        const { id } = query;
          return await this.mongoRepository.getOneAsync(id)
       case "many":
-        const { skip, take } = req.query;
+        const { skip, take } = query;
         console.log('in many case',skip,take);
         return await this.mongoRepository.getAsync(skip, take)
       default: return undefined;
