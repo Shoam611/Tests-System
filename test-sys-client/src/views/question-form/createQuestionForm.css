@@ -19,7 +19,8 @@
     width: inherit;
     padding: 0 var(--gap-m) ;
     height:fit-content;
-    margin-bottom: calc(var(--gap-l) * 300);
+    margin-bottom: var(--gap-m);
+    /* margin-bottom: calc(var(--gap-l) * 300); */
 
 }
 form{

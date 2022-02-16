@@ -14,7 +14,7 @@
   margin-bottom: var(--gap-s);
 }
 .questions-view-outlet-container{
-  height: 100%;
+  height: 80vh;
   width: 100%;
   margin: 0;
   overflow-y:auto;
@@ -34,17 +34,7 @@ ul[display="row"] {
     padding-bottom: var(--gap-xs);
     margin-bottom: var(--gap-xs);
 }
-/* ul[display="row"] a.active::after {
-  content: "";
-  display: block;
-  position: relative;
-  height: var(--gap-xs);
-  width: 90%;
-  justify-self:center ;
-  margin: 0 5%;
-  background-color: var(--dark-color);
-  background-color: var(--accent);
-}  */
+
 .QuestionView ::-webkit-scrollbar {
   height: 0.5em;
 }
@@ -55,4 +45,9 @@ ul[display="row"] {
 .QuestionView ::-webkit-scrollbar-track {
   width: 0.1em;
   background: var(--light-color);
+}
+
+.expenses-list {
+  list-style: none;
+  padding: 0;
 }

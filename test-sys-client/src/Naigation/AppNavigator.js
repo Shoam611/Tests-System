@@ -2,7 +2,9 @@ import { Route, Routes } from "react-router-dom";
 import App from "App";
 import QuestionsView from "../views/QuestionsView";
 import DefaultView from "views/defaultView";
-import TestsView from "../views/TestsView";
+import TestsView from "../views/test-form/TestsView";
+import CreateTestForm from "views/test-form/createTestForm";
+import QuestionsForTest from "views/test-form/questionsForTest";
 const AppNavigator = () => {
   return (
     <div id="AppNavigatorContainer">
@@ -11,7 +13,9 @@ const AppNavigator = () => {
           <Route path="questions/questions" element={<QuestionsView />} />
           <Route path="questions/edit" element={<DefaultView />} />
 
-          <Route path="qweezes/qweezes" element={<TestsView />} />
+          <Route path="qweezes/create/*" element={<TestsView />}>
+          </Route>
+
           <Route path="qweezes/edit" element={<DefaultView />} />
 
           <Route path="topics/topics" element={<QuestionsView />} />

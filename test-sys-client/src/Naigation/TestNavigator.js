@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import DefaultView from 'views/defaultView';
-import TestsView from '../views/TestsView'
+import TestsView from '../views/test-form/TestsView'
 import QuestionsView from '../views/QuestionsView'
 import Test from '../views/Tests'
 
