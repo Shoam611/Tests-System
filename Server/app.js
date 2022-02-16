@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require('cors')
 const app = express();
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 const { container } = require('./app-container');
 
 const questionsController = container.resolve('questionsController');

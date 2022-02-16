@@ -6,9 +6,10 @@
   margin: 1rem 0;
   background-color: gray;
 }
-.chosen {
+
+/* .active .expense-item {
   background-color: #a9deab;
-}
+} */
 
 .expense-date {
   display: flex;
