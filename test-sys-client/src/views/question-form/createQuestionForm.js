@@ -25,7 +25,7 @@ const CreateQuestionForm = () => {
     const onAddingAwnser = () => {
         if (answers.length >= 6) return;
         const id = getId();
-        const newAnswer = { id: id, render: <AwnserChoice id={id} onRemove={handleRemoveAwnser} onChange={awnserContentChangedHandler} />, value: '' ,isSelected:false};
+        const newAnswer = { id: id, render: <AwnserChoice id={id} onRemove={handleRemoveAwnser} onChange={awnserContentChangedHandler}  />, value: '' ,isSelected:false};
         answers.push(newAnswer);
         forceUpdate();
     }
@@ -37,6 +37,7 @@ const CreateQuestionForm = () => {
         }
     }
     const awnserContentChangedHandler = (value, id) => {
+        console.log('changed');
         const temp = answers;
         temp.filter(i => i.id === id)[0].value = value;
         setAwnsers(temp);
