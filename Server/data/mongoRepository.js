@@ -33,10 +33,10 @@ class MongoRepository {
     async getAsync(skip = 0, take = 10) {
         const query = QuestionModel.find({ sort: '-createdAt' }).skip(skip).limit(take).cursor();
         const list = [];
-        for (let doc = await query.next(); doc != null; doc = await query.next()){
+        for (let doc = await query.next(); doc != null; doc = await query.next()) {
             list.push(doc);
         }
-            console.log("list",list);
+        console.log("list", list);
         return list;
     }
     async UpdateOne(id, newQuestion) {

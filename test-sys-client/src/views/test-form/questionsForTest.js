@@ -22,7 +22,7 @@ const QuestionsForTest = (props) => {
         setQuestions(oldArray => [...oldArray, obj]);
         console.log(questions);
     }
-    const removeQuestion = (index = 1) => {
+    const removeQuestion = (index) => {
         var tempArray = [...questions];
         var index = tempArray.indexOf(index);
         tempArray.splice(index, 1);
@@ -42,7 +42,8 @@ const QuestionsForTest = (props) => {
                             textAbove={question.textAbove}
                             tags={question.tags}
                             myself={question}
-                            onClick={addQuestion}
+                            onAdd={addQuestion}
+                            onRemove={removeQuestion}
                         />
                     ))}
                 </ul>

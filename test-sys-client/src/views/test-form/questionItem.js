@@ -1,27 +1,32 @@
 import React, { useState } from 'react';
+import { Checkbox } from 'UIKit';
 import Card from 'UIKit/Layouts/Card';
 import './questionItem.css';
 
 const QuestionItem = props => {
-    const [isClicked, setIsClicked] = useState(true);
+    const [checked, setChecked] = useState(false); 
 
     const clickHandler = () => {
-
-        props.onClick(props.myself);
-
-        setIsClicked(!isClicked);
-        console.log(isClicked);
+        if (!checked) {
+            props.onAdd(props.myself);
+            setChecked(true);
+        } else {
+            props.onRemove(props.id);
+            setChecked(false);
+        }
+        console.log(checked);
     }
 
     return (
-        <li onClick={clickHandler}>
-            <Card className={'expense-item ' + (isClicked ? '' : 'chosen')}>
+        <li>
+            <Card className={'expense-item ' + (checked ? 'chosen' : '')}>
                 <div className='expense-date'>12</div>
                 <div className='expense-item__description'>
                     <h3>{props.textAbove}</h3>
                     <h6>{props.tags}</h6>
                     <div>
-                        <button>Show</button>
+                        <Checkbox onChange={clickHandler} />
+                        <button >Show</button>
                         <button>Edit</button>
                     </div>
                 </div>
