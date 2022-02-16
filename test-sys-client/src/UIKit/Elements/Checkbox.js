@@ -40,11 +40,7 @@ const CheckboxItem = ({ onChange, render, id }) => {
     }
     return (
         <li key={id} style={{ marginTop: "10px" }}>
-<<<<<<< Updated upstream
-            <Line >
-=======
             <Line>
->>>>>>> Stashed changes
                 <div className="iconContainer" onClick={() => { onSelectionHandler() }}>
                     <i className={checked ? "fas fa-check-square" : "far fa-check-square"} />
                 </div>
