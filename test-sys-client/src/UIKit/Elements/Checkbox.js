@@ -1,19 +1,24 @@
-import {  useState } from "react";
+import { useEffect, useState } from "react";
 import Line from "UIKit/Layouts/Line";
 import './Checkbox.css'
 const Checkbox = ({ list }) => {
 
-    const onSelctionChanged = (id,value) => {
+    const onSelctionChanged = (id, value) => {
+        console.log('changed');
         list.forEach(item => {
-            if(item.id===id) item.isSelected=value;
+            if (item.id === id) {
+                item.isSelected = value;
+                // item.onChange(id,value)
+            }
         });
+
     }
     const renderListOptions = () => {
         return list.map((value) => <CheckboxItem key={value.id}
-                                                id={value.id}
-                                                selected={value.checked}
-                                                onChange={onSelctionChanged}
-                                                render={value.render} />);
+            id={value.id}
+            selected={value.checked}
+            onChange={onSelctionChanged}
+            render={value.render} />);
     }
     return (
         <div >
@@ -24,19 +29,22 @@ const Checkbox = ({ list }) => {
     )
 }
 
-const CheckboxItem = ({onChange,render,id}) => {
+const CheckboxItem = ({ onChange, render, id }) => {
     const [checked, setChecked] = useState(false);
+    const [toRender, setRender] = useState(render);
+
     const onSelectionHandler = () => {
         setChecked(!checked);
-        onChange(id,!checked);
+        onChange(id, !checked);
+        setRender({...render,props:{...render.props,className:!checked? 'active':'' }})
     }
     return (
-        <li key={id} style={{ marginTop:"10px"}}>
-            <Line justify="start" >
+        <li key={id} style={{ marginTop: "10px" }}>
+            <Line justify="evenly" >
                 <div className="iconContainer" onClick={() => { onSelectionHandler() }}>
                     <i className={checked ? "fas fa-check-square" : "far fa-check-square"} />
                 </div>
-                <div>{render}</div>
+                <div>{toRender}</div>
             </Line>
         </li>
     )

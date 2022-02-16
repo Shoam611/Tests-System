@@ -1,3 +1,4 @@
+import Enumerable from 'node-enumerable';
 import { ADD,FETCH,DELETE } from "Store/actions/question";
 const initialState = {
     questions:[]
@@ -13,10 +14,13 @@ export default (state=initialState,action) =>{
         questions.push(action.newQuestion)
         return {...state,questions:questions }
         
-        case FETCH : /* */
-        // if(action.range fit for questions,range)
-        // {
-        // } else askServer();
+        case FETCH : 
+        if(action.data){
+            // const questions =Enumerable.create(...questions,action.data)
+            //                             .distinctBy(q=>q._id);
+            return {...state,questions:action.data}
+        }
+
         return state;
         case DELETE :  break;
        

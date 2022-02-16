@@ -12,13 +12,13 @@ class MongoRepository {
     async init() { connect(`mongodb://${this.domain}:${this.port}/${this.databaseName}`) }
     //Create
     async addAsync(object) {
-        console.log('in add async');
         const q = new QuestionModel({ ...object });
-        q.save();
+        await q.save();
+        console.log('added', q._id.toString());
+        return q._id;
     }
     //Delete
     async DeleteOneAsync(id) {
-        console.log('id in repo', id);
         QuestionModel.deleteByIdAsync(id);
     }
     //Read

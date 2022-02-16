@@ -11,9 +11,11 @@
   "license": "ISC",
   "dependencies": {
     "awilix": "^6.1.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "mongoose": "^6.2.1",
+    "node-enumerable": "^6.0.0",
     "nodemon": "^2.0.15"
   }
 }
