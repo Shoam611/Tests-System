@@ -1,4 +1,3 @@
-//const Enumerable = require('node-enumerable');
 const { QuestionModel } = require('./schemes');
 const { connect, disconnect } = require('mongoose');
 class MongoRepository {
@@ -36,7 +35,6 @@ class MongoRepository {
         for (let doc = await query.next(); doc != null; doc = await query.next()) {
             list.push(doc);
         }
-        console.log("list", list);
         return list;
     }
     async UpdateOne(id, newQuestion) {
