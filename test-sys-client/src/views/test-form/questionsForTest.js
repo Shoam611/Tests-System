@@ -26,9 +26,9 @@ const QuestionsForTest = (props) => {
             onRemove: (id) => { removeQuestion(id) }
         }))
         setList(temp);
-    }, [fetchedData, setList]);
+    }, [fetchedData, setList,addQuestion,removeQuestion]);
 
-    useEffect(() => getQuestion(), []);
+    useEffect(() => getQuestion(),[]);
 
     const addQuestion = (obj) => {
         console.log(obj.value);
