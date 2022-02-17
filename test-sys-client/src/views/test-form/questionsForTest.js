@@ -4,10 +4,11 @@ const { Btn, Checkbox, Line } = require("UIKit");
 const axios = require('axios');
 
 const QuestionsForTest = (props) => {
-    const [questions, setQuestions] = useState([]);
+    //states
     const [fetchedData, setFetchedData] = useState([]);
     const [list, setList] = useState([]);
 
+    //fetching method
     const getQuestion = () => {
         axios.get('http://localhost:4200/questions?oneOrMany=many&skip=0&take=20')
             .then((response) => {
@@ -16,30 +17,20 @@ const QuestionsForTest = (props) => {
             })
     }
 
+    //Side Effects
     useEffect(() => {
         const temp = fetchedData.map((value, index) => ({
             id: value._id,
             render: <Line justify="start"><QuestionItem {...value} index={index} /></Line>,
             value: value,
             checked: false,
-            onChange: onSelectionChange,
+            onChange: props.onQuestionSelected,
             onRemove: () => { }
         }))
         setList(temp);
     }, [fetchedData, setList]);
 
     useEffect(() => getQuestion(), []);
-
-    const onSelectionChange = (item, value) => value ? questions.push(item) : questions.pop(item);
-
-    const removeQuestion = (obj) => {
-        console.log(obj.id);
-        var tempArray = [...questions];
-        var index = tempArray.indexOf(obj.id);
-        tempArray.splice(index.id, 1);
-        setQuestions(tempArray);
-        console.log(questions);
-    }
 
     return (
         <>

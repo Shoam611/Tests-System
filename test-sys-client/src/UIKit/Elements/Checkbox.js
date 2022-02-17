@@ -4,7 +4,6 @@ import './Checkbox.css'
 const Checkbox = ({ list }) => {
 
     const onSelctionChanged = (id, value) => {
-        console.log('changed');
         list.forEach(item => {
             if (item.id === id) {
                 item.isSelected = value;
