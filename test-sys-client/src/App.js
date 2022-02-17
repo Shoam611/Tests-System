@@ -10,7 +10,6 @@ import { useDispatch } from 'react-redux';
 function App() {
   const dispatch = useDispatch()
   useEffect(()=>{
-    console.log('in side eefect');
     dispatch(fetchQuestions());
   },[])
 

@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react' ;
-import { useSelector } from 'react-redux' ;
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Box, Btn, Line } from 'UIKit';
 const ManageQuestionView = (props) => {
+    const dispatch = useDispatch()
     const [topic, setTopic] = useState()
     const questions = useSelector(state => state.questions.questions)
     useEffect(() => {

@@ -22,23 +22,20 @@ const QuestionsForTest = (props) => {
             render: <Line justify="start"><QuestionItem {...value} index={index} /></Line>,
             value: value,
             checked: false,
-            onChange: (item) => { addQuestion(item); },
-            onRemove: (id) => { removeQuestion(id) }
+            onChange: onSelectionChange,
+            onRemove: () => { }
         }))
         setList(temp);
     }, [fetchedData, setList,addQuestion,removeQuestion]);
 
     useEffect(() => getQuestion(),[]);
 
-    const addQuestion = (obj) => {
-        console.log(obj.value);
-        setQuestions(oldArray => [...oldArray, obj.value]);
-        console.log(questions);
-    }
-    const removeQuestion = (index) => {
-        console.log(index.id);
+    const onSelectionChange = (item, value) => value ? questions.push(item) : questions.pop(item);
+
+    const removeQuestion = (obj) => {
+        console.log(obj.id);
         var tempArray = [...questions];
-        var index = tempArray.indexOf(index.id);
+        var index = tempArray.indexOf(obj.id);
         tempArray.splice(index.id, 1);
         setQuestions(tempArray);
         console.log(questions);
@@ -48,22 +45,6 @@ const QuestionsForTest = (props) => {
         <>
             <h1>Choose Questions</h1>
             <Checkbox list={list} />
-            {/* <Card>
-                <ul>
-                    {fetchedData.map((question) => (
-                        
-                        <QuestionItem 
-                            key={Math.random()}
-                            id={question.id}
-                            textAbove={question.textAbove}
-                            tags={question.tags}
-                            myself={question}
-                            onAdd={addQuestion}
-                            onRemove={removeQuestion}
-                        />
-                    ))}
-                </ul>
-            </Card> */}
             <Btn i="chevron-left" onClick={() => props.prev()}>Back</Btn>
         </>
     );

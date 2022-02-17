@@ -7,9 +7,9 @@
   background-color: gray;
 }
 
-/* .active .expense-item {
+.active .expense-item {
   background-color: #a9deab;
-} */
+}
 
 .expense-date {
   display: flex;

@@ -8,11 +8,11 @@ const Checkbox = ({ list }) => {
         list.forEach(item => {
             if (item.id === id) {
                 item.isSelected = value;
-                // item.onChange(id,value)
+                item.onChange(item.value, value);
             }
         });
-
     }
+   
     const renderListOptions = () => {
         return list.map((value) => <CheckboxItem key={value.id}
             id={value.id}
@@ -20,6 +20,7 @@ const Checkbox = ({ list }) => {
             onChange={onSelctionChanged}
             render={value.render} />);
     }
+   
     return (
         <div >
             <ul>
@@ -36,11 +37,11 @@ const CheckboxItem = ({ onChange, render, id }) => {
     const onSelectionHandler = () => {
         setChecked(!checked);
         onChange(id, !checked);
-        setRender({...render,props:{...render.props,className:!checked? 'active':'' }})
+        setRender({ ...render, props: { ...render.props, className: !checked ? 'active' : '' } })
     }
     return (
         <li key={id} style={{ marginTop: "10px" }}>
-            <Line >
+            <Line>
                 <div className="iconContainer" onClick={() => { onSelectionHandler() }}>
                     <i className={checked ? "fas fa-check-square" : "far fa-check-square"} />
                 </div>
