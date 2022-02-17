@@ -11,7 +11,7 @@ const Checkbox = ({ list }) => {
             }
         });
     }
-   
+
     const renderListOptions = () => {
         return list.map((value) => <CheckboxItem key={value.id}
             id={value.id}
@@ -19,7 +19,7 @@ const Checkbox = ({ list }) => {
             onChange={onSelctionChanged}
             render={value.render} />);
     }
-   
+
     return (
         <div >
             <ul>
@@ -29,10 +29,9 @@ const Checkbox = ({ list }) => {
     )
 }
 
-const CheckboxItem = ({ onChange, render, id }) => {
-    const [checked, setChecked] = useState(false);
+const CheckboxItem = ({ onChange, render, id, selected }) => {
+    const [checked, setChecked] = useState(selected);
     const [toRender, setRender] = useState(render);
-
     const onSelectionHandler = () => {
         setChecked(!checked);
         onChange(id, !checked);

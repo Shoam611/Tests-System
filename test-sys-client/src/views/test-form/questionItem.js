@@ -3,11 +3,12 @@ import Card from 'UIKit/Layouts/Card';
 import './questionItem.css';
 
 const QuestionItem = props => {
+    const tenFirstWords = props.textAbove.split(' ').slice(0, 10).join(' ');
     return (
         <Card className='expense-item'>
             <div className='expense-date'>{props.index}</div>
             <div className='expense-item__description'>
-                <h2>{props.textAbove}</h2>
+                <h2>{tenFirstWords}</h2>
                 <h4>{props.tags.join(', ')}</h4>
             </div>
         </Card>
