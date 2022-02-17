@@ -1,17 +1,12 @@
 import { useState, useEffect } from 'react';
-import { fetchQuestions } from 'Store/actions/question';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Btn, Line } from 'UIKit';
 const ManageQuestionView = (props) => {
     const dispatch = useDispatch()
-    // const [questions,setQuestins]=useState()
     const [topic, setTopic] = useState()
     const questions = useSelector(state => state.questions.questions)
     useEffect(() => {
-        // dispatch(fetchQuestions())
-        //get current topic
         setTopic('def-topic')
-        //get questions list
     }, []);
 
     const handleShowPrev = () => {
