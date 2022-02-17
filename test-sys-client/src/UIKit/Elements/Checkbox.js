@@ -11,8 +11,8 @@ const Checkbox = ({ list }) => {
                 item.onChange(item.value, value);
             }
         });
-
     }
+   
     const renderListOptions = () => {
         return list.map((value) => <CheckboxItem key={value.id}
             id={value.id}
@@ -20,6 +20,7 @@ const Checkbox = ({ list }) => {
             onChange={onSelctionChanged}
             render={value.render} />);
     }
+   
     return (
         <div >
             <ul>
