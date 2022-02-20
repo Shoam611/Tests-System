@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import question from "Store/reducers/question";
+import { useEffect, useState} from "react";
 import QuestionItem from "./questionItem";
 const { Btn, Checkbox, Line, Input } = require("UIKit");
 const axios = require('axios');
@@ -9,7 +8,6 @@ const QuestionsForTest = (props) => {
     const [fetchedData, setFetchedData] = useState([]);
     const [list, setList] = useState([]);
     const [selectedCounter, setSelectedCounter] = useState(0);
-    const [isAllChecked, setIsAllChecked] = useState(false);
 
     //Side Effects
     useEffect(() => {
@@ -32,13 +30,13 @@ const QuestionsForTest = (props) => {
         value ? setSelectedCounter(prevState => { return prevState + 1 }) : setSelectedCounter(prevState => { return prevState - 1 });
     }
 
-    const buildDisplayList = (list, checked) => {
+    const buildDisplayList = (list) => {
         console.log(list);
         const temp = list.map((value, index) => ({
             id: value._id,
             render: <Line justify="start"><QuestionItem {...value} index={index} /></Line>,
             value: value,
-            checked: checked,
+            checked: false,
             onChange: questionSelectedHandler,
         }))
         setList(temp);
@@ -59,21 +57,12 @@ const QuestionsForTest = (props) => {
         }
     }
 
-    const checkAll = (e) => {
-        setIsAllChecked(e.target.checked);
-
-        buildDisplayList(fetchedData, e.target.checked);
-    }
-
     return (
         <div className='AddTForm'>
             <h1>Choose Questions</h1>
             <div className="form-container">
                 <div className="inline-button-text">
                     Questions Selected:{selectedCounter}
-                    <label> {isAllChecked ? 'Deselect All' : 'Select All'}
-                        <input onChange={checkAll} type="checkbox" />
-                    </label>
                     <Input type="text" onChange={filterList} placeholder="Filter By Tags..." />
                 </div>
                 <Checkbox list={list} />
