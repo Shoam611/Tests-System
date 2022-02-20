@@ -78,7 +78,7 @@ const CreateQuestionForm = () => {
                 <form onSubmit={handleSubmit} >
                     <div className='form-container' >
                         <label > topic : {topic}</label>
-                        <Dropdown list={questionTypes} selected={questionType} onChange={(qType) => { handleQuestionTypeChanged(qType) }} />
+                        <Dropdown list={questionTypes} selected={questionType} onChange={handleQuestionTypeChanged} />
                         <Input placeholder="Question text:"        {...Question_text} />
                         <Input placeholder="Text above question:"  {...Text_above_question} />
                         <Input placeholder="Text below question:"  {...Text_below_question} />
