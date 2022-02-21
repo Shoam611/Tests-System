@@ -4,10 +4,12 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 const { container } = require('./app-container');
+require('./services/mongoHandler')();
+
 
 const questionsController = container.resolve('questionsController');
 
-app.post('/questions', async (req, res) => { const newId = questionsController.addQuestion(req); res.send(newId.toString()).status(200) });
+app.post('/questions', async (req, res) => { const newId = await questionsController.addQuestion(req); res.send(newId.toString()).status(200) });
 
 app.get('/questions', async (req, res) => { const result = await questionsController.getQuestions(req); res.send(result).status(200) });
 

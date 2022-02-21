@@ -16,6 +16,7 @@ const QuestionComponentOverlay = (props) => {
 
   return (
     <Card className={classes.modal}>
+      {console.log(props)}
       <header className={classes.header}>
         <h2>{props.questionText}</h2>
       </header>
@@ -26,9 +27,9 @@ const QuestionComponentOverlay = (props) => {
         <p>Question Text: {props.questionText}</p>
         <p>Text Below Question: {props.textBelow}</p>
         <ul>Answers:
-          {props.correctAwnserIndex.map((answer, index) => (
-            <li key={Math.random()}>
-              {index + 1}) {index === props.correctAwnserIndex[index] ? `${answer} - Correct Answer` : { answer }}
+          {props.answers.map((answer, index) => (
+            <li key={answer._id}>
+              {index + 1}) {index === props.correctAwnserIndex[index] ? `${answer.value} - Correct Answer` : {answer}}
             </li>)
           )}
         </ul>

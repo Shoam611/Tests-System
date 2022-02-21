@@ -18,6 +18,6 @@ export const fetchQuestions = () => {
     return async (dispatch, getState) => {
         const response = await axios.get(`http://localhost:4200/questions?oneOrMany=many&skip=0&take=20`);
         const responseData = await response.data;
-        dispatch({ type: FETCH, data: responseData })
+        dispatch({ type: FETCH, newQuestions: responseData })
     }
 }

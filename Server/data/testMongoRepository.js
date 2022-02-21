@@ -1,15 +1,7 @@
 const { TestModel } = require('./schemes');
-const { connect, disconnect } = require('mongoose');
 
 class TestsMongoRepository {
-    constructor({ schemes }) {
-        this.TestModel = schemes.TestModel;
-        this.domain = 'localhost';
-        this.port = '27017'
-        this.databaseName = 'testsPool';
-        this.init()
-    }
-    async init() { connect(`mongodb://${this.domain}:${this.port}/${this.databaseName}`) }
+    
     //Create
     async addAsync(object) {
         const t = new TestModel({ ...object });

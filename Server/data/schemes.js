@@ -2,7 +2,7 @@ const { Types, Schema, model } = require('mongoose');
 const answerSchema = new Schema({
     value: String,
     id: Number
-})
+});
 const questionSchema = new Schema({
     topic: String,
     questionType: Number,
@@ -11,7 +11,7 @@ const questionSchema = new Schema({
     textBelow: String,
     tags: [],
     answers: [answerSchema],
-    correctAwnserIndex: [],
+    correctAnswerIds: [],
 }, { timestamps: true });
 
 const emailSchema = new Schema({
@@ -31,7 +31,7 @@ const testSchema = new Schema({
     msgOnSuccess: String,
     msgOnFailure: String,
     toShowMistakes: Boolean,
-    emailMessages: { emailSchema },
+    emailMessages: [emailSchema],
     question: [questionSchema]
 });
 questionSchema.statics.deleteByIdAsync = async function (id) {
@@ -40,12 +40,13 @@ questionSchema.statics.deleteByIdAsync = async function (id) {
 testSchema.statics.deleteByIdAsync = async function (id) {
     return this.deleteOne({ _id: id })
 };
-const AnswerModel = model('AnswerModel', answerSchema);
-const EmailModel = model('EmailModel', emailSchema)
+const AnswerModel = model('answer', answerSchema);
 const QuestionModel = model('QuestionModel', questionSchema);
 const TestModel = model('TestModel', testSchema)
+const EmailModel = model('EmailModel', emailSchema)
 
 module.exports = {
     QuestionModel,
+    AnswerModel,
     TestModel
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Modal from 'UIKit/Elements/Modal';
+import QuestionComponent from 'UIKit/Elements/QuestionComponent';
 import Card from 'UIKit/Layouts/Card';
 import './questionItem.css';
 
@@ -25,7 +25,7 @@ const QuestionItem = props => {
                 <h2>{hover ? props.questionText : tenFirstWords}</h2>
                 <h4>{props.tags.join(', ')}</h4>
             </div>
-            {showModal ? <Modal onConfirm={onFullShowHandler} {...props} /> : ''}
+            {showModal ? <QuestionComponent onConfirm={onFullShowHandler} {...props} /> : ''}
             <button className='expense-date' onClick={onFullShowHandler}>Show</button>
         </Card>
     );

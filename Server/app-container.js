@@ -5,6 +5,7 @@ const TestsController = require("./controllers/testsController.js");
 const MongoRepository = require('./data/mongoRepository');
 const schemes = require('./data/schemes');
 const TestsMongoRepository = require("./data/testMongoRepository.js");
+const initConnection = require("./services/mongoHandler.js");
 
 
 const setup = () => {
@@ -13,6 +14,7 @@ const setup = () => {
     mongoRepository: awilix.asClass(MongoRepository).singleton(),
     testsController: awilix.asClass(TestsController).singleton(),
     testsMongoRepository: awilix.asClass(TestsMongoRepository).singleton(),
+    connect: awilix.asFunction(initConnection).singleton(),
     schemes: awilix.asValue(schemes)
   });
 };
