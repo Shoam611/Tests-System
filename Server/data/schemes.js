@@ -18,10 +18,7 @@ questionSchema.statics.deleteByIdAsync = async function (id) {
 };
 const AnswerModel = model('answer', answerSchema);
 const QuestionModel = model('QuestionModel', questionSchema);
-//--------------
-//const qid = "fcnhfdvb";
-//QuestionModel.findById(qid, { _id: 0}).populate('answers');
-//-------------
+
 module.exports = {
     QuestionModel
     ,AnswerModel
