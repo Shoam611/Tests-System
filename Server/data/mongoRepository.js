@@ -22,7 +22,6 @@ class MongoRepository {
         QuestionModel.deleteByIdAsync(id);
     }
     //Read
-    //Update
     async getOneAsync(id) {
         const query = QuestionModel.findOne({ _id: id });
         const doc = await query.next();
@@ -30,10 +29,11 @@ class MongoRepository {
     }
     async getAsync(skip = 0, take = 10,filterquery={}) {
         const query = await QuestionModel.find({...filterquery, sort: '-createdAt' })
-                                         .skip(skip)
-                                         .limit(take)
-            return query;
+        .skip(skip)
+        .limit(take)
+        return query;
     }
+    //Update
     async UpdateOne(id, newQuestion) {
     }
     async deleteManyAsync(filter) {
