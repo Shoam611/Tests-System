@@ -64,8 +64,3 @@ const Modal = (props) => {
 };
 
 export default Modal;
-
-
-//Tags
-//Created At
-//Updated At

@@ -12,7 +12,7 @@ const QuestionsForTest = (props) => {
     //Side Effects
     useEffect(() => {
         buildDisplayList(fetchedData);
-    }, [fetchedData, setList]);
+    }, [fetchedData]);
 
     useEffect(() => getQuestion(), []);
 
