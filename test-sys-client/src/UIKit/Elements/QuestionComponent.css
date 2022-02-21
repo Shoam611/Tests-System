@@ -18,7 +18,7 @@
   }
   
   .header {
-    background: #4f005f;
+    background: var(--accent);
     padding: 1rem;
   }
   
@@ -37,6 +37,10 @@
     display: flex;
     justify-content: flex-end;
     background-color: white;
+  }
+
+  .correct_indexer{
+    color: rgb(87, 214, 98);
   }
   
   @media (min-width: 768px) {

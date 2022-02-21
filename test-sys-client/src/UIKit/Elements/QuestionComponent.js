@@ -1,11 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Line } from "UIKit";
 import Card from "UIKit/Layouts/Card";
 import Btn from "./Btn";
-import classes from "./QuestionComponent.module.css";
+import "./QuestionComponent.css";
 
 const QuestionComponentBackdrop = (props) => {
-  return <div className={classes.backdrop} onClick={props.onConfirm} />;
+  return <div className="backdrop" onClick={props.onConfirm} />;
 };
 const QuestionComponentOverlay = (props) => {
 
@@ -15,12 +16,12 @@ const QuestionComponentOverlay = (props) => {
   }
 
   return (
-    <Card className={classes.modal}>
+    <Card className="modal">
       {console.log(props)}
-      <header className={classes.header}>
+      <header className="header">
         <h2>{props.questionText}</h2>
       </header>
-      <div className={classes.content}>
+      <div className="content">
         <h3>Topic: {props.topic}</h3>
         <p>Question Type: {props.questionType === 1 ? "Single Answer" : "Multi Answer Type"}</p>
         <p>Text Above Question: {props.textAbove}</p>
@@ -29,7 +30,7 @@ const QuestionComponentOverlay = (props) => {
         <ul>Answers:
           {props.answers.map((answer, index) => (
             <li key={answer._id}>
-              {index + 1}) {index === props.correctAwnserIndex[index] ? `${answer.value} - Correct Answer` : {answer}}
+              <Line>{index + 1}) {answer.value} {!props.correctAnswerIds.indexOf(answer.id) && <h4 className="correct_indexer">- Correct Answer</h4>}</Line>
             </li>)
           )}
         </ul>
@@ -37,7 +38,7 @@ const QuestionComponentOverlay = (props) => {
         <p>Created At: {normalizeDate(props.createdAt)}</p>
         <p>Updated At: {normalizeDate(props.updatedAt)}</p>
       </div>
-      <footer className={classes.actions}>
+      <footer className="actions">
         <Btn onClick={props.onConfirm}>Okay</Btn>
       </footer>
     </Card>
