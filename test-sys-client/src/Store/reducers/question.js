@@ -15,12 +15,11 @@ export default (state=initialState,action) =>{
         return {...state,questions:questions }
         
         case FETCH : 
-        if(action.data){
-            // const questions =Enumerable.create(...questions,action.data)
-            //                             .distinctBy(q=>q._id);
-            return {...state,questions:action.data}
+        if(action.newQuestions){
+            // const questions =Enumerable.create(...questions,action.data).distinctBy(q=>q._id);
+            console.log(action.newQuestions);
+            return {...state,questions:action.newQuestions}
         }
-
         return state;
         case DELETE :  break;
        

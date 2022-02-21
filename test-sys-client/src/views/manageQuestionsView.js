@@ -8,16 +8,13 @@ const ManageQuestionView = (props) => {
     useEffect(() => {
         setTopic('def-topic')
     }, []);
-
-    const handleShowPrev = () => {
-    }
-    const handleShownext = () => {
-    }
-   
+    const handleShowPrev = () => { console.log(questions); }
+    const handleShownext = () => {  }
+    
     const renderQuestions = () => {
         return (
             questions.map((q, index) => {
-                console.log(q._id);
+                console.log(q._id,q.ansers);
                 return (
                     <Box key={q._id}>
                         <Line>

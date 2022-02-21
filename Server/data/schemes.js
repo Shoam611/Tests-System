@@ -1,23 +1,28 @@
-const {Types,Schema,model} = require('mongoose');
-const answerSchema=new Schema({
-    value:String,
-    id:Number
+const { Types, Schema, model } = require('mongoose');
+const answerSchema = new Schema({
+    value: String,
+    id: Number
 });
 const questionSchema = new Schema({
-    topic:String,
-    questionType:Number,
-    questionText:String ,
-    textAbove:String,
-    textBelow:String,
-    tags:[],
-    answers:[answerSchema],
-    correctAwnserIndex:[],
-},{timestamps:true}
-);
-questionSchema.statics.deleteByIdAsync =async function(id) {
-    return  this.deleteOne({ _id: id })
-  };
-const QuestionModel = model('QuestionModel',questionSchema);
-module.exports={
+    topic: String,
+    questionType: Number,
+    questionText: String,
+    textAbove: String,
+    textBelow: String,
+    tags: [],
+    answers: [answerSchema],
+    correctAnswerIds: [],
+}, { timestamps: true });
+questionSchema.statics.deleteByIdAsync = async function (id) {
+    return this.deleteOne({ _id: id })
+};
+const AnswerModel = model('answer', answerSchema);
+const QuestionModel = model('QuestionModel', questionSchema);
+//--------------
+//const qid = "fcnhfdvb";
+//QuestionModel.findById(qid, { _id: 0}).populate('answers');
+//-------------
+module.exports = {
     QuestionModel
+    ,AnswerModel
 }

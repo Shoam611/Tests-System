@@ -35,8 +35,6 @@ class QuestionsController {
 
   updateQuestion = ({ body }) => {
     throw new Error('not implimented')
-    // const {id,newQuestion} = body
-    // this.mongoRepository.updateOne(id,newQuestion)
   }
 
 }

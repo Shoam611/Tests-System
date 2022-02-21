@@ -5,6 +5,15 @@ import './createQuestionForm.css';
 const CreateTestForm = (props) => {
     //states
     const [message, setMessage] = useState("");
+    const testTypes = [
+        { id: 1, value: ' Predefined Test - Same questions for all respondents ' },
+        { id: 2, value: ' Random Test - Different questions for each respondent ' },
+        { id: 3, value: ' Questionnaire - A survey of questions with no correct answers ' }
+    ]
+    const languages = [
+        { id: 1, value: 'English' },
+        { id: 2, value: 'Hebrew' }
+    ]
 
     //handlers
     const handleSubmit = () => {
@@ -24,11 +33,11 @@ const CreateTestForm = (props) => {
 
     //validations
     const testValidation = () => {
-        if (+props.testType < 1 || +props.testType > 3) {
+        if (+props.testType < 1 || +props.testType > testTypes.length) {
             setMessage('Please Choose a Test Type.');
             return false;
         }
-        if (+props.lang < 1 || +props.lang > 2) {
+        if (+props.lang < 1 || +props.lang > languages.length) {
             setMessage('Please Choose a Language.');
             return false;
         }
@@ -72,15 +81,6 @@ const CreateTestForm = (props) => {
     }
 
     //lists
-    const testTypes = [
-        { id: 1, value: ' Predefined Test - Same questions for all respondents ' },
-        { id: 2, value: ' Random Test - Different questions for each respondent ' },
-        { id: 3, value: ' Questionnaire - A survey of questions with no correct answers ' }
-    ]
-    const languages = [
-        { id: 1, value: 'English' },
-        { id: 2, value: 'Hebrew' }
-    ]
 
     return (
         <div className='AddTForm'>
