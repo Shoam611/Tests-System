@@ -14,7 +14,7 @@ const ManageQuestionView = (props) => {
     const renderQuestions = () => {
         return (
             questions.map((q, index) => {
-                console.log(q._id,q.ansers);
+                console.log(q._id,q.answers);
                 return (
                     <Box key={q._id}>
                         <Line>
