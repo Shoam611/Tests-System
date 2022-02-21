@@ -1,11 +1,12 @@
 .QuestionView {
   padding: 0;
-  margin: 0 var(--gap-s) ;
-  width: calc(100% - var(--gap-m)) ;
+  margin: 0 var(--gap-s);
+  width: calc(100% - var(--gap-m));
   height: 100%;
   display: grid;
   grid-template-rows: max-content 1fr;
 }
+
 .container {
   overflow-x: auto;
   width: min-content;
@@ -13,35 +14,40 @@
   align-self: center;
   margin-bottom: var(--gap-s);
 }
-.questions-view-outlet-container{
+
+.questions-view-outlet-container {
   height: 80vh;
   width: 100%;
   margin: 0;
-  overflow-y:auto;
+  overflow-y: auto;
 }
+
 ul {
   background: transparent;
   padding: 10;
   margin: 0;
 }
+
 ul[display="row"] {
-    display: flex;
-    flex-direction: row;
-    width: fit-content;
-    max-width: minmax(55vw, 90%);
-    overflow-x: auto;
-    white-space: nowrap;
-    padding-bottom: var(--gap-xs);
-    margin-bottom: var(--gap-xs);
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+  max-width: minmax(55vw, 90%);
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: var(--gap-xs);
+  margin-bottom: var(--gap-xs);
 }
 
 .QuestionView ::-webkit-scrollbar {
   height: 0.5em;
 }
+
 .QuestionView ::-webkit-scrollbar-thumb {
   border-radius: 2em;
   background-color: var(--accent);
 }
+
 .QuestionView ::-webkit-scrollbar-track {
   width: 0.1em;
   background: var(--light-color);
@@ -50,4 +56,8 @@ ul[display="row"] {
 .expenses-list {
   list-style: none;
   padding: 0;
+}
+
+.inline-button-text {
+  display: inline-flex;
 }

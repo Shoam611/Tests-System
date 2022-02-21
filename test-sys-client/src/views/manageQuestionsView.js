@@ -8,28 +8,29 @@ const ManageQuestionView = (props) => {
     useEffect(() => {
         setTopic('def-topic')
     }, []);
+
     const handleShowPrev = () => { console.log(questions); }
-    const handleShownext = () => {  }
-    
+    const handleShownext = () => { }
+
     const renderQuestions = () => {
         return (
-            questions.map((q, index) => {
-                console.log(q._id,q.answers);
+            questions.map((q) => {
+                console.log(q._id, q.answers);
                 return (
                     <Box key={q._id}>
                         <Line>
-                        <h4>question text: <span>{q.questionText}</span></h4> <Btn />
+                            <h4>question text: <span>{q.questionText}</span></h4> <Btn />
                         </Line>
                     </Box>
                 )
             }))
     }
     return (
-        <div style={{display:'flex',flexFlow:'column',maxHeight:'auto='}}>
+        <div style={{ display: 'flex', flexFlow: 'column', maxHeight: 'auto=' }}>
             <h1>Questions for <span>{topic}</span></h1>
-         
-            <div style={{flex:' 0 1 auto',overflow:'scroll'}}>
-            {renderQuestions()}
+
+            <div style={{ flex: ' 0 1 auto', overflow: 'scroll' }}>
+                {renderQuestions()}
 
 
                 <Line >

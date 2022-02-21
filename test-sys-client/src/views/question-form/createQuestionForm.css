@@ -1,34 +1,35 @@
 .AddQForm {
   width: 95%;
-  height:auto;
+  height: auto;
   overflow-y: scroll;
   background-color: var(--light-color);
   display: grid;
   grid-template-rows: 90px 1fr;
   color: var(--text-color-dark);
 }
+
 .AddQForm h1 {
   color: var(--accent);
 }
+
 .form-container {
-  overflow-y:scroll;
+  overflow-y: scroll;
   background-color: var(--midtone-color);
   display: flex;
   flex-direction: column;
   gap: var(--gap-l);
   width: inherit;
-
-  padding: 0 var(--gap-m) ;
-  height:min-content;
-  margin-bottom: 0;
+  padding: 0 var(--gap-m);
+  height: fit-content;
+  margin-bottom: var(--gap-m);
 }
 
-form{
-  height: min-content;
+form {
   width: auto;
-  overflow-y:scroll;
+  overflow-y: scroll;
 }
-hr{
+
+hr {
   background-color: var(--accent);
   height: var(--gap-xs);
   width: 100%;
@@ -37,11 +38,17 @@ hr{
 .AddQForm::-webkit-scrollbar {
   height: 0;
 }
-.AddQForm  ::-webkit-scrollbar-thumb {
+
+.AddQForm ::-webkit-scrollbar-thumb {
   border-radius: 2em;
   background-color: transparent;
 }
+
 .AddQForm ::-webkit-scrollbar-track {
   width: 5em;
   background: var(--light-color);
+}
+
+.ErrorMessage {
+  color: red;
 }

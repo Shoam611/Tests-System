@@ -1,14 +1,7 @@
 const { QuestionModel } = require('./schemes');
-const { connect, disconnect } = require('mongoose');
+
 class MongoRepository {
-    constructor({ schemes }) {
-        this.QuestionModel = schemes.QuestionModel;
-        this.domain = 'localhost';
-        this.port = '27017'
-        this.databaseName = 'questionsPool';
-        this.init()
-    }
-    async init() { connect(`mongodb://${this.domain}:${this.port}/${this.databaseName}`) }
+    
     //Create
     async addAsync(object) {
         console.log('in repo func add');
@@ -41,4 +34,3 @@ class MongoRepository {
     }
 }
 module.exports = MongoRepository
-//-----------------------------option B

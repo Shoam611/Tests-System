@@ -1,85 +1,7 @@
 import { Btn, Dropdown, Input } from 'UIKit';
-import { useState } from 'react';
 import './createQuestionForm.css';
 
 const CreateTestForm = (props) => {
-    //states
-    const [message, setMessage] = useState("");
-    const testTypes = [
-        { id: 1, value: ' Predefined Test - Same questions for all respondents ' },
-        { id: 2, value: ' Random Test - Different questions for each respondent ' },
-        { id: 3, value: ' Questionnaire - A survey of questions with no correct answers ' }
-    ]
-    const languages = [
-        { id: 1, value: 'English' },
-        { id: 2, value: 'Hebrew' }
-    ]
-
-    //handlers
-    const handleSubmit = () => {
-        if (testValidation()) {
-            props.next();
-            setMessage("");
-        }
-    }
-
-    //regEx validation
-    const ValidateEmail = (mail) => {
-        if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(mail)) {
-            return true;
-        }
-        return false;
-    }
-
-    //validations
-    const testValidation = () => {
-        if (+props.testType < 1 || +props.testType > testTypes.length) {
-            setMessage('Please Choose a Test Type.');
-            return false;
-        }
-        if (+props.lang < 1 || +props.lang > languages.length) {
-            setMessage('Please Choose a Language.');
-            return false;
-        }
-        if (props.Manager_email.value.trim().length === 0) {
-            setMessage('Email Address Cannot Be Empty!');
-            return false;
-        }
-        if (!ValidateEmail(props.Manager_email.value)) {
-            setMessage('Invalid Email Address!');
-            return false;
-        }
-        if (props.Test_name.value.trim().length === 0) {
-            setMessage('Test Name Cannot Be Empty!');
-            return false;
-        }
-        if (+props.Passing_grade.value < 1 || +props.Passing_grade.value > 100) {
-            setMessage('Invalid Passing Grade! Must Be Between 1 and 100.');
-            return false;
-        }
-        if (props.Test_header.value.trim().length === 0) {
-            setMessage('Test Header Cannot Be Empty!');
-            return false;
-        }
-        if (props.Text_msgOnSuccess.value.trim().length === 0) {
-            setMessage('Message On Succes Cannot Be Empty!');
-            return false;
-        }
-        if (props.Text_msgOnFailure.value.trim().length === 0) {
-            setMessage('Message On Failure Cannot Be Empty!');
-            return false;
-        }
-        if (props.Email_succBody.value.trim().length === 0 || props.Email_succSub.value.trim().length === 0) {
-            setMessage('Email On Succes Cannot Be Empty!');
-            return false;
-        }
-        if (props.Email_failBody.value.trim().length === 0 || props.Email_failSub.value.trim().length === 0) {
-            setMessage('Email On Failure Cannot Be Empty!');
-            return false;
-        }
-        return true;
-    }
-
     //lists
 
     return (
@@ -120,8 +42,7 @@ const CreateTestForm = (props) => {
                     </label>
                     <textarea placeholder='Body' {...props.Email_failBody} />
 
-                    <Btn i="chevron-right" onClick={() => {props.next();}}>Next</Btn>
-                    <p className='errorMessage'>{message}</p>
+                    <Btn i="chevron-right" onClick={() => { props.next(); }}>Next</Btn>
                 </div>
             </form>
         </div >

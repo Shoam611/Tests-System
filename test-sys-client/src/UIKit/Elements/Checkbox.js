@@ -1,18 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Line from "UIKit/Layouts/Line";
 import './Checkbox.css'
 const Checkbox = ({ list }) => {
 
     const onSelctionChanged = (id, value) => {
-        console.log('changed');
+        console.log(list);
         list.forEach(item => {
             if (item.id === id) {
                 item.isSelected = value;
-                item.onChange(item.value, value);
+                // item.onChange(item.value, value);
             }
         });
     }
-   
+
     const renderListOptions = () => {
         return list.map((value) => <CheckboxItem key={value.id}
             id={value.id}
@@ -20,7 +20,7 @@ const Checkbox = ({ list }) => {
             onChange={onSelctionChanged}
             render={value.render} />);
     }
-   
+
     return (
         <div >
             <ul>
@@ -30,14 +30,14 @@ const Checkbox = ({ list }) => {
     )
 }
 
-const CheckboxItem = ({ onChange, render, id }) => {
-    const [checked, setChecked] = useState(false);
+const CheckboxItem = ({ onChange, render, id, selected}) => {
+    const [checked, setChecked] = useState(selected);
     const [toRender, setRender] = useState(render);
 
     const onSelectionHandler = () => {
         setChecked(!checked);
         onChange(id, !checked);
-        setRender({ ...render, props: { ...render.props, className: !checked ? 'active' : '' } })
+        setRender({ ...render, props: { ...render.props, className: !checked ? 'active' : '' } });
     }
     return (
         <li key={id} style={{ marginTop: "10px" }}>
