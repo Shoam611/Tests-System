@@ -8,20 +8,33 @@ const Backdrop = (props) => {
   return <div className={classes.backdrop} onClick={props.onConfirm} />;
 };
 const ModalOverlay = (props) => {
+
+  const normalizeDate = (inputDate) => {
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    return new Date(inputDate).toLocaleDateString('en-EN', options);
+  }
+
   return (
     <Card className={classes.modal}>
       <header className={classes.header}>
         <h2>{props.questionText}</h2>
       </header>
       <div className={classes.content}>
-        <p>{props.message}</p>
-        <ul>
-          {props.correctAwnserIndex.map((answer) => (
+        <h3>Topic: {props.topic}</h3>
+        <p>Question Type: {props.questionType === 1 ? "Single Answer" : "Multi Answer Type"}</p>
+        <p>Text Above Question: {props.textAbove}</p>
+        <p>Question Text: {props.questionText}</p>
+        <p>Text Below Question: {props.textBelow}</p>
+        <ul>Answers:
+          {props.correctAwnserIndex.map((answer, index) => (
             <li key={Math.random()}>
-              {answer}
+              {index + 1}) {index === props.correctAwnserIndex[index] ? `${answer} - Correct Answer` : { answer }}
             </li>)
           )}
         </ul>
+        <p>Tags: {props.tags.join(', ')}</p>
+        <p>Created At: {normalizeDate(props.createdAt)}</p>
+        <p>Updated At: {normalizeDate(props.updatedAt)}</p>
       </div>
       <footer className={classes.actions}>
         <Btn onClick={props.onConfirm}>Okay</Btn>
@@ -53,31 +66,6 @@ const Modal = (props) => {
 export default Modal;
 
 
-// <div className='expense-item__description'>
-// Topic: {props.data.topic},
-// <br/>
-// Text Above: {props.data.textAbove},
-// <br/>
-// Text Below: {props.data.textBelow},
-// <br/>
-// Question Text: {props.data.questionText},
-// <br/>
-// Correct Answer/s: <ul>
-//     {props.data.correctAwnserIndex.map((answer) =>
-
-//         <li key={Math.random()}>
-//             {answer}
-//         </li>
-//     )}
-// </ul>,
-// <br/>
-// Answers:
-// <ul>
-//     {props.data.answers.map((answer) =>
-//         <li key={answer.id}>
-//             {answer.value}
-//         </li>
-//     )}
-// </ul>
-
-// </div>
+//Tags
+//Created At
+//Updated At
