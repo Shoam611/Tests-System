@@ -10,8 +10,8 @@ const TestsMongoRepository = require("./data/testMongoRepository.js");
 const setup = () => {
   container.register({
     questionsController: awilix.asClass(QuestionsController).singleton(),
-    testsController: awilix.asClass(TestsController).singleton(),
     mongoRepository: awilix.asClass(MongoRepository).singleton(),
+    testsController: awilix.asClass(TestsController).singleton(),
     testsMongoRepository: awilix.asClass(TestsMongoRepository).singleton(),
     schemes: awilix.asValue(schemes)
   });

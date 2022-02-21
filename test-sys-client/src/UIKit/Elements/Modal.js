@@ -2,12 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Card from "UIKit/Layouts/Card";
 import Btn from "./Btn";
-import classes from "./Modal.module.css";
+import classes from "./QuestionComponent.module.css";
 
-const Backdrop = (props) => {
+const QuestionComponentBackdrop = (props) => {
   return <div className={classes.backdrop} onClick={props.onConfirm} />;
 };
-const ModalOverlay = (props) => {
+const QuestionComponentOverlay = (props) => {
 
   const normalizeDate = (inputDate) => {
     const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
@@ -43,15 +43,15 @@ const ModalOverlay = (props) => {
   );
 };
 
-const Modal = (props) => {
+const QuestionComponent = (props) => {
   return (
     <>
       {ReactDOM.createPortal(
-        <Backdrop onConfirm={props.onConfirm} />,
+        <QuestionComponentBackdrop onConfirm={props.onConfirm} />,
         document.getElementById("backdrop-root")
       )}
       {ReactDOM.createPortal(
-        <ModalOverlay
+        <QuestionComponentOverlay
           {...props}
           title={props.title}
           message={props.message}
@@ -63,4 +63,4 @@ const Modal = (props) => {
   );
 };
 
-export default Modal;
+export default QuestionComponent;

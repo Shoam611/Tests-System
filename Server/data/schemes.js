@@ -40,6 +40,8 @@ questionSchema.statics.deleteByIdAsync = async function (id) {
 testSchema.statics.deleteByIdAsync = async function (id) {
     return this.deleteOne({ _id: id })
 };
+const AnswerModel = model('AnswerModel', answerSchema);
+const EmailModel = model('EmailModel', emailSchema)
 const QuestionModel = model('QuestionModel', questionSchema);
 const TestModel = model('TestModel', testSchema)
 
