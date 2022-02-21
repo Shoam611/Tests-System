@@ -28,11 +28,10 @@ class MongoRepository {
         const doc = await query.next();
         return doc;
     }
-    async getAsync(skip = 0, take = 10) {
-        const query = await QuestionModel.find({ sort: '-createdAt' })
-            .skip(skip)
-            .limit(take)
-            // .populate('answer')
+    async getAsync(skip = 0, take = 10,filterquery={}) {
+        const query = await QuestionModel.find({...filterquery, sort: '-createdAt' })
+                                         .skip(skip)
+                                         .limit(take)
             return query;
     }
     async UpdateOne(id, newQuestion) {
