@@ -14,6 +14,7 @@ const ManageQuestionView = props => {
     const handleShownext = () => { }
 
     const renderTests = () => {
+        console.log(tests);
         return (
             tests.map((t) => {
                 return (

@@ -8,10 +8,12 @@ import { Provider } from 'react-redux';
 
 import Navigator from './Naigation/MainNavigator'
 import questionReducer from 'Store/reducers/question';
+import testReducer from 'Store/reducers/test'
 import './index.css';
 
 const rootReducer = combineReducers({
-  questions: questionReducer
+  questions: questionReducer,
+  tests: testReducer
 });
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 ReactDOM.render(
