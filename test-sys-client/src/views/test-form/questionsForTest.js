@@ -10,9 +10,7 @@ const QuestionsForTest = (props) => {
     const [list, setList] = useState([]);
     const [selectedCounter, setSelectedCounter] = useState(0);
     const questions = useSelector(state => state.questions.questions)
-    useEffect(()=>{
-        setFetchedData(questions);
-    },[])
+    useEffect(()=>{setFetchedData(questions);},[])
     //handlers
     const {onQuestionSelected} = props;
     const questionSelectedHandler = useCallback((item, value) => {
@@ -34,21 +32,6 @@ const QuestionsForTest = (props) => {
     useEffect(() => {
         buildDisplayList(fetchedData);
     }, [fetchedData, buildDisplayList]);
-
-    // useEffect(() => getQuestion(), []);
-
-    //helpers
-    // const getQuestion = () => {
-    //     axios.get('http://localhost:4200/questions?oneOrMany=many&skip=0&take=20')
-    //         .then((response) => {
-    //             const myData = response.data;
-    //             setFetchedData(myData);
-    //         })
-    // }
-
-   
-
-
 
     const filterList = (e) => {
         let tags = e.target.value.toUpperCase();
