@@ -1,32 +1,34 @@
+import { useCallback, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Rows, Columns } from 'UIKit';
 import Header from 'components/header';
 import SideNav from './components/SideNav';
-import './App.css';
-import { useEffect } from 'react';
-import { Dispatch } from 'react';
-import {fetchQuestions} from 'Store/actions/question'
-import { useDispatch } from 'react-redux';
+import { fetchQuestions } from 'Store/actions/question'
 import { fetchTopic } from 'Store/actions/topic';
+import './App.css';
 function App() {
+  const [isLoading, setIsLoading] = useState();
   const dispatch = useDispatch();
-  
-  const loadTopic=useCallback(async()=>{
+  const loadTopic = useCallback(async () => {
     await dispatch(fetchTopic())
-    
-  },[dispatch,fetchTopic,fetchQuestions]);
-  const loadData=()=>{
-    await dispatch(fetchQuestions());
-    //await dispatch(fetchTests());
-}
+  }, [dispatch, fetchTopic, fetchQuestions]);
 
-  useEffect(()=>{
-    loadTopic().then(()=>{
-      loadData();
+  const loadData = async () => {
+    await dispatch(fetchQuestions());
+  }
+
+  useEffect(() => {
+    setIsLoading(true);
+    loadTopic().then(() => {
+      loadData().then(()=>{
+        setIsLoading(false)
+      });
     })
-  },[])
+  }, [])
 
   return (
+    isLoading ?  (<div><h1>Loading data...</h1></div>) :
     <div className="App">
       <Rows>
         {/* top bar */}

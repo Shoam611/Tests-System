@@ -1,4 +1,4 @@
-const { QuestionModel } = require('./schemas/testSchema');
+const { QuestionModel } = require('./schemas/index');
 
 class MongoRepository {
     
@@ -21,7 +21,9 @@ class MongoRepository {
         return doc;
     }
     async getAsync(skip = 0, take = 10,filterquery={}) {
-        const query = await QuestionModel.find({...filterquery, sort: '-createdAt' })
+        console.log('filter',filterquery);
+        const query = await QuestionModel.find({ sort: '-createdAt' })
+        .where(filterquery)
         .skip(skip)
         .limit(take)
         return query;

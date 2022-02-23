@@ -26,9 +26,11 @@ class QuestionsController {
         const { id } = query;
         return await this.questionRepository.getOneAsync(id)
       case "many":
-        const { skip, take } = query;
+        const { skip, take ,topic} = query;
+        let filter = {};
+        if(topic)filter = {topic: topic}
         console.log('in many case', skip, take);
-        return await this.questionRepository.getAsync(skip, take)
+        return await this.questionRepository.getAsync(skip, take,filter)
       default: return undefined;
     }
   };
