@@ -1,4 +1,4 @@
-const { TestModel } = require('./schemes');
+const { TestModel } = require('./schemas/testSchema');
 
 class TestsMongoRepository {
     
