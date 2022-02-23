@@ -9,14 +9,16 @@ import { fetchTopic } from 'Store/actions/topic';
 import './App.css';
 function App() {
   const [isLoading, setIsLoading] = useState();
+  
   const dispatch = useDispatch();
+
   const loadTopic = useCallback(async () => {
     await dispatch(fetchTopic())
-  }, [dispatch, fetchTopic]);
+  }, [dispatch]);
 
   const loadData = useCallback(async () => {
     await dispatch(fetchQuestions());
-  }, [dispatch,fetchQuestions]);
+  }, [dispatch]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -25,7 +27,7 @@ function App() {
         setIsLoading(false)
       });
     })
-  }, [])
+  }, [loadData,loadTopic])
 
   return (
     isLoading ? (<div><h1>Loading data...</h1></div>) :

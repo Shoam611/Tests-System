@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import QuestionItem from "./questionItem";
-const { Btn, Checkbox, Line, Input } = require("UIKit");
-const axios = require('axios');
+import { Btn, Checkbox, Line, Input }from "UIKit";
 
 const QuestionsForTest = (props) => {
     //states
@@ -10,7 +9,7 @@ const QuestionsForTest = (props) => {
     const [list, setList] = useState([]);
     const [selectedCounter, setSelectedCounter] = useState(0);
     const questions = useSelector(state => state.questions.questions)
-    useEffect(()=>{setFetchedData(questions);},[])
+    useEffect(()=>{setFetchedData(questions);},[questions,setFetchedData])
     //handlers
     const {onQuestionSelected} = props;
     const questionSelectedHandler = useCallback((item, value) => {
