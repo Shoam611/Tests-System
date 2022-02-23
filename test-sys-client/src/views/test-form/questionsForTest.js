@@ -1,4 +1,4 @@
-import { useEffect, useState} from "react";
+import { useCallback, useEffect, useState } from "react";
 import QuestionItem from "./questionItem";
 const { Btn, Checkbox, Line, Input } = require("UIKit");
 const axios = require('axios');
@@ -8,29 +8,13 @@ const QuestionsForTest = (props) => {
     const [fetchedData, setFetchedData] = useState([]);
     const [list, setList] = useState([]);
     const [selectedCounter, setSelectedCounter] = useState(0);
-
-    //Side Effects
-    useEffect(() => {
-        buildDisplayList(fetchedData);
-    }, [fetchedData]);
-
-    useEffect(() => getQuestion(), []);
-
-    //methods
-    const getQuestion = () => {
-        axios.get('http://localhost:4200/questions?oneOrMany=many&skip=0&take=20')
-            .then((response) => {
-                const myData = response.data;
-                setFetchedData(myData);
-            })
-    }
-
-    const questionSelectedHandler = (item, value) => {
-        props.onQuestionSelected(item, value);
+    //handlers
+    const {onQuestionSelected} = props;
+    const questionSelectedHandler = useCallback((item, value) => {
+        onQuestionSelected(item, value);
         value ? setSelectedCounter(prevState => { return prevState + 1 }) : setSelectedCounter(prevState => { return prevState - 1 });
-    }
-
-    const buildDisplayList = (list) => {
+    },[onQuestionSelected])
+    const buildDisplayList = useCallback((list) => {
         console.log(list);
         const temp = list.map((value, index) => ({
             id: value._id,
@@ -40,7 +24,26 @@ const QuestionsForTest = (props) => {
             onChange: questionSelectedHandler,
         }))
         setList(temp);
+    }, [questionSelectedHandler]);
+    //Side Effects
+    useEffect(() => {
+        buildDisplayList(fetchedData);
+    }, [fetchedData, buildDisplayList]);
+
+    useEffect(() => getQuestion(), []);
+
+    //helpers
+    const getQuestion = () => {
+        axios.get('http://localhost:4200/questions?oneOrMany=many&skip=0&take=20')
+            .then((response) => {
+                const myData = response.data;
+                setFetchedData(myData);
+            })
     }
+
+   
+
+
 
     const filterList = (e) => {
         let tags = e.target.value.toUpperCase();

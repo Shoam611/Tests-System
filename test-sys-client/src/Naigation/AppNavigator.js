@@ -3,8 +3,6 @@ import App from "App";
 import QuestionsView from "../views/QuestionsView";
 import DefaultView from "views/defaultView";
 import TestsView from "../views/test-form/TestsView";
-import CreateTestForm from "views/test-form/createTestForm";
-import QuestionsForTest from "views/test-form/questionsForTest";
 import ManageQuestionView from "views/manageQuestionsView";
 const AppNavigator = () => {
   return (

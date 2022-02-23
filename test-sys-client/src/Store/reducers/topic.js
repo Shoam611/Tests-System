@@ -5,7 +5,7 @@ const initialState = {
 
 const reducer = (state=initialState,action)=>{
     switch(action.type){
-        case 'FETCHTOPIC' : return{...state,topic:action.newTopic}
+        case FETCH: return{...state,topic:action.newTopic}
         default:return state;
     }
 }
