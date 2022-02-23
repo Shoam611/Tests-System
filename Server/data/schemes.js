@@ -20,7 +20,6 @@ const questionSchema = new Schema({
 //     failureSubject: String,
 //     failureBody: String
 // });
-
 const testSchema = new Schema({
     testType: Number,
     lang: Number,
@@ -36,7 +35,7 @@ const testSchema = new Schema({
     emailSubOnFail: String,
     emailBodyOnFail: String,
     questions: [questionSchema]
-});
+}, { timestamps: true });
 questionSchema.statics.deleteByIdAsync = async function (id) {
     return this.deleteOne({ _id: id })
 };

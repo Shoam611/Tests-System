@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Btn } from 'UIKit';
 import QuestionComponent from 'UIKit/Elements/QuestionComponent';
 import Card from 'UIKit/Layouts/Card';
 import './questionItem.css';
@@ -26,7 +27,7 @@ const QuestionItem = props => {
                 <h4>{props.tags.join(', ')}</h4>
             </div>
             {showModal ? <QuestionComponent onConfirm={onFullShowHandler} {...props} /> : ''}
-            <button className='expense-date' onClick={onFullShowHandler}>Show</button>
+            <Btn onClick={onFullShowHandler}>Show</Btn>
         </Card>
     );
 }
