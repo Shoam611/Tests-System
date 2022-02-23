@@ -29,6 +29,7 @@
   grid-template-rows: 100%;
   margin: 0;
   padding: 0;
+  
 }
 .questions-container.grid.grid-header{
     /* text-align: center; */
@@ -36,6 +37,7 @@
 }
 .questions-container.grid h4{
     word-wrap: normal;
+    align-self: center;
     margin: 0; 
     padding: 0;
     

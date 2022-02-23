@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Box, Btn, Icon, Line } from 'UIKit';
+import { Box, Btn, Dropdown, Icon, Line } from 'UIKit';
 import './manageQuestionsView.css'
 const ManageQuestionView = (props) => {
     const [topic, setTopic] = useState();
@@ -17,13 +17,13 @@ const ManageQuestionView = (props) => {
         return (
             questions.map((q) => {
                 return (
-                    <Box key={q._id}>
+                    <Box key={q._id} >
                         <div className='questions-container grid'>
-                            <Icon i={q.isActive ? 'circle' : ''} />
+                            <Icon i={q.isActive ? 'check' : 'times'} />
                             <h4> {q.questionText}</h4>
                             <h4> {new Date(q.updatedAt).toDateString()}</h4>
                             <h4> {questionType.find(type=>type.id===q.questionType).name}</h4>
-                            <Btn i="chevron-down">Actions</Btn>
+                            <Btn i='caret-down'>Actions</Btn>
                         </div>
                     </Box>
                 )
