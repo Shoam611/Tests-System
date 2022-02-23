@@ -9,6 +9,7 @@ import { Outlet, Routes, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Test from "models/TestModel";
 import { useDispatch } from "react-redux";
+import { addTest } from "Store/actions/test";
 
 const TestsView = () => {
     //states
@@ -18,6 +19,7 @@ const TestsView = () => {
     const [toShowMistakes, setToShowMistakes] = useState(false);
     const [questions, setQuestions] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
+    const [selectedCounter, setSelectedCounter] = useState(0);
 
     const dispatch = useDispatch();
 
@@ -58,17 +60,19 @@ const TestsView = () => {
     const toShowChangedHandler = (e) => {
         setToShowMistakes(!e);
     }
-    const onSelectionChange = (item, value) => value ? questions.push(item) : questions.pop(item);
+    const onSelectionChange = (item, value) => {
+        value ? questions.push(item) : questions.pop(item);
+        value ? setSelectedCounter(prevState => { return prevState + 1 }) : setSelectedCounter(prevState => { return prevState - 1 });
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (formValidation()) {
-            const newTest = new Test(testType, lang, fields.Manager_email, fields.Test_name, fields.Passing_grade, fields.Test_header, fields.Text_msgOnSuccess, fields.Text_msgOnFailure, toShowMistakes, fields.Email_succSub, fields.Email_succBody, fields.Email_failSub, fields.Email_failBody, questions);
+            const newTest = new Test(testType, lang, fields.Manager_email.value, fields.Test_name.value, fields.Passing_grade.value, fields.Test_header.value, fields.Text_msgOnSuccess.value, fields.Text_msgOnFailure.value, toShowMistakes, fields.Email_succSub.value, fields.Email_succBody.value, fields.Email_failSub.value, fields.Email_failBody.value, questions);
             console.log(newTest);
-            // dispatch(addTest(newTest));
+            dispatch(addTest(newTest));
         }
     }
-
     //RegEx validation
     const ValidateEmail = (mail) => {
         if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(mail)) {
@@ -76,7 +80,6 @@ const TestsView = () => {
         }
         return false;
     }
-
     //validations
     const formValidation = () => {
         if (+fields.testType < 1 || +fields.testType > 3) {
@@ -130,7 +133,6 @@ const TestsView = () => {
         setErrorMessage('');
         return true;
     }
-
     //views
     const steps = [
         <CreateTestForm next={handleNextStep} onTestTypeChange={testTypeChangedHandler} onLangChange={langChangedHandler} onToShowChange={toShowChangedHandler} data={testData} {...fields} />

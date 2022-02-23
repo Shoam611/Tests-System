@@ -1,10 +1,10 @@
 const awilix = require("awilix");
 const container = awilix.createContainer();
 const QuestionsController = require("./controllers/questionsController.js");
-const TestsController = require("./controllers/testsController.js");
+const TestsController = require("./controllers/testsController");
 const MongoRepository = require('./data/mongoRepository');
 const schemes = require('./data/schemes');
-const TestsMongoRepository = require("./data/testMongoRepository.js");
+const TestsMongoRepository = require('./data/testsMongoRepository');
 const initConnection = require("./services/mongoHandler.js");
 
 

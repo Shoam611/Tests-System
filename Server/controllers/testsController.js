@@ -2,12 +2,11 @@ class TestsController {
     constructor({ testsMongoRepository }) {
         this.testsMongoRepository = testsMongoRepository;
     }
-
-    addTest = ({ body }) => {
-        console.log('inController');
+    addTest = async ({ body }) => {
         const { newTest, } = body;
+        console.log('inController', newTest);
         if (!newTest) { console.log("Invalid Test"); return; }
-        this.testsMongoRepository.addAsync(Test);
+        return await this.testsMongoRepository.addAsync(newTest);
     }
 
     deleteTest = ({ body }) => {
@@ -15,7 +14,6 @@ class TestsController {
         console.log('in delete controller', id);
         this.testsMongoRepository.DeleteOneAsync(id)
     }
-
 
     getTests = async (req) => {
         console.log('in get tests');

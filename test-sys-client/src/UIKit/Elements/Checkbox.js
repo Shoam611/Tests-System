@@ -4,11 +4,10 @@ import './Checkbox.css'
 const Checkbox = ({ list }) => {
 
     const onSelctionChanged = (id, value) => {
-        console.log(list);
         list.forEach(item => {
             if (item.id === id) {
                 item.isSelected = value;
-                // item.onChange(item.value, value);
+                item.onChange(item.value, value);
             }
         });
     }
@@ -30,7 +29,7 @@ const Checkbox = ({ list }) => {
     )
 }
 
-const CheckboxItem = ({ onChange, render, id, selected}) => {
+const CheckboxItem = ({ onChange, render, id, selected }) => {
     const [checked, setChecked] = useState(selected);
     const [toRender, setRender] = useState(render);
 

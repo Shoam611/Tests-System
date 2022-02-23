@@ -1,5 +1,4 @@
 class QuestionsController {
-
   constructor({ mongoRepository }) {
     this.mongoRepository = mongoRepository;
   }

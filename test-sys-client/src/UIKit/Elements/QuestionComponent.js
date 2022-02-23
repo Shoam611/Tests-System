@@ -28,9 +28,9 @@ const QuestionComponentOverlay = (props) => {
         <p>Question Text: {props.questionText}</p>
         <p>Text Below Question: {props.textBelow}</p>
         <ul>Answers:
-          {props.answers.map((answer, index) => (
+          {props.awnsers.map((answer, index) => (
             <li key={answer._id}>
-              <Line>{index + 1}) {answer.value} {!props.correctAnswerIds.indexOf(answer.id) && <h4 className="correct_indexer">- Correct Answer</h4>}</Line>
+              <Line>{index + 1}) {answer.value} {!props.correctAwnserIndex.indexOf(answer.id) && <h4 className="correct_indexer">- Correct Answer</h4>}</Line>
             </li>)
           )}
         </ul>

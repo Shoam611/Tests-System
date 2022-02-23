@@ -9,30 +9,33 @@ const questionSchema = new Schema({
     questionText: String,
     textAbove: String,
     textBelow: String,
-    tags: [],
-    answers: [answerSchema],
-    correctAnswerIds: [],
+    tags: Array,
+    awnsers: [answerSchema],
+    correctAwnserIndex: Array,
 }, { timestamps: true });
 
-const emailSchema = new Schema({
-    successSubject: String,
-    successBody: String,
-    failureSubject: String,
-    failureBody: String
-});
+// const emailSchema = new Schema({
+//     successSubject: String,
+//     successBody: String,
+//     failureSubject: String,
+//     failureBody: String
+// });
 
 const testSchema = new Schema({
     testType: Number,
     lang: Number,
     managerEmail: String,
-    testName: String,
+    name: String,
     passingGrade: Number,
-    testHeader: String,
-    msgOnSuccess: String,
-    msgOnFailure: String,
-    toShowMistakes: Boolean,
-    emailMessages: [emailSchema],
-    question: [questionSchema]
+    header: String,
+    msgOnSucc: String,
+    msgOnFail: String,
+    showIfWrong: Boolean,
+    emailSubOnSucc: String,
+    emailBodyOnSucc: String,
+    emailSubOnFail: String,
+    emailBodyOnFail: String,
+    questions: [questionSchema]
 });
 questionSchema.statics.deleteByIdAsync = async function (id) {
     return this.deleteOne({ _id: id })
@@ -43,7 +46,6 @@ testSchema.statics.deleteByIdAsync = async function (id) {
 const AnswerModel = model('answer', answerSchema);
 const QuestionModel = model('QuestionModel', questionSchema);
 const TestModel = model('TestModel', testSchema)
-const EmailModel = model('EmailModel', emailSchema)
 
 module.exports = {
     QuestionModel,
