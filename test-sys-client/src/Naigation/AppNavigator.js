@@ -3,9 +3,8 @@ import App from "App";
 import QuestionsView from "../views/QuestionsView";
 import DefaultView from "views/defaultView";
 import TestsView from "../views/test-form/TestsView";
-import CreateTestForm from "views/test-form/createTestForm";
-import QuestionsForTest from "views/test-form/questionsForTest";
 import ManageQuestionView from "views/manageQuestionsView";
+import ManageTestsView from "views/manageTestsView";
 const AppNavigator = () => {
   return (
     <div id="AppNavigatorContainer">
@@ -15,7 +14,7 @@ const AppNavigator = () => {
           <Route path="questions/edit" element={<ManageQuestionView />} />
 
           <Route path="qweezes/create/*" element={<TestsView />} />
-          <Route path="qweezes/edit" element={<DefaultView />} />
+          <Route path="qweezes/edit" element={<ManageTestsView />} />
 
           <Route path="topics/topics" element={<QuestionsView />} />
           <Route path="topics/edit" element={<DefaultView />} />

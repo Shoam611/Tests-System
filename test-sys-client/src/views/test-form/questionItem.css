@@ -4,7 +4,8 @@
   align-items: center;
   padding: 0.5rem;
   margin: 1rem 0;
-  background-color: gray;
+  background-color: #c7c7c7af;
+  color: black;
 }
 
 .active .expense-item {
@@ -14,14 +15,23 @@
 .expense-date {
   display: flex;
   flex-direction: column;
-  width: 5.5rem;
-  height: 5.5rem;
+  width: 3.5rem;
+  height: 3.5rem;
   border: 1px solid #ececec;
-  background-color: #2a2a2a;
+  background-color: var(--accent);
   color: white;
   border-radius: 12px;
   align-items: center;
   justify-content: center;
+}
+
+button.expense-date {
+  height: 2.5rem;
+}
+
+button.expense-date:hover {
+  background-color: #7157b18a;
+  transition: background-color .2s;
 }
 
 .expense-item__description {
@@ -32,7 +42,7 @@
   flex-flow: column-reverse;
   justify-content: flex-start;
   flex: 1;
-  font-size: 1.25rem;
+  font-size: 1rem;
 }
 
 @media (min-width: 580px) {

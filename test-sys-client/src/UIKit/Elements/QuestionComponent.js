@@ -17,7 +17,6 @@ const QuestionComponentOverlay = (props) => {
 
   return (
     <Card className="modal">
-      {console.log(props)}
       <header className="header">
         <h2>{props.questionText}</h2>
       </header>
@@ -30,7 +29,7 @@ const QuestionComponentOverlay = (props) => {
         <ul>Answers:
           {props.awnsers.map((answer, index) => (
             <li key={answer._id}>
-              <Line>{index + 1}) {answer.value} {!props.correctAwnserIndex.indexOf(answer.id) && <h4 className="correct_indexer">- Correct Answer</h4>}</Line>
+              <Line>{index + 1}) {answer.value} {props.correctAwnserIndex.includes(answer.id) && <p className="correct_indexer">- Correct Answer</p>}</Line>
             </li>)
           )}
         </ul>
