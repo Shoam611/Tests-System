@@ -4,14 +4,13 @@ import Header from 'components/header';
 import SideNav from './components/SideNav';
 import './App.css';
 import { useEffect } from 'react';
-import { Dispatch } from 'react';
-import {fetchQuestions} from 'Store/actions/question'
+import { fetchQuestions } from 'Store/actions/question'
 import { useDispatch } from 'react-redux';
 function App() {
   const dispatch = useDispatch()
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(fetchQuestions());
-  },[])
+  }, [])
 
   return (
     <div className="App">
