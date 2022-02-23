@@ -7,10 +7,23 @@ import { useEffect } from 'react';
 import { Dispatch } from 'react';
 import {fetchQuestions} from 'Store/actions/question'
 import { useDispatch } from 'react-redux';
+import { fetchTopic } from 'Store/actions/topic';
 function App() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  
+  const loadTopic=useCallback(async()=>{
+    await dispatch(fetchTopic())
+    
+  },[dispatch,fetchTopic,fetchQuestions]);
+  const loadData=()=>{
+    await dispatch(fetchQuestions());
+    //await dispatch(fetchTests());
+}
+
   useEffect(()=>{
-    dispatch(fetchQuestions());
+    loadTopic().then(()=>{
+      loadData();
+    })
   },[])
 
   return (
