@@ -44,7 +44,7 @@ const QuestionComponentOverlay = (props) => {
   );
 };
 
-const QuestionComponent = (props) => {
+const QuestionModal = (props) => {
   return (
     <>
       {ReactDOM.createPortal(
@@ -64,4 +64,4 @@ const QuestionComponent = (props) => {
   );
 };
 
-export default QuestionComponent;
+export default QuestionModal;
