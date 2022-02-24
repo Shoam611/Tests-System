@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Box, Btn, Input, Line } from "UIKit";
+import {  useSelector } from "react-redux";
+import {  Btn, Input, Line } from "UIKit";
 import Card from "UIKit/Layouts/Card";
 const ManageQuestionView = props => {
-    const dispatch = useDispatch();
     const [topic, setTopic] = useState('');
     const [filteredArray, setFilteredArray] = useState(null);
     const tests = useSelector(state => state.tests.tests)
@@ -11,8 +10,8 @@ const ManageQuestionView = props => {
         setTopic('def-topic')
     }, []);
 
-    const handleShowPrev = () => { console.log(tests); }
-    const handleShownext = () => { }
+    // const handleShowPrev = () => { console.log(tests); }
+    // const handleShownext = () => { }
 
     const filterListHandler = (e) => {
         let keyWords = e.target.value.toUpperCase();

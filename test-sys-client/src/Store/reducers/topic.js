@@ -1,4 +1,4 @@
-import { FETCH } from "Store/actions/topic";
+import { FETCH } from '../actions/topic';
 const initialState = {
     topic:{}
 }
