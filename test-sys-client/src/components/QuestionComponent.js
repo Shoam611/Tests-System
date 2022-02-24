@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Line } from "UIKit";
 import Card from "UIKit/Layouts/Card";
-import Btn from "./Btn";
+import Btn from "../UIKit/Elements/Btn";
 import "./QuestionComponent.css";
 
 const QuestionComponentBackdrop = (props) => {
