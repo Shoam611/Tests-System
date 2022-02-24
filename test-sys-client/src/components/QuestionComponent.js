@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Line } from "UIKit";
 import Card from "UIKit/Layouts/Card";
-import Btn from "./Btn";
+import Btn from "../UIKit/Elements/Btn";
 import "./QuestionComponent.css";
 
 const QuestionComponentBackdrop = (props) => {
@@ -27,15 +27,15 @@ const QuestionComponentOverlay = (props) => {
         <p>Question Text: {props.questionText}</p>
         <p>Text Below Question: {props.textBelow}</p>
         <ul>Answers:
-          {props.awnsers.map((answer, index) => (
+          {props.answers.map((answer, index) => (
             <li key={answer._id}>
-              <Line>{index + 1}) {answer.value} {props.correctAwnserIndex.includes(answer.id) && <p className="correct_indexer">- Correct Answer</p>}</Line>
+              <Line>{index + 1}) {answer.value} {props.correctAnswerIds.includes(answer.id) && <p className="correct_indexer">- Correct Answer</p>}</Line>
             </li>)
           )}
         </ul>
         <p>Tags: {props.tags.join(', ')}</p>
-        <p>Created At: {normalizeDate(props.createdAt)}</p>
-        <p>Updated At: {normalizeDate(props.updatedAt)}</p>
+        {/* <p>Created At: {normalizeDate(props.createdAt)}</p> */}
+        <p>Last update: {normalizeDate(props.updatedAt)}</p>
       </div>
       <footer className="actions">
         <Btn onClick={props.onConfirm}>Okay</Btn>

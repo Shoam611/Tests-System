@@ -1,5 +1,5 @@
 import { Btn, Rows, RadioButton, Checkbox } from 'UIKit';
-const AwnsersSelector = props => {
+const AnswersSelector = props => {
     const renderSelector = () => {
         switch (props.questionType) {
             case 1: return <RadioButton selected={props.selected} list={props.list} />;
@@ -14,4 +14,4 @@ const AwnsersSelector = props => {
         </Rows>
     )
 }
-export default AwnsersSelector
+export default AnswersSelector

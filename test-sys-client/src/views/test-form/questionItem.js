@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Btn } from 'UIKit';
-import QuestionComponent from 'UIKit/Elements/QuestionComponent';
+import QuestionComponent from 'components/QuestionComponent';
 import Card from 'UIKit/Layouts/Card';
 import './questionItem.css';
 
