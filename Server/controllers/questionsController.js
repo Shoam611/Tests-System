@@ -1,18 +1,19 @@
 class QuestionsController {
-  constructor({ mongoRepository }) {
-    this.mongoRepository = mongoRepository;
+
+  constructor({ questionRepository }) {
+    this.questionRepository = questionRepository;
   }
   addQuestion = async ({ body }) => {
     console.log('inController');
     const { newQuestion, } = body;
     if (!newQuestion) { console.log("Invalid Question"); return; }
-    return await this.mongoRepository.addAsync(newQuestion);
+    return await this.questionRepository.addAsync(newQuestion);
   }
 
   deleteQuestion = ({ body }) => {
     const { id } = body;
     console.log('in delete controller', id);
-    this.mongoRepository.DeleteOneAsync(id)
+    this.questionRepository.DeleteOneAsync(id)
   }
   //--------------------------------------
   getQuestions = async ({ query }) => {
@@ -23,11 +24,13 @@ class QuestionsController {
       case "one":
         console.log('in one case');
         const { id } = query;
-        return await this.mongoRepository.getOneAsync(id)
+        return await this.questionRepository.getOneAsync(id)
       case "many":
-        const { skip, take } = query;
+        const { skip, take ,topic} = query;
+        let filter = {};
+        if(topic)filter = {topic: topic}
         console.log('in many case', skip, take);
-        return await this.mongoRepository.getAsync(skip, take)
+        return await this.questionRepository.getAsync(skip, take,filter)
       default: return undefined;
     }
   };

@@ -1,4 +1,4 @@
-const { connect, disconnect } = require('mongoose');
+const { connect } = require('mongoose');
 
 const initConnection = async () => {
 

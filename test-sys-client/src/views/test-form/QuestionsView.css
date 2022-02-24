@@ -7,13 +7,7 @@
   grid-template-rows: max-content 1fr;
 }
 
-.container {
-  overflow-x: auto;
-  width: min-content;
-  justify-self: center;
-  align-self: center;
-  margin-bottom: var(--gap-s);
-}
+.container { justify-self: center }
 
 .questions-view-outlet-container {
   height: 80vh;

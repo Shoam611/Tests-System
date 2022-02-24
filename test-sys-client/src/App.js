@@ -1,37 +1,53 @@
+import { useCallback, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Rows, Columns } from 'UIKit';
 import Header from 'components/header';
 import SideNav from './components/SideNav';
-import './App.css';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { fetchQuestions } from 'Store/actions/question'
-import { fetchTests } from 'Store/actions/test';
+import { fetchTopic } from 'Store/actions/topic';
+import './App.css';
 function App() {
-  const dispatch = useDispatch()
+  const [isLoading, setIsLoading] = useState();
+  
+  const dispatch = useDispatch();
+
+  const loadTopic = useCallback(async () => {
+    await dispatch(fetchTopic())
+  }, [dispatch]);
+
+  const loadData = useCallback(async () => {
+    await dispatch(fetchQuestions());
+  }, [dispatch]);
+
   useEffect(() => {
-    dispatch(fetchQuestions());
-    dispatch(fetchTests());
-  }, [])
+    setIsLoading(true);
+    loadTopic().then(() => {
+      loadData().then(() => {
+        setIsLoading(false)
+      });
+    })
+  }, [loadData,loadTopic])
 
   return (
-    <div className="App">
-      <Rows>
-        {/* top bar */}
-        <Header />
-        {/* body */}
-        <div>
-          <Columns>
-            {/* navigation menue */}
-            <SideNav />
-            {/* content placeholder*/}
-            <div className='app-outlet-container'>
-              <Outlet />
-            </div>
-          </Columns>
-        </div>
-      </Rows >
-    </div >
+    isLoading ? (<div><h1>Loading data...</h1></div>) :
+      <div className="App">
+        <Rows>
+          {/* top bar */}
+          <Header />
+          {/* body */}
+          <div>
+            <Columns>
+              {/* navigation menue */}
+              <SideNav />
+              {/* content placeholder*/}
+              <div className='app-outlet-container'>
+                <Outlet />
+              </div>
+            </Columns>
+          </div>
+        </Rows >
+      </div >
   );
 }
 

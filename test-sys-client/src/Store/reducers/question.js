@@ -1,10 +1,10 @@
-import Enumerable from 'node-enumerable';
+//import Enumerable from 'node-enumerable';
 import { ADD, FETCH, DELETE } from "Store/actions/question";
 const initialState = {
     questions: []
 }
 
-export default (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
 
     switch (action.type) {
         case ADD:
@@ -25,3 +25,4 @@ export default (state = initialState, action) => {
         default: return state;
     }
 }
+export default reducer

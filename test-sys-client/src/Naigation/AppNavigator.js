@@ -16,20 +16,20 @@ const AppNavigator = () => {
           <Route path="qweezes/create/*" element={<TestsView />} />
           <Route path="qweezes/edit" element={<ManageTestsView />} />
 
-          <Route path="topics/topics" element={<QuestionsView />} />
+          <Route path="topics/topics" element={<DefaultView />} />
           <Route path="topics/edit" element={<DefaultView />} />
 
-          <Route path="reports/qweezes" element={<QuestionsView />} />
+          <Route path="reports/qweezes" element={<DefaultView />} />
           <Route path="reports/respondant" element={<DefaultView />} />
-          <Route path="reports/statistics" element={<TestsView />} />
+          <Route path="reports/statistics" element={<DefaultView />} />
 
-          <Route path="accounts/fields" element={<QuestionsView />} />
+          <Route path="accounts/fields" element={<DefaultView />} />
           <Route path="accounts/details" element={<DefaultView />} />
           <Route path="accounts/lang" element={<DefaultView />} />
-          <Route path="accounts/ui" element={<TestsView />} />
+          <Route path="accounts/ui" element={<DefaultView />} />
 
           <Route path="admin/permissions" element={<DefaultView />} />
-          <Route path="admin/annount" element={<QuestionsView />} />
+          <Route path="admin/annount" element={<DefaultView />} />
         </Route>
       </Routes>
     </div>
