@@ -29,7 +29,7 @@ const QuestionComponentOverlay = (props) => {
         <ul>Answers:
           {props.awnsers.map((answer, index) => (
             <li key={answer._id}>
-              <Line>{index + 1}) {answer.value} {props.correctAwnserIndex.includes(answer.id) && <p className="correct_indexer">- Correct Answer</p>}</Line>
+              <Line>{index + 1}) {answer.value} {props.correctAnswerIds.includes(answer.id) && <p className="correct_indexer">- Correct Answer</p>}</Line>
             </li>)
           )}
         </ul>

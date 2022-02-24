@@ -11,7 +11,7 @@ class Question {
             .filter(tag => (!!tag) && tag);
         this.awnsers = awnsers;
         this.correctAnswerIds = correctAwnserIndex;
-        this.presentaionAxisId = presentaionAxis;
+        this.presentaionAxisIds = presentaionAxis;
         this.isAnActiveQuestion = isAnActiveQuestion;
     }
 }
