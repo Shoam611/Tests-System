@@ -34,8 +34,8 @@ const QuestionComponentOverlay = (props) => {
           )}
         </ul>
         <p>Tags: {props.tags.join(', ')}</p>
-        <p>Created At: {normalizeDate(props.createdAt)}</p>
-        <p>Updated At: {normalizeDate(props.updatedAt)}</p>
+        {/* <p>Created At: {normalizeDate(props.createdAt)}</p> */}
+        <p>Last update: {normalizeDate(props.updatedAt)}</p>
       </div>
       <footer className="actions">
         <Btn onClick={props.onConfirm}>Okay</Btn>

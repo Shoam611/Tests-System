@@ -11,9 +11,9 @@ const questionSchema = new Schema({
     questionText: String,
     textAbove: String,
     textBelow: String,
-    tags: [],
+    tags: Array,
     answers: [answerSchema],
-    correctAnswerIds: [],
+    correctAnswerIds: Array,
     presentaionAxisId:Number,
     isAnActiveQuestion:Boolean
 }, { timestamps: true });
