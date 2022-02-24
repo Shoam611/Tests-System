@@ -14,6 +14,8 @@ const questionSchema = new Schema({
     tags: [],
     answers: [answerSchema],
     correctAnswerIds: [],
+    presentaionAxisId:Number,
+    isAnActiveQuestion:Boolean
 }, { timestamps: true });
 questionSchema.statics.deleteByIdAsync = async function (id) {
     return this.deleteOne({ _id: id })

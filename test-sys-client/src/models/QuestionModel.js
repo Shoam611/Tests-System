@@ -1,5 +1,5 @@
 class Question{
-    constructor(topic,questionType,questionText ,textAbove,textBelow,tags,awnsers,correctAwnserIndex){
+    constructor(topic,questionType,questionText ,textAbove,textBelow,tags,awnsers,correctAwnserIndex,presentaionAxis,isAnActiveQuestion=false){
         this.topic = topic;
         this.questionType=questionType;
         this.questionText=questionText;
@@ -10,6 +10,8 @@ class Question{
                         .filter(tag => (!!tag) && tag);
         this.awnsers=awnsers;
         this.correctAwnserIndex=correctAwnserIndex;
+        this.presentaionAxisId=presentaionAxis;
+        this.isAnActiveQuestion=isAnActiveQuestion;
     }
 }
 export default Question;

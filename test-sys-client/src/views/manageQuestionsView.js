@@ -1,25 +1,22 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Box, Btn, Dropdown, Icon, Line } from 'UIKit';
+import { Box, Btn, Icon, Line } from 'UIKit';
 import './manageQuestionsView.css'
 const ManageQuestionView = (props) => {
-    const [topic, setTopic] = useState();
+    const topic = useSelector(state=>state.topic.topic);
     const [questionType] = useState([{id:1,name:'Single choice'},{id:1,name:'Multi choice'}]);
     const questions = useSelector(state => state.questions.questions)
-    useEffect(() => {
-        setTopic('def-topic')
-    }, []);
 
     const handleShowPrev = () => { console.log(questions); }
     const handleShownext = () => { }
 
     const renderQuestions = () => {
-        return (
+        return ( questions.length===0 ? <h2>No Questions available for the selected topic : {topic.name}</h2>:
             questions.map((q) => {
                 return (
                     <Box key={q._id} >
                         <div className='questions-container grid'>
-                            <Icon i={q.isActive ? 'check' : 'times'} />
+                            <Icon i={q.isAnActiveQuestion ? 'check' : 'times'} />
                             <h4> {q.questionText}</h4>
                             <h4> {new Date(q.updatedAt).toDateString()}</h4>
                             <h4> {questionType.find(type=>type.id===q.questionType).name}</h4>
@@ -31,7 +28,7 @@ const ManageQuestionView = (props) => {
     }
     return (
         <div className='mange-question-view'>
-            <h1>Questions for <span>{topic}</span></h1>
+            <h1>Questions for <span>{topic.name}</span></h1>
             <div className='question-wrapper'>
 
                 <div className='questions-container'>

@@ -1,7 +1,7 @@
-import { useState,useReducer } from "react";
+import { useReducer } from "react";
 import Line from "UIKit/Layouts/Line";
 const RadioButton = ({ list }) => {
-    const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
+    const [_, forceUpdate] = useReducer(x => x + 1, 0);
     const onSelectionChanged =(id)=>{
         list.forEach(element => {
             element.isSelected = (id===element.id)

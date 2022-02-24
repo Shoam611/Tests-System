@@ -1,47 +1,55 @@
 import useInput from 'hooks/useInput';
-import { Btn, Dropdown, Input, } from 'UIKit';
-import { useEffect, useState, useReducer } from 'react';
+import { Btn, Dropdown, Input, Line, RadioButton, } from 'UIKit';
+import { useEffect, useState, useReducer, useCallback } from 'react';
 import Question from 'models/QuestionModel';
 import AwnsersSelector from './answerSelector';
 import AwnserChoice from './answerChoice';
 import './createQuestionForm.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { addQuestion, fetchQuestions } from 'Store/actions/question';
+import { addQuestion } from 'Store/actions/question';
+import { presentationAxis } from 'models/presentationAxis';
 const CreateQuestionForm = () => {
+    //states
+    const [questionTypes, setQuestionTypes] = useState(null);   //list of q types available
+    const [topic, setTopic] = useState('');
+    const [questionType, setQuestionType] = useState(null);     //selected q type
+    const [answers, setAwnsers] = useState([]);
+    const [errorMessage, setErrorMessage] = useState('');
     //helpers
-    const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
-
-    const getId = () => {
+    const [_, forceUpdate] = useReducer(x => x + 1, 0);
+    const axis = presentationAxis.map(item => ({ ...item, isSelected: false, render: item.value }));
+    axis[0].isSelected = true
+    const getId =useCallback(() => {
         if (answers.length > 0) {
             return answers.at(-1).id + 1;
         }
         else return 1;
-    }
+    },[answers])
     const dispatch = useDispatch();
     //handlers
     const handleQuestionTypeChanged = (qType) => {
         answers.forEach(item => { item.isSelected = false; item.value = '' })
         setQuestionType(qType);
     }
-    const onAddingAwnser = () => {
-        if (answers.length >= 6) return;
-        const id = getId();
-        const newAnswer = { id: id, render: <AwnserChoice id={id} onRemove={handleRemoveAwnser} onChange={awnserContentChangedHandler} />, value: '', isSelected: false };
-        answers.push(newAnswer);
-        forceUpdate();
-    }
-    const handleRemoveAwnser = (id) => {
+    const handleRemoveAwnser = useCallback((id) => {
         if (answers.length > 2) {
             const index = answers.indexOf(answers.find(i => i.id === id));
             if (index >= 0) { answers.splice(index, 1); }
             forceUpdate()
         }
-    }
-    const awnserContentChangedHandler = (value, id) => {
+    },[answers])
+    const awnserContentChangedHandler = useCallback((value, id) => {
         const temp = answers;
         temp.filter(i => i.id === id)[0].value = value;
         setAwnsers(temp);
-    }
+    },[answers])
+    const onAddingAwnser = useCallback(() => {
+        if (answers.length >= 6) return;
+        const id = getId();
+        const newAnswer = { id: id, render: <AwnserChoice id={id} onRemove={handleRemoveAwnser} onChange={awnserContentChangedHandler} />, value: '', isSelected: false };
+        answers.push(newAnswer);
+        forceUpdate();
+    }, [answers,awnserContentChangedHandler,handleRemoveAwnser,getId])
 
     const formValidation = () => {
         if (+questionType < 1 || +questionType > 3) {
@@ -89,7 +97,8 @@ const CreateQuestionForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (formValidation()) {
-            const newQuestion = new Question(topic, questionType, Question_text.value, Text_above_question.value, Text_below_question.value, tags.value, answers.map(({ value }, index) => ({ value, id: index })), getIndexes(answers));
+            const selectedAxisId = axis.find(item => item.isSelected === true);
+            const newQuestion = new Question(topic, questionType, Question_text.value, Text_above_question.value, Text_below_question.value, tags.value, answers.map(({ value }, index) => ({ value, id: index })), getIndexes(answers), selectedAxisId);
             console.log(newQuestion);
             dispatch(addQuestion(newQuestion))
         }
@@ -99,19 +108,14 @@ const CreateQuestionForm = () => {
     const printToConsole = () => {
         console.log(questions);
     }
-    //states
-    const [questionTypes, setQuestionTypes] = useState(null);   //list of q types available
-    const [topic, setTopic] = useState('');
-    const [questionType, setQuestionType] = useState(null);     //selected q type
-    const [answers, setAwnsers] = useState([]);
-    const [errorMessage, setErrorMessage] = useState('');
+
 
     //side-effects
     useEffect(() => {
         onAddingAwnser(); onAddingAwnser();
         setQuestionTypes([{ id: 1, value: 'Single choice' }, { id: 2, value: 'Multi Choice' }]);
         setTopic('def-topic');
-    }, []);
+    }, [onAddingAwnser]);
     //inputs
     const Question_text = useInput();
     const Text_above_question = useInput();
@@ -129,6 +133,10 @@ const CreateQuestionForm = () => {
                         <Dropdown list={questionTypes} selected={questionType} onChange={handleQuestionTypeChanged} />
                         <Input placeholder="Question text:"        {...Question_text} />
                         <Input placeholder="Text above question:"  {...Text_above_question} />
+                        <Line>
+                            <h4>Question presentaion axis : </h4>
+                            <RadioButton list={axis} />
+                        </Line>
                         <Input placeholder="Text below question:"  {...Text_below_question} />
                         <Input placeholder="tags (seperate with , charecter)" {...tags} />
                         <hr />
