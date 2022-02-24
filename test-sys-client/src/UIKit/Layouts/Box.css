@@ -1,7 +1,7 @@
 .Box {
   border: none;
   border-radius: 5px;
-  padding: var(--gap-s) var(--gap-m);
+  padding: var(--gap-s) ;
   transition: 0.3s;
 }
 .Box:hover {
