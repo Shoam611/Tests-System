@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Box, Btn, Icon, Input, Line } from 'UIKit';
+import QuestionComponent from '../components/QuestionComponent';
 import './manageQuestionsView.css'
 const ManageQuestionView = (props) => {
     const topic = useSelector(state => state.topic.topic);
@@ -9,18 +10,21 @@ const ManageQuestionView = (props) => {
 
     const handleShowPrev = () => { console.log(questions); }
     const handleShownext = () => { }
-
+    const showQuestionHandler = (q) =>{
+        <QuestionComponent {...q} />
+    }
     const renderQuestions = () => {
         return (questions.length === 0 ? <h2>No Questions available for the selected topic : {topic.name}</h2> :
             questions.map((q) => {
                 return (
-                    <Box key={q._id} >
+                    <Box key={q._id} onClick={showQuestionHandler.bind(this,q)}>
+                        {<div> </div> }
                         <div className='questions-container-item'>
-                            <Icon i={q.isAnActiveQuestion ? 'check' : 'times'} />
+                            {q.isAnActiveQuestion ? <Icon i={ 'check'} /> : <Btn i ="times" /> }
                             <h4> {q.questionText}</h4>
                             <h4> {new Date(q.updatedAt).toDateString()}</h4>
                             <h4> {questionType.find(type => type.id === q.questionType).name}</h4>
-                            <Btn i='caret-down'>Actions</Btn>
+                            <Btn i=''>Edit</Btn>
                         </div>
                     </Box>
                 )
@@ -36,11 +40,11 @@ const ManageQuestionView = (props) => {
             </Line>
             <div className='question-wrapper'>
                     <div className='questions-container-item grid-header'>
-                        <Box>   <h4 >Is active</h4>     </Box>
+                        <div />
                         <Box>   <h4> questionText</h4>  </Box>
                         <Box>   <h4> updatedAt</h4>     </Box>
                         <Box>   <h4> questionType</h4>  </Box>
-                        <h4> actions</h4>
+                        <div />
                     </div>
                 <div className='questions-container '>
                     {renderQuestions()}
