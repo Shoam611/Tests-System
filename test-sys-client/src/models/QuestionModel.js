@@ -1,5 +1,5 @@
 class Question {
-    constructor(topic, questionType, questionText, textAbove, textBelow, tags, awnsers, correctAwnserIndex, presentaionAxis, isAnActiveQuestion = false) {
+    constructor(topic, questionType, questionText, textAbove, textBelow, tags, answers, correctAwnserIndex, presentaionAxis, isAnActiveQuestion = false) {
         this.topic = topic;
         this.questionType = questionType;
         this.questionText = questionText;
@@ -9,7 +9,7 @@ class Question {
             .split(',')
             .map(tag => tag.trim())
             .filter(tag => (!!tag) && tag);
-        this.awnsers = awnsers;
+        this.answers = answers;
         this.correctAnswerIds = correctAwnserIndex;
         this.presentaionAxisIds = presentaionAxis;
         this.isAnActiveQuestion = isAnActiveQuestion;
