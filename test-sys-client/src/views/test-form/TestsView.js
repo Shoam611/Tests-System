@@ -13,13 +13,13 @@ import { addTest } from "Store/actions/test";
 
 const TestsView = () => {
     //states
-    const [testData, setTestData] = useState('');
+    const [testData] = useState('');
     const [testType, setTestType] = useState(0);
     const [lang, setLang] = useState(0);
     const [toShowMistakes, setToShowMistakes] = useState(false);
-    const [questions, setQuestions] = useState([]);
+    const [questions] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
-    const [selectedCounter, setSelectedCounter] = useState(0);
+    const [setSelectedCounter] = useState(0);
 
     const dispatch = useDispatch();
 
