@@ -5,7 +5,7 @@ import QuestionComponent from '../components/QuestionComponent';
 import './manageQuestionsView.css'
 const ManageQuestionView = (props) => {
     const topic = useSelector(state => state.topic.topic);
-    const [questionType] = useState([{ id: 1, name: 'Single choice' }, { id: 1, name: 'Multi choice' }]);
+    const [questionType] = useState([{ id: 1, name: 'Single Choice' }, { id: 1, name: 'Multi Choice' }]);
     const questions = useSelector(state => state.questions.questions)
 
     const handleShowPrev = () => { console.log(questions); }
@@ -14,7 +14,7 @@ const ManageQuestionView = (props) => {
         <QuestionComponent {...q} />
     }
     const renderQuestions = () => {
-        return (questions.length === 0 ? <h2>No Questions available for the selected topic : {topic.name}</h2> :
+        return (questions.length === 0 ? <h2>No Questions Available For The Selected Topic: {topic.name}.</h2> :
             questions.map((q) => {
                 return (
                     <Box key={q._id} onClick={showQuestionHandler.bind(this,q)}>
@@ -34,8 +34,8 @@ const ManageQuestionView = (props) => {
         <div className='mange-question-view'>
             <h1>Questions for: <span>{topic.name}</span></h1>
             <Line>
-                <div style={{ width: '250px' ,margin:'var(--gap-m) 0',padding:0}}>
-                    <Input placeholder="search by tags" />
+                <div style={{ width: '250px', margin: 'var(--gap-m) 0', padding: 0 }}>
+                    <Input placeholder="Search by tags..." />
                 </div>
             </Line>
             <div className='question-wrapper'>
@@ -55,16 +55,16 @@ const ManageQuestionView = (props) => {
                         <Box >
                             <Line>
                                 <Btn i="chevron-left" onClick={handleShowPrev} />
-                                <h4>go forward / backwords</h4>
+                                <h4>Forwards / Backwords</h4>
                                 <Btn i="chevron-right" onClick={handleShownext} />
                             </Line>
                         </Box>
                     </Line>
                 </Line>
             </div>
-        <div>
+            <div>
 
-        </div>
+            </div>
         </div>
     )
 }
