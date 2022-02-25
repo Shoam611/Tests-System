@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Dialog } from "@reach/dialog";
+// import { Dialog } from "@reach/dialog";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Btn from "./Btn";
