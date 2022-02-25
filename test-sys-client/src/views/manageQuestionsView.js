@@ -1,6 +1,6 @@
 import Question from '../components/Question';
 import { useSelector } from 'react-redux';
-import { Box, Btn, Icon, Input, Line } from 'UIKit';
+import { Box, Btn, Input, Line } from 'UIKit';
 import './manageQuestionsView.css'
 import { useEffect, useState } from 'react';
 const ManageQuestionView = (props) => {
@@ -9,7 +9,7 @@ const ManageQuestionView = (props) => {
     const handleShowPrev = () => { }
     const handleShownext = () => { }
     const [viewedQuestions, setViewedQuestions] = useState([]);
-    useEffect(() => { setViewedQuestions(questions.slice(0,5)); }, []);
+    useEffect(() => { setViewedQuestions(questions.slice(0,5)); }, [questions]);
     const renderQuestions = () => {
         return (viewedQuestions.length === 0 ? <h2>No Questions Available For The Selected Topic: {topic.name}.</h2> :
             viewedQuestions.map((q) => <Question key={q._id} {...q} />))

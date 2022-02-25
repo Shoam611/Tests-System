@@ -33,6 +33,7 @@ const CreateQuestionForm = () => {
     }
     const handleRemoveAwnser = useCallback((id) => {
         if (answers.length > 2) {
+            console.log(id);
             const index = answers.indexOf(answers.find(i => i.id === id));
             if (index >= 0) { answers.splice(index, 1); }
             forceUpdate()
@@ -46,7 +47,12 @@ const CreateQuestionForm = () => {
     const onAddingAwnser = useCallback(() => {
         if (answers.length >= 6) return;
         const id = getId();
-        const newAnswer = { id: id, render: <AwnserChoice id={id} onRemove={handleRemoveAwnser} onChange={awnserContentChangedHandler} />, value: '', isSelected: false };
+        const newAnswer = {
+            id: id,
+            render: <AwnserChoice id={id} onRemove={handleRemoveAwnser} onChange={awnserContentChangedHandler} />,
+            value: '',
+            isSelected: false
+        };
         answers.push(newAnswer);
         forceUpdate();
     }, [answers, awnserContentChangedHandler, handleRemoveAwnser, getId])
@@ -140,9 +146,7 @@ const CreateQuestionForm = () => {
                         <Input placeholder="Text below question:"  {...Text_below_question} />
                         <Input placeholder="tags (seperate with , charecter)" {...tags} />
                         <hr />
-                        {questionType && <AnswersSelector onAddingAwnser={onAddingAwnser}
-                            list={answers}
-                            questionType={questionType} />}
+                        {questionType && <AnswersSelector onAddingAwnser={onAddingAwnser} list={answers} questionType={questionType} />}
                         <Input type="submit" value="Submit" />
                         <p className='ErrorMessage'>{errorMessage}</p>
                     </div>

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Rows, Columns } from 'UIKit';
 import Header from 'components/header';

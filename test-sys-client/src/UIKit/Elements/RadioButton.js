@@ -9,11 +9,12 @@ const RadioButton = ({ list }) => {
         forceUpdate();
     }
     const renderListOptions = () => {
-        return list.map(item => <RadioItem  key={item.id} 
+        return list ? list.map(item => <RadioItem  key={item.id} 
                                             id={item.id} 
                                             render={item.render} 
                                             isSelected={item.isSelected} 
-                                            onChange={onSelectionChanged}/>)
+                                            onChange={onSelectionChanged}/>) :null
+                                             
     };
     return (
         <div>
