@@ -4,7 +4,7 @@ import QuestionsView from "../views/QuestionsView";
 import DefaultView from "views/defaultView";
 import TestsView from "../views/test-form/TestsView";
 import ManageQuestionView from "views/manageQuestionsView";
-import ManageTestsView from "views/manageTestsView";
+import ManageTestsView from "views/manage-tests/manageTestsView";
 import EditQuestionView from "views/editQuestionView";
 const AppNavigator = () => {
   return (

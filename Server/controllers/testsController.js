@@ -7,7 +7,7 @@ class TestsController {
         console.log('inController');
         const { newTest, } = body;
         if (!newTest) { console.log("Invalid Test"); return; }
-        this.testsRepository.addAsync(Test);
+        this.testsRepository.addAsync(newTest);
     }
 
     deleteTest = ({ body }) => {

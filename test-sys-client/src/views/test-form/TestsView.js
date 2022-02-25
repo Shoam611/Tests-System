@@ -19,7 +19,7 @@ const TestsView = () => {
     const [toShowMistakes, setToShowMistakes] = useState(false);
     const [questions] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
-    const [setSelectedCounter] = useState(0);
+    const [, setSelectedCounter] = useState(0);
 
     const dispatch = useDispatch();
 

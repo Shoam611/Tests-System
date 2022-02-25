@@ -4,12 +4,13 @@ import { useDispatch } from 'react-redux';
 import { Rows, Columns } from 'UIKit';
 import Header from 'components/header';
 import SideNav from './components/SideNav';
-import { fetchQuestions } from 'Store/actions/question'
+import { fetchQuestions } from 'Store/actions/question';
+import { fetchTests } from 'Store/actions/test';
 import { fetchTopic } from 'Store/actions/topic';
 import './App.css';
 function App() {
   const [isLoading, setIsLoading] = useState();
-  
+
   const dispatch = useDispatch();
   const loadTopic = useCallback(async () => {
     await dispatch(fetchTopic())
@@ -17,6 +18,7 @@ function App() {
 
   const loadData = useCallback(async () => {
     await dispatch(fetchQuestions());
+    await dispatch(fetchTests());
   }, [dispatch]);
 
   useEffect(() => {
@@ -26,7 +28,7 @@ function App() {
         setIsLoading(false)
       });
     })
-  }, [loadData,loadTopic])
+  }, [loadData, loadTopic])
 
   return (
     isLoading ? (<div><h1>Loading data...</h1></div>) :

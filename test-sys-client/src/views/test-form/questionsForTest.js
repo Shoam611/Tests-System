@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import QuestionItem from "./questionItem";
-import { Btn, Checkbox, Line, Input }from "UIKit";
+import { Btn, Checkbox, Line, Input } from "UIKit";
 
 const QuestionsForTest = (props) => {
     //states
@@ -9,15 +9,14 @@ const QuestionsForTest = (props) => {
     const [list, setList] = useState([]);
     const [selectedCounter, setSelectedCounter] = useState(0);
     const questions = useSelector(state => state.questions.questions)
-    useEffect(()=>{setFetchedData(questions);},[questions,setFetchedData])
+    useEffect(() => { setFetchedData(questions); }, [questions, setFetchedData])
     //handlers
-    const {onQuestionSelected} = props;
+    const { onQuestionSelected } = props;
     const questionSelectedHandler = useCallback((item, value) => {
         onQuestionSelected(item, value);
         value ? setSelectedCounter(prevState => { return prevState + 1 }) : setSelectedCounter(prevState => { return prevState - 1 });
-    },[onQuestionSelected])
+    }, [onQuestionSelected])
     const buildDisplayList = useCallback((list) => {
-        console.log(list);
         const temp = list.map((value, index) => ({
             id: value._id,
             render: <Line justify="start"><QuestionItem {...value} index={index} /></Line>,

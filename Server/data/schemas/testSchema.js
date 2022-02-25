@@ -1,33 +1,29 @@
-const { Types, Schema, model } = require('mongoose');
-const {questionSchema} =require('./questionSchema')
-const emailSchema = new Schema({
-    successSubject: String,
-    successBody: String,
-    failureSubject: String,
-    failureBody: String
-});
+const { Schema, model } = require('mongoose');
+const { questionSchema } = require('./questionSchema');
 
 const testSchema = new Schema({
     testType: Number,
     lang: Number,
     managerEmail: String,
-    testName: String,
+    name: String,
     passingGrade: Number,
-    testHeader: String,
-    msgOnSuccess: String,
-    msgOnFailure: String,
-    toShowMistakes: Boolean,
-    emailMessages: [emailSchema],
-    question: [questionSchema]
-});
+    header: String,
+    msgOnSucc: String,
+    msgOnFail: String,
+    showIfWrong: Boolean,
+    emailBodyOnFail: String,
+    emailBodyOnSucc: String,
+    emailSubOnFail: String,
+    emailSubOnSucc: String,
+    questions: [questionSchema],
+}, { timestamps: true });
 
 testSchema.statics.deleteByIdAsync = async function (id) {
-    return this.deleteOne({ _id: id })
+    return this.deleteOne({ _id: id });
 };
 
-const TestModel = model('TestModel', testSchema)
-const EmailModel = model('EmailModel', emailSchema)
+const TestModel = model('TestModel', testSchema);
 
 module.exports = {
-    TestModel,EmailModel
-}
+    TestModel
+};
