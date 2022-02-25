@@ -6,24 +6,23 @@ import { useEffect, useState } from 'react';
 const ManageQuestionView = (props) => {
     const topic = useSelector(state => state.topic.topic);
     const questions = useSelector(state => state.questions.questions)
-    const handleShowPrev = () => { console.log(questions); }
+    const handleShowPrev = () => { }
     const handleShownext = () => { }
     const [viewedQuestions, setViewedQuestions] = useState([]);
-    useEffect(() => { setViewedQuestions(questions); }, []);
-    // Array.prototype.sortByDate =(arr) => sort((a,b)=>{a.updatedAt > b.updatedAt ? 1 : -1})
+    useEffect(() => { setViewedQuestions(questions.slice(0,5)); }, []);
     const renderQuestions = () => {
         return (viewedQuestions.length === 0 ? <h2>No Questions Available For The Selected Topic: {topic.name}.</h2> :
             viewedQuestions.map((q) => <Question key={q._id} {...q} />))
     }
     const [orderBy,setOrderBy]= useState(1);
     const sortByKey = (key) => {
-        const temp = viewedQuestions.sort((q1, q2) => q1[key] > q2[key] ? orderBy : -orderBy);
+        const temp = questions.sort((q1, q2) => q1[key] > q2[key] ? orderBy : -orderBy).slice(0,5);
         setViewedQuestions(temp);
         setOrderBy(-orderBy)
         console.log('key:', key, 'first value:', temp[0][key]);
     }
     const sortByDateString = (key) => {
-        const temp = viewedQuestions.sort((q1, q2) => new Date(q1[key]) > new Date(q2[key]) ? orderBy : -orderBy);
+        const temp = questions.sort((q1, q2) => new Date(q1[key]) > new Date(q2[key]) ? orderBy : -orderBy).slice(0,5);
         setViewedQuestions(temp);
         setOrderBy(-orderBy);
         console.log('key:', key, 'first value:', temp[0][key]);
@@ -54,11 +53,13 @@ const ManageQuestionView = (props) => {
     return (
         <div className='mange-question-view'>
             <h1>Questions for: <span>{topic.name}</span></h1>
+            
             <Line>
                 <div style={{ width: '250px', margin: 'var(--gap-m) 0', padding: 0 }}>
                     <Input placeholder="Search by tags..." onChange={() => { }} />
                 </div>
             </Line>
+            
             <div className='question-wrapper'>
                 {renderHeader()}
                 <div className='questions-container '>

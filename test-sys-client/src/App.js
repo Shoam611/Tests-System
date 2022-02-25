@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Rows, Columns } from 'UIKit';
 import Header from 'components/header';
@@ -11,7 +11,6 @@ function App() {
   const [isLoading, setIsLoading] = useState();
   
   const dispatch = useDispatch();
-
   const loadTopic = useCallback(async () => {
     await dispatch(fetchTopic())
   }, [dispatch]);

@@ -1,9 +1,10 @@
 import './Btn.css';
-import { Line, Icon, Box } from 'UIKit';
+import { Line, Icon } from 'UIKit';
+import React, { forwardRef }from "react";
 
-const Btn = (props) => {
+const Btn = (props,ref) => {
     return (
-        <div className="Btn" onClick={props.onClick}>
+        <div className="Btn" onClick={props.onClick} ref ={ref}>
             <Line justify="between">
                 {props.children}
                 {props.i ? <Icon i={props.i} color="#fff"/> : null}
@@ -11,4 +12,4 @@ const Btn = (props) => {
         </div>
     )
 }
-export default Btn;
+export default forwardRef(Btn);

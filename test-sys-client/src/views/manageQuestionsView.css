@@ -1,7 +1,7 @@
 .mange-question-view {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: min-content fit-content 1fr var(--gap-m);
+  grid-template-rows: 150px 50px 1fr var(--gap-m);
   flex-flow: column;
   align-items: center;
   padding: 0 10%;
@@ -11,6 +11,7 @@
   background-color: var(--background-light);
 }
 .question-wrapper {
+  align-self: start;
   width: 100%;
   padding: 0 var(--gap-m);
   background-color: var(--background-primary);
