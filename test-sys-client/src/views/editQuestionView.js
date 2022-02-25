@@ -15,6 +15,12 @@ const EditQuestionView = (props) => {
     const newTextAbove = useInput(question.textAbove);
     const newTextBelow = useInput(question.textBelow);
     console.log(question)
+    const newAwnsers = question.answers.map(a=>({
+        id:a.id,
+        render:<p>{a.value}</p>,
+        value:a.value,
+        isSelected:question.correctAnswerIds.indexOf(a.id)>-1
+    }));
     return (
         <div className="edit-question-view">
 
@@ -39,7 +45,7 @@ const EditQuestionView = (props) => {
                 <Input {...newTextBelow} />
                 {/* {question.textBelow} */}
                 <h4>Answers: </h4>
-                <AnswersSelector questionType={question.questionType} list={question.answers} onAddingAwnser={() => { console.log('clicked'); }} />
+                <AnswersSelector questionType={question.questionType} list={newAwnsers} onAddingAwnser={() => { console.log('clicked'); }} />
                 <Btn onClick={navigate.bind(this, -1)}>Go back</Btn>
                 <Btn >Submit</Btn>
             </div>
