@@ -12,14 +12,14 @@ const MainNavigator = () => {
 
     <div id='MainNavigatiorContainer'>
       {
-        state?.bg && (
+        state?.backgroundLocation && (
           <Routes location={location}>
             <Route path='/qmodal/:id' element={<Modal />} />
           </Routes>
         )
       }
-      {console.log('bg: ', state?.bg, 'current: ', location)}
-      <Routes location={state?.bg ? state.bg : location}>
+      {console.log('bg: ', state?.backgroundLocation, 'current: ', location)}
+      <Routes location={state?.backgroundLocation ? state.backgroundLocation : location}>
         <Route path="/" element={<AdminView />} />
         <Route path="/app/*" element={<AppNavigator />} />
         <Route path="/test/*" element={<TestNavigator />} />
