@@ -16,12 +16,12 @@ const Modal = () => {
     }
     if(!question) return null;
     return(
-        // <Dialog onDismiss={onDismiss} initialFocusRef={closeBtnRef} aria-labelledby="label">
-            <div  className="dialog-div" >
+         <Dialog onDismiss={onDismiss} initialFocusRef={closeBtnRef} aria-labelledby="label">
+            {/* <div  className="dialog-div" > */}
             <h2>{question.questionText}</h2>
             <Btn onClick={onDismiss} ref={closeBtnRef} i="times"/>
-            </div>
-        /* </Dialog> */
+            {/* </div> */}
+         </Dialog> 
     )
 
 }
