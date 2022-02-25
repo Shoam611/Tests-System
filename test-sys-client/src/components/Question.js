@@ -37,7 +37,7 @@ const Question = (props) => {
                 {/* </Link> */}
                 <h4> {new Date(props.updatedAt).toDateString()}</h4>
                 <h4> {questionTypes.find(type => type.id === props.questionType).value}</h4>
-                <Btn i=''>Edit</Btn>
+                <Btn i='' onClick={()=>{navigate(`editQuestion/${props._id}`)}}>Edit</Btn>
             </div>
         </Box>
     )

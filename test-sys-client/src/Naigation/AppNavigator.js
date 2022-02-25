@@ -5,6 +5,7 @@ import DefaultView from "views/defaultView";
 import TestsView from "../views/test-form/TestsView";
 import ManageQuestionView from "views/manageQuestionsView";
 import ManageTestsView from "views/manageTestsView";
+import EditQuestionView from "views/editQuestionView";
 const AppNavigator = () => {
   return (
     <div id="AppNavigatorContainer">
@@ -12,6 +13,7 @@ const AppNavigator = () => {
         <Route path="/" element={<App />}>
           <Route path="questions/questions" element={<QuestionsView />} />
           <Route path="questions/edit" element={<ManageQuestionView />} />
+          <Route path="questions/edit/editQuestion/:id" element={<EditQuestionView />} />
 
           <Route path="qweezes/create/*" element={<TestsView />} />
           <Route path="qweezes/edit" element={<ManageTestsView />} />
