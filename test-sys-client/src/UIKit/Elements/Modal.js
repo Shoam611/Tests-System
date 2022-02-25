@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Btn from "./Btn";
 import './Modal.css';      
-import "@reach/dialog/styles.css";
+// import "@reach/dialog/styles.css";
 
 const Modal = () => {
     const navigate = useNavigate();
@@ -16,12 +16,13 @@ const Modal = () => {
     }
     if(!question) return null;
     return(
-         <Dialog onDismiss={onDismiss} initialFocusRef={closeBtnRef} aria-labelledby="label">
-            {/* <div  className="dialog-div" > */}
-            <h2>{question.questionText}</h2>
-            <Btn onClick={onDismiss} ref={closeBtnRef} i="times"/>
-            {/* </div> */}
-         </Dialog> 
+        //  <Dialog onDismiss={onDismiss} initialFocusRef={closeBtnRef} aria-labelledby="label">
+        //     {/* <div  className="dialog-div" > */}
+        //     <h2>{question.questionText}</h2>
+        //     <Btn onClick={onDismiss} ref={closeBtnRef} i="times"/>
+        //     {/* </div> */}
+        //  </Dialog> 
+        <div></div>
     )
 
 }
