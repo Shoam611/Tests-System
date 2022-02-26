@@ -95,10 +95,10 @@ const CreateQuestionForm = () => {
         setErrorMessage('');
         return true;
     }
-
     const getIndexes = (answers) => {
         return answers.map(({ isSelected }, index) => ({ isCorrect: isSelected, index })).filter(({ isCorrect }) => isCorrect).map(({ index }) => index);
     }
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         if (formValidation()) {

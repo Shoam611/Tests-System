@@ -35,8 +35,10 @@ class QuestionsController {
     }
   };
 
-  updateQuestion = ({ body }) => {
-    throw new Error('not implimented');
+  updateQuestion = async ({ body }) => {
+    const {newQuestion,id} = body;
+    console.log(id,newQuestion);
+    await this.questionRepository.updateOneAsync(id,newQuestion)
   }
 
 }
