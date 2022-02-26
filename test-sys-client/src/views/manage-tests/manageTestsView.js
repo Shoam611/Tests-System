@@ -9,10 +9,7 @@ const ManageQuestionView = props => {
     const [viewedTests, setViewedTests] = useState([]);
     const tests = useSelector(state => state.tests.tests);
 
-    const handleShowPrev = () => { console.log(tests); }
-    const handleShownext = () => { }
-
-    useEffect(() => { setViewedTests(tests.slice(0, 10)); }, [setViewedTests, tests]);
+    useEffect(() => { setViewedTests(tests); }, [setViewedTests, tests]);
 
     const filterListHandler = (e) => {
         let keyWords = e.target.value.toUpperCase();
@@ -52,19 +49,6 @@ const ManageQuestionView = props => {
         return (viewedTests.length === 0 ? <h2>No Tests Available For The Selected Topic: {topic.name}</h2> :
             viewedTests.map((t) => <Test key={t._id} {...t} />));
     }
-    const renderSelector = () => (
-        <Line justify="around">
-            <Line>
-                <Box >
-                    <Line>
-                        <Btn i="chevron-left" onClick={handleShowPrev} />
-                        <h4>Backwords / Forwards</h4>
-                        <Btn i="chevron-right" onClick={handleShownext} />
-                    </Line>
-                </Box>
-            </Line>
-        </Line>
-    )
 
     return (
         <div className="mange-question-view">
@@ -81,7 +65,6 @@ const ManageQuestionView = props => {
                 <div className="questions-container">
                     {renderTests()}
                 </div>
-                {renderSelector()}
             </div>
         </div>
     );
