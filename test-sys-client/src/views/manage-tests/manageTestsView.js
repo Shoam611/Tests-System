@@ -14,7 +14,7 @@ const ManageQuestionView = props => {
     const filterListHandler = (e) => {
         let keyWords = e.target.value.toUpperCase();
         setViewedTests(tests.filter(test => test.name.toUpperCase().includes(keyWords)));
-        if (keyWords.trim().length === 0) setViewedTests(useSelector);
+        if (keyWords.trim().length === 0) setViewedTests(tests);
     }
     const [orderBy, setOrderBy] = useState(1);
 

@@ -26,10 +26,7 @@ const EditQuestionView = (props) => {
     const newTextAbove = useInput(question?.textAbove);
     const newTextBelow = useInput(question?.textBelow);
     const tags = useInput(question?.tags.join(' , '))
-    const awnserContentChangedHandler = useCallback((value, id) => {
-        newAnswers.find(i => i.id === id).value = value;
-        console.log(newAnswers);
-    }, [newAnswers]);
+    const awnserContentChangedHandler = useCallback((value, id) => {newAnswers.find(i => i.id === id).value = value;}, [newAnswers]);
 
     const handleRemoveAnswer = useCallback((id) => {
         if (newAnswers && newAnswers.length > 2) {
@@ -77,7 +74,7 @@ const EditQuestionView = (props) => {
     
     //side effects
     useEffect(() => { !question && navigate(-1) }, [question, navigate])
-    useEffect(() => {console.log('answers did mount'); setInitialAnswers() }, []);
+    useEffect(() => { setInitialAnswers() }, []);
 
 
 
