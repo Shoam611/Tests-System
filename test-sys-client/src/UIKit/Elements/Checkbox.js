@@ -21,7 +21,7 @@ const Checkbox = ({ list }) => {
     }
 
     return (
-        <div >
+        <div style={{width:'100%'}}>
             <ul>
                 {renderListOptions()}
             </ul>
@@ -43,7 +43,7 @@ const CheckboxItem = ({ onChange, render, id, selected }) => {
                 <div className="iconContainer" onClick={() => { onSelectionHandler() }}>
                     <i className={isSelected ? "fas fa-check-square " : "far fa-check-square"} />
                 </div>
-                <div>{toRender}</div>
+                <div style={{width:'100%'}} >{toRender}</div>
             </Line>
         </li>
     )

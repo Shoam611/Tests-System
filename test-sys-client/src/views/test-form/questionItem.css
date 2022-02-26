@@ -37,10 +37,11 @@ button.expense-date:hover {
 .expense-item__description {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+
   gap: 1rem;
   align-items: flex-end;
   flex-flow: column-reverse;
-  justify-content: flex-start;
   flex: 1;
   font-size: 1rem;
 }
