@@ -1,4 +1,4 @@
-import Enumerable from 'node-enumerable';
+// import Enumerable from 'node-enumerable';
 import { ADD, FETCH, DELETE, UPDATE } from "Store/actions/test";
 const initialState = {
     tests: []
@@ -15,7 +15,7 @@ const reducer = (state = initialState, action) => {
 
         case FETCH:
             if (action.newTest) {
-                // const tests =Enumerable.create(...tests,action.data).distinctBy(t=>t._id);
+
                 return { ...state, tests: action.newTest }
             }
             return state;
