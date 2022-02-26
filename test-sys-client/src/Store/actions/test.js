@@ -21,7 +21,7 @@ export const updateTest = (newTest, id) => {
         const response = await runPutRequest('http://localhost:4200/tests', { newTest: newTest, id: id });
         const _id = await response;
         console.log("updated ", _id);
-        dispatch({ type: UPDATE, newTest: { _id, ...newTest }, id: id })
+        dispatch({ type: UPDATE, newTest: { _id, ...newTest }, id: id });
     }
 }
 

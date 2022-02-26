@@ -10,7 +10,7 @@
   
   .modal {
     position: fixed;
-    top: 30vh;
+    top: 1vh;
     left: 10%;
     width: 80%;
     z-index: 100;
@@ -28,8 +28,13 @@
   }
   
   .content {
+    overflow-y: auto;
     padding: 1rem;
     background-color: white;
+    height: 80vh;
+    width: 100%;
+    margin: 0;
+    overflow-y: auto;
   }
   
   .actions {
@@ -38,8 +43,8 @@
     justify-content: flex-end;
     background-color: white;
   }
-
-  .correct_indexer{
+  
+  .correct_indexer {
     color: rgb(87, 214, 98);
   }
   
@@ -49,4 +54,3 @@
       width: 40rem;
     }
   }
-  

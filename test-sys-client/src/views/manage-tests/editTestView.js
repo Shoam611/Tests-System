@@ -3,7 +3,7 @@ import { Btn, Dropdown, Input } from "UIKit";
 import { testTypes, languages } from "models/presentationAxis";
 import '../editQuestionView.css'
 import useInput from "hooks/useInput";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Test from "models/TestModel";
 import { updateTest } from "Store/actions/test";
 import ShowQuestionsModal from "components/ShowQuestionsModal";
@@ -109,13 +109,27 @@ const EditTestView = props => {
             if (question._id === value)
                 return true;
         }
+        for (let question of newQuestions) {
+            if (question._id === value)
+                return true;
+        }
         return false;
     }
     const questionSelectedHandler = (item, value) => {
-        value ? newQuestions.push(item) : newQuestions.pop(item);
-        console.log(newQuestions);
+        // value ? newQuestions.push(item) : newQuestions.pop(item);
+        if (!value) {
+            const foundTest = newQuestions.find(test => test._id === item._id);
+            const indexOfTest = newQuestions.indexOf(foundTest);
+            const temp = newQuestions.splice(indexOfTest, 1);
+            setQuestions(temp);
+        }
+        else {
+            setQuestions(item);
+        }
+        console.log('newQuestions State >', newQuestions);
     }
-    const renderQuestions = () => {
+    const renderQuestions = useCallback(() => {
+        console.log('in render');
         const temp = questions.map((value, index) => ({
             id: value._id,
             render: <QuestionShortened {...value} index={index} />,
@@ -124,11 +138,11 @@ const EditTestView = props => {
             onChange: questionSelectedHandler,
         }))
         setList(temp);
-    }
+    }, [])
     const onFullShowHandler = () => {
         setShowModal(!showModal);
     }
-    useEffect(() => { renderQuestions(); }, []);
+    useEffect(() => { console.log('in useEffect'); renderQuestions(); }, [newQuestions, setQuestions, renderQuestions]);
 
     return (
         <div className="edit-question-view">
