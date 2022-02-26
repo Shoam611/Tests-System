@@ -3,17 +3,19 @@ import { Btn, Dropdown, Input } from "UIKit";
 import { testTypes, languages } from "models/presentationAxis";
 import '../editQuestionView.css'
 import useInput from "hooks/useInput";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Test from "models/TestModel";
 import { updateTest } from "Store/actions/test";
-const { useNavigate, useParams } = require("react-router-dom");
-
+import ShowQuestionsModal from "components/ShowQuestionsModal";
+import QuestionShortened from "./QuestionShortened";
+const { useNavigate, useParams, } = require("react-router-dom");
 const EditTestView = props => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { id } = useParams();
     const topic = useSelector(state => state.topic.topic);
     const test = useSelector(state => state.tests.tests).find(t => t._id === id);
+    const questions = useSelector(state => state.questions.questions);
     const [newShowIfWrong, setNewShowIfWrong] = useState(test?.showIfWrong);
     const [newTestType, setNewTestType] = useState(test?.testType);
     const [newLanguage, setNewLanguage] = useState(test?.lang);
@@ -28,14 +30,16 @@ const EditTestView = props => {
     const newEmailSubOnFail = useInput(test?.emailSubOnFail);
     const newEmailBodyOnFail = useInput(test?.emailBodyOnFail);
     const [errorMessage, setErrorMessage] = useState("");
-
+    const [newQuestions, setQuestions] = useState(test?.questions);
+    const [showModal, setShowModal] = useState(false);
+    const [list, setList] = useState([]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (formValidation()) {
-            console.log(test);
-            const newTest = new Test(newTestType, newLanguage, newManagerEmail.value, newTestName.value, newPassingGrade.value, newHeader.value, newMsgOnSucc.value, newMsgOnFail.value, newShowIfWrong, newEmailSubOnSucc.value, newEmailBodyOnSucc.value, newEmailSubOnFail.value, newEmailBodyOnFail.value, test.questions);
+            const newTest = new Test(newTestType, newLanguage, newManagerEmail.value, newTestName.value, newPassingGrade.value, newHeader.value, newMsgOnSucc.value, newMsgOnFail.value, newShowIfWrong, newEmailSubOnSucc.value, newEmailBodyOnSucc.value, newEmailSubOnFail.value, newEmailBodyOnFail.value, newQuestions);
             dispatch(updateTest(newTest, id));
+            navigate(-1);
         }
     }
     //RegEx validation
@@ -98,7 +102,32 @@ const EditTestView = props => {
         setErrorMessage('');
         return true;
     }
+    //methods
     const checkedHandler = () => setNewShowIfWrong(!newShowIfWrong);
+    const isExists = (value) => {
+        for (let question of test.questions) {
+            if (question._id === value)
+                return true;
+        }
+        return false;
+    }
+    const questionSelectedHandler = (item, value) => {
+        value ? newQuestions.push(item) : newQuestions.pop(item);
+    }
+    const renderQuestions = () => {
+        const temp = questions.map((value, index) => ({
+            id: value._id,
+            render: <QuestionShortened />,
+            value: value,
+            checked: isExists(value._id),
+            onChange: questionSelectedHandler,
+        }))
+        setList(temp);
+    }
+    const onFullShowHandler = () => {
+        setShowModal(!showModal);
+    }
+    useEffect(() => { renderQuestions(); }, []);
 
     return (
         <div className="edit-question-view">
@@ -149,12 +178,14 @@ const EditTestView = props => {
                 <h4>Email To Manager On Failure - Body: </h4>
                 <textarea {...newEmailBodyOnFail} />
 
+                <h4>Questions</h4>
+                <Btn onClick={onFullShowHandler}>Show Questions</Btn>
+                {showModal ? <ShowQuestionsModal onSelect={questionSelectedHandler} onConfirm={onFullShowHandler} list={list} /> : ''}
                 {errorMessage.trim().length !== 0 && <><h2>Message Error:</h2><p style={{ color: "red" }}>{errorMessage}</p></>}
 
                 <Btn onClick={navigate.bind(this, -1)}>Go back</Btn>
                 <Btn onClick={handleSubmit}>Submit</Btn>
             </div>
-
         </div>
     )
 }

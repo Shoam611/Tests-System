@@ -18,9 +18,9 @@ const testsController = container.resolve('testsController');
 app.post('/tests', async (req, res) => { testsController.addTest(req); res.send(200) });
 app.get('/tests', async (req, res) => { const result = await testsController.getTests(req); res.send(result).status(200) });
 app.delete('/tests', async (req, res) => { testsController.deleteTest(req); res.send(200) });
-app.put('/tests', async (req, res) => { const id = await testsController.updateTest(req); res.send(id.toString()).status(200); console.log('THIS IS THE ID',id); });
+app.put('/tests', async (req, res) => { const id = await testsController.updateTest(req); res.send(id.toString()).status(200); console.log('THIS IS THE ID', id); });
 
 const topicController = container.resolve('topicController');
 app.get('/topic', async (req, res) => { res.send(JSON.stringify(await topicController.getDefaultTopic())); })
 
-module.exports = app
+module.exports = app;

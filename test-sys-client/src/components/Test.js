@@ -17,7 +17,7 @@ const Test = (props) => {
                 <h4>{props.name}</h4>
                 <h4>{props.questions.length} Questions</h4>
                 <h4>{normalizeDate(props.updatedAt)}</h4>
-                <Btn i='' onClick={() => { navigate(`editTest/${props._id}`) }}>Edit</Btn>
+                <Btn i='' onClick={() => { navigate(`editTest/${props._id}`, { replace: false }) }}>Edit</Btn>
             </div>
         </Box>
     )

@@ -12,11 +12,12 @@ const ManageQuestionView = props => {
     const handleShowPrev = () => { console.log(tests); }
     const handleShownext = () => { }
 
-    useEffect(() => { setViewedTests(tests.slice(0, 10)); }, []);
+    useEffect(() => { setViewedTests(tests.slice(0, 10)); }, [setViewedTests, tests]);
+
     const filterListHandler = (e) => {
         let keyWords = e.target.value.toUpperCase();
         setViewedTests(tests.filter(test => test.name.toUpperCase().includes(keyWords)));
-        if (keyWords.trim().length === 0) setViewedTests(tests);
+        if (keyWords.trim().length === 0) setViewedTests(useSelector);
     }
     const [orderBy, setOrderBy] = useState(1);
 
@@ -51,7 +52,6 @@ const ManageQuestionView = props => {
         return (viewedTests.length === 0 ? <h2>No Tests Available For The Selected Topic: {topic.name}</h2> :
             viewedTests.map((t) => <Test key={t._id} {...t} />));
     }
-
     const renderSelector = () => (
         <Line justify="around">
             <Line>

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import QuestionItem from "./questionItem";
-import { Btn, Checkbox, Line, Input } from "UIKit";
+import { Btn, Checkbox, Input } from "UIKit";
 
 const QuestionsForTest = (props) => {
     //states
@@ -11,26 +11,24 @@ const QuestionsForTest = (props) => {
     const questions = useSelector(state => state.questions.questions);
     useEffect(() => { setFetchedData(questions); }, [questions, setFetchedData])
     //handlers
-    const { onQuestionSelected } = props;
-    const questionSelectedHandler = useCallback((item, value) => {
-        onQuestionSelected(item, value);
+    const questionSelectedHandler = (item, value) => {
+        props.onQuestionSelected(item, value);
         value ? setSelectedCounter(prevState => { return prevState + 1 }) : setSelectedCounter(prevState => { return prevState - 1 });
-    }, [onQuestionSelected])
-    const buildDisplayList = useCallback((list) => {
+    }
+    const buildDisplayList = (list) => {
         const temp = list.map((value, index) => ({
             id: value._id,
-            render: <Line justify="start"><QuestionItem {...value} index={index} /></Line>,
+            render: <QuestionItem {...value} index={index} />,
             value: value,
-            checked: false,
+            checked: isExists(value._id),
             onChange: questionSelectedHandler,
         }))
-        console.log(temp);
         setList(temp);
-    }, [questionSelectedHandler]);
+    };
     //Side Effects
     useEffect(() => {
         buildDisplayList(fetchedData);
-    }, [fetchedData, buildDisplayList]);
+    }, [fetchedData]);
 
     const filterList = (e) => {
         let tags = e.target.value.toUpperCase();
@@ -46,7 +44,15 @@ const QuestionsForTest = (props) => {
             buildDisplayList(fetchedData);
         }
     }
-
+    const isExists = (value) => {
+        for (let question of props.questions) {
+            if (question._id === value) {
+                setSelectedCounter(prevState => { return prevState + 1 });
+                return true;
+            }
+        }
+        return false;
+    }
     return (
         <div className='AddTForm'>
             <h1>Choose Questions</h1>
@@ -58,7 +64,6 @@ const QuestionsForTest = (props) => {
                 <Checkbox list={list} />
                 <Btn i="chevron-left" onClick={() => props.prev()}>Back</Btn>
             </div>
-
         </div>
     );
 }

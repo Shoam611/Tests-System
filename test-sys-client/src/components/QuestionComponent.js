@@ -49,7 +49,7 @@ const QuestionModal = (props) => {
     <>
       {ReactDOM.createPortal(
         <QuestionComponentBackdrop onConfirm={props.onConfirm} />,
-        document.getElementById("backdrop-root")
+        document.getElementById("backdrop-root-modal")
       )}
       {ReactDOM.createPortal(
         <QuestionComponentOverlay
@@ -58,7 +58,7 @@ const QuestionModal = (props) => {
           message={props.message}
           onConfirm={props.onConfirm}
         />,
-        document.getElementById("overlay-root")
+        document.getElementById("overlay-root-modal")
       )}
     </>
   );
