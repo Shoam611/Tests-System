@@ -9,11 +9,13 @@ import { Provider } from 'react-redux';
 import Navigator from './Naigation/MainNavigator'
 import questionReducer from 'Store/reducers/question';
 import topicReducer from 'Store/reducers/topic';
+import testReducer from 'Store/reducers/test';
 import './index.css';
 
 const rootReducer = combineReducers({
   questions: questionReducer,
-  topic:topicReducer,
+  topic: topicReducer,
+  tests: testReducer
 });
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 ReactDOM.render(

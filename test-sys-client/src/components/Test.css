@@ -1,0 +1,15 @@
+.tests-container-item {
+    display: grid;
+    grid-template-columns: 80px 1fr 180px 9em 80px;
+    grid-template-rows: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.tests-container-item h4 {
+    word-wrap: normal;
+    align-self: center;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}

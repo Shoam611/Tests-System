@@ -1,14 +1,20 @@
-.edit-question-view{
-    background-color:var(--light-color);
+.edit-question-view {
+    background-color: var(--light-color);
+    height: 95vh;
+    width: 100%;
+    margin: 0;
+    overflow-y: auto;
 }
-.edit-question-form-container{
+
+.edit-question-form-container {
     height: min-content;
-    display:grid;
+    display: grid;
     grid-row-gap: var(--gap-l);
     grid-column-gap: var(--gap-m);
-    grid-template-columns: max-content  1fr;
+    grid-template-columns: max-content 1fr;
 }
-.edit-question-form-container h4{
-    margin:0;
-    padding :0;
+
+.edit-question-form-container h4 {
+    margin: 0;
+    padding: 0;
 }

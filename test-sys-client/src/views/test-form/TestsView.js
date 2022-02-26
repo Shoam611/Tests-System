@@ -19,12 +19,10 @@ const TestsView = () => {
     const [toShowMistakes, setToShowMistakes] = useState(false);
     const [questions] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
-    const [setSelectedCounter] = useState(0);
+    const [, setSelectedCounter] = useState(0);
 
     const dispatch = useDispatch();
-
     let navigate = useNavigate();
-
     const fields = {
         Manager_email: useInput(),
         Test_name: useInput(),
@@ -41,30 +39,16 @@ const TestsView = () => {
         toShowMistakes,
         topic: 'def-topic',
     }
-
     //handlers
-    const handleNextStep = () => {
-        console.log('next');
-        navigate("/app/qweezes/create/selectQuestions");
-    }
-    const handlePrevStep = () => {
-        console.log('prev');
-        navigate("/app/qweezes/create/form");
-    }
-    const testTypeChangedHandler = (e) => {
-        setTestType(e);
-    }
-    const langChangedHandler = (e) => {
-        setLang(e);
-    }
-    const toShowChangedHandler = (e) => {
-        setToShowMistakes(!e);
-    }
-    const onSelectionChange = (item, value) => {
+    const handleNextStep = () => navigate("/app/qweezes/create/selectQuestions");
+    const handlePrevStep = () => navigate("/app/qweezes/create/form");
+    const testTypeChangedHandler = (e) => setTestType(e);
+    const langChangedHandler = (e) => setLang(e);
+    const toShowChangedHandler = (e) => setToShowMistakes(!e);
+    const onSelectionChange = (item, value) => { 
         value ? questions.push(item) : questions.pop(item);
         value ? setSelectedCounter(prevState => { return prevState + 1 }) : setSelectedCounter(prevState => { return prevState - 1 });
     };
-
     const handleSubmit = (e) => {
         e.preventDefault();
         if (formValidation()) {

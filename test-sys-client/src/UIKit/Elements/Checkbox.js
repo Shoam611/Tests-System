@@ -32,17 +32,16 @@ const Checkbox = ({ list }) => {
 const CheckboxItem = ({ onChange, render, id, selected }) => {
     const [checked, setChecked] = useState(selected);
     const [toRender, setRender] = useState(render);
-
     const onSelectionHandler = () => {
         setChecked(!checked);
         onChange(id, !checked);
         setRender({ ...render, props: { ...render.props, className: !checked ? 'active' : '' } });
     }
     return (
-        <li key={id} style={{ marginTop: "10px" }}>
+        <li key={id} className={checked ? "active" : ""} style={{ marginTop: "10px" }}>
             <Line>
                 <div className="iconContainer" onClick={() => { onSelectionHandler() }}>
-                    <i className={checked ? "fas fa-check-square" : "far fa-check-square"} />
+                    <i className={checked ? "fas fa-check-square " : "far fa-check-square"} />
                 </div>
                 <div>{toRender}</div>
             </Line>
