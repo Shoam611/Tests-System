@@ -1,28 +1,27 @@
 import Question from '../components/Question';
 import { useSelector } from 'react-redux';
-import { Box, Btn, Input, Line } from 'UIKit';
+import { Box, Input, Line } from 'UIKit';
 import './manageQuestionsView.css'
 import { useEffect, useState } from 'react';
 const ManageQuestionView = (props) => {
     const topic = useSelector(state => state.topic.topic);
     const questions = useSelector(state => state.questions.questions)
-    const handleShowPrev = () => { }
-    const handleShownext = () => { }
+  
     const [viewedQuestions, setViewedQuestions] = useState([]);
-    useEffect(() => { setViewedQuestions(questions.slice(0,5)); }, [questions]);
+    useEffect(() => { setViewedQuestions(questions); }, [questions]);
     const renderQuestions = () => {
         return (viewedQuestions.length === 0 ? <h2>No Questions Available For The Selected Topic: {topic.name}.</h2> :
             viewedQuestions.map((q) => <Question key={q._id} {...q} />))
     }
     const [orderBy,setOrderBy]= useState(1);
     const sortByKey = (key) => {
-        const temp = questions.sort((q1, q2) => q1[key] > q2[key] ? orderBy : -orderBy).slice(0,5);
+        const temp = questions.sort((q1, q2) => q1[key] > q2[key] ? orderBy : -orderBy);//.slice(0,5);
         setViewedQuestions(temp);
         setOrderBy(-orderBy)
         console.log('key:', key, 'first value:', temp[0][key]);
     }
     const sortByDateString = (key) => {
-        const temp = questions.sort((q1, q2) => new Date(q1[key]) > new Date(q2[key]) ? orderBy : -orderBy).slice(0,5);
+        const temp = questions.sort((q1, q2) => new Date(q1[key]) > new Date(q2[key]) ? orderBy : -orderBy)//.slice(0,5);
         setViewedQuestions(temp);
         setOrderBy(-orderBy);
         console.log('key:', key, 'first value:', temp[0][key]);
@@ -36,19 +35,7 @@ const ManageQuestionView = (props) => {
             <div />
         </div>
     )
-    const renderSelector = () => (
-        <Line justify="around">
-            <Line>
-                <Box >
-                    <Line>
-                        <Btn i="chevron-left" onClick={handleShowPrev} />
-                        <h4>Backwords / Forwards</h4>
-                        <Btn i="chevron-right" onClick={handleShownext} />
-                    </Line>
-                </Box>
-            </Line>
-        </Line>
-    )
+    
 
     return (
         <div className='mange-question-view'>
@@ -65,7 +52,10 @@ const ManageQuestionView = (props) => {
                 <div className='questions-container '>
                     {renderQuestions()}
                 </div>
-                {renderSelector()}
+             <div>
+
+             </div>
+                {/* {renderSelector()} */}
 
             </div>
             <div>

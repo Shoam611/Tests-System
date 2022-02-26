@@ -27,10 +27,12 @@ const EditQuestionView = (props) => {
     const newTextBelow = useInput(question?.textBelow);
     const tags = useInput(question?.tags.join(' , '))
     const awnserContentChangedHandler = useCallback((value, id) => {
+        console.log('triggered',value,id);
         const temp = newAnswers;
         temp.find(i => i.id === id).value = value;
         setNewAwnsers(temp);
-    }, [newAnswers, setNewAwnsers]);
+        console.log(temp);
+    }, [newAnswers]);
 
     const handleRemoveAnswer = useCallback((id) => {
         if (newAnswers && newAnswers.length > 2) {
@@ -47,32 +49,34 @@ const EditQuestionView = (props) => {
         const newAnswer = {
             id: id,
             render: <AnswerChoice value={answer?.value ? answer.value : ''} id={id} onRemove={handleRemoveAnswer} onChange={awnserContentChangedHandler} />,
-            value: answer?.value ? answer.value : '',
+            value: answer?.value ? `${answer.value}` : '',
             isSelected: question.correctAnswerIds.indexOf(answer.id) > -1
         };
         newAnswers.push(newAnswer);
         forceUpdate();
     }, [newAnswers, handleRemoveAnswer, awnserContentChangedHandler, getId,question?.correctAnswerIds])
+
     const getIndexes = (answers) => {
         return answers.map(({ isSelected }, index) => ({ isCorrect: isSelected, index })).filter(({ isCorrect }) => isCorrect).map(({ index }) => index);
     }
+
     const setInitialAnswers = () => {
         question?.answers.forEach(element => {
             addingAnswerHandler(element);
         });
     }
     const onSubmitHandler = () => {
-        if (true) {//futere to be validate
+        if (true) { //futere to be validate
             const selectedAxis = axis.find(item =>item.isSelected===true).id
             const newQuestion = new Question(topic.name,question.questionType,newQuestionText.value,newTextAbove.value,newTextBelow.value,tags.value,newAnswers.map(({ value }, index) => ({ value, id: index })),  getIndexes(newAnswers) , selectedAxis);
             dispatch(updateQuestion(newQuestion,question._id));
             navigate(-1);
         }
     }
-
+    
     //side effects
     useEffect(() => { !question && navigate(-1) }, [question, navigate])
-    useEffect(() => { setInitialAnswers() }, []);
+    useEffect(() => {console.log('answers did mount'); setInitialAnswers() }, []);
 
 
 

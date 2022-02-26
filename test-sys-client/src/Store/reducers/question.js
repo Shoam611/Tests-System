@@ -23,7 +23,7 @@ const reducer = (state = initialState, action) => {
         case UPDATE:
             const newQuestions = state.questions;
             newQuestions.filter(q => q._id !== action.id);
-            newQuestions.push({ ...action.newQuestion, _id:action.id });
+            newQuestions.push({ ...action.newQuestion, _id:action.id ,updatedAt:new Date().toISOString()});
             return { ...state, questions: newQuestions }
         default: return state;
     }
