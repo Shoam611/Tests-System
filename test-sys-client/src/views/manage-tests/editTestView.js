@@ -6,7 +6,7 @@ import useInput from "hooks/useInput";
 import { useCallback, useEffect, useState } from "react";
 import Test from "models/TestModel";
 import { updateTest } from "Store/actions/test";
-import ShowQuestionsModal from "components/ShowQuestionsModal";
+import ShowQuestionsModal from "../../components/ShowQuestionsModal";
 import QuestionShortened from "views/manage-tests/QuestionShortened";
 const { useNavigate, useParams, } = require("react-router-dom");
 const EditTestView = props => {
@@ -131,7 +131,7 @@ const EditTestView = props => {
             id: value._id,
             render: <QuestionShortened {...value} index={index} />,
             value: value,
-            checked:  true,//newQuestions.map(q=>q._id).indexOf(value._id) > -1,// isExists(value._id),
+            isSelected: newQuestions.map(q=>q._id).indexOf(value._id) > -1,// isExists(value._id),
             onChange: questionSelectedHandler,
         }))
         setList(temp);
