@@ -29,10 +29,12 @@ class MongoRepository {
         return query;
     }
     //Update
-    async UpdateOne(id, newQuestion) {
-    }
-    async deleteManyAsync(filter) {
-
-    }
+    async updateOneAsync (id, newQuestion) {
+        console.log('in update on async',id,newQuestion);
+        const oldDoc =await QuestionModel.updateOne({_id:id},newQuestion);
+        console.log('post update action',oldDoc);
+        }
+    
+    async deleteManyAsync(filter) { }
 }
 module.exports = MongoRepository

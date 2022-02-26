@@ -4,10 +4,10 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import AppNavigator from './AppNavigator';
 import TestNavigator from './TestNavigator';
 import AdminView from './AdminView'
-import Modal from 'UIKit/Elements/Modal';
+// import Modal from 'UIKit/Elements/Modal';
 const MainNavigator = () => {
-  let location = useLocation();
-  let state = location.state;
+  // let location = useLocation();
+  // let state = location.state;
   return (
 
     <div id='MainNavigatiorContainer'>

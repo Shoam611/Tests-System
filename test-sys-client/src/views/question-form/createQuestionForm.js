@@ -3,29 +3,29 @@ import { Btn, Dropdown, Input, Line, RadioButton, } from 'UIKit';
 import { useEffect, useState, useReducer, useCallback } from 'react';
 import Question from 'models/QuestionModel';
 import AnswersSelector from './answerSelector';
-import AwnserChoice from './answerChoice';
+import AnswerChoice from './answerChoice';
 import './createQuestionForm.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { addQuestion } from 'Store/actions/question';
 import { presentationAxis } from 'models/presentationAxis';
 const CreateQuestionForm = () => {
+    //hooks
+    const dispatch = useDispatch();
+    const [_, forceUpdate] = useReducer(x => x + 1, 0);
     //states
     const [questionTypes, setQuestionTypes] = useState(null);   //list of q types available
-    const [topic, setTopic] = useState('');
     const [questionType, setQuestionType] = useState(null);     //selected q type
     const [answers, setAnswers] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
+    //inputs
+    const Question_text = useInput();
+    const Text_above_question = useInput();
+    const Text_below_question = useInput();
+    const tags = useInput();
     //helpers
-    const [_, forceUpdate] = useReducer(x => x + 1, 0);
     const axis = presentationAxis.map(item => ({ ...item, isSelected: false, render: item.value }));
     axis[0].isSelected = true
-    const getId = useCallback(() => {
-        if (answers.length > 0) {
-            return answers.at(-1).id + 1;
-        }
-        else return 1;
-    }, [answers])
-    const dispatch = useDispatch();
+    const getId = useCallback(() => answers.length > 0 ? answers.at(-1).id + 1 : 1, [answers])
     //handlers
     const handleQuestionTypeChanged = (qType) => {
         answers.forEach(item => { item.isSelected = false; item.value = '' })
@@ -46,7 +46,12 @@ const CreateQuestionForm = () => {
     const onAddingAwnser = useCallback(() => {
         if (answers.length >= 6) return;
         const id = getId();
-        const newAnswer = { id: id, render: <AwnserChoice id={id} onRemove={handleRemoveAwnser} onChange={awnserContentChangedHandler} />, value: '', isSelected: false };
+        const newAnswer = {
+            id: id,
+            render: <AnswerChoice id={id} onRemove={handleRemoveAwnser} onChange={awnserContentChangedHandler} />,
+            value: '',
+            isSelected: false
+        };
         answers.push(newAnswer);
         forceUpdate();
     }, [answers, awnserContentChangedHandler, handleRemoveAwnser, getId])
@@ -90,10 +95,10 @@ const CreateQuestionForm = () => {
         setErrorMessage('');
         return true;
     }
-
     const getIndexes = (answers) => {
         return answers.map(({ isSelected }, index) => ({ isCorrect: isSelected, index })).filter(({ isCorrect }) => isCorrect).map(({ index }) => index);
     }
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         if (formValidation()) {
@@ -105,22 +110,16 @@ const CreateQuestionForm = () => {
     }
 
     const questions = useSelector(state => state.questions.questions)
+    const topic = useSelector(state => state.topic.topic)
     const printToConsole = () => {
         console.log(questions);
     }
-
-
     //side-effects
     useEffect(() => {
         onAddingAwnser(); onAddingAwnser();
         setQuestionTypes([{ id: 1, value: 'Single choice' }, { id: 2, value: 'Multi Choice' }]);
-        setTopic('def-topic');
     }, [onAddingAwnser]);
-    //inputs
-    const Question_text = useInput();
-    const Text_above_question = useInput();
-    const Text_below_question = useInput();
-    const tags = useInput();
+
     //renderers
     return (
         <div className='AddQForm'>
@@ -129,7 +128,7 @@ const CreateQuestionForm = () => {
             <div style={{ height: 'min-content' }}>
                 <form onSubmit={handleSubmit} >
                     <div className='form-container' >
-                        <label > topic : {topic}</label>
+                        <label > topic : {topic.name}</label>
                         <Dropdown list={questionTypes} selected={questionType} onChange={handleQuestionTypeChanged} />
                         <Input placeholder="Question text:"        {...Question_text} />
                         <Input placeholder="Text above question:"  {...Text_above_question} />
@@ -140,9 +139,7 @@ const CreateQuestionForm = () => {
                         <Input placeholder="Text below question:"  {...Text_below_question} />
                         <Input placeholder="tags (seperate with , charecter)" {...tags} />
                         <hr />
-                        {questionType && <AnswersSelector onAddingAwnser={onAddingAwnser}
-                            list={answers}
-                            questionType={questionType} />}
+                        {questionType && <AnswersSelector questionType={questionType} list={answers} onAddingAwnser={onAddingAwnser} />}
                         <Input type="submit" value="Submit" />
                         <p className='ErrorMessage'>{errorMessage}</p>
                     </div>
