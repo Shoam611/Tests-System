@@ -9,66 +9,68 @@ import { useEffect, useReducer, useState, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const EditQuestionView = (props) => {
-    const [_, forceUpdate] = useReducer(x => x + 1)
+    //hooks
+    const [_, forceUpdate] = useReducer(x => x + 1, 0)
     const navigate = useNavigate();
     const { id } = useParams();
+    //states and fields
     const question = useSelector(state => state.questions.questions).find(q => q._id === id);
     const topic = useSelector(state => state.topic.topic);
-    const newQuestionText = useInput(question.questionText);
-    const newTextAbove = useInput(question.textAbove);
-    const newTextBelow = useInput(question.textBelow);
-    const [newAwnsers, setNewAwnsers] = useState([]);
-    
+    const [newAnswers, setNewAwnsers] = useState([]);
+    //inputs
+    const newQuestionText = useInput(question?.questionText);
+    const newTextAbove = useInput(question?.textAbove);
+    const newTextBelow = useInput(question?.textBelow);
+
     const awnserContentChangedHandler = useCallback((value, id) => {
-        const temp = newAwnsers;
-        temp.filter(i => i.id === id)[0].value = value;
+        const temp = newAnswers;
+        temp.find(i => i.id === id).value = value;
         setNewAwnsers(temp);
-    }, [newAwnsers, setNewAwnsers]);
-    
+    }, [newAnswers, setNewAwnsers]);
+
     const handleRemoveAnswer = useCallback((id) => {
-        if (newAwnsers && newAwnsers.length > 2) {
-            const index = newAwnsers.indexOf(newAwnsers.find(i => i.id === id));
-            if (index >= 0) { newAwnsers.splice(index, 1); }
-            forceUpdate()
+        console.log('in remove', id);
+        if (newAnswers && newAnswers.length > 2) {
+            console.log('in if statement', newAnswers.length);
+            const index = newAnswers.indexOf(newAnswers.find(i => i.id === id));
+            console.log('index: ', index);
+            if (index >= 0) {
+                newAnswers.splice(index, 1);
+                console.log('splicing', newAnswers);
+
+            }
+            forceUpdate();
         }
-    }, [newAwnsers])
-    
-    const getId = useCallback(
-        () => newAwnsers.length > 0 ? newAwnsers.at(-1).id + 1 : 1,
-        [newAwnsers]);
-        
-        const addingAnswerHandler = () => {
-            console.log('trying to add answer');
-            if (newAwnsers.length >= 6) return;
-            const id = getId();
-            const newAnswer = {
-                id: id,
-            render: <AnswerChoice id={id} onRemove={handleRemoveAnswer} onChange={awnserContentChangedHandler} />,
-            value: '',
-            isSelected: false
+    }, [newAnswers])
+
+    const getId = useCallback(() => newAnswers.length > 0 ? newAnswers.at(-1).id + 1 : 1, [newAnswers]);
+
+    const addingAnswerHandler = useCallback((answer = {}) => {
+        console.log('trying to add answer');
+        if (newAnswers.length >= 6) return;
+        const id = getId();
+        const newAnswer = {
+            id: id,
+            render: <AnswerChoice value={answer?.value ? answer.value : ''} id={id} onRemove={handleRemoveAnswer} onChange={awnserContentChangedHandler} />,
+            value: answer?.value ? answer.value : '',
+            isSelected:question.correctAnswerIds.indexOf(answer.id) > -1
         };
-        newAwnsers.push(newAnswer);
+        newAnswers.push(newAnswer);
         forceUpdate();
-        console.log(newAwnsers.length);
+    }, [newAnswers, handleRemoveAnswer, awnserContentChangedHandler,getId])
+
+    const setInitialAnswers = () => {
+        question?.answers.forEach(element => {
+            addingAnswerHandler(element);
+        });
     }
-    if (!question) {
-        navigate(-1)
-    }
-    useEffect(() => {
-        if (!question) {
-            navigate(-1)
-        }
-        setNewAwnsers(question.answers.map(a => ({
-                    id: a.id,
-                    value: a.value,
-                    render: <AnswerChoice id={a.id} value={a.value} onRemove={handleRemoveAnswer} onChange={awnserContentChangedHandler} />,
-                    isSelected: question.correctAnswerIds.indexOf(a.id) > -1
-        })));
-    }, [])
+    //side effects
+    useEffect(() => { !question && navigate(-1) }, [question, navigate])
+    useEffect(() => { setInitialAnswers() }, []);
 
 
 
-    return (
+    return (!question ? <div /> :
         <div className="edit-question-view">
 
             <div className="edit-question-form-container" >
@@ -79,7 +81,7 @@ const EditQuestionView = (props) => {
                 <h4>{topic.name}</h4>
 
                 <h4>Question Types : </h4>
-                {questionTypes.find(type => type.id == question.questionType).value}
+                {questionTypes.find(type => type.id === question.questionType).value}
 
                 <h4>Question Tex: </h4>
                 <Input {...newQuestionText} />
@@ -92,7 +94,7 @@ const EditQuestionView = (props) => {
                 <Input {...newTextBelow} />
                 {/* {question.textBelow} */}
                 <h4>Answers: </h4>
-                <AnswersSelector questionType={question.questionType} list={newAwnsers} onAddingAwnser={() => { addingAnswerHandler(); forceUpdate(); }} />
+                <AnswersSelector questionType={question.questionType} list={newAnswers} onAddingAwnser={addingAnswerHandler} />
                 <Btn onClick={navigate.bind(this, -1)}>Go back</Btn>
                 <Btn >Submit</Btn>
             </div>
