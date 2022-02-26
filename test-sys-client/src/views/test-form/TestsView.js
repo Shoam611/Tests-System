@@ -20,11 +20,10 @@ const TestsView = () => {
     const [questions] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
     const [, setSelectedCounter] = useState(0);
+    const [listData, setListData] = useState([]);
 
     const dispatch = useDispatch();
-
     let navigate = useNavigate();
-
     const fields = {
         Manager_email: useInput(),
         Test_name: useInput(),
@@ -64,6 +63,7 @@ const TestsView = () => {
         value ? questions.push(item) : questions.pop(item);
         value ? setSelectedCounter(prevState => { return prevState + 1 }) : setSelectedCounter(prevState => { return prevState - 1 });
     };
+    const saveListHandler = (list) => setListData(list);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -136,7 +136,7 @@ const TestsView = () => {
     //views
     const steps = [
         <CreateTestForm next={handleNextStep} onTestTypeChange={testTypeChangedHandler} onLangChange={langChangedHandler} onToShowChange={toShowChangedHandler} data={testData} {...fields} />
-        , <QuestionsForTest prev={handlePrevStep} next={handleNextStep} onQuestionSelected={onSelectionChange} data={testData} questions={questions} />
+        , <QuestionsForTest prev={handlePrevStep} next={handleNextStep} onQuestionSelected={onSelectionChange} data={testData} questions={questions} updateList={saveListHandler} renderList={listData} />
     ]
     return (
         <div className="QuestionView">

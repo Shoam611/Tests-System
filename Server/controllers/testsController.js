@@ -16,6 +16,12 @@ class TestsController {
         this.testsRepository.DeleteOneAsync(id)
     }
 
+    updateTest = async ({ body }) => {
+        console.log('in update test');
+        const { id } = body;
+        const { newTest } = body;
+        return await this.testsRepository.UpdateTest(id, newTest);
+    }
 
     getTests = async (req) => {
         console.log('in get tests');

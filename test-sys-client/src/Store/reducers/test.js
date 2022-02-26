@@ -1,10 +1,10 @@
 import Enumerable from 'node-enumerable';
-import { ADD, FETCH, DELETE } from "Store/actions/test";
+import { ADD, FETCH, DELETE, UPDATE } from "Store/actions/test";
 const initialState = {
     tests: []
 }
 
- const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
 
     switch (action.type) {
         case ADD:
@@ -18,7 +18,17 @@ const initialState = {
                 // const tests =Enumerable.create(...tests,action.data).distinctBy(t=>t._id);
                 return { ...state, tests: action.newTest }
             }
+            return state;
 
+        case UPDATE:
+            const testing = state.tests;
+            if (action.newTest) {
+                const foundTest = testing.find(test => test._id === action.id);
+                const indexOfTest = testing.indexOf(foundTest);
+                testing.splice(indexOfTest, 1);
+                testing.push(action.newTest);
+                return { tests: action.newTest, ...state }
+            }
             return state;
         case DELETE: break;
 

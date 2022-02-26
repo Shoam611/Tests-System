@@ -8,7 +8,7 @@ const QuestionsForTest = (props) => {
     const [fetchedData, setFetchedData] = useState([]);
     const [list, setList] = useState([]);
     const [selectedCounter, setSelectedCounter] = useState(0);
-    const questions = useSelector(state => state.questions.questions)
+    const questions = useSelector(state => state.questions.questions);
     useEffect(() => { setFetchedData(questions); }, [questions, setFetchedData])
     //handlers
     const { onQuestionSelected } = props;
@@ -24,6 +24,7 @@ const QuestionsForTest = (props) => {
             checked: false,
             onChange: questionSelectedHandler,
         }))
+        console.log(temp);
         setList(temp);
     }, [questionSelectedHandler]);
     //Side Effects

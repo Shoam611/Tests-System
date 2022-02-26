@@ -1,8 +1,9 @@
 import axios from 'axios';
-import { runPostRequest } from 'services/httpInvoker'
+import { runPostRequest, runPutRequest } from 'services/httpInvoker'
 export const ADD = 'ADD';
 export const FETCH = 'FETCH';
 export const DELETE = 'DELETE';
+export const UPDATE = 'UPDATE';
 
 export const addTest = (newTest) => {
     return async (dispatch, getState) => {
@@ -11,6 +12,16 @@ export const addTest = (newTest) => {
         const _id = await response.data;
         console.log("added ", _id);
         dispatch({ type: ADD, newTest: { _id, ...newTest } })
+    }
+}
+
+export const updateTest = (newTest, id) => {
+    return async (dispatch) => {
+        console.log('puting...');
+        const response = await runPutRequest('http://localhost:4200/tests', { newTest: newTest, id: id });
+        const _id = await response;
+        console.log("updated ", _id);
+        dispatch({ type: UPDATE, newTest: { _id, ...newTest }, id: id })
     }
 }
 

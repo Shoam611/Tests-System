@@ -1,7 +1,7 @@
 const { TestModel } = require('./schemas/testSchema');
 
 class TestsMongoRepository {
-    
+
     //Create
     async addAsync(object) {
         const t = new TestModel({ ...object });
@@ -15,6 +15,12 @@ class TestsMongoRepository {
     }
     //Read
     //Update
+    async UpdateTest(id, newTest) {
+        const doc = await TestModel.findOneAndReplace({ _id: id }, { _id: id, ...newTest });
+        await doc.save();
+        console.log('added', doc._id.toString());
+        return doc._id;
+    }
 
     async getOneAsync(id) {
         const query = TestModel.findOne({ _id: id });
