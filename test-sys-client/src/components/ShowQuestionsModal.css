@@ -3,16 +3,19 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     z-index: 10;
     background: rgba(0, 0, 0, 0.75);
   }
   
   .modal {
-    position: fixed;
-    top: 1vh;
-    left: 10%;
-    width: 80%;
+    position: absolute;
+    top: 20vh;
+    left: 20vw;
+    display: grid;
+    width: 60vw;
+    height: 60vh;
+    grid-template-rows:7vh 45vh 8vh;
     z-index: 100;
     overflow: hidden;
   }
@@ -29,12 +32,13 @@
   
   .content {
     overflow-y: auto;
-    padding: 1rem;
+    padding:  0 1rem;
     background-color: white;
-    height: 80vh;
+    height: auto;
     width: 100%;
     margin: 0;
-    overflow-y: auto;
+
+    overflow-y: scroll;
   }
   
   .actions {
@@ -48,9 +52,9 @@
     color: rgb(87, 214, 98);
   }
   
-  @media (min-width: 768px) {
+  /* @media (min-width: 768px) {
     .modal {
       left: calc(50% - 20rem);
-      width: 40rem;
+      width: 40vw;
     }
-  }
+  } */

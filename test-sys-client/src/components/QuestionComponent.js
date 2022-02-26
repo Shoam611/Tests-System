@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Line } from "UIKit";
 import Card from "UIKit/Layouts/Card";
 import Btn from "../UIKit/Elements/Btn";
-import "./QuestionComponent.css";
+import "./ShowQuestionsModal.css";
 
 const QuestionComponentBackdrop = (props) => {
   return <div className="backdrop" onClick={props.onConfirm} />;
