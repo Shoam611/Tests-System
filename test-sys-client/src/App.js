@@ -11,7 +11,6 @@ function App() {
   const [isLoading, setIsLoading] = useState();
   
   const dispatch = useDispatch();
-
   const loadTopic = useCallback(async () => {
     await dispatch(fetchTopic())
   }, [dispatch]);

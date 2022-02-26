@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import AnimateHeight from 'react-animate-height';
 import { Line, Icon } from 'UIKit';
 import "./Dropdown.css";
 

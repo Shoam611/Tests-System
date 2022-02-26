@@ -1,0 +1,14 @@
+.edit-question-view{
+    background-color:var(--light-color);
+}
+.edit-question-form-container{
+    height: min-content;
+    display:grid;
+    grid-row-gap: var(--gap-l);
+    grid-column-gap: var(--gap-m);
+    grid-template-columns: max-content  1fr;
+}
+.edit-question-form-container h4{
+    margin:0;
+    padding :0;
+}

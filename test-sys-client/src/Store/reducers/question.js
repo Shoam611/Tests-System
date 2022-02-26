@@ -1,5 +1,5 @@
 //import Enumerable from 'node-enumerable';
-import { ADD, FETCH, DELETE } from "Store/actions/question";
+import { ADD, FETCH, DELETE, UPDATE } from "Store/actions/question";
 const initialState = {
     questions: []
 }
@@ -18,10 +18,13 @@ const reducer = (state = initialState, action) => {
                 // const questions =Enumerable.create(...questions,action.data).distinctBy(q=>q._id);
                 return { ...state, questions: action.newQuestions }
             }
-
             return state;
-        case DELETE: break;
-
+        case DELETE: return state;
+        case UPDATE:
+            const newQuestions = state.questions;
+            newQuestions.filter(q => q._id !== action.id);
+            newQuestions.push({ ...action.newQuestion, _id:action.id });
+            return { ...state, questions: newQuestions }
         default: return state;
     }
 }

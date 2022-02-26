@@ -1,0 +1,10 @@
+.dialog-div{
+    background-color: rgba(0, 0, 0, 0.761);
+    height: 50%;
+    opacity: 0.5;
+    width: 50%;
+    /* position: absolute; */
+    position: fixed;
+    z-index: 20;
+    align-self: start;
+}
