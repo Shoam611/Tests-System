@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import Test from "models/TestModel";
 import { updateTest } from "Store/actions/test";
 import ShowQuestionsModal from "components/ShowQuestionsModal";
-import QuestionShortened from "./QuestionShortened";
+import QuestionShortened from "views/manage-tests/QuestionShortened";
 const { useNavigate, useParams, } = require("react-router-dom");
 const EditTestView = props => {
     const dispatch = useDispatch();
@@ -113,11 +113,12 @@ const EditTestView = props => {
     }
     const questionSelectedHandler = (item, value) => {
         value ? newQuestions.push(item) : newQuestions.pop(item);
+        console.log(newQuestions);
     }
     const renderQuestions = () => {
         const temp = questions.map((value, index) => ({
             id: value._id,
-            render: <QuestionShortened />,
+            render: <QuestionShortened {...value} index={index} />,
             value: value,
             checked: isExists(value._id),
             onChange: questionSelectedHandler,
