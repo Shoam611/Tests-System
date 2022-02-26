@@ -8,7 +8,7 @@ const ManageQuestionView = (props) => {
     const questions = useSelector(state => state.questions.questions)
   
     const [viewedQuestions, setViewedQuestions] = useState([]);
-    useEffect(() => { setViewedQuestions(questions.slice(0, 5)); }, []);
+    useEffect(() => { setViewedQuestions(questions/*.slice(0, 5));*/)}, []);
     const renderQuestions = () => {
         return (viewedQuestions.length === 0 ? <h2>No Questions Available For The Selected Topic: {topic.name}.</h2> :
             viewedQuestions.map((q) => <Question key={q._id} {...q} />))

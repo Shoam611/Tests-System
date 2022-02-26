@@ -15,7 +15,7 @@ const Checkbox = ({ list }) => {
     const renderListOptions = () => {
         return list.map((value) => <CheckboxItem key={value.id}
             id={value.id}
-            selected={value.checked}
+            selected={value.isSelected}
             onChange={onSelctionChanged}
             render={value.render} />);
     }
@@ -30,18 +30,18 @@ const Checkbox = ({ list }) => {
 }
 
 const CheckboxItem = ({ onChange, render, id, selected }) => {
-    const [checked, setChecked] = useState(selected);
+    const [isSelected, setIsSelected] = useState(selected);
     const [toRender, setRender] = useState(render);
     const onSelectionHandler = () => {
-        setChecked(!checked);
-        onChange(id, !checked);
-        setRender({ ...render, props: { ...render.props, className: !checked ? 'active' : '' } });
+        setIsSelected(!isSelected);
+        onChange(id, !isSelected);
+        setRender({ ...render, props: { ...render.props, className: !isSelected ? 'active' : '' } });
     }
     return (
-        <li key={id} className={checked ? "active" : ""} style={{ marginTop: "10px" }}>
+        <li key={id} className={isSelected ? "active" : ""} style={{ marginTop: "10px" }}>
             <Line>
                 <div className="iconContainer" onClick={() => { onSelectionHandler() }}>
-                    <i className={checked ? "fas fa-check-square " : "far fa-check-square"} />
+                    <i className={isSelected ? "fas fa-check-square " : "far fa-check-square"} />
                 </div>
                 <div>{toRender}</div>
             </Line>
