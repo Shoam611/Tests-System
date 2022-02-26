@@ -40,9 +40,10 @@ const CreateQuestionForm = () => {
     }, [answers])
     const awnserContentChangedHandler = useCallback((value, id) => {
         const temp = answers;
-        temp.filter(i => i.id === id)[0].value = value;
+        temp.find(i => i.id === id).value = value;
         setAnswers(temp);
-    }, [answers])
+    }, [answers,setAnswers]);
+
     const onAddingAwnser = useCallback(() => {
         if (answers.length >= 6) return;
         const id = getId();
