@@ -13,7 +13,7 @@ class TestsMongoRepository {
     async DeleteOneAsync(id) {
         TestModel.deleteByIdAsync(id);
     }
-    //Read
+
     //Update
     async UpdateTest(id, newTest) {
         const doc = await TestModel.findOneAndReplace({ _id: id }, { _id: id, ...newTest });
@@ -22,14 +22,15 @@ class TestsMongoRepository {
         return doc._id;
     }
 
+    //Read
     async getOneAsync(id) {
         const query = TestModel.findOne({ _id: id });
         const doc = await query.next();
         return doc;
     }
 
-    async getAsync(skip = 0, take = 10) {
-        const query = TestModel.find({ sort: '-createdAt' }).skip(skip).limit(take).cursor();
+    async getAsync() {
+        const query = TestModel.find({ sort: '-createdAt' }).cursor();
         const list = [];
         for (let doc = await query.next(); doc != null; doc = await query.next()) {
             list.push(doc);
@@ -37,10 +38,6 @@ class TestsMongoRepository {
         console.log("list", list);
         return list;
     }
-    async UpdateOne(id, newTest) {
-    }
-    async deleteManyAsync(filter) {
-
-    }
+    
 }
 module.exports = TestsMongoRepository

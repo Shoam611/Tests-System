@@ -25,21 +25,9 @@ class TestsController {
 
     getTests = async (req) => {
         console.log('in get tests');
-        const { oneOrMany } = req.query;
-        console.log('one or Many', oneOrMany);
-        switch (oneOrMany) {
-            case "one":
-                console.log('in one case');
-                const { id } = req.query;
-                return await this.testsRepository.getOneAsync(id)
-            case "many":
-                const { skip, take } = req.query;
-                console.log('in many case', skip, take);
-                return await this.testsRepository.getAsync(skip, take)
-            default: return undefined;
-        }
-    };
 
+        return await this.testsRepository.getAsync();
+    }
 }
 
 module.exports = TestsController;

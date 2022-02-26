@@ -27,7 +27,7 @@ export const updateTest = (newTest, id) => {
 
 export const fetchTests = () => {
     return async (dispatch, getState) => {
-        const response = await axios.get(`http://localhost:4200/tests?oneOrMany=many&skip=0&take=20`);
+        const response = await axios.get(`http://localhost:4200/tests`);
         const responseData = await response.data;
         dispatch({ type: FETCH, newTest: responseData })
     }
