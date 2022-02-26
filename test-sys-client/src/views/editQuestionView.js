@@ -27,11 +27,8 @@ const EditQuestionView = (props) => {
     const newTextBelow = useInput(question?.textBelow);
     const tags = useInput(question?.tags.join(' , '))
     const awnserContentChangedHandler = useCallback((value, id) => {
-        console.log('triggered',value,id);
-        const temp = newAnswers;
-        temp.find(i => i.id === id).value = value;
-        setNewAwnsers(temp);
-        console.log(temp);
+        newAnswers.find(i => i.id === id).value = value;
+        console.log(newAnswers);
     }, [newAnswers]);
 
     const handleRemoveAnswer = useCallback((id) => {
@@ -48,7 +45,11 @@ const EditQuestionView = (props) => {
         const id = getId();
         const newAnswer = {
             id: id,
-            render: <AnswerChoice value={answer?.value ? answer.value : ''} id={id} onRemove={handleRemoveAnswer} onChange={awnserContentChangedHandler} />,
+            render: <AnswerChoice 
+                    value={answer.value ? `${answer.value}` : ''} 
+                    id={id} 
+                    onRemove={handleRemoveAnswer} 
+                    onChange={awnserContentChangedHandler} />,
             value: answer?.value ? `${answer.value}` : '',
             isSelected: question.correctAnswerIds.indexOf(answer.id) > -1
         };

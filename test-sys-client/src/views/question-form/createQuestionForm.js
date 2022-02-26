@@ -39,17 +39,17 @@ const CreateQuestionForm = () => {
         }
     }, [answers])
     const awnserContentChangedHandler = useCallback((value, id) => {
-        const temp = answers;
-        temp.find(i => i.id === id).value = value;
-        setAnswers(temp);
-    }, [answers,setAnswers]);
+        answers.find(i => i.id === id).value = value;
+    }, [answers]);
 
     const onAddingAwnser = useCallback(() => {
         if (answers.length >= 6) return;
         const id = getId();
         const newAnswer = {
             id: id,
-            render: <AnswerChoice id={id} onRemove={handleRemoveAwnser} onChange={awnserContentChangedHandler} />,
+            render: <AnswerChoice id={id} 
+            onRemove={handleRemoveAwnser} 
+            onChange={awnserContentChangedHandler} />,
             value: '',
             isSelected: false
         };
