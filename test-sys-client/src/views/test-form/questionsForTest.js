@@ -46,7 +46,7 @@ const QuestionsForTest = (props) => {
     }
     const isExists = (value) => {
         for (let question of props.questions) {
-            if (question._id === value) {
+            if (question === value) {
                 setSelectedCounter(prevState => { return prevState + 1 });
                 return true;
             }
