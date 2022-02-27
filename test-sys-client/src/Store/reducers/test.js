@@ -7,7 +7,6 @@ const reducer = (state = initialState, action) => {
 
     switch (action.type) {
         case ADD:
-
             const tests = state.tests;
             tests.push(action.newTest)
             return { ...state, tests: tests }

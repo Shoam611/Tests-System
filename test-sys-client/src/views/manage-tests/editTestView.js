@@ -109,12 +109,12 @@ const EditTestView = props => {
     const questionSelectedHandler = useCallback((item, value) => {
         console.log('item >', item);
         if (!value) {
-            const filtered = newQuestions.filter(q => q._id !== item._id);
+            const filtered = newQuestions.filter(q => q !== item._id);
             setQuestions(filtered);
             console.log('newQuestions State >', filtered);
         }
         else {
-            newQuestions.push(item)
+            newQuestions.push(item._id);
             console.log(newQuestions);
         }
     }, [setQuestions, newQuestions])
@@ -124,7 +124,7 @@ const EditTestView = props => {
             id: value._id,
             render: <QuestionShortened {...value} index={index} />,
             value: value,
-            isSelected: newQuestions.map(q => q._id).indexOf(value._id) > -1,
+            isSelected: newQuestions.map(q => q).indexOf(value._id) > -1,
             onChange: questionSelectedHandler,
         }))
         setList(temp);

@@ -45,8 +45,8 @@ const TestsView = () => {
     const testTypeChangedHandler = (e) => setTestType(e);
     const langChangedHandler = (e) => setLang(e);
     const toShowChangedHandler = (e) => setToShowMistakes(!e);
-    const onSelectionChange = (item, value) => { 
-        value ? questions.push(item) : questions.pop(item);
+    const onSelectionChange = (item, value) => {
+        value ? questions.push(item._id) : questions.pop(item._id);
         value ? setSelectedCounter(prevState => { return prevState + 1 }) : setSelectedCounter(prevState => { return prevState - 1 });
     };
     const handleSubmit = (e) => {
