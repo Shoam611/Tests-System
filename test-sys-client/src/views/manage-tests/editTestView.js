@@ -118,6 +118,7 @@ const EditTestView = props => {
             console.log(newQuestions);
         }
     }, [setQuestions, newQuestions])
+
     const setListValue = useCallback(() => {
         console.log("in set List value", newQuestions);
         const temp = questions.map((value, index) => ({
@@ -135,6 +136,7 @@ const EditTestView = props => {
     const setIninitalQuestions = useCallback(() => {
         test?.questions.forEach(q => newQuestions.push(q));
     }, [])
+    
     useEffect(() => {
         setIninitalQuestions();
         setListValue();
