@@ -6,9 +6,9 @@ import { useEffect, useState } from 'react';
 const ManageQuestionView = (props) => {
     const topic = useSelector(state => state.topic.topic);
     const questions = useSelector(state => state.questions.questions)
-  
+
     const [viewedQuestions, setViewedQuestions] = useState([]);
-    useEffect(() => { setViewedQuestions(questions)}, [questions]);
+    useEffect(() =>{ setViewedQuestions(questions)}, []);
     const renderQuestions = () => {
         return (viewedQuestions.length === 0 ? <h2>No Questions Available For The Selected Topic: {topic.name}.</h2> :
             viewedQuestions.map((q) => <Question key={q._id} {...q} />))
@@ -35,7 +35,7 @@ const ManageQuestionView = (props) => {
             <div />
         </div>
     )
-    
+
 
     return (
         <div className='mange-question-view'>
@@ -52,10 +52,10 @@ const ManageQuestionView = (props) => {
                 <div className='questions-container '>
                     {renderQuestions()}
                 </div>
-             <div>
+                <div>
 
-             </div>
-            
+                </div>
+
 
             </div>
             <div>

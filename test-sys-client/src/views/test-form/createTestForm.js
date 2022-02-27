@@ -20,9 +20,9 @@ const CreateTestForm = (props) => {
                     <Input placeholder="Manager Email:" type="email" {...props.Manager_email} />
                     <Input placeholder="Test Name:" maxLength="200" {...props.Test_name} />
                     <Input placeholder="Passing Grade:" type="number" min="1" max="100" {...props.Passing_grade} />
-                    <textarea placeholder="Header:" {...props.Test_header} />
-                    <textarea placeholder="Message to Show Student on Success:"  {...props.Text_msgOnSuccess} />
-                    <textarea placeholder="Message to Show Student on Failure:"  {...props.Text_msgOnFailure} />
+                    <Input placeholder="Header:" {...props.Test_header} />
+                    <Input placeholder="Message to Show Student on Success:"  {...props.Text_msgOnSuccess} />
+                    <Input placeholder="Message to Show Student on Failure:"  {...props.Text_msgOnFailure} />
 
                     <label>
                         Show Student Where He Was Wrong?
@@ -33,13 +33,13 @@ const CreateTestForm = (props) => {
                         Manager Email On Succes:
                         <Input type="text" placeholder="Subject" {...props.Email_succSub} />
                     </label>
-                    <textarea placeholder='Body' {...props.Email_succBody} />
+                    <Input placeholder='Body' {...props.Email_succBody} />
 
                     <label>
                         Manager Email On Failure:
                         <Input type="text" placeholder="Subject" {...props.Email_failSub} />
                     </label>
-                    <textarea placeholder='Body' {...props.Email_failBody} />
+                    <Input placeholder='Body' {...props.Email_failBody} />
 
                     <Btn i="chevron-right" onClick={() => { props.next(); }}>Next</Btn>
                 </div>

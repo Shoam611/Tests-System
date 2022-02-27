@@ -15,6 +15,15 @@ export const addTest = (newTest) => {
     }
 }
 
+export const fetchTests = () => {
+    return async (dispatch, getState) => {
+        const topic = getState().topic.topic;
+        const response = await axios.get(`http://localhost:4200/tests?topic=${topic._id}`);
+        const responseData = await response.data;
+        dispatch({ type: FETCH, newTest: responseData })
+    }
+}
+
 export const updateTest = (newTest, id) => {
     return async (dispatch) => {
         console.log('puting...');
@@ -25,11 +34,4 @@ export const updateTest = (newTest, id) => {
     }
 }
 
-export const fetchTests = () => {
-    return async (dispatch, getState) => {
-        const response = await axios.get(`http://localhost:4200/tests`);
-        const responseData = await response.data;
-        dispatch({ type: FETCH, newTest: responseData })
-    }
-}
 

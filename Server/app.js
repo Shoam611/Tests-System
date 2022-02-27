@@ -6,7 +6,6 @@ app.use(cors());
 const { container } = require('./app-container');
 require('./services/mongoHandler')();
 
-
 const questionsController = container.resolve('questionsController');
 
 app.post('/questions', async (req, res) => { const newId = await questionsController.addQuestion(req); res.send(newId.toString()).status(200) });

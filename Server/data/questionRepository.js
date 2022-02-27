@@ -20,12 +20,10 @@ class MongoRepository {
         const doc = await query.next();
         return doc;
     }
-    async getAsync(skip = 0, take = 10,filterquery={}) {
+    async getAsync(filterquery={}) {
         console.log('filter',filterquery);
-        const query = await QuestionModel.find({ sort: '-createdAt' })
-        .where(filterquery)
-        .skip(skip)
-        .limit(take)
+        const query = await QuestionModel.find({ sort: '-createdAt' }).where(filterquery);
+        console.log(query);
         return query;
     }
     //Update

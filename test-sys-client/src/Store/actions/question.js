@@ -17,18 +17,18 @@ export const addQuestion = (newQuestion) => {
 
 export const fetchQuestions = () => {
     return async (dispatch, getState) => {
-        const topic=getState().topic.topic;
-        const response = await axios.get(`http://localhost:4200/questions?oneOrMany=many&skip=0&take=20&topic=${topic.name}`);
+        const topic = getState().topic.topic;
+        const response = await axios.get(`http://localhost:4200/questions?topic=${topic._id}`);
         const responseData = await response.data;
         dispatch({ type: FETCH, newQuestions: responseData })
     }
 }
 
-export const updateQuestion = (newQuestion,id) =>{
-    return async (dispatch,getState) =>{
-        try{
-            const response = await axios.put('http://localhost:4200/questions',{newQuestion,id});
-            dispatch({type:UPDATE,newQuestion,id});
-        }catch{console.error('falied sending put request to server');dispatch({type:'x'})}
+export const updateQuestion = (newQuestion, id) => {
+    return async (dispatch, getState) => {
+        try {
+            const response = await axios.put('http://localhost:4200/questions', { newQuestion, id });
+            dispatch({ type: UPDATE, newQuestion, id });
+        } catch { console.error('falied sending put request to server'); dispatch({ type: 'x' }) }
     }
 }

@@ -1,6 +1,4 @@
 const { Types, Schema, model } = require('mongoose');
-
-
 const answerSchema = new Schema({
     value: String,
     id: Number
@@ -14,7 +12,7 @@ const questionSchema = new Schema({
     tags: Array,
     answers: [answerSchema],
     correctAnswerIds: Array,
-    presentaionAxisId:Number,
+    presentaionAxisId: Number,
     isAnActiveQuestion:Boolean
 }, { timestamps: true });
 questionSchema.statics.deleteByIdAsync = async function (id) {
@@ -23,4 +21,4 @@ questionSchema.statics.deleteByIdAsync = async function (id) {
 const QuestionModel = model('QuestionModel', questionSchema);
 const AnswerModel = model('answer', answerSchema);
 
-module.exports = { QuestionModel,questionSchema,AnswerModel}
+module.exports = { QuestionModel, questionSchema, AnswerModel }

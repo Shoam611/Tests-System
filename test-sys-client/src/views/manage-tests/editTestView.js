@@ -109,13 +109,9 @@ const EditTestView = props => {
     const questionSelectedHandler = useCallback((item, value) => {
         console.log('item >', item);
         if (!value) {
-            const foundTest = newQuestions.filter(question => question._id === item._id);
-            console.log('Found Test', foundTest);
-            const indexOfTest = newQuestions.indexOf(foundTest);
-            console.log('Index of Test', indexOfTest);
-            const temp = newQuestions.splice(indexOfTest, 1);
-            setQuestions(temp);
-            console.log('newQuestions State >', temp);
+            const filtered = newQuestions.filter(q => q._id !== item._id);
+            setQuestions(filtered);
+            console.log('newQuestions State >', filtered);
         }
         else {
             newQuestions.push(item)
@@ -128,7 +124,7 @@ const EditTestView = props => {
             id: value._id,
             render: <QuestionShortened {...value} index={index} />,
             value: value,
-            isSelected: newQuestions.map(q => q._id).indexOf(value._id) > -1,// isExists(value._id),
+            isSelected: newQuestions.map(q => q._id).indexOf(value._id) > -1,
             onChange: questionSelectedHandler,
         }))
         setList(temp);
@@ -138,7 +134,7 @@ const EditTestView = props => {
 
     const setIninitalQuestions = useCallback(() => {
         test?.questions.forEach(q => newQuestions.push(q));
-    }, [newQuestions, test?.questions]) //}, [test.questions, newQuestions])
+    }, [])
     useEffect(() => {
         setIninitalQuestions();
         setListValue();
@@ -183,16 +179,16 @@ const EditTestView = props => {
                 <input type="checkbox" defaultChecked={newShowIfWrong} onChange={checkedHandler} />
 
                 <h4>Email To Manager On Success - Subject: </h4>
-                <textarea {...newEmailSubOnSucc} />
+                <Input {...newEmailSubOnSucc} />
 
                 <h4>Email To Manager On Success - Body: </h4>
-                <textarea {...newEmailBodyOnSucc} />
+                <Input {...newEmailBodyOnSucc} />
 
                 <h4>Email To Manager On Failure - Subject: </h4>
-                <textarea {...newEmailSubOnFail} />
+                <Input {...newEmailSubOnFail} />
 
                 <h4>Email To Manager On Failure - Body: </h4>
-                <textarea {...newEmailBodyOnFail} />
+                <Input {...newEmailBodyOnFail} />
 
                 <h4>Questions</h4>
                 <Btn onClick={onFullShowHandler}>Show Questions</Btn>
