@@ -36,7 +36,6 @@ const ManageQuestionView = (props) => {
         </div>
     )
 
-
     return (
         <div className='mange-question-view'>
             <h1>Questions for: <span>{topic.name}</span></h1>

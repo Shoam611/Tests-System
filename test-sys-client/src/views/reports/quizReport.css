@@ -1,0 +1,9 @@
+.report-by-quiz-view {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 150px 50px 1fr var(--gap-l);
+  padding: 0 10%;
+  max-height: auto;
+  background-color: var(--background-light);
+
+}
