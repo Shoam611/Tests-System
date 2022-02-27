@@ -1,10 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { Box, Btn } from "UIKit";
 import './Test.css';
 
 const Test = (props) => {
     const navigate = useNavigate();
-
     const normalizeDate = (inputDate) => {
         const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
         return new Date(inputDate).toLocaleDateString('en-EN', options);
@@ -19,7 +18,7 @@ const Test = (props) => {
                 <h4>{normalizeDate(props.updatedAt)}</h4>
                 <div className="actions">
                     <Btn i='' onClick={() => { navigate(`editTest/${props._id}`, { replace: false }) }}>Edit</Btn>
-                    <Btn i='' onClick={() => { navigate(`editTest/${props._id}`, { replace: false }) }}>Run</Btn>
+                    <Btn i='' onClick={() => { navigate(`/app/qweezes/run/${props._id}`, { replace: false }) }}>Run</Btn>
                 </div>
             </div>
         </Box>
