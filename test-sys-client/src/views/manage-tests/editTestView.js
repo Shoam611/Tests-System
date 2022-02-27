@@ -112,7 +112,6 @@ const EditTestView = props => {
     // }
     const questionSelectedHandler = useCallback((item, value) => {
         // value ? newQuestions.push(item) : newQuestions.pop(item);
-        console.log(newQuestions);
         console.log("value", value);
         if (!value) {
             const foundTest = newQuestions.find(question => question._id === item._id);
@@ -122,7 +121,8 @@ const EditTestView = props => {
             console.log('newQuestions State >', temp);
         }
         else {
-            newQuestions.push(item._id);
+            newQuestions.push(item)
+            console.log(newQuestions);
         }
     },[setQuestions,newQuestions])
     const setListValue = useCallback(() => {
@@ -131,7 +131,7 @@ const EditTestView = props => {
             id: value._id,
             render: <QuestionShortened {...value} index={index} />,
             value: value,
-            isSelected: newQuestions.map(q=>q._id).indexOf(value._id) > -1,// isExists(value._id),
+            isSelected: newQuestions.map(q=>q._id).indexOf(value._id)>-1,// isExists(value._id),
             onChange: questionSelectedHandler,
         }))
         setList(temp);
@@ -141,21 +141,22 @@ const EditTestView = props => {
         setShowModal(!showModal);
     }
 
-    const setInitialSelected=()=>{
+    const setInitialSelected=useCallback(()=>{
         for (const question of newQuestions) {
-            question._id && 
             questionSelectedHandler(question,true)
         }
-    }
+    },[newQuestions,questionSelectedHandler])
+
     const setIninitalQuestions =useCallback(() =>{
-        console.log("init" , test.question);
+        // console.log("init" , test.questions);
         test.questions.forEach(q => newQuestions.push(q));
     },[test.questions,newQuestions])
     useEffect(()=>{
         setIninitalQuestions();
         setListValue(); 
-        setInitialSelected();
-    },[setIninitalQuestions,setListValue])
+        console.log("list",list);
+        // setInitialSelected();
+    },[/*setIninitalQuestions,setListValue,setInitialSelected*/])
     
 
     return (
