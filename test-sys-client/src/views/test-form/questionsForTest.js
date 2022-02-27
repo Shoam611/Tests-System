@@ -20,7 +20,7 @@ const QuestionsForTest = (props) => {
             id: value._id,
             render: <QuestionItem {...value} index={index} />,
             value: value,
-            checked: isExists(value._id),
+            isSelected: isExists(value._id),
             onChange: questionSelectedHandler,
         }))
         setList(temp);
