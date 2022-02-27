@@ -23,10 +23,12 @@ class TestsController {
         return await this.testsRepository.UpdateTest(id, newTest);
     }
 
-    getTests = async (req) => {
+    getTests = async ({ query }) => {
         console.log('in get tests');
-
-        return await this.testsRepository.getAsync();
+        const { topic } = query;
+        let filter = {};
+        if (topic) filter = { topic: topic }
+        return await this.testsRepository.getAsync(filter);
     }
 }
 

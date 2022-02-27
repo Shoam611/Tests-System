@@ -29,15 +29,12 @@ class TestsMongoRepository {
         return doc;
     }
 
-    async getAsync() {
-        const query = TestModel.find({ sort: '-createdAt' }).cursor();
-        const list = [];
-        for (let doc = await query.next(); doc != null; doc = await query.next()) {
-            list.push(doc);
-        }
-        console.log("list", list);
-        return list;
+    async getAsync(filterquery = {}) {
+        console.log('filter', filterquery);
+        const query = TestModel.find({ sort: '-createdAt' }).where(filterquery);
+        console.log(query);
+        return query;
     }
-    
+
 }
 module.exports = TestsMongoRepository

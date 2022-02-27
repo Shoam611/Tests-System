@@ -1,4 +1,3 @@
-// import Enumerable from 'node-enumerable';
 import { ADD, FETCH, DELETE, UPDATE } from "Store/actions/test";
 const initialState = {
     tests: []
@@ -15,23 +14,17 @@ const reducer = (state = initialState, action) => {
 
         case FETCH:
             if (action.newTest) {
-
                 return { ...state, tests: action.newTest }
             }
             return state;
 
         case UPDATE:
-            const testing = state.tests;
-            if (action.newTest) {
-                const foundTest = testing.find(test => test._id === action.id);
-                const indexOfTest = testing.indexOf(foundTest);
-                testing.splice(indexOfTest, 1);
-                testing.push({ ...action.newTest, updatedAt: new Date().toISOString() });
-                return { tests: testing, ...state }
-            }
-            return state;
-        case DELETE: break;
+            const newTests = state.tests;
+            newTests.filter(t => t._id !== action.id);
+            newTests.push({ ...action.newTest, _id: action.id, updatedAt: new Date().toISOString() });
+            return { ...state, tests: newTests }
 
+        case DELETE: break;
         default: return state;
     }
 }
