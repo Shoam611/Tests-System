@@ -1,4 +1,4 @@
-import {  useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import QuestionItem from "./questionItem";
 import { Btn, Checkbox, Input } from "UIKit";
@@ -15,7 +15,7 @@ const QuestionsForTest = (props) => {
         props.onQuestionSelected(item, value);
         value ? setSelectedCounter(prevState => { return prevState + 1 }) : setSelectedCounter(prevState => { return prevState - 1 });
     }
-    const buildDisplayList = (list) => {
+    const buildDisplayList = useCallback((list) => {
         const temp = list.map((value, index) => ({
             id: value._id,
             render: <QuestionItem {...value} index={index} />,
@@ -24,11 +24,11 @@ const QuestionsForTest = (props) => {
             onChange: questionSelectedHandler,
         }))
         setList(temp);
-    };
+    }, []);
     //Side Effects
     useEffect(() => {
         buildDisplayList(fetchedData);
-    }, [fetchedData]);
+    }, [fetchedData, buildDisplayList]);
 
     const filterList = (e) => {
         let tags = e.target.value.toUpperCase();

@@ -27,7 +27,7 @@ const reducer = (state = initialState, action) => {
                 const indexOfTest = testing.indexOf(foundTest);
                 testing.splice(indexOfTest, 1);
                 testing.push({ ...action.newTest, updatedAt: new Date().toISOString() });
-                return { ...state, tests: testing }
+                return { tests: testing, ...state }
             }
             return state;
         case DELETE: break;

@@ -38,6 +38,7 @@ const EditTestView = props => {
         e.preventDefault();
         if (formValidation()) {
             const newTest = new Test(newTestType, newLanguage, newManagerEmail.value, newTestName.value, newPassingGrade.value, newHeader.value, newMsgOnSucc.value, newMsgOnFail.value, newShowIfWrong, newEmailSubOnSucc.value, newEmailBodyOnSucc.value, newEmailSubOnFail.value, newEmailBodyOnFail.value, newQuestions);
+            console.log(newTest);
             dispatch(updateTest(newTest, id));
             navigate(-1);
         }
@@ -104,18 +105,14 @@ const EditTestView = props => {
     }
     //methods
     const checkedHandler = () => setNewShowIfWrong(!newShowIfWrong);
-    // const isExists = (value) => {
-    //     for (let question of newQuestions) {
-    //         if (question._id === value) return true;
-    //     }
-    //     return false;
-    // }
+
     const questionSelectedHandler = useCallback((item, value) => {
-        // value ? newQuestions.push(item) : newQuestions.pop(item);
-        console.log("value", value);
+        console.log('item >', item);
         if (!value) {
-            const foundTest = newQuestions.find(question => question._id === item._id);
+            const foundTest = newQuestions.filter(question => question._id === item._id);
+            console.log('Found Test', foundTest);
             const indexOfTest = newQuestions.indexOf(foundTest);
+            console.log('Index of Test', indexOfTest);
             const temp = newQuestions.splice(indexOfTest, 1);
             setQuestions(temp);
             console.log('newQuestions State >', temp);
@@ -124,30 +121,29 @@ const EditTestView = props => {
             newQuestions.push(item)
             console.log(newQuestions);
         }
-    },[setQuestions,newQuestions])
+    }, [setQuestions, newQuestions])
     const setListValue = useCallback(() => {
-        console.log("in set List value",newQuestions);
-            const temp = questions.map((value, index) => ({
+        console.log("in set List value", newQuestions);
+        const temp = questions.map((value, index) => ({
             id: value._id,
             render: <QuestionShortened {...value} index={index} />,
             value: value,
-            isSelected: newQuestions.map(q=>q._id).indexOf(value._id)>-1,// isExists(value._id),
+            isSelected: newQuestions.map(q => q._id).indexOf(value._id) > -1,// isExists(value._id),
             onChange: questionSelectedHandler,
         }))
         setList(temp);
-    }, [setList,questions,newQuestions,questionSelectedHandler])
-    
-    const onFullShowHandler = () => {setShowModal(!showModal);}
+    }, [setList, questions, newQuestions, questionSelectedHandler])
 
-    const setIninitalQuestions =useCallback(() =>{
-        test.questions.forEach(q => newQuestions.push(q));
-    },[test.questions,newQuestions])
-    useEffect(()=>{
+    const onFullShowHandler = () => { setShowModal(!showModal); }
+
+    const setIninitalQuestions = useCallback(() => {
+        test?.questions.forEach(q => newQuestions.push(q));
+    }, [newQuestions, test?.questions]) //}, [test.questions, newQuestions])
+    useEffect(() => {
         setIninitalQuestions();
-        setListValue(); 
-        console.log("list",list);
-    },[])
-    
+        setListValue();
+    }, [setIninitalQuestions, setListValue])
+
 
     return (
         <div className="edit-question-view">

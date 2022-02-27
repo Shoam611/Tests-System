@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Btn, Input, Line,RadioButton } from "UIKit";
+import { Btn, Input, Line, RadioButton } from "UIKit";
 import { presentationAxis, questionTypes } from "models/presentationAxis";
 import './editQuestionView.css'
 import AnswersSelector from "./question-form/answerSelector";
@@ -12,28 +12,29 @@ import { updateQuestion } from "Store/actions/question";
 
 const EditQuestionView = (props) => {
     //hooks
-    const [ _ , forceUpdate] = useReducer(x => x + 1, 0)
+    const [, forceUpdate] = useReducer(x => x + 1, 0)
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { id } = useParams();
     //states and fields
     const question = useSelector(state => state.questions.questions).find(q => q._id === id);
-    const axis = presentationAxis.map(item => ({ ...item, isSelected: question?.presentaionAxisId===item.id, render: item.value }));
+    const axis = presentationAxis.map(item => ({ ...item, isSelected: question?.presentaionAxisId === item.id, render: item.value }));
     const topic = useSelector(state => state.topic.topic);
-    const [newAnswers, setNewAwnsers] = useState([]);
+    const [newAnswers] = useState([]);
     //inputs
     const newQuestionText = useInput(question?.questionText);
     const newTextAbove = useInput(question?.textAbove);
     const newTextBelow = useInput(question?.textBelow);
     const tags = useInput(question?.tags.join(' , '))
-    const awnserContentChangedHandler = useCallback((value, id) => {newAnswers.find(i => i.id === id).value = value;}, [newAnswers]);
+    const awnserContentChangedHandler = useCallback((value, id) => { newAnswers.find(i => i.id === id).value = value; }, [newAnswers]);
 
     const handleRemoveAnswer = useCallback((id) => {
         if (newAnswers && newAnswers.length > 2) {
             const index = newAnswers.indexOf(newAnswers.find(i => i.id === id));
-            if (index >= 0) {newAnswers.splice(index, 1);}
+            if (index >= 0) { newAnswers.splice(index, 1); }
             forceUpdate();
-        } }, [newAnswers])
+        }
+    }, [newAnswers])
 
     const getId = useCallback(() => newAnswers.length > 0 ? newAnswers.at(-1).id + 1 : 1, [newAnswers]);
 
@@ -42,39 +43,39 @@ const EditQuestionView = (props) => {
         const id = getId();
         const newAnswer = {
             id: id,
-            render: <AnswerChoice 
-                    value={answer.value ? `${answer.value}` : ''} 
-                    id={id} 
-                    onRemove={handleRemoveAnswer} 
-                    onChange={awnserContentChangedHandler} />,
+            render: <AnswerChoice
+                value={answer.value ? `${answer.value}` : ''}
+                id={id}
+                onRemove={handleRemoveAnswer}
+                onChange={awnserContentChangedHandler} />,
             value: answer?.value ? `${answer.value}` : '',
             isSelected: question.correctAnswerIds.indexOf(answer.id) > -1
         };
         newAnswers.push(newAnswer);
         forceUpdate();
-    }, [newAnswers, handleRemoveAnswer, awnserContentChangedHandler, getId,question?.correctAnswerIds])
+    }, [newAnswers, handleRemoveAnswer, awnserContentChangedHandler, getId, question?.correctAnswerIds])
 
     const getIndexes = (answers) => {
         return answers.map(({ isSelected }, index) => ({ isCorrect: isSelected, index })).filter(({ isCorrect }) => isCorrect).map(({ index }) => index);
     }
 
-    const setInitialAnswers = () => {
+    const setInitialAnswers = useCallback(() => {
         question?.answers.forEach(element => {
             addingAnswerHandler(element);
         });
-    }
+    }, [addingAnswerHandler, question?.answers]);
     const onSubmitHandler = () => {
         if (true) { //futere to be validate
-            const selectedAxis = axis.find(item =>item.isSelected===true).id
-            const newQuestion = new Question(topic.name,question.questionType,newQuestionText.value,newTextAbove.value,newTextBelow.value,tags.value,newAnswers.map(({ value }, index) => ({ value, id: index })),  getIndexes(newAnswers) , selectedAxis);
-            dispatch(updateQuestion(newQuestion,question._id));
+            const selectedAxis = axis.find(item => item.isSelected === true).id
+            const newQuestion = new Question(topic.name, question.questionType, newQuestionText.value, newTextAbove.value, newTextBelow.value, tags.value, newAnswers.map(({ value }, index) => ({ value, id: index })), getIndexes(newAnswers), selectedAxis);
+            dispatch(updateQuestion(newQuestion, question._id));
             navigate(-1);
         }
     }
-    
+
     //side effects
     useEffect(() => { !question && navigate(-1) }, [question, navigate])
-    useEffect(() => { setInitialAnswers() }, []);
+    useEffect(() => { setInitialAnswers() }, [setInitialAnswers]);
 
 
 

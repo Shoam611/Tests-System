@@ -32,17 +32,17 @@ const Dropdown = (props) => {
     //render
     const renderListItems = () => {
         return props.list.map(i => {
-            return <li  key={i.id} onClick={() => handleItemSelect(i)}>{i.value}</li>
+            return <li key={i.id} onClick={() => handleItemSelect(i)}>{i.value}</li>
         })
     }
 
     const renderList = () => {
         if (isOpen) {
-        return (
-            <ul className="list">
-                {renderListItems()}
-            </ul>
-        )
+            return (
+                <ul className="list">
+                    {renderListItems()}
+                </ul>
+            )
         }
         return null;
     }
@@ -65,7 +65,7 @@ const Dropdown = (props) => {
                     <Icon i={"chevron-up"} />
                 </Line>
             </div>
-                {renderList()}
+            {renderList()}
         </div>
     )
 }

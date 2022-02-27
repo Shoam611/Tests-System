@@ -1,7 +1,7 @@
 import Test from "components/Test";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Box, Btn, Input, Line } from "UIKit";
+import { Box, Input, Line } from "UIKit";
 import '../manageQuestionsView.css';
 
 const ManageQuestionView = props => {
