@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { runPostRequest, runPutRequest } from 'services/httpInvoker'
-export const ADD = 'ADD';
-export const FETCH = 'FETCH';
-export const DELETE = 'DELETE';
-export const UPDATE = 'UPDATE';
+export const ADD = 'ADDTEST';
+export const FETCH = 'FETCHTEST';
+export const DELETE = 'DELETETEST';
+export const UPDATE = 'UPDATETEST';
 
 export const addTest = (newTest) => {
     return async (dispatch, getState) => {
