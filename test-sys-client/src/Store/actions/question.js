@@ -18,7 +18,7 @@ export const addQuestion = (newQuestion) => {
 export const fetchQuestions = () => {
     return async (dispatch, getState) => {
         const topic = getState().topic.topic;
-        const response = await axios.get(`http://localhost:4200/questions?topic=${topic._id}`);
+        const response = await axios.get(`http://localhost:4200/questions?topic=${topic.name}`);
         const responseData = await response.data;
         dispatch({ type: FETCH, newQuestions: responseData })
     }

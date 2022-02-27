@@ -23,7 +23,7 @@ class MongoRepository {
     async getAsync(filterquery={}) {
         console.log('filter',filterquery);
         const query = await QuestionModel.find({ sort: '-createdAt' }).where(filterquery);
-        console.log(query);
+        console.log("query: ",query);
         return query;
     }
     //Update

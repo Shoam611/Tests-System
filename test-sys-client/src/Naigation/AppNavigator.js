@@ -7,6 +7,7 @@ import ManageQuestionView from "views/manageQuestionsView";
 import ManageTestsView from "views/manage-tests/manageTestsView";
 import EditQuestionView from "views/editQuestionView";
 import EditTestView from "views/manage-tests/editTestView"
+import QuizReport from "views/reports/quizReport";
 const AppNavigator = () => {
   return (
     <div id="AppNavigatorContainer">
@@ -23,7 +24,7 @@ const AppNavigator = () => {
           <Route path="topics/topics" element={<DefaultView />} />
           <Route path="topics/edit" element={<DefaultView />} />
 
-          <Route path="reports/qweezes" element={<DefaultView />} />
+          <Route path="reports/qweezes" element={<QuizReport />} />
           <Route path="reports/respondant" element={<DefaultView />} />
           <Route path="reports/statistics" element={<DefaultView />} />
 
