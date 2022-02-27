@@ -137,26 +137,16 @@ const EditTestView = props => {
         setList(temp);
     }, [setList,questions,newQuestions,questionSelectedHandler])
     
-    const onFullShowHandler = () => {
-        setShowModal(!showModal);
-    }
-
-    const setInitialSelected=useCallback(()=>{
-        for (const question of newQuestions) {
-            questionSelectedHandler(question,true)
-        }
-    },[newQuestions,questionSelectedHandler])
+    const onFullShowHandler = () => {setShowModal(!showModal);}
 
     const setIninitalQuestions =useCallback(() =>{
-        // console.log("init" , test.questions);
         test.questions.forEach(q => newQuestions.push(q));
     },[test.questions,newQuestions])
     useEffect(()=>{
         setIninitalQuestions();
         setListValue(); 
         console.log("list",list);
-        // setInitialSelected();
-    },[/*setIninitalQuestions,setListValue,setInitialSelected*/])
+    },[])
     
 
     return (

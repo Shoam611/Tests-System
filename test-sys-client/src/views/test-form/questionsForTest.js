@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import QuestionItem from "./questionItem";
 import { Btn, Checkbox, Input } from "UIKit";
