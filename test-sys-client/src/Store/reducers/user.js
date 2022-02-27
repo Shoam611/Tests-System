@@ -7,7 +7,7 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD:
             const users = state.users;
-            users.push(action.newUser)
+            users.push(action.newUser);
             return { ...state, users: users }
 
         case FETCH:

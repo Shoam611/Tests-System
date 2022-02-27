@@ -2,13 +2,14 @@ import useInput from "hooks/useInput";
 import User from "models/UserModel";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { Btn, Input } from "UIKit";
 import { addUser } from "Store/actions/user";
 
 const NewUserForm = props => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { id } = useParams();
     const userFirstName = useInput();
     const userLastName = useInput();
     const userEmail = useInput();
@@ -60,17 +61,18 @@ const NewUserForm = props => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(id);
         if (formValidation()) {
-            const newUser = new User(userFirstName.value, userLastName.value, userEmail.value, userPhoneNumber.value);
+            const newUser = new User(userFirstName.value, userLastName.value, userEmail.value, userPhoneNumber.value, [id], ['User']);
             console.log(newUser);
             dispatch(addUser(newUser));
-            // navigate(); tbd
+            navigate(`/app/qweezes/run/viewTest/${id}`, { replace: false });
         }
     }
 
     return (
-        <div>
-            <h2>Personal Information</h2>
+        <>
+            <h2>Personal Information For Test {id}</h2>
             <h4>First Name</h4>
             <Input placeholder="First name" {...userFirstName} />
             <h4>Last Name</h4>
@@ -81,7 +83,7 @@ const NewUserForm = props => {
             <Input placeholder="Phone Number" {...userPhoneNumber} />
             <p>{errorMessage}</p>
             <Btn onClick={handleSubmit}>Submit</Btn>
-        </div>);
+        </>);
 }
 
 export default NewUserForm;

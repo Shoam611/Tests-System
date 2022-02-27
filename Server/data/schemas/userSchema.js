@@ -3,7 +3,9 @@ const userSchema = new Schema({
     firstName: String,
     lastName: String,
     email: String,
-    phoneNumber: String
+    phoneNumber: String,
+    testsIds: Array,
+    roles: Array
 }, { timestamps: true });
 
 userSchema.statics.deleteByIdAsync = async function (id) {
