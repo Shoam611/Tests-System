@@ -127,8 +127,8 @@ const TestsView = () => {
             <div className="container">
                 <GradientBorder to="left" bottom  >
                     <ul display="row">
-                        <NavLinkItem to="/app/qweezes/create/form">Test Details</NavLinkItem>
-                        <NavLinkItem to="/app/qweezes/create/selectQuestions">Manage Questions</NavLinkItem>
+                        <NavLinkItem to="/qweezes/create/form">Test Details</NavLinkItem>
+                        <NavLinkItem to="/qweezes/create/selectQuestions">Manage Questions</NavLinkItem>
                     </ul>
                 </GradientBorder>
             </div>

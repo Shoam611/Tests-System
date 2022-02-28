@@ -12,14 +12,13 @@ class QuestionsController {
 
   deleteQuestion = ({ body }) => {
     const { id } = body;
-    console.log('in delete controller', id);
     this.questionRepository.DeleteOneAsync(id)
   }
   //--------------------------------------
   getQuestions = async ({ query }) => {
-    console.log('in get questions');
     const { topic } = query;
     let filter = {};
+    console.log(topic);
     if (topic) filter = { topic: topic }
     return await this.questionRepository.getAsync(filter);
   }
