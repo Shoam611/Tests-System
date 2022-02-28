@@ -2,7 +2,7 @@ import Test from "components/Test";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Box, Input, Line } from "UIKit";
-import '../manageQuestionsView.css';
+import './manageTestsView.css';
 
 const ManageQuestionView = props => {
     const topic = useSelector(state => state.topic.topic);
@@ -34,7 +34,7 @@ const ManageQuestionView = props => {
         setOrderBy(-orderBy);
     }
     const renderHeader = () => (
-        <div className='questions-table-header'>
+        <div className='tests-table-header'>
             <div />
             <Box onClick={sortByName}>     <h4> Test Name</h4> </Box>
             <Box onClick={sortByQuestions}>     <h4> No. of Questions</h4> </Box>
@@ -48,7 +48,7 @@ const ManageQuestionView = props => {
     }
 
     return (
-        <div className="mange-question-view">
+        <div className="mange-test-view">
             <h1>Tests for: <span>{topic.name}</span></h1>
 
             <Line>
@@ -57,9 +57,9 @@ const ManageQuestionView = props => {
                 </div>
             </Line>
 
-            <div className='question-wrapper'>
+            <div className='test-wrapper'>
                 {renderHeader()}
-                <div className="questions-container">
+                <div className="tests-container">
                     {renderTests()}
                 </div>
             </div>
