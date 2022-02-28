@@ -38,7 +38,6 @@ const EditTestView = () => {
         e.preventDefault();
         if (formValidation()) {
             const newTest = new Test(newTestType, newLanguage, newManagerEmail.value, newTestName.value, newPassingGrade.value, newHeader.value, newMsgOnSucc.value, newMsgOnFail.value, newShowIfWrong, newEmailSubOnSucc.value, newEmailBodyOnSucc.value, newEmailSubOnFail.value, newEmailBodyOnFail.value, newQuestions);
-            console.log(newTest);
             dispatch(updateTest(newTest, id));
             navigate(-1);
         }
@@ -103,20 +102,16 @@ const EditTestView = () => {
     const checkedHandler = () => setNewShowIfWrong(!newShowIfWrong);
 
     const questionSelectedHandler = useCallback((item, value) => {
-        console.log('item >', item);
         if (!value) {
             const filtered = newQuestions.filter(q => q !== item._id);
             setQuestions(filtered);
-            console.log('newQuestions State >', filtered);
         }
         else {
             newQuestions.push(item._id);
-            console.log(newQuestions);
         }
     }, [setQuestions, newQuestions])
 
     const setListValue = useCallback(() => {
-        console.log("in set List value", newQuestions);
         const temp = questions.map((value, index) => ({
             id: value._id,
             render: <QuestionShortened {...value} index={index} />,

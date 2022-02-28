@@ -37,8 +37,6 @@ const QuestionsForTest = (props) => {
             .filter(tag => (!!tag) && tag);
 
         let newArray = fetchedData.filter(question => question.tags.find(tag => tagsArray.includes(tag.toUpperCase())));
-
-        console.log(newArray);
         buildDisplayList(newArray);
         if (e.target.value.trim().length === 0) {
             buildDisplayList(fetchedData);

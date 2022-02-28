@@ -106,7 +106,6 @@ const CreateQuestionForm = () => {
         if (formValidation()) {
             const selectedAxisId = axis.find(item => item.isSelected === true).id;
             const newQuestion = new Question(topic, questionType, Question_text.value, Text_above_question.value, Text_below_question.value, tags.value, answers.map(({ value }, index) => ({ value, id: index })), getIndexes(answers), selectedAxisId,);
-            console.log(newQuestion);
             dispatch(addQuestion(newQuestion))
         }
     }

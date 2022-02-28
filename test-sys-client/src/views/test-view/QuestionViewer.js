@@ -23,7 +23,6 @@ const QuestionViewer = props => {
     }, [renderQuestions]);
     return (
         <>
-            {console.log(props)}
             <h4>{props.textAbove}</h4>
             <h4>{props.questionText}</h4>
             <h4>{props.textBelow}</h4>

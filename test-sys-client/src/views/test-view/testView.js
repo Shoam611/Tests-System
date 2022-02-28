@@ -26,7 +26,6 @@ const TestView = () => {
                 {questionsViews[currectQuestion]}
                 <Btn onClick={onPrev}>Previous</Btn>
                 {questionsViews.length <= currectQuestion ? <Btn>Submit</Btn> : <Btn onClick={onNext}>Next</Btn>}
-                {console.log(questionsViews.length, currectQuestion)}
             </div>)
         }
         return (

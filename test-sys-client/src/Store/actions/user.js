@@ -7,10 +7,8 @@ export const UPDATE = 'UPDATETEST';
 
 export const addUser = (newUser) => {
     return async (dispatch, getState) => {
-        console.log('posting...');
         const response = await runPostRequest('http://localhost:4200/users', { newUser: newUser });
         const _id = await response.data;
-        console.log("added ", _id);
         dispatch({ type: ADD, newUser: { _id, ...newUser } })
     }
 }

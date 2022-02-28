@@ -7,10 +7,9 @@ export const UPDATE = 'UPDATEQUESTION';
 
 export const addQuestion = (newQuestion) => {
     return async (dispatch, getState) => {
-        console.log('posting...');
+
         const response = await runPostRequest('http://localhost:4200/questions', { newQuestion: newQuestion });
         const _id = await response.data;
-        console.log("added ", _id);
         dispatch({ type: ADD, newQuestion: { _id, ...newQuestion } })
     }
 }

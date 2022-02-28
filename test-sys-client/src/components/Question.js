@@ -8,15 +8,13 @@ import './Question.css'
 const Question = (props) => {
     const [isModalOn, setIsModalOn] = useState(false);
     const showModal = useCallback(() => {
-        console.log('setting modal to ', !isModalOn);
         setIsModalOn(!isModalOn)
     }, [setIsModalOn, isModalOn])
     useEffect(() => {
         if (isModalOn) {
             window.addEventListener('click', showModal)
-            console.log('registered');
         }
-        return () => { window.removeEventListener('click', showModal); console.log('unregistered'); }
+        return () => { window.removeEventListener('click', showModal); }
     }, [isModalOn, showModal]);
     const setBackgroundLocation = () => { }
     const location = useLocation();
@@ -31,10 +29,8 @@ const Question = (props) => {
         <Box >
             {isModalOn && <QuestionModal {...props} />}
             <div className='questions-container-item'>
-                {props.isAnActiveQuestion ? <Icon i={'check'} /> : /*<Btn i="times" />*/ <div />}
-                {/* <Link to={`/qmodal/${props._id}`} state={{ bg: location }}> */}
+                {props.isAnActiveQuestion ? <Icon i={'check'} /> :  <div />}
                     <h4 onClick={showModal}> {props.questionText}</h4>
-                {/* </Link> */}
                 <h4> {new Date(props.updatedAt).toDateString()}</h4>
                 <h4> {questionTypes.find(type => type.id === props.questionType).value}</h4>
                 <Btn i='' onClick={()=>{navigate(`editQuestion/${props._id}`)}}>Edit</Btn>

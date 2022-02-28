@@ -6,11 +6,9 @@ export const DELETE = 'DELETETEST';
 export const UPDATE = 'UPDATETEST';
 
 export const addTest = (newTest) => {
-    return async (dispatch, getState) => {
-        console.log('posting...');
+    return async (dispatch) => {
         const response = await runPostRequest('http://localhost:4200/tests', { newTest: newTest });
         const _id = await response.data;
-        console.log("added ", _id);
         dispatch({ type: ADD, newTest: { _id, ...newTest } })
     }
 }
@@ -26,7 +24,6 @@ export const fetchTests = () => {
 
 export const updateTest = (newTest, id) => {
     return async (dispatch) => {
-        console.log('puting...');
         await runPutRequest('http://localhost:4200/tests', { newTest, id });
         dispatch({ type: UPDATE, newTest, id });
     }

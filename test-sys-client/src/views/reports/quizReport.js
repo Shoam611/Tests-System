@@ -75,10 +75,7 @@ const TestItem = (props) => {
         const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
         return new Date(inputDate).toLocaleDateString('en-EN', options);
     }
-    const generateReport = () => {
-        console.log(props._id);
-
-    }
+    const generateReport = () => { }
     return (
         <Box>
             <div className="tests-container-item" onClick={generateReport}>

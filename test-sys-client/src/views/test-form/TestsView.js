@@ -54,7 +54,6 @@ const TestsView = () => {
         e.preventDefault();
         if (formValidation()) {
             const newTest = new Test(testType, lang, fields.Manager_email.value, fields.Test_name.value, fields.Passing_grade.value, fields.Test_header.value, fields.Text_msgOnSuccess.value, fields.Text_msgOnFailure.value, toShowMistakes, fields.Email_succSub.value, fields.Email_succBody.value, fields.Email_failSub.value, fields.Email_failBody.value, questions);
-            console.log(newTest);
             dispatch(addTest(newTest));
         }
     }

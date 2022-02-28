@@ -51,7 +51,6 @@ const NewUserForm = props => {
             return false;
         }
         if (!ValidatePhoneNumber(userPhoneNumber.value)) {
-            console.log(userPhoneNumber.value);
             setErrorMessage('Invalid Phone Number.');
             return false;
         }
@@ -61,10 +60,8 @@ const NewUserForm = props => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(id);
         if (formValidation()) {
             const newUser = new User(userFirstName.value, userLastName.value, userEmail.value, userPhoneNumber.value, [id], ['User']);
-            console.log(newUser);
             dispatch(addUser(newUser));
             navigate(`/app/qweezes/run/viewTest/${id}`, { replace: false });
         }

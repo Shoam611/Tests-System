@@ -22,19 +22,16 @@ const ManageQuestionView = props => {
         const temp = viewedTests.sort((t1, t2) => t1.name > t2.name ? orderBy : -orderBy).slice(0, 10);
         setViewedTests(temp);
         setOrderBy(-orderBy);
-        console.log(temp);
     }
     const sortByQuestions = () => {
         const temp = viewedTests.sort((t1, t2) => t1.questions.length > t2.questions.length ? orderBy : -orderBy).slice(0, 10);
         setViewedTests(temp);
         setOrderBy(-orderBy);
-        console.log(temp);
     }
     const sortByDateString = (key) => {
         const temp = viewedTests.sort((t1, t2) => new Date(t1[key]) > new Date(t2[key]) ? orderBy : -orderBy).slice(0, 10);
         setViewedTests(temp);
         setOrderBy(-orderBy);
-        console.log('key:', key, 'first value:', temp[0][key]);
     }
     const renderHeader = () => (
         <div className='questions-table-header'>
