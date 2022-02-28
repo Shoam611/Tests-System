@@ -15,16 +15,14 @@ const ManageQuestionView = (props) => {
     }
     const [orderBy, setOrderBy] = useState(1);
     const sortByKey = (key) => {
-        const temp = questions.sort((q1, q2) => q1[key] > q2[key] ? orderBy : -orderBy);//.slice(0,5);
+        const temp = viewedQuestions.sort((q1, q2) => q1[key] > q2[key] ? orderBy : -orderBy);//.slice(0,5);
         setViewedQuestions(temp);
         setOrderBy(-orderBy)
-        console.log('key:', key, 'first value:', temp[0][key]);
     }
     const sortByDateString = (key) => {
-        const temp = questions.sort((q1, q2) => new Date(q1[key]) > new Date(q2[key]) ? orderBy : -orderBy)//.slice(0,5);
+        const temp = viewedQuestions.sort((q1, q2) => new Date(q1[key]) > new Date(q2[key]) ? orderBy : -orderBy)//.slice(0,5);
         setViewedQuestions(temp);
         setOrderBy(-orderBy);
-        console.log('key:', key, 'first value:', temp[0][key]);
     }
     const filterList = (e) => {
         let tags = e.target.value.toUpperCase();
