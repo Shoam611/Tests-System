@@ -1,17 +1,14 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 const { Checkbox } = require("UIKit")
 
 const QuestionViewer = props => {
     const [list, setList] = useState([]);
 
-    const answerChangeHandler = () => {
+    const answerChangeHandler =useCallback(() => { },[])
 
-    }
-
-    const renderQuestions = () => {
-        console.log(props);
-        const temp = props.answers.map((answer, index) => ({
+    const renderQuestions =useCallback(() => {
+        const temp = props.answers.map((answer) => ({
             id: answer._id,
             render: <p>{answer.value}</p>,
             value: answer,
@@ -19,11 +16,11 @@ const QuestionViewer = props => {
             onChange: answerChangeHandler
         }))
         setList(temp)
-    }
+    },[answerChangeHandler,props.answers])
 
     useEffect(() => {
         renderQuestions();
-    }, [setList]);
+    }, [renderQuestions]);
     return (
         <>
             {console.log(props)}

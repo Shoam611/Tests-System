@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { Line, Icon, Box } from "UIKit"
+import { Line, Icon } from "UIKit"
 import './header.css'
 const Header = (props) => {
   return (

@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import { Btn } from "UIKit";
 import QuestionViewer from "./QuestionViewer";
 import './testView.css'
-const TestView = prop => {
+const TestView = () => {
     const { id } = useParams();
     const test = useSelector(state => state.tests.tests).find(t => t._id === id);
     const questions = useSelector(state => state.questions.questions).filter(q => test.questions.includes(q._id));
@@ -14,7 +14,7 @@ const TestView = prop => {
 
     const setInitialTest = useCallback(() => {
         setViewedTest(test);
-    }, [setViewedTest])
+    }, [setViewedTest,test])
 
     const onPrev = () => setCurrectQuestion(prevState => { return prevState - 1 })
     const onNext = () => setCurrectQuestion(prevState => { return prevState + 1 })
@@ -37,17 +37,17 @@ const TestView = prop => {
         );
     }
 
-    const initialQuestionsComponents = () => {
+    const initialQuestionsComponents = useCallback(() => {
         const temp = questions?.map((q) => (
             <QuestionViewer key={q._id} {...q} />
         ));
         questionsViews.push(...temp);
-    }
+    },[questions,questionsViews])
 
     useEffect(() => {
         setInitialTest();
         initialQuestionsComponents();
-    }, [setInitialTest]);
+    }, [setInitialTest,initialQuestionsComponents]);
 
     return renderQuestions();
 }

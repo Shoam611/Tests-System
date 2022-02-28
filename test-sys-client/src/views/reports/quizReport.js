@@ -12,7 +12,7 @@ const QuizReport = () => {
     const maxDate = useInput();
     useEffect(() => {
         setViewedTests(tests)
-    }, [])
+    }, [setViewedTests,tests])
 
     //sorts
     const sortByKey = (key) => {

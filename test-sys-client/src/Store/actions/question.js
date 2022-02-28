@@ -27,7 +27,7 @@ export const fetchQuestions = () => {
 export const updateQuestion = (newQuestion, id) => {
     return async (dispatch) => {
         try {
-            const response = await axios.put('http://localhost:4200/questions', { newQuestion, id });
+             await axios.put('http://localhost:4200/questions', { newQuestion, id });
             dispatch({ type: UPDATE, newQuestion, id });
         } catch { console.error('falied sending put request to server'); dispatch({ type: 'x' }) }
     }

@@ -9,7 +9,7 @@ import { updateTest } from "Store/actions/test";
 import ShowQuestionsModal from "../../components/ShowQuestionsModal";
 import QuestionShortened from "views/manage-tests/QuestionShortened";
 const { useNavigate, useParams, } = require("react-router-dom");
-const EditTestView = props => {
+const EditTestView = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { id } = useParams();
@@ -96,10 +96,6 @@ const EditTestView = props => {
             setErrorMessage('Email On Failure Fields Cannot Be Empty!');
             return false;
         }
-        // if (questions.length === 0) {
-        //     setErrorMessage('Must Select Questions In The "Manage Questions" Tab.');
-        //     return false;
-        // }
         setErrorMessage('');
         return true;
     }
@@ -135,7 +131,7 @@ const EditTestView = props => {
 
     const setIninitalQuestions = useCallback(() => {
         test?.questions.forEach(q => newQuestions.push(q));
-    }, [])
+    }, [newQuestions,test?.questions])
     
     useEffect(() => {
         setIninitalQuestions();

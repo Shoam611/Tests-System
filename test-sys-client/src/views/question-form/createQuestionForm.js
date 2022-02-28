@@ -1,5 +1,5 @@
 import useInput from 'hooks/useInput';
-import { Btn, Dropdown, Input, Line, RadioButton, } from 'UIKit';
+import { Dropdown, Input, Line, RadioButton, } from 'UIKit';
 import { useEffect, useState, useReducer, useCallback } from 'react';
 import Question from 'models/QuestionModel';
 import AnswersSelector from './answerSelector';
@@ -11,12 +11,12 @@ import { presentationAxis } from 'models/presentationAxis';
 const CreateQuestionForm = () => {
     //hooks
     const dispatch = useDispatch();
-    const [_, forceUpdate] = useReducer(x => x + 1, 0);
+    const [, forceUpdate] = useReducer(x => x + 1, 0);
     const topic = useSelector(state => state.topic.topic)
     //states
     const [questionTypes, setQuestionTypes] = useState(null);   //list of q types available
     const [questionType, setQuestionType] = useState(null);     //selected q type
-    const [answers, setAnswers] = useState([]);
+    const [answers] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
     //inputs
     const Question_text = useInput();
