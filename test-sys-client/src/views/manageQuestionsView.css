@@ -1,7 +1,7 @@
 .mange-question-view {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 150px 1fr var(--gap-m);
+  grid-template-rows: 150px 50px 1fr var(--gap-m);
   align-items: center;
   padding: 0 10%;
   height: 100%;

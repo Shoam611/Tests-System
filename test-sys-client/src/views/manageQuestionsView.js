@@ -1,6 +1,6 @@
 import Question from '../components/Question';
 import { useSelector } from 'react-redux';
-import { Box } from 'UIKit';
+import { Box, Input, Line } from 'UIKit';
 import './manageQuestionsView.css'
 import { useEffect, useState } from 'react';
 const ManageQuestionView = (props) => {
@@ -15,15 +15,23 @@ const ManageQuestionView = (props) => {
     }
     const [orderBy, setOrderBy] = useState(1);
     const sortByKey = (key) => {
-        const temp = questions.sort((q1, q2) => q1[key] > q2[key] ? orderBy : -orderBy);
+        const temp = questions.sort((q1, q2) => q1[key] > q2[key] ? orderBy : -orderBy);//.slice(0,5);
         setViewedQuestions(temp);
         setOrderBy(-orderBy)
-      
+        console.log('key:', key, 'first value:', temp[0][key]);
     }
     const sortByDateString = (key) => {
         const temp = questions.sort((q1, q2) => new Date(q1[key]) > new Date(q2[key]) ? orderBy : -orderBy)//.slice(0,5);
         setViewedQuestions(temp);
         setOrderBy(-orderBy);
+        console.log('key:', key, 'first value:', temp[0][key]);
+    }
+    const filterList = (e) => {
+        let tags = e.target.value.toUpperCase();
+        let tagsArray = tags.split(',').map(tag => tag.trim()).filter(tag => (!!tag) && tag);
+        const newArray = questions.filter(question => question.tags.find(tag => tagsArray.includes(tag.toUpperCase())));
+        setViewedQuestions(newArray)
+        if (e.target.value.trim().length === 0) {setViewedQuestions(questions)}
     }
     const renderHeader = () => (
         <div className='questions-table-header'>
@@ -38,6 +46,11 @@ const ManageQuestionView = (props) => {
     return (
         <div className='mange-question-view'>
             <h1>Questions for: <span>{topic.name}</span></h1>
+            <Line>
+                <div style={{ width: '250px', margin: 'var(--gap-m) 0', padding: 0 }}>
+                    <Input placeholder="Search by tags..." onChange={filterList} />
+                </div>
+            </Line>
             <div className='question-wrapper'>
                 {renderHeader()}
                 <div className='questions-container '>
