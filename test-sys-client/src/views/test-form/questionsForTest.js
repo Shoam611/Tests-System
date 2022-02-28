@@ -11,10 +11,20 @@ const QuestionsForTest = (props) => {
     const questions = useSelector(state => state.questions.questions);
     useEffect(() => { setFetchedData(questions); }, [questions, setFetchedData])
     //handlers
-    const questionSelectedHandler = (item, value) => {
-        props.onQuestionSelected(item, value);
+    const { onQuestionSelected } = props
+    const questionSelectedHandler = useCallback((item, value) => {
+        onQuestionSelected(item, value);
         value ? setSelectedCounter(prevState => { return prevState + 1 }) : setSelectedCounter(prevState => { return prevState - 1 });
-    }
+    }, [onQuestionSelected, setSelectedCounter])
+    const isExists = useCallback((value) => {
+        for (let question of props.questions) {
+            if (question === value) {
+                setSelectedCounter(prevState => { return prevState + 1 });
+                return true;
+            }
+        }
+        return false;
+    },[setSelectedCounter,props.questions])
     const buildDisplayList = useCallback((list) => {
         const temp = list.map((value, index) => ({
             id: value._id,
@@ -24,7 +34,7 @@ const QuestionsForTest = (props) => {
             onChange: questionSelectedHandler,
         }))
         setList(temp);
-    }, []);
+    }, [isExists, questionSelectedHandler]);
     //Side Effects
     useEffect(() => {
         buildDisplayList(fetchedData);
@@ -42,15 +52,7 @@ const QuestionsForTest = (props) => {
             buildDisplayList(fetchedData);
         }
     }
-    const isExists = (value) => {
-        for (let question of props.questions) {
-            if (question === value) {
-                setSelectedCounter(prevState => { return prevState + 1 });
-                return true;
-            }
-        }
-        return false;
-    }
+
     return (
         <div className='AddTForm'>
             <h1>Choose Questions</h1>
