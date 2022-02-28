@@ -5,5 +5,15 @@
   padding: 0 10%;
   max-height: auto;
   background-color: var(--background-light);
-
+height: 100%;
+}
+.tests-wrapper{
+  height: max-content;
+  background-color: #fff;
+  padding: 0 var(--gap-m);
+  border-radius: 2em;
+}
+.tests-container {
+  border-radius: 2em;
+  background-color: var(--background-light);
 }
