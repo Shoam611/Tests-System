@@ -18,7 +18,7 @@ const Test = (props) => {
                 <h4>{normalizeDate(props.updatedAt)}</h4>
                 <div className="actions">
                     <Btn i='' onClick={() => { navigate(`editTest/${props._id}`, { replace: false }) }}>Edit</Btn>
-                    <Btn i='' onClick={() => { navigate(`/app/qweezes/run/${props._id}`, { replace: false }) }}>Run</Btn>
+                    <Btn i='' onClick={() => { navigate(`/qweezes/run/${props._id}`, { replace: false }) }}>Run</Btn>
                 </div>
             </div>
         </Box>

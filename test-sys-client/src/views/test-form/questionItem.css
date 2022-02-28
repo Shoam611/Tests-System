@@ -1,4 +1,4 @@
-.expense-item {
+.question-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -8,11 +8,11 @@
   color: black;
 }
 
-.active .expense-item {
+.active .question-item {
   background-color: #a9deab;
 }
 
-.expense-date {
+.question-index {
   display: flex;
   flex-direction: column;
   width: 3.5rem;
@@ -25,16 +25,16 @@
   justify-content: center;
 }
 
-button.expense-date {
+button.question-index {
   height: 2.5rem;
 }
 
-button.expense-date:hover {
+button.question-index:hover {
   background-color: #7157b18a;
   transition: background-color .2s;
 }
 
-.expense-item__description {
+.question-item__description {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -47,7 +47,7 @@ button.expense-date:hover {
 }
 
 @media (min-width: 580px) {
-  .expense-item__description {
+  .question-item__description {
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;

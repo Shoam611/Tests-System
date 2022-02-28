@@ -9,6 +9,7 @@ const QuestionsForTest = (props) => {
     const [list, setList] = useState([]);
     const [selectedCounter, setSelectedCounter] = useState(0);
     const questions = useSelector(state => state.questions.questions);
+    const topic = useSelector(state => state.topic.topic);
     useEffect(() => { setFetchedData(questions); }, [questions, setFetchedData])
     //handlers
     const { onQuestionSelected } = props
@@ -61,7 +62,7 @@ const QuestionsForTest = (props) => {
                     Questions Selected:{selectedCounter}
                     <Input type="text" onChange={filterList} placeholder="Filter By Tags..." />
                 </div>
-                <Checkbox list={list} />
+                {fetchedData.length === 0 ? <h4>No Quesitons Found For Topic: {topic.name}</h4> : <Checkbox list={list} />}
                 <Btn i="chevron-left" onClick={() => props.prev()}>Back</Btn>
             </div>
         </div>

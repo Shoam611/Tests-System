@@ -1,14 +1,17 @@
 import { Btn, Dropdown, Input } from 'UIKit';
 import { testTypes, languages } from "models/presentationAxis";
 import './createQuestionForm.css';
+import { useSelector } from 'react-redux';
 
 const CreateTestForm = (props) => {
+    const topic = useSelector(state => state.topic.topic);
+
     return (
         <div className='AddTForm'>
             <h1>New Test</h1>
             <form>
                 <div className='form-container' >
-                    <label>Topic: {props.topic}</label>
+                    <label>Topic: {topic.name}</label>
                     <label>
                         Type of Test:
                         <Dropdown list={testTypes} selected={props.testType} onChange={(value) => props.onTestTypeChange(value)} />

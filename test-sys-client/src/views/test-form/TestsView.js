@@ -13,17 +13,17 @@ import { addTest } from "Store/actions/test";
 
 const TestsView = () => {
     //states
-    const [testData] = useState('');
+    const [testData, setTestData] = useState('');
     const [testType, setTestType] = useState(0);
     const [lang, setLang] = useState(0);
     const [toShowMistakes, setToShowMistakes] = useState(false);
-    const [questions] = useState([]);
+    const [questions, setQuestions] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
     const [, setSelectedCounter] = useState(0);
 
     const dispatch = useDispatch();
     let navigate = useNavigate();
-    const topic = useSelector(state=>state.topic.topic)
+    const topic = useSelector(state => state.topic.topic)
     const fields = {
         Manager_email: useInput(),
         Test_name: useInput(),
@@ -55,7 +55,27 @@ const TestsView = () => {
         if (formValidation()) {
             const newTest = new Test(testType, lang, fields.Manager_email.value, fields.Test_name.value, fields.Passing_grade.value, fields.Test_header.value, fields.Text_msgOnSuccess.value, fields.Text_msgOnFailure.value, toShowMistakes, fields.Email_succSub.value, fields.Email_succBody.value, fields.Email_failSub.value, fields.Email_failBody.value, questions);
             dispatch(addTest(newTest));
+            resetForms();
+            navigate('/qweezes/create/form');
         }
+    }
+    const resetForms = () => {
+        setTestData('');
+        setTestType(0);
+        setLang(0);
+        setToShowMistakes(false);
+        setQuestions([]);
+        setSelectedCounter(0);
+        fields.Manager_email.setValue('');
+        fields.Test_name.setValue('');
+        fields.Passing_grade.setValue('');
+        fields.Test_header.setValue('');
+        fields.Text_msgOnSuccess.setValue('');
+        fields.Text_msgOnFailure.setValue('');
+        fields.Email_succSub.setValue('');
+        fields.Email_succBody.setValue('');
+        fields.Email_failSub.setValue('');
+        fields.Email_failBody.setValue('');
     }
     //RegEx validation
     const ValidateEmail = (mail) => {

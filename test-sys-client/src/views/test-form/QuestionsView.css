@@ -47,7 +47,7 @@ ul[display="row"] {
   background: var(--light-color);
 }
 
-.expenses-list {
+.questions-list {
   list-style: none;
   padding: 0;
 }
