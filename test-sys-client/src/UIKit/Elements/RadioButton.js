@@ -32,11 +32,11 @@ const RadioItem = ({ id, render, onChange, isSelected }) => {
 
     return (
         <li key={id} style={{ marginTop: "10px" }}>
-            <Line justify="start">
+            <Line >
                 <div onClick={onSelectionChangedHandler}>
                     <i className={isSelected ? "fas fa-circle" : "far fa-circle"}></i>
                 </div>
-                <div >{render}</div>
+                <div style={{width:'100%'}}>{render}</div>
             </Line>
         </li>)
 }

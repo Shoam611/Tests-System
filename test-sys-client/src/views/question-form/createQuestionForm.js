@@ -14,8 +14,8 @@ const CreateQuestionForm = () => {
     const [, forceUpdate] = useReducer(x => x + 1, 0);
     const topic = useSelector(state => state.topic.topic)
     //states
-    const [questionTypes, setQuestionTypes] = useState(null);   //list of q types available
-    const [questionType, setQuestionType] = useState(null);     //selected q type
+    const [questionTypes, setQuestionTypes] = useState(null); //list of q types available
+    const [questionType, setQuestionType] = useState(null);   //selected q type
     const [answers] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
     //inputs
@@ -24,6 +24,14 @@ const CreateQuestionForm = () => {
     const Text_below_question = useInput();
     const tags = useInput();
     //helpers
+    const clear = () =>{
+        setQuestionType(null)
+        Question_text.setValue('')  ;
+        Text_above_question.setValue('')
+        tags.setValue('')
+        Text_below_question.setValue('');
+        setErrorMessage('')
+    }
     const axis = presentationAxis.map(item => ({ ...item, isSelected: false, render: item.value }));
     axis[0].isSelected = true
     const getId = useCallback(() => answers.length > 0 ? answers.at(-1).id + 1 : 1, [answers])
@@ -107,6 +115,7 @@ const CreateQuestionForm = () => {
             const selectedAxisId = axis.find(item => item.isSelected === true).id;
             const newQuestion = new Question(topic, questionType, Question_text.value, Text_above_question.value, Text_below_question.value, tags.value, answers.map(({ value }, index) => ({ value, id: index })), getIndexes(answers), selectedAxisId,);
             dispatch(addQuestion(newQuestion))
+            clear()
         }
     }
 
