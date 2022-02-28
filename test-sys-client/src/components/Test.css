@@ -1,6 +1,6 @@
 .tests-container-item {
     display: grid;
-    grid-template-columns: 80px 1fr 180px 9em 80px;
+    grid-template-columns: 80px 1fr 180px 9em 100px;
     grid-template-rows: 100%;
     margin: 0;
     padding: 0;
@@ -12,4 +12,10 @@
     margin: 0;
     padding: 0;
     height: 100%;
+}
+
+.actions {
+    display: flex;
+    margin: 0;
+    padding: 0;
 }
