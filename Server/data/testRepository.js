@@ -23,12 +23,6 @@ class TestsMongoRepository {
     }
 
     //Read
-    async getOneAsync(id) {
-        const query = TestModel.findOne({ _id: id });
-        const doc = await query.next();
-        return doc;
-    }
-
     async getAsync(filterquery = {}) {
         console.log('filter', filterquery);
         const query = TestModel.find({ sort: '-createdAt' }).where(filterquery);

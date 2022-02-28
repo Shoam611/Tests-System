@@ -17,9 +17,15 @@ const testsController = container.resolve('testsController');
 app.post('/tests', async (req, res) => { testsController.addTest(req); res.send(200) });
 app.get('/tests', async (req, res) => { const result = await testsController.getTests(req); res.send(result).status(200) });
 app.delete('/tests', async (req, res) => { testsController.deleteTest(req); res.send(200) });
-app.put('/tests', async (req, res) => { const id = await testsController.updateTest(req); res.send(id.toString()).status(200); console.log('THIS IS THE ID', id); });
+app.put('/tests', async (req, res) => { const id = await testsController.updateTest(req); res.send(id.toString()).status(200); });
 
 const topicController = container.resolve('topicController');
-app.get('/topic', async (req, res) => { res.send(JSON.stringify(await topicController.getDefaultTopic())); })
+app.get('/topic', async (req, res) => { res.send(JSON.stringify(await topicController.getDefaultTopic())); });
+
+const usersController = container.resolve('usersController');
+app.post('/users', async (req, res) => { usersController.addUser(req); res.send(200) });
+app.get('/users', async (req, res) => { const result = await usersController.getUsers(req); res.send(result).status(200) });
+app.delete('/users', async (req, res) => { usersController.deleteUser(req); res.send(200) });
+app.put('/users', async (req, res) => { const id = await usersController.updateUser(req); res.send(id.toString()).status(200); });
 
 module.exports = app;

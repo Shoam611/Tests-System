@@ -8,6 +8,8 @@ import ManageTestsView from "views/manage-tests/manageTestsView";
 import EditQuestionView from "views/editQuestionView";
 import EditTestView from "views/manage-tests/editTestView"
 import QuizReport from "views/reports/quizReport";
+import NewUserForm from "views/test-view/newUserForm";
+import TestView from "views/test-view/testView";
 const AppNavigator = () => {
   return (
     <div id="AppNavigatorContainer">
@@ -20,6 +22,8 @@ const AppNavigator = () => {
           <Route path="qweezes/create/*" element={<TestsView />} />
           <Route path="qweezes/edit" element={<ManageTestsView />} />
           <Route path="qweezes/edit/editTest/:id" element={<EditTestView />} />
+          <Route path="qweezes/run/:id" element={<NewUserForm />} />
+          <Route path="qweezes/run/viewTest/:id" element={<TestView />} />
 
           <Route path="topics/topics" element={<DefaultView />} />
           <Route path="topics/edit" element={<DefaultView />} />
