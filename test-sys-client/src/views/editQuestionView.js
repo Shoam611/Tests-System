@@ -37,7 +37,6 @@ const EditQuestionView = () => {
     }, [newAnswers])
 
     const getId = useCallback(() => newAnswers.length > 0 ? newAnswers.at(-1).id + 1 : 1, [newAnswers]);
-useEffect(()=>{console.log(question);})
     const addingAnswerHandler = useCallback((answer = {}) => {
         if (newAnswers.length >= 6) return;
         const id = getId();

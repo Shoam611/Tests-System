@@ -1,11 +1,9 @@
-// import Test from "components/Test";
 import useInput from "hooks/useInput";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Box, Input, Line } from "UIKit";
 import './quizReport.css'
-const QuizReport = (prop) => {
-    // const [quizesRecords, setQuizRecords] = useState([]);
+const QuizReport = () => {
     const topic = useSelector(state => state.topic.topic)
     const tests = useSelector(state => state.tests.tests);
     const [viewedTests, setViewedTests] = useState([]);
@@ -13,33 +11,28 @@ const QuizReport = (prop) => {
     const minDate = useInput();
     const maxDate = useInput();
     useEffect(() => {
-        console.log(tests);
         setViewedTests(tests)
     }, [])
 
     //sorts
     const sortByKey = (key) => {
-        const temp = tests.sort((q1, q2) => q1[key] > q2[key] ? orderBy : -orderBy);//.slice(0,5);
+        const temp = tests.sort((q1, q2) => q1[key] > q2[key] ? orderBy : -orderBy);
         setViewedTests(temp);
         setOrderBy(-orderBy)
-        console.log('key:', key, 'first value:', temp[0][key]);
     }
     const sortByDateString = (key) => {
-        const temp = tests.sort((q1, q2) => new Date(q1[key]) > new Date(q2[key]) ? orderBy : -orderBy)//.slice(0,5);
+        const temp = tests.sort((q1, q2) => new Date(q1[key]) > new Date(q2[key]) ? orderBy : -orderBy)
         setViewedTests(temp);
         setOrderBy(-orderBy);
-        // console.log('key:', key, 'first value:', temp[0][key]);
-        console.log(minDate.value);
     }
     const sortByArrayLength = (key) => {
-        const temp = tests.sort((q1, q2) => q1[key].length > q2[key].length ? orderBy : -orderBy)//.slice(0,5);
-        setViewedTests(temp);
+        const temp = tests.sort((q1, q2) => q1[key].length > q2[key].length ? orderBy : -orderBy);
         setOrderBy(-orderBy);
-        console.log('key:', key, 'first value:', temp[0][key]);
+        setViewedTests(temp)
     }
     //renderers
     const renderTests = () => {
-        return (viewedTests.length === 0 ? <h2>No Questions Available For The Selected Topic: {topic.name}.</h2> :
+        return (viewedTests.length === 0 ? <h2>No Tests Available For The Selected Topic: {topic.name}.</h2> :
             viewedTests.map((t) => <TestItem key={t._id} {...t} />))
     }
     const renderHeader = () => (
@@ -82,7 +75,6 @@ const TestItem = (props) => {
         const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
         return new Date(inputDate).toLocaleDateString('en-EN', options);
     }
-    const dispatch=useDispatch()
     const generateReport = () => {
         console.log(props._id);
 
@@ -92,7 +84,7 @@ const TestItem = (props) => {
             <div className="tests-container-item" onClick={generateReport}>
                 <div />
                 <h4>{props.name}</h4>
-                <h4>{props.questions.length} Questions</h4>
+                <h4>{props?.questions.length} s</h4>
                 <h4>{normalizeDate(props.updatedAt)}</h4>
             </div>
         </Box>

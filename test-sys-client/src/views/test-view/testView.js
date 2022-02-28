@@ -1,22 +1,20 @@
 import { useCallback, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router";
 import { Btn } from "UIKit";
 import QuestionViewer from "./QuestionViewer";
 import './testView.css'
 const TestView = prop => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
     const { id } = useParams();
     const test = useSelector(state => state.tests.tests).find(t => t._id === id);
     const questions = useSelector(state => state.questions.questions).filter(q => test.questions.includes(q._id));
     const [viewedTest, setViewedTest] = useState();
-    const [questionsViews, setQuestionsViews] = useState([]);
+    const [questionsViews] = useState([]);
     const [currectQuestion, setCurrectQuestion] = useState(-1);
 
     const setInitialTest = useCallback(() => {
         setViewedTest(test);
-    }, [])
+    }, [setViewedTest])
 
     const onPrev = () => setCurrectQuestion(prevState => { return prevState - 1 })
     const onNext = () => setCurrectQuestion(prevState => { return prevState + 1 })
@@ -51,12 +49,7 @@ const TestView = prop => {
         initialQuestionsComponents();
     }, [setInitialTest]);
 
-    return (
-        <>
-            {/* {console.log(test, questions)} */}
-            {renderQuestions()}
-        </>
-    );
+    return renderQuestions();
 }
 
 export default TestView;
