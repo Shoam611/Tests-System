@@ -10,7 +10,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Question from "models/QuestionModel";
 import { updateQuestion } from "Store/actions/question";
 
-const EditQuestionView = (props) => {
+const EditQuestionView = () => {
     //hooks
     const [, forceUpdate] = useReducer(x => x + 1, 0)
     const navigate = useNavigate();
@@ -37,7 +37,7 @@ const EditQuestionView = (props) => {
     }, [newAnswers])
 
     const getId = useCallback(() => newAnswers.length > 0 ? newAnswers.at(-1).id + 1 : 1, [newAnswers]);
-
+useEffect(()=>{console.log(question);})
     const addingAnswerHandler = useCallback((answer = {}) => {
         if (newAnswers.length >= 6) return;
         const id = getId();
@@ -67,7 +67,7 @@ const EditQuestionView = (props) => {
     const onSubmitHandler = () => {
         if (true) { //futere to be validate
             const selectedAxis = axis.find(item => item.isSelected === true).id
-            const newQuestion = new Question(topic.name, question.questionType, newQuestionText.value, newTextAbove.value, newTextBelow.value, tags.value, newAnswers.map(({ value }, index) => ({ value, id: index })), getIndexes(newAnswers), selectedAxis);
+            const newQuestion = new Question(topic._id, question.questionType, newQuestionText.value, newTextAbove.value, newTextBelow.value, tags.value, newAnswers.map(({ value }, index) => ({ value, id: index })), getIndexes(newAnswers), selectedAxis);
             dispatch(updateQuestion(newQuestion, question._id));
             navigate(-1);
         }

@@ -8,7 +8,7 @@ import QuestionsForTest from "./questionsForTest";
 import { Outlet, Routes, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Test from "models/TestModel";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addTest } from "Store/actions/test";
 
 const TestsView = () => {
@@ -23,6 +23,7 @@ const TestsView = () => {
 
     const dispatch = useDispatch();
     let navigate = useNavigate();
+    const topic = useSelector(state=>state.topic.topic)
     const fields = {
         Manager_email: useInput(),
         Test_name: useInput(),
@@ -37,11 +38,11 @@ const TestsView = () => {
         testType,
         lang,
         toShowMistakes,
-        topic: 'def-topic',
+        topic: topic.name,
     }
     //handlers
-    const handleNextStep = () => navigate("/app/qweezes/create/selectQuestions");
-    const handlePrevStep = () => navigate("/app/qweezes/create/form");
+    const handleNextStep = () => navigate("/qweezes/create/selectQuestions");
+    const handlePrevStep = () => navigate("/qweezes/create/form");
     const testTypeChangedHandler = (e) => setTestType(e);
     const langChangedHandler = (e) => setLang(e);
     const toShowChangedHandler = (e) => setToShowMistakes(!e);

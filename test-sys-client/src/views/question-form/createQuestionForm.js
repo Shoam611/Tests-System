@@ -12,6 +12,7 @@ const CreateQuestionForm = () => {
     //hooks
     const dispatch = useDispatch();
     const [_, forceUpdate] = useReducer(x => x + 1, 0);
+    const topic = useSelector(state => state.topic.topic)
     //states
     const [questionTypes, setQuestionTypes] = useState(null);   //list of q types available
     const [questionType, setQuestionType] = useState(null);     //selected q type
@@ -110,11 +111,7 @@ const CreateQuestionForm = () => {
         }
     }
 
-    const questions = useSelector(state => state.questions.questions)
-    const topic = useSelector(state => state.topic.topic)
-    const printToConsole = () => {
-        console.log(questions);
-    }
+ 
     //side-effects
     useEffect(() => {
         onAddingAwnser(); onAddingAwnser();
@@ -125,7 +122,6 @@ const CreateQuestionForm = () => {
     return (
         <div className='AddQForm'>
             <h1>New Question</h1>
-            <Btn onClick={printToConsole}>print to console</Btn>
             <div style={{ height: 'min-content' }}>
                 <form onSubmit={handleSubmit} >
                     <div className='form-container' >
