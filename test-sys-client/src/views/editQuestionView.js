@@ -67,6 +67,7 @@ useEffect(()=>{console.log(question);})
     const onSubmitHandler = () => {
         if (true) { //futere to be validate
             const selectedAxis = axis.find(item => item.isSelected === true).id
+            console.log(selectedAxis);
             const newQuestion = new Question(topic._id, question.questionType, newQuestionText.value, newTextAbove.value, newTextBelow.value, tags.value, newAnswers.map(({ value }, index) => ({ value, id: index })), getIndexes(newAnswers), selectedAxis);
             dispatch(updateQuestion(newQuestion, question._id));
             navigate(-1);
