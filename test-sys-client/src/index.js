@@ -6,7 +6,7 @@ import { applyMiddleware, combineReducers, createStore } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 
-import Navigator from './Naigation/MainNavigator'
+import Navigator from './Naigation/AppNavigator'
 import questionReducer from 'Store/reducers/question';
 import topicReducer from 'Store/reducers/topic';
 import testReducer from 'Store/reducers/test';
