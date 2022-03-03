@@ -1,9 +1,11 @@
-const { Types, Schema, model } = require('mongoose');
+const { Schema } = require('mongoose');
+const {testsDb} = require('../../services/mongoHandler');
 
 const topicSchema = new Schema({
     name: String
+    //orgenazation : objectId
 }, { timestamps: true });
 
-const TopicModel = model('topic', topicSchema);
+const Topic = testsDb.model('topics', topicSchema);
 
-module.exports = { topicSchema, TopicModel };
+module.exports = { topicSchema, Topic };

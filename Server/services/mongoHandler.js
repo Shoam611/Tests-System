@@ -1,13 +1,15 @@
 const mongoose = require('mongoose');
 
-let connection
+let testsDb
+let usersDb
+let recordsDb
 const initConnection = async () => {
-    const { domain, db_port, database_name } = process.env;
+    const { domain, db_port, database_data_name ,database_records_name,database_users_name} = process.env;
         try { 
-            connection = mongoose.createConnection(`mongodb://${domain}:${db_port}/${database_name}`)
-            // connect(`mongodb://${domain}:${db_port}/${database_name}`);
-
-        } catch (err) { console.log('error'); }
+            testsDb = mongoose.createConnection(`mongodb://${domain}:${db_port}/${database_data_name}`)
+            usersDb = mongoose.createConnection(`mongodb://${domain}:${db_port}/${database_users_name}`)
+            recordsDb = mongoose.createConnection(`mongodb://${domain}:${db_port}/${database_records_name}`)
+        } catch (err) {  }
 } 
 initConnection();
-module.exports = { initConnection, connection};
+module.exports = { initConnection, testsDb, recordsDb , usersDb };

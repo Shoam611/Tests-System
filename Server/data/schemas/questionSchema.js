@@ -1,5 +1,5 @@
 const { Schema } = require('mongoose');
-const datapool_db = require('../../services/mongoHandler').connection;
+const {testsDb} = require('../../services/mongoHandler');
 
 const answerSchema = new Schema({
     value: String,
@@ -20,7 +20,7 @@ const questionSchema = new Schema({
 
 questionSchema.statics.deleteByIdAsync = async (id) => this.deleteOne({ _id: id }) ;
 
-const Question = datapool_db.model('Question', questionSchema);
-const Answer = datapool_db.model('answer', answerSchema);
+const Question = testsDb.model('Question', questionSchema);
+const Answer = testsDb.model('answer', answerSchema);
 
 module.exports = { Question, questionSchema, Answer }

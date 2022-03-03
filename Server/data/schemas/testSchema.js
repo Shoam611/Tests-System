@@ -1,6 +1,5 @@
-const { Schema, model } = require('mongoose');
-// const { questionSchema } = require('./questionSchema');
-
+const { Schema } = require('mongoose');
+const {testsDb} = require('../../services/mongoHandler');
 const testSchema = new Schema({
     testType: Number,
     lang: Number,
@@ -21,7 +20,7 @@ const testSchema = new Schema({
 testSchema.statics.deleteByIdAsync = async function (id) {
     return this.deleteOne({ _id: id });
 };
-const TestModel = model('TestModel', testSchema);
+const Test = testsDb.model('Test', testSchema);
 module.exports = {
-    TestModel
+    Test
 };

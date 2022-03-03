@@ -1,8 +1,10 @@
-const {QuestionModel} = require('./questionSchema');
-const {TestModel} = require('./testSchema');
-const {TopicModel} = require('./topicSchema')
+const {Question} = require('./questionSchema');
+const {Test} = require('./testSchema');
+const {Topic} = require('./topicSchema');
+const {User} = require('./userSchema')
 module.exports ={
-    QuestionModel,
-    TestModel,
-    TopicModel
+    Question,
+    Test,
+    Topic,
+    User
 }
