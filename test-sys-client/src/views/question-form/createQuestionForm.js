@@ -130,36 +130,35 @@ const CreateQuestionForm = () => {
     //renderers
     return (
         <div className='AddQForm'>
-            <h1>New Question</h1>
-            <div>
-                <h3>topic : {topic.name}</h3>
-                <form onSubmit={handleSubmit} >
-                    <div className='form-container' >
-
-                        <label >Question type:</label>
-                        <Dropdown list={questionTypes} selected={questionType} onChange={handleQuestionTypeChanged} />
-                        <label >Question type:</label>
-                        <Input placeholder="Question text:"        {...Question_text} />
-                        <label >Question type:</label>
-                        <Input placeholder="Text above question:"  {...Text_above_question} />
-                        <label >Question presentaion axis : </label>
-                        <RadioButton list={axis} />
-                        <label >Question presentaion axis : </label>
-                        <Input placeholder="Text below question:"  {...Text_below_question} />
-                        <label >Question presentaion axis : </label>
-                        <Input placeholder="tags (seperate with , charecter)" {...tags} />
-                        <hr />
-                        {questionType && <>
+            <form onSubmit={handleSubmit} >
+                <div className='form-container' >
+                    <h1>New Question</h1>
+                    <Line justify ="around">
+                        <h2>topic : {topic.name}</h2>
+                    </Line>
+                    <label >Question type:</label>
+                    <Dropdown list={questionTypes} selected={questionType} onChange={handleQuestionTypeChanged} />
+                    <label >Question type:</label>
+                    <Input placeholder="Question text:"        {...Question_text} />
+                    <label >Question type:</label>
+                    <Input placeholder="Text above question:"  {...Text_above_question} />
+                    <label >Question presentaion axis : </label>
+                    <RadioButton list={axis} />
+                    <label >Question presentaion axis : </label>
+                    <Input placeholder="Text below question:"  {...Text_below_question} />
+                    <label >Question presentaion axis : </label>
+                    <Input placeholder="tags (seperate with , charecter)" {...tags} />
+                    <hr />
+                    {questionType && <>
                         <label >Ansers : </label>
-                            <AnswersSelector questionType={questionType} list={answers} onAddingAwnser={onAddingAwnser} />
-                            <hr />
-                        </> 
-                                         }
-                        <Input type="submit" value="Submit" />
-                        <p className='ErrorMessage'>{errorMessage}</p>
-                    </div>
-                </form>
-            </div>
+                        <AnswersSelector questionType={questionType} list={answers} onAddingAwnser={onAddingAwnser} />
+                        <hr />
+                    </>
+                    }
+                    <Input type="submit" value="Submit" />
+                </div>
+                    <p className='ErrorMessage'>{errorMessage}</p>
+            </form>
         </div >
     )
 

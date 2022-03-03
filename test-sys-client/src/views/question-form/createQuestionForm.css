@@ -1,27 +1,26 @@
 .AddQForm {
   width: 100%;
-  height: auto;
-  margin-top: var(--gap-xs);
+  height:calc(100vh - 60px);
+  margin: var(--gap-xs);
   overflow-y: scroll;
   background-color: var(--light-color);
-  display: grid;
-  grid-template-rows: 75px 1fr;
-  color: var(--text-color-dark);
+  display: block;
 }
 
 .AddQForm h1 {
   color: var(--accent);
 }
-.form-container h3{
+.form-container h3,.Input[type="submit"]{
   grid-column: span 2;
   margin: 0;
 }
 .form-container {
+  color: var(--text-color-dark);
   overflow-y: scroll;
   background-color: var(--midtone-color);
   display: grid;
   grid-row: auto;
-  grid-template-columns: 150px 1fr ;
+  grid-template-columns: max-content 1fr ;
   height: auto;
   gap: var(--gap-l);
   width: inherit;
@@ -50,5 +49,5 @@ hr {
   background: var(--light-color);
 }
 .ErrorMessage {
-  color: red;
+  color: var(--text-color-error);
 }
