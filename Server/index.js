@@ -2,10 +2,12 @@
 //.env
 require("dotenv").config();
 const port = process.env.port ?  process.env.port : 8080;
+//logger
+const {createLogger,testLogger} = require('./logger-configuration.js');
+createLogger();
+testLogger();
 //DI
 require('./app-container').setup();
-//logger
-
 //app
 const app = require('./app');
 //swagger//server-startup

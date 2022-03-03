@@ -8,8 +8,9 @@ require('./services/mongoHandler')();
 
 const questionsController = container.resolve('questionsController');
 
-app.post('/questions', async (req, res) => {
-    try { res.send(await questionsController.addQuestion(req).toString()).status(200)
+app.post('/questions', async (req, res) => { try { 
+    const result = await questionsController.addQuestion(req)    
+    res.send(result).status(200)
     } catch (err) { res.send(err.message).status(500) }
 });
 app.get('/questions', async (req, res) => {
