@@ -3,13 +3,14 @@ const cors = require('cors');
 const app = express();
 app.use(express.json());
 app.use(cors());
+/* require('./services/mongoHandler').initConnection(); */
 const { container } = require('./app-container');
-require('./services/mongoHandler')();
 
 const questionsController = container.resolve('questionsController');
 
 app.post('/questions', async (req, res) => { try { 
-    const result = await questionsController.addQuestion(req)    
+    const result = await questionsController.addQuestion(req)  ;
+    console.log(result);  
     res.send(result).status(200)
     } catch (err) { res.send(err.message).status(500) }
 });

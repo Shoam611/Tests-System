@@ -1,4 +1,6 @@
-const { Types, Schema, model } = require('mongoose');
+const { Schema } = require('mongoose');
+const datapool_db = require('../../services/mongoHandler').connection;
+
 const answerSchema = new Schema({
     value: String,
     id: Number
@@ -13,12 +15,12 @@ const questionSchema = new Schema({
     answers: [answerSchema],
     correctAnswerIds: Array,
     presentaionAxisId: Number,
-    isAnActiveQuestion:Boolean
+    isAnActiveQuestion: Boolean
 }, { timestamps: true });
-questionSchema.statics.deleteByIdAsync = async function (id) {
-    return this.deleteOne({ _id: id })
-};
-const QuestionModel = model('QuestionModel', questionSchema);
-const AnswerModel = model('answer', answerSchema);
 
-module.exports = { QuestionModel, questionSchema, AnswerModel }
+questionSchema.statics.deleteByIdAsync = async (id) => this.deleteOne({ _id: id }) ;
+
+const Question = datapool_db.model('Question', questionSchema);
+const Answer = datapool_db.model('answer', answerSchema);
+
+module.exports = { Question, questionSchema, Answer }

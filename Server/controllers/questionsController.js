@@ -1,14 +1,17 @@
 class QuestionsController {
 
-  constructor({ questionRepository }) {
-    this.questionRepository = questionRepository;
+  constructor({ questionRepository, logger }) {
+    this.questionRepository = questionRepository; this.logger = logger
   }
   addQuestion = async ({ body }) => {
-    try{
-      const { newQuestion, } = body;
-      if (!newQuestion) { console.log("Invalid Question"); return; }
+    try { const { newQuestion, } = body;
+      if (!newQuestion) { this.logger.eror(new Error('post request to the destenated adress missed nedded arguments')); return null; }
       return await this.questionRepository.addAsync(newQuestion);
-    }catch(err){}
+    }
+    catch (err) {
+      return null;
+      this.logger.error(new Error('failed to add question to datatabase, controller'));
+    }
   }
 
   deleteQuestion = ({ body }) => {
