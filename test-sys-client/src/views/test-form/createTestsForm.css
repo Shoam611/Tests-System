@@ -1,10 +1,9 @@
 .AddTForm {
-  width: 95%;
+  width: 100%;
   height:min-content;
   overflow-y: scroll;
   background-color: var(--light-color);
-  display: grid;
-  grid-template-rows: 90px 1fr;
+  display: block;
   color: var(--text-color-dark);
 }
 .AddTForm h1 {

@@ -12,13 +12,16 @@
 .AddQForm h1 {
   color: var(--accent);
 }
-
+.form-container h3{
+  grid-column: span 2;
+  margin: 0;
+}
 .form-container {
   overflow-y: scroll;
   background-color: var(--midtone-color);
   display: grid;
   grid-row: auto;
-  grid-template-columns: max-content 1fr ;
+  grid-template-columns: 150px 1fr ;
   height: auto;
   gap: var(--gap-l);
   width: inherit;

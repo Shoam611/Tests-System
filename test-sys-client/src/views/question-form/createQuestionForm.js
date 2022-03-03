@@ -132,7 +132,6 @@ const CreateQuestionForm = () => {
         <div className='AddQForm'>
             <h1>New Question</h1>
             <div>
-
                 <h3>topic : {topic.name}</h3>
                 <form onSubmit={handleSubmit} >
                     <div className='form-container' >
