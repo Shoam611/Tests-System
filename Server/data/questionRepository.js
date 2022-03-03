@@ -1,15 +1,19 @@
 const { Question } = require('./schemas/index');
 
 class MongoRepository {
-
+constructor({logger}){
+    this.logger = logger;
+}
     //Create
     async addAsync(object) {
         try {
-            const q = new Question({ ...object });
+            const q = new Question({...object});
             await q.save();
             return q._id;
         } catch (err) {
-            throw new Error(`error while trying to ad question to the db.\n original error ${err.message}`)
+            const newErr = new Error(`error while trying to ad question to the db.\n original error ${err.message}`)
+            this.logger.error(newErr);
+            throw newErr
         }
     }
     //Delete

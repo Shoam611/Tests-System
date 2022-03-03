@@ -4,7 +4,6 @@ class TopicController{
         this.topicRepository=topicRepository;
     }
     getDefaultTopic = async () =>{
-        console.log('in topic controller');
       return await this.topicRepository.getDefaultAsync();
     }   
 }

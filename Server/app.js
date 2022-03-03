@@ -16,6 +16,7 @@ app.get('/questions', async (req, res) => {
         res.send(result).status(200)
     } catch (err) { res.send(err.message).status(500) }
 });
+
 app.delete('/questions', async (req, res) => { questionsController.deleteQuestion(req); res.send(200) });
 app.put('/questions', async (req, res) => { questionsController.updateQuestion(req); res.send(200) });
 
