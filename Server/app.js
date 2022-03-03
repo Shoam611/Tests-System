@@ -8,8 +8,16 @@ require('./services/mongoHandler')();
 
 const questionsController = container.resolve('questionsController');
 
-app.post('/questions', async (req, res) => { const newId = await questionsController.addQuestion(req); res.send(newId.toString()).status(200) });
-app.get('/questions', async (req, res) => { const result = await questionsController.getQuestions(req); res.send(result).status(200) });
+app.post('/questions', async (req, res) => {
+    try { res.send(await questionsController.addQuestion(req).toString()).status(200)
+    } catch (err) { res.send(err.message).status(500) }
+});
+app.get('/questions', async (req, res) => {
+    try{
+        const result = await questionsController.getQuestions(req); 
+        res.send(result).status(200) 
+    } catch(err){ res.send(err.message).status(500) }
+    });
 app.delete('/questions', async (req, res) => { questionsController.deleteQuestion(req); res.send(200) });
 app.put('/questions', async (req, res) => { questionsController.updateQuestion(req); res.send(200) });
 

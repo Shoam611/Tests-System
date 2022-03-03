@@ -4,10 +4,11 @@ class QuestionsController {
     this.questionRepository = questionRepository;
   }
   addQuestion = async ({ body }) => {
-    console.log('inController');
-    const { newQuestion, } = body;
-    if (!newQuestion) { console.log("Invalid Question"); return; }
-    return await this.questionRepository.addAsync(newQuestion);
+    try{
+      const { newQuestion, } = body;
+      if (!newQuestion) { console.log("Invalid Question"); return; }
+      return await this.questionRepository.addAsync(newQuestion);
+    }catch(err){}
   }
 
   deleteQuestion = ({ body }) => {
