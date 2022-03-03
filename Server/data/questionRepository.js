@@ -4,21 +4,26 @@ class MongoRepository {
     
     //Create
     async addAsync(object) {
-        console.log('in repo func add');
-        const q = new QuestionModel({ ...object });
-        await q.save();
-        console.log('added', q._id.toString());
-        return q._id;
+        try{
+            const q = new QuestionModel({ ...object });
+            await q.save();
+            return q._id;
+        }catch(err){
+            throw new Error(`error while trying to save to ad question to the db.\n original error ${err.message}`)
+        }
     }
     //Delete
     async DeleteOneAsync(id) {
-        QuestionModel.deleteByIdAsync(id);
+        try{ QuestionModel.deleteByIdAsync(id); }
+        catch(err){throw new Error(`error while trying to delete question ${id} from the db.\n original error ${err.message}`)}
     }
     //Read
     async getOneAsync(id) {
-        const query = QuestionModel.findOne({ _id: id });
-        const doc = await query.next();
-        return doc;
+        try{
+            const query = QuestionModel.findOne({ _id: id });
+            const doc = await query.next();
+            return doc;
+        } 
     }
     async getAsync(filterquery={}) {
         console.log('filter',filterquery);
