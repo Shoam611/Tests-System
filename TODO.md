@@ -17,4 +17,6 @@
     + distributed routes in app.js
 ### extra features
 1. logging
-
+2. unhardcode url adress in client
+3. add labels to fields
+4. present user server issued problems
