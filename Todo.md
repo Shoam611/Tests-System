@@ -14,5 +14,6 @@
  1. folders managment 
     + components folder
     + views sub-folders
+    + distributed routes in app.js
 ### extra features
 1. logging
