@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import App from "App";
-import QuestionsView from "../views/QuestionsView";
 import DefaultView from "views/defaultView";
 import TestsView from "../views/test-form/TestsView";
 import ManageQuestionView from "views/manageQuestionsView";
@@ -10,12 +9,13 @@ import EditTestView from "views/manage-tests/editTestView"
 import QuizReport from "views/reports/quizReport";
 import NewUserForm from "views/test-view/newUserForm";
 import TestView from "views/test-view/testView";
+import CreateQuestionForm from "views/question-form/createQuestionForm";
 const AppNavigator = () => {
   return (
     <div id="AppNavigatorContainer">
       <Routes>
         <Route path="/" element={<App />}>
-          <Route path="questions/questions" element={<QuestionsView />} />
+          <Route path="questions/questions" element={<CreateQuestionForm />} />
           <Route path="questions/edit" element={<ManageQuestionView />} />
           <Route path="questions/edit/editQuestion/:id" element={<EditQuestionView />} />
 

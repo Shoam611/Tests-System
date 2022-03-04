@@ -1,16 +1,15 @@
 .AddTForm {
-  width: 95%;
+  width: 100%;
   height:min-content;
   overflow-y: scroll;
   background-color: var(--light-color);
-  display: grid;
-  grid-template-rows: 90px 1fr;
+  display: block;
   color: var(--text-color-dark);
 }
-.AddTForm h1 {
-  color: var(--accent);
+.form-container h1{
+  color:var(--accent)
 }
-.form-container {
+/* .form-container {
     overflow-y:scroll;
     background-color: var(--midtone-color);
     display: flex;
@@ -21,17 +20,7 @@
     padding: 0 var(--gap-m) ;
     height:min-content;
     margin-bottom: 0;
-}
-form{
-  height: min-content;
-  width: auto;
-  overflow-y:scroll;
-}
-hr{
-  background-color: var(--accent);
-  height: var(--gap-xs);
-  width: 100%;
-}
+} */
 
 .AddQForm::-webkit-scrollbar {
   height: 0;
@@ -43,7 +32,4 @@ hr{
 .AddQForm ::-webkit-scrollbar-track {
   width: 5em;
   background: var(--light-color);
-}
-.errorMessage {
-  color:red;
 }

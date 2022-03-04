@@ -11,7 +11,6 @@ const AnswersSelector = props => {
         <Rows>
             <Btn i="plus" onClick={props.onAddingAwnser} />
             {renderSelector()}
-            <hr />
         </Rows>
     )
 }

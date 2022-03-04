@@ -24,9 +24,9 @@ const CreateQuestionForm = () => {
     const Text_below_question = useInput();
     const tags = useInput();
     //helpers
-    const clear = () =>{
+    const clear = () => {
         setQuestionType(null)
-        Question_text.setValue('')  ;
+        Question_text.setValue('');
         Text_above_question.setValue('')
         tags.setValue('')
         Text_below_question.setValue('');
@@ -56,9 +56,9 @@ const CreateQuestionForm = () => {
         const id = getId();
         const newAnswer = {
             id: id,
-            render: <AnswerChoice id={id} 
-            onRemove={handleRemoveAwnser} 
-            onChange={awnserContentChangedHandler} />,
+            render: <AnswerChoice id={id}
+                onRemove={handleRemoveAwnser}
+                onChange={awnserContentChangedHandler} />,
             value: '',
             isSelected: false
         };
@@ -108,7 +108,7 @@ const CreateQuestionForm = () => {
     const getIndexes = (answers) => {
         return answers.map(({ isSelected }, index) => ({ isCorrect: isSelected, index })).filter(({ isCorrect }) => isCorrect).map(({ index }) => index);
     }
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (formValidation()) {
@@ -119,9 +119,10 @@ const CreateQuestionForm = () => {
         }
     }
 
- 
+
     //side-effects
     useEffect(() => {
+        console.log(topic);
         onAddingAwnser(); onAddingAwnser();
         setQuestionTypes([{ id: 1, value: 'Single choice' }, { id: 2, value: 'Multi Choice' }]);
     }, [onAddingAwnser]);
@@ -129,27 +130,35 @@ const CreateQuestionForm = () => {
     //renderers
     return (
         <div className='AddQForm'>
-            <h1>New Question</h1>
-            <div style={{ height: 'min-content' }}>
-                <form onSubmit={handleSubmit} >
-                    <div className='form-container' >
-                        <label > topic : {topic.name}</label>
-                        <Dropdown list={questionTypes} selected={questionType} onChange={handleQuestionTypeChanged} />
-                        <Input placeholder="Question text:"        {...Question_text} />
-                        <Input placeholder="Text above question:"  {...Text_above_question} />
-                        <Line>
-                            <h4>Question presentaion axis : </h4>
-                            <RadioButton list={axis} />
-                        </Line>
-                        <Input placeholder="Text below question:"  {...Text_below_question} />
-                        <Input placeholder="tags (seperate with , charecter)" {...tags} />
+            <form onSubmit={handleSubmit} >
+                <div className='form-container' >
+                    <h1>New Question</h1>
+                    <Line justify ="around">
+                        <h2>topic : {topic.name}</h2>
+                    </Line>
+                    <label >Question type:</label>
+                    <Dropdown list={questionTypes} selected={questionType} onChange={handleQuestionTypeChanged} />
+                    <label >Question type:</label>
+                    <Input placeholder="Question text:"        {...Question_text} />
+                    <label >Question type:</label>
+                    <Input placeholder="Text above question:"  {...Text_above_question} />
+                    <label >Question presentaion axis : </label>
+                    <RadioButton list={axis} />
+                    <label >Question presentaion axis : </label>
+                    <Input placeholder="Text below question:"  {...Text_below_question} />
+                    <label >Question presentaion axis : </label>
+                    <Input placeholder="tags (seperate with , charecter)" {...tags} />
+                    <hr />
+                    {questionType && <>
+                        <label >Ansers : </label>
+                        <AnswersSelector questionType={questionType} list={answers} onAddingAwnser={onAddingAwnser} />
                         <hr />
-                        {questionType && <AnswersSelector questionType={questionType} list={answers} onAddingAwnser={onAddingAwnser} />}
-                        <Input type="submit" value="Submit" />
-                        <p className='ErrorMessage'>{errorMessage}</p>
-                    </div>
-                </form>
-            </div>
+                    </>
+                    }
+                    <Input type="submit" value="Submit" />
+                </div>
+                    <p className='ErrorMessage'>{errorMessage}</p>
+            </form>
         </div >
     )
 

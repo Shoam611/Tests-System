@@ -6,16 +6,15 @@
 
 .Grid.rows > :nth-child(1) {
     box-shadow:var(--shadow-bottom);
-    /* background-color: var(--background-light); */
     color: var(--text-color);
     padding: 0 var(--gap);
 }
 .Grid.rows {
-    grid-template-rows: 60px 1fr;
+    grid-template-rows: 5vh 1fr;
 }
 
 .Grid.columns {
-     grid-template-columns: var(--menue-width) 1fr;
+     grid-template-columns: 20vw 1fr;
 }
 
 .Grid.columns > :nth-child(1) {

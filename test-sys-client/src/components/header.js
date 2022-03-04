@@ -14,8 +14,6 @@ const Header = (props) => {
         <div  className="header-item">
             <a href='https://github.com/Shoam611/Tests-System'>GitHub</a>
         </div>
-        <div className="header-item">
-        </div>
       </Line>
     </Line>
   )
