@@ -22,13 +22,17 @@
   grid-row: auto;
   grid-template-columns: max-content 1fr ;
   height: auto;
-  gap: var(--gap-l);
+  gap: var(--gap-m);
   width: inherit;
   padding: 0 var(--gap-m);
   margin-bottom: var(--gap-m);
 }
 form {
   width: auto;
+}
+.form-container label{
+  font-size: 1.1em;
+  font-weight: var(--font-weight-l);
 }
 hr {
   background-color: var(--accent);
