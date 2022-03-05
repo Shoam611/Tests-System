@@ -4,27 +4,19 @@ class UsersController {
     }
 
     addUser = ({ body }) => {
-        console.log('inController');
         const { newUser, } = body;
-        if (!newUser) { console.log("Invalid Test"); return; }
+        if (!newUser) { return null; }
         this.userRepository.addAsync(newUser);
     }
 
-    deleteUser = ({ body }) => {
-        const { id } = body;
-        console.log('in delete controller', id);
-        this.userRepository.DeleteOneAsync(id)
-    }
+    deleteUser = ({ body }) =>  this.userRepository.DeleteOneAsync(body.id) 
 
     updateUser = async ({ body }) => {
-        console.log('in update test');
-        const { id } = body;
-        const { newTest } = body;
+        const { id,newTest } = body;
         return await this.userRepository.UpdateUser(id, newTest);
     }
 
     getUser = async ({ query }) => {
-        console.log('in get tests');
         const { topic } = query;
         let filter = {};
         if (topic) filter = { topic: topic }

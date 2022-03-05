@@ -21,7 +21,6 @@ class UserRepository {
     }
     //Read
     async getAsync(filterquery = {}) {
-        console.log('filter', filterquery);
         const query = User.find({ sort: '-createdAt' }).where(filterquery);
         return query;
     }

@@ -6,7 +6,6 @@ class TestsMongoRepository {
     async addAsync(object) {
         const t = new Test({ ...object });
         await t.save();
-        console.log('added', t._id.toString());
         return t._id;
     }
     //Delete
@@ -18,15 +17,12 @@ class TestsMongoRepository {
     async UpdateTest(id, newTest) {
         const doc = await Test.findOneAndReplace({ _id: id }, { _id: id, ...newTest });
         await doc.save();
-        console.log('added', doc._id.toString());
         return doc._id;
     }
 
     //Read
     async getAsync(filterquery = {}) {
-        console.log('filter', filterquery);
         const query = Test.find({ sort: '-createdAt' }).where(filterquery);
-        console.log(query);
         return query;
     }
 
