@@ -11,35 +11,25 @@ const QuestionsForTest = (props) => {
     const questions = useSelector(state => state.questions.questions);
     const topic = useSelector(state => state.topic.topic);
     useEffect(() => { setFetchedData(questions); }, [questions, setFetchedData])
+
     //handlers
-    const { onQuestionSelected } = props
+    const { onQuestionSelected } = props;
+
     const questionSelectedHandler = useCallback((item, value) => {
         onQuestionSelected(item, value);
         value ? setSelectedCounter(prevState => { return prevState + 1 }) : setSelectedCounter(prevState => { return prevState - 1 });
     }, [onQuestionSelected, setSelectedCounter])
-    const isExists = useCallback((value) => {
-        for (let question of props.questions) {
-            if (question === value) {
-                setSelectedCounter(prevState => { return prevState + 1 });
-                return true;
-            }
-        }
-        return false;
-    },[setSelectedCounter,props.questions])
+
     const buildDisplayList = useCallback((list) => {
         const temp = list.map((value, index) => ({
             id: value._id,
             render: <QuestionItem {...value} index={index} />,
             value: value,
-            isSelected: isExists(value._id),
+            isSelected: list.map(q => q).indexOf(value._id) > -1,
             onChange: questionSelectedHandler,
         }))
         setList(temp);
-    }, [isExists, questionSelectedHandler]);
-    //Side Effects
-    useEffect(() => {
-        buildDisplayList(fetchedData);
-    }, [fetchedData, buildDisplayList]);
+    }, [questionSelectedHandler]);
 
     const filterList = (e) => {
         let tags = e.target.value.toUpperCase();
@@ -53,6 +43,11 @@ const QuestionsForTest = (props) => {
             buildDisplayList(fetchedData);
         }
     }
+
+    //Side Effects
+    useEffect(() => {
+        buildDisplayList(fetchedData);
+    }, [fetchedData, buildDisplayList]);
 
     return (
         <div className='AddTForm'>

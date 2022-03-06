@@ -3,9 +3,9 @@ import App from "App";
 import DefaultView from "views/defaultView";
 import TestsView from "../views/test-form/TestsView";
 import ManageQuestionView from "views/manageQuestionsView";
-import ManageTestsView from "views/manage-tests/manageTestsView";
+import ManageTestsView from "views/tests-manager/manageTestsView";
 import EditQuestionView from "views/editQuestionView";
-import EditTestView from "views/manage-tests/editTestView"
+import EditTestView from "views/tests-manager/editTestView"
 import QuizReport from "views/reports/quizReport";
 import NewUserForm from "views/test-view/newUserForm";
 import TestView from "views/test-view/testView";

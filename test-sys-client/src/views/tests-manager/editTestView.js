@@ -7,7 +7,7 @@ import { useCallback, useEffect, useState } from "react";
 import Test from "models/TestModel";
 import { updateTest } from "Store/actions/test";
 import ShowQuestionsModal from "../../components/ShowQuestionsModal";
-import QuestionShortened from "views/manage-tests/QuestionShortened";
+import QuestionShortened from "views/tests-manager/QuestionShortened";
 const { useNavigate, useParams, } = require("react-router-dom");
 const EditTestView = () => {
     const dispatch = useDispatch();
