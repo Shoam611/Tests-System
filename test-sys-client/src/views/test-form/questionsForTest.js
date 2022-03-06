@@ -21,7 +21,6 @@ const QuestionsForTest = ({ onQuestionSelected, selectedQuestios, prev }) => {
             isSelected: selectedQuestios.indexOf(value._id) > -1,
             onChange: onQuestionSelected,
         }))
-        console.log(temp);
         setList(temp);
     }, [setList,selectedQuestios,onQuestionSelected]);
 
