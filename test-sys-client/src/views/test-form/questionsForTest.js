@@ -3,41 +3,36 @@ import { useSelector } from "react-redux";
 import QuestionItem from "./questionItem";
 import { Btn, Checkbox, Input } from "UIKit";
 
-const QuestionsForTest = (props) => {
+const QuestionsForTest = ({ onQuestionSelected, selectedQuestios, prev }) => {
     //states
     const [list, setList] = useState([]);
     const questions = useSelector(state => state.questions.questions);
     const topic = useSelector(state => state.topic.topic);
-
     //handlers
-    // const { onQuestionSelected } = props;
-
-    const questionSelectedHandler = useCallback((item, value) => {
-        props.onQuestionSelected(item, value);
-    }, [props]);
+    // const questionSelectedHandler = useCallback((item, value) => {
+    //     onQuestionSelected(item, value);
+    // }, [onQuestionSelected]);
 
     const buildDisplayList = useCallback((list) => {
         const temp = list.map((value, index) => ({
             id: value._id,
             render: <QuestionItem {...value} index={index} />,
             value: value,
-            isSelected: props.selectedQuestios.indexOf(value._id) > -1,
-            onChange: questionSelectedHandler,
+            isSelected: selectedQuestios.indexOf(value._id) > -1,
+            onChange: onQuestionSelected,
         }))
+        console.log(temp);
         setList(temp);
-    }, [questionSelectedHandler, props.selectedQuestios]);
+    }, [setList,selectedQuestios,onQuestionSelected]);
 
     const filterList = (e) => {
-        let tags = e.target.value.toUpperCase();
-        let newTagsArray = tags.split(',')
-            .map(tag => tag.trim())
-            .filter(tag => (!!tag) && tag);
-
-        let newArray = questions.filter(question => question.tags.find(tag => newTagsArray.includes(tag.toUpperCase())));
-        buildDisplayList(newArray);
-        if (e.target.value.trim().length === 0) {
-            buildDisplayList(questions);
-        }
+        const {value}= e.target
+        const tags = value.toLowerCase();
+        const newTagsArray = tags.split(',')
+                                .map(tag => tag.trim())
+                                .filter(tag => (!!tag) && tag);
+        const newArray = questions.filter(question => question.tags.find(tag => newTagsArray.includes(tag.toLowerCase())));
+        value.trim().length === 0 ? buildDisplayList(questions) : buildDisplayList(newArray);
     }
 
     //Side Effects
@@ -51,9 +46,9 @@ const QuestionsForTest = (props) => {
                 <h1>Choose Questions</h1><div />
                 <h4>filter by tags:</h4>
                 <Input type="text" onChange={filterList} placeholder="Filter By Tags..." />
-                <h4>Questions Selected:{props.selectedQuestios.length}</h4>
+                <h4>Questions Selected:{selectedQuestios.length}</h4>
                 {questions.length === 0 ? <h4>No Quesitons Found For Topic: {topic.name}</h4> : <Checkbox list={list} />}
-                <Btn i="chevron-left" onClick={() => props.prev()}>Back</Btn>
+                <Btn i="chevron-left" onClick={() => prev()}>Back</Btn>
             </div>
         </div>
     );
