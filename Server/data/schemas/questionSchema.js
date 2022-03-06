@@ -18,7 +18,7 @@ module.exports = createQuestionModel = (connection) =>{
 }, { timestamps: true });
 
 questionSchema.statics.deleteByIdAsync = async (id) => this.deleteOne({ _id: id }) ;
-const Answer = testsDb.model('answer', answerSchema);
+const Answer = connection.model('answer', answerSchema);
 const Question = connection.model('Question', questionSchema);
 return Question
 }

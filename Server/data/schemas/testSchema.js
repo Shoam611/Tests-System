@@ -1,5 +1,5 @@
 const { Schema } = require('mongoose');
-module.export = createTestModel = (connection) => {
+module.exports = createTestModel = (connection) => {
     const testSchema = new Schema({
         testType: Number,
         lang: Number,
