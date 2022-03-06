@@ -1,14 +1,18 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Btn, Input, Line, RadioButton } from "UIKit";
-import { presentationAxis, questionTypes } from "models/presentationAxis";
-import './editQuestionView.css'
-import AnswersSelector from "./question-form/answerSelector";
-import AnswerChoice from './question-form/answerChoice';
-import useInput from "hooks/useInput";
 import { useEffect, useReducer, useState, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Question from "models/QuestionModel";
+
+import { useDispatch, useSelector } from "react-redux";
 import { updateQuestion } from "Store/actions/question";
+
+import { presentationAxis, questionTypes } from "models/presentationAxis";
+import Question from "models/QuestionModel";
+
+import useInput from "hooks/useInput";
+import AnswersSelector from "./question-form/answerSelector";
+import AnswerChoice from './question-form/answerChoice';
+import { Btn, Input, Line, RadioButton } from "UIKit";
+
+import './editQuestionView.css'
 
 const EditQuestionView = () => {
     //hooks
