@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Box, Btn } from "UIKit";
 import QuestionViewer from "./QuestionViewer";
 import './testView.css'
 const TestView = () => {
     const { id } = useParams();
+    const dispatch = useDispatch();
     const test = useSelector(state => state.tests.tests).find(t => t._id === id);
     const questions = useSelector(state => state.questions.questions).filter(q => test.questions.includes(q._id));
     const [questionsViews] = useState([]);
@@ -24,14 +25,14 @@ const TestView = () => {
     const onAnsweredHandler = useCallback((item, value, id) => {
         console.log('item', item, 'value', value, 'id:', id);
 
-        const wasRightTemp = questions.find(q => q._id == id).correctAnswerIds.every(a => a === item.id);
-        console.log('wasRight', wasRightTemp);
+        // const wasRightTemp = questions.find(q => q._id == id).correctAnswerIds.every(a => a === item.id);
+        // console.log('wasRight', wasRightTemp);
         console.log('question example', questions[1]);
         value ?
-            answeredQuestions.push({ id: id, selectedAnswersIds: item.id, wasUserRight: wasRightTemp }) :
+            answeredQuestions.push({ id: id, selectedAnswersIds: item.id }) :
             answeredQuestions.splice(answeredQuestions.indexOf(item._id), 1);
 
-        // console.log(answeredQuestions);
+        console.log(answeredQuestions);
     }, [answeredQuestions, currentQuestion, questionsViews])
 
     const shuffle = arr => {

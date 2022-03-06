@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Line from "UIKit/Layouts/Line";
-import './Checkbox.css'
+import './Checkbox.css';
 const Checkbox = ({ list }) => {
 
     const onSelctionChanged = (id, value) => {
@@ -8,7 +8,6 @@ const Checkbox = ({ list }) => {
             if (item.id === id) {
                 item.isSelected = value;
                 item.onChange && item.onChange(item.value, value, item.father);
-                console.log(item.value);
             }
         });
     }
