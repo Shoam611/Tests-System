@@ -17,7 +17,7 @@
   background-color: var(--midtone-color);
   display: grid;
   grid-row: auto;
-  grid-template-columns: max-content 1fr ;
+  grid-template-columns: max-content 1fr;
   height: auto;
   gap: var(--gap-l);
   width:calc(inherit - var(--gap-l)) ;
@@ -26,6 +26,10 @@
 }
 form {
   width: auto;
+}
+.form-container label{
+  font-size: 1.1em;
+  font-weight: var(--font-weight-l);
 }
 hr {
   background-color: var(--accent);

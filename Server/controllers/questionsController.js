@@ -1,11 +1,11 @@
 class QuestionsController {
 
-  constructor({ questionRepository }) {
-    this.questionRepository = questionRepository;
+  constructor({ questionRepository, logger }) {
+    this.questionRepository = questionRepository; this.logger = logger
   }
   addQuestion = async ({ body }) => {
     const { newQuestion, } = body;
-    if (!newQuestion) { console.log("Invalid Question"); return; }
+    if (!newQuestion) { return; }
     return await this.questionRepository.addAsync(newQuestion);
   }
 

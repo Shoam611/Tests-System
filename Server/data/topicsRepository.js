@@ -1,31 +1,25 @@
-const { TopicModel } = require('./schemas/index');
+const { getModels } = require('./schemas/createConnection.js');
+const { logger } = require('../app-logger.js')
+
 class TopicRepository {
     //Create
     async addAsync(newDoc) {
-        console.log('in add topic', newDoc);
-        const q = new TopicModel({ ...newDoc });
+        const {Topic} = getModels();
+        const q = new Topic({ ...newDoc });
         await q.save();
         return q._id;
     }
     //Read
     async getDefaultAsync() {
-        console.log('in get actions');
-        let topic =await TopicModel.find({}).cursor().next();
-        if(!topic){
-            this.addAsync({name:'def-topic'});
-            topic = await TopicModel.find({}).cursor().next();
-        }
-        else{
-            console.log("retrived topic",topic);
-            return topic;
-        }
+        try{
+            const {Topic} = getModels();
+            let topic =await Topic.find({}).cursor().next();
+            if(!topic) {
+                await this.addAsync({name:'def-topic'});
+                topic = await Topic.find({}).cursor().next(); 
+            }
+            else return topic;  
+        }catch(err){logger.error(err.message); return null}
     }
-    //Update
-    // async UpdateOne(id,name) {
-    //     console.log('in update action');
-    //     console.log(name);
-    //    const oldDoc =await UserModel.updateOne({_id:id},{name:name,currentBalance:balance,dayOfTracking:dayOfTracking });
-    //    console.log("modified: ", oldDoc.modifiedCount);
-    // }
 }
 module.exports = TopicRepository

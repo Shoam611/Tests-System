@@ -1,9 +1,8 @@
-const { Types, Schema, model } = require('mongoose');
-
-const topicSchema = new Schema({
-    name: String
-}, { timestamps: true });
-
-const TopicModel = model('topic', topicSchema);
-
-module.exports = { topicSchema, TopicModel };
+const { Schema, model }=require( 'mongoose') ;
+module.exports = createTopicModel=(connection)=>{
+    const topicSchema = new Schema({
+        name: String
+    }, { timestamps: true });
+    const Topic = connection.model('topics', topicSchema);
+    return Topic;
+}

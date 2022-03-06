@@ -1,5 +1,6 @@
 const awilix = require("awilix");
 const container = awilix.createContainer();
+const {logger} = require('./app-logger.js')
 const QuestionsController = require("./controllers/questionsController.js");
 const QuestionRepository = require('./data/questionRepository');
 
@@ -13,9 +14,6 @@ const TopicController = require("./controllers/topicController.js");
 const TopicRepository = require('./data/topicsRepository.js');
 
 const schemes = require('./data/schemas/index');
-const initConnection = require("./services/mongoHandler.js");
-
-
 const setup = () => {
   container.register({
     questionsController: awilix.asClass(QuestionsController).singleton(),
@@ -27,10 +25,10 @@ const setup = () => {
     usersController: awilix.asClass(UsersController).singleton(),
     userRepository: awilix.asClass(UserRepository).singleton(),
 
-    topicRepository: awilix.asClass(TopicRepository),
-    topicController: awilix.asClass(TopicController),
+    topicRepository: awilix.asClass(TopicRepository).singleton(),
+    topicController: awilix.asClass(TopicController).singleton(),
 
-    connect: awilix.asFunction(initConnection).singleton(),
+    logger: awilix.asValue(logger),
     schemes: awilix.asValue(schemes)
   });
 };

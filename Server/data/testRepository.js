@@ -1,32 +1,33 @@
-const { TestModel } = require('./schemas/testSchema');
+// const { Test } = require('./schemas/createConnection.js');
+const { getModels } = require('./schemas/createConnection.js');
 
 class TestsMongoRepository {
 
     //Create
     async addAsync(object) {
-        const t = new TestModel({ ...object });
+        const {Test} = getModels();
+        const t = new Test({ ...object });
         await t.save();
-        console.log('added', t._id.toString());
         return t._id;
     }
     //Delete
     async DeleteOneAsync(id) {
-        TestModel.deleteByIdAsync(id);
+        const {Test} = getModels();
+        Test.deleteByIdAsync(id);
     }
 
     //Update
     async UpdateTest(id, newTest) {
-        const doc = await TestModel.findOneAndReplace({ _id: id }, { _id: id, ...newTest });
+        const {Test} = getModels();
+        const doc = await Test.findOneAndReplace({ _id: id }, { _id: id, ...newTest });
         await doc.save();
-        console.log('added', doc._id.toString());
         return doc._id;
     }
 
     //Read
     async getAsync(filterquery = {}) {
-        console.log('filter', filterquery);
-        const query = TestModel.find({ sort: '-createdAt' }).where(filterquery);
-        console.log(query);
+        const {Test} = getModels();
+        const query = Test.find({ sort: '-createdAt' }).where(filterquery);
         return query;
     }
 

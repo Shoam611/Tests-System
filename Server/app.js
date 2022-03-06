@@ -1,31 +1,42 @@
 const express = require("express");
+const questions_route = require('./routes/question.routes.js')
+const tests_route = require('./routes/tests.routes.js')
+const topic_route = require('./routes/topic.routes.js')
+const user_routes = require('./routes/users.routes.js')
 const cors = require('cors');
 const app = express();
 app.use(express.json());
 app.use(cors());
-const { container } = require('./app-container');
-require('./services/mongoHandler')();
-
-const questionsController = container.resolve('questionsController');
-
-app.post('/questions', async (req, res) => { const newId = await questionsController.addQuestion(req); res.send(newId.toString()).status(200) });
-app.get('/questions', async (req, res) => { const result = await questionsController.getQuestions(req); res.send(result).status(200) });
-app.delete('/questions', async (req, res) => { questionsController.deleteQuestion(req); res.send(200) });
-app.put('/questions', async (req, res) => { questionsController.updateQuestion(req); res.send(200) });
-
-const testsController = container.resolve('testsController');
-app.post('/tests', async (req, res) => { testsController.addTest(req); res.send(200) });
-app.get('/tests', async (req, res) => { const result = await testsController.getTests(req); res.send(result).status(200) });
-app.delete('/tests', async (req, res) => { testsController.deleteTest(req); res.send(200) });
-app.put('/tests', async (req, res) => { const id = await testsController.updateTest(req); res.send(id.toString()).status(200); });
-
-const topicController = container.resolve('topicController');
-app.get('/topic', async (req, res) => { res.send(JSON.stringify(await topicController.getDefaultTopic())); });
-
-const usersController = container.resolve('usersController');
-app.post('/users', async (req, res) => { usersController.addUser(req); res.send(200) });
-app.get('/users', async (req, res) => { const result = await usersController.getUsers(req); res.send(result).status(200) });
-app.delete('/users', async (req, res) => { usersController.deleteUser(req); res.send(200) });
-app.put('/users', async (req, res) => { const id = await usersController.updateUser(req); res.send(id.toString()).status(200); });
+app.use('/questions', questions_route)
+app.use('/tests', tests_route)
+app.use('/topic', topic_route)
+app.use('/users', user_routes)
 
 module.exports = app;
+
+/*
+--0--
+selectedAnswersId:[]
+correctAnswerIds : [3,2]
+--1--
+selectedAnswersId:[]
+correctAnswerIds : [2,3] // sort-accending
+--2--
+selectedAnswersId:[3]
+correctAnswerIds : [2,3]
+--3--
+selectedAnswersId :[3,2] // sort-accending
+selectedAnswersIds:[2,3]
+correctAnswerIds  :[2,3]
+    //is length equal
+        //foreach in index are equal
+
+    const initialState = {
+        question-records:[]
+        user:User,
+        test-taken:Quiz
+        score:Number
+    }
+
+
+*/

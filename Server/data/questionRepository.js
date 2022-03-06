@@ -1,38 +1,41 @@
-const { QuestionModel } = require('./schemas/index');
-
+const { getModels } = require('./schemas/createConnection.js');
+const { logger }= require('../app-logger.js')
 class MongoRepository {
-    
+ 
     //Create
     async addAsync(object) {
-        console.log('in repo func add');
-        const q = new QuestionModel({ ...object });
-        await q.save();
-        console.log('added', q._id.toString());
-        return q._id;
+        const {Question} = getModels();
+        try {
+            const q = new Question({...object});
+            await q.save();
+            return q._id;
+        } catch (err) {
+            const newErr = new Error(`error while trying to ad question to the db at q-repository. original error ${err.message}`)
+            logger.error(newErr);
+            return newErr
+        }
     }
     //Delete
     async DeleteOneAsync(id) {
-        QuestionModel.deleteByIdAsync(id);
+        const {Question} = getModels();
+        try { Question.deleteByIdAsync(id); }
+        catch (err) { throw new Error(`error while trying to delete question ${id} from the db at q-repository. original error ${err.message}`); }
     }
     //Read
-    async getOneAsync(id) {
-        const query = QuestionModel.findOne({ _id: id });
-        const doc = await query.next();
-        return doc;
-    }
-    async getAsync(filterquery={}) {
-        console.log('filter',filterquery);
-        const query = await QuestionModel.find({ sort: '-createdAt' }).where(filterquery);
-        console.log("query: ",query);
-        return query;
+    async getAsync(filterquery = {}) {
+        const {Question} = getModels();
+        try { return await Question.find({ sort: '-createdAt' }).where(filterquery); }
+        catch (err) {
+            const newErr = new Error(`error while trying to fetch questions from the db at q-repository. original error ${err.message}`); 
+             logger.error(newErr.message);
+            return null;
+        }
     }
     //Update
-    async updateOneAsync (id, newQuestion) {
-        console.log('in update on async',id,newQuestion);
-        const oldDoc =await QuestionModel.updateOne({_id:id},newQuestion);
-        console.log('post update action',oldDoc);
-        }
-    
-    async deleteManyAsync(filter) { }
+    async updateOneAsync(id, newQuestion) {
+        const {Question} = getModels();
+        try { await Question.updateOne({ _id: id }, newQuestion);} 
+        catch (err) { throw new Error(`error while trying to update questions from the db at q-repository. original error ${err.message}`); }
+    }
 }
 module.exports = MongoRepository
