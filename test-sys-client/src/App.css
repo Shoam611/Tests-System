@@ -6,7 +6,6 @@ html, body, #root, .App,#AppNavigatorContainer{
 }
 .App {
   display: block;
-  font-size: 1.7vh;
 }
 hr{
   padding:0;
@@ -42,6 +41,5 @@ input :active ,input:focus{
   margin: 0;
   padding: 0;
 }
-h3{
-  font-size: 2.4vh;
-}
+/* h3{
+} */

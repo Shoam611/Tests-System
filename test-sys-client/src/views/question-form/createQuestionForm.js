@@ -138,15 +138,15 @@ const CreateQuestionForm = () => {
                     </Line>
                     <label >Question type:</label>
                     <Dropdown list={questionTypes} selected={questionType} onChange={handleQuestionTypeChanged} />
-                    <label >Question type:</label>
+                    <label >Question text:</label>
                     <Input placeholder="Question text:"        {...Question_text} />
-                    <label >Question type:</label>
+                    <label >Question above question:</label>
                     <Input placeholder="Text above question:"  {...Text_above_question} />
-                    <label >Question presentaion axis : </label>
-                    <RadioButton list={axis} />
-                    <label >Question presentaion axis : </label>
+                    <label >Question above question: </label>
                     <Input placeholder="Text below question:"  {...Text_below_question} />
                     <label >Question presentaion axis : </label>
+                    <RadioButton list={axis} />
+                    <label >tags : </label>
                     <Input placeholder="tags (seperate with , charecter)" {...tags} />
                     <hr />
                     {questionType && <>
