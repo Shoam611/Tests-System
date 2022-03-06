@@ -1,5 +1,5 @@
-// const { Topic } = require('./schemas/createConnection.js');
 const { getModels } = require('./schemas/createConnection.js');
+const { logger } = require('../app-logger.js')
 
 class TopicRepository {
     //Create
@@ -11,13 +11,15 @@ class TopicRepository {
     }
     //Read
     async getDefaultAsync() {
-        const {Topic} = getModels();
-        let topic =await Topic.find({}).cursor().next();
-        if(!topic) {
-            await this.addAsync({name:'def-topic'});
-            topic = await Topic.find({}).cursor().next(); 
-        }
-        else return topic;  
+        try{
+            const {Topic} = getModels();
+            let topic =await Topic.find({}).cursor().next();
+            if(!topic) {
+                await this.addAsync({name:'def-topic'});
+                topic = await Topic.find({}).cursor().next(); 
+            }
+            else return topic;  
+        }catch(err){logger.error(err.message); return null}
     }
 }
 module.exports = TopicRepository

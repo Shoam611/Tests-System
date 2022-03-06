@@ -8,8 +8,10 @@ const { logger } = require('../../app-logger');
 let Test, Topic, Question, User
 const createDataConnection = async () => {
     const { domain, db_port, database_data_name, database_users_name } = process.env;
+    logger.info(`.env ${domain} , ${db_port}, ${database_data_name} , ${database_users_name} `)
     logger.info('attempts to establish connection to the data db server. at createDataConnection 11')
     createConnection(`mongodb://${domain}:${db_port}/${database_data_name}`).asPromise().then((con) => {
+        logger.info(`${!!con} connection`)
         Question = createQuestionModel(con);
         Test = createTestModel(con);
         Topic = createTopicModel(con);

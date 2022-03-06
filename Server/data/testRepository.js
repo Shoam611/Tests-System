@@ -6,9 +6,7 @@ class TestsMongoRepository {
     //Create
     async addAsync(object) {
         const {Test} = getModels();
-        console.log(Test);
         const t = new Test({ ...object });
-        console.log(t);
         await t.save();
         return t._id;
     }

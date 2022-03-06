@@ -24,12 +24,11 @@ class MongoRepository {
     //Read
     async getAsync(filterquery = {}) {
         const {Question} = getModels();
-        console.log(Question);
         try { return await Question.find({ sort: '-createdAt' }).where(filterquery); }
         catch (err) {
             const newErr = new Error(`error while trying to fetch questions from the db at q-repository. original error ${err.message}`); 
              logger.error(newErr.message);
-            throw newErr
+            return null;
         }
     }
     //Update

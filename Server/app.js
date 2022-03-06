@@ -7,8 +7,6 @@ const cors = require('cors');
 const app = express();
 app.use(express.json());
 app.use(cors());
-const { container } = require('./app-container');
-
 app.use('/questions', questions_route)
 app.use('/tests' , tests_route)
 app.use('/topic',topic_route)
