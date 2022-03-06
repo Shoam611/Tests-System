@@ -4,7 +4,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 const { container } = require('./app-container');
-
+// const {logger }= require('./app-logger');
+// app.use()
 const questionsController = container.resolve('questionsController');
 app.post('/questions', async (req, res) => {
     try { res.send(await questionsController.addQuestion(req)).status(200) }

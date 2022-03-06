@@ -1,16 +1,15 @@
-const { Schema } = require('mongoose');
-const {testsDb} = require('../../services/mongoHandler');
-
-const answerSchema = new Schema({
-    value: String,
-    id: Number
-});
-const questionSchema = new Schema({
-    topic: String,
-    questionType: Number,
-    questionText: String,
-    textAbove: String,
-    textBelow: String,
+import { Schema } from 'mongoose' ;
+export const createQuestionModel = (connection) =>{
+    const answerSchema = new Schema({
+        value: String,
+        id: Number
+    });
+    const questionSchema = new Schema({
+        topic: String,
+        questionType: Number,
+        questionText: String,
+        textAbove: String,
+        textBelow: String,
     tags: Array,
     answers: [answerSchema],
     correctAnswerIds: Array,
@@ -19,8 +18,7 @@ const questionSchema = new Schema({
 }, { timestamps: true });
 
 questionSchema.statics.deleteByIdAsync = async (id) => this.deleteOne({ _id: id }) ;
-
-const Question = testsDb.model('Question', questionSchema);
+const Question = connection.model('Question', questionSchema);
 const Answer = testsDb.model('answer', answerSchema);
-
-module.exports = { Question, questionSchema, Answer }
+return [Answer,Question]
+}

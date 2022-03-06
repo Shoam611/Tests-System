@@ -1,9 +1,6 @@
 const { Question } = require('./schemas/index');
-
+const { logger }= require('../app-logger.js')
 class MongoRepository {
-constructor({logger}){
-    this.logger = logger;
-}
     //Create
     async addAsync(object) {
         try {
@@ -12,7 +9,7 @@ constructor({logger}){
             return q._id;
         } catch (err) {
             const newErr = new Error(`error while trying to ad question to the db.\n original error ${err.message}`)
-            this.logger.error(newErr);
+            logger.error(newErr);
             return newErr
         }
     }
@@ -24,7 +21,11 @@ constructor({logger}){
     //Read
     async getAsync(filterquery = {}) {
         try { return await Question.find({ sort: '-createdAt' }).where(filterquery); }
-        catch (err) { throw new Error(`error while trying to fetch questions from the db.\n original error ${err.message}`); }
+        catch (err) {
+            const newErr = new Error(`error while trying to fetch questions from the db.\n original error ${err.message}`); 
+             logger.log('error' ,newErr.message);
+            throw newErr
+        }
     }
     //Update
     async updateOneAsync(id, newQuestion) {

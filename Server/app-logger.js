@@ -3,18 +3,17 @@ const winston = require('winston');
 let logger;
 function createLogger (){
     logger = winston.createLogger({
-        level:'error',
-        defaultMeta:{service: 'Server' },
+        level:'info',
         format:winston.format.json(),
+        defaultMeta:{service: 'Server' },
         transports:[
-            new winston.transports.File({filename:'logs/error.log'}) ,
-            new winston.transports.File({filename:'logs/warning.log'}) ]
+            new winston.transports.File({filename:'logs/error.log' , level:'error'}) , 
+            new winston.transports.File({filename:'logs/warning.log' , level:' warn'}) , 
+            new winston.transports.File({filename:'logs/info.log' , level:'info'}) , 
+        ]
     })
-}
-function testLogger(){
-logger.log('error','some error massage',{ additional: 'properties',
-are: 'passed along'})
-logger.error(new Error('Error as info'));
-}
+    return logger ;
+}createLogger();
 
-module.exports = {logger, createLogger,testLogger}
+
+module.exports = {logger, createLogger}
