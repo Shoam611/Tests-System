@@ -108,7 +108,6 @@ const CreateQuestionForm = () => {
     const getIndexes = (answers) => {
         return answers.map(({ isSelected }, index) => ({ isCorrect: isSelected, index })).filter(({ isCorrect }) => isCorrect).map(({ index }) => index);
     }
-
     const handleSubmit = (e) => {
         e.preventDefault();
         if (formValidation()) {
@@ -118,13 +117,11 @@ const CreateQuestionForm = () => {
             clear()
         }
     }
-
-
     //side-effects
     useEffect(() => {
         onAddingAwnser(); onAddingAwnser();
         setQuestionTypes([{ id: 1, value: 'Single choice' }, { id: 2, value: 'Multi Choice' }]);
-    }, [onAddingAwnser]);
+    }, [onAddingAwnser]);   
 
     //renderers
     return (

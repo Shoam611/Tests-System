@@ -8,45 +8,46 @@ const TestView = () => {
     const { id } = useParams();
     const test = useSelector(state => state.tests.tests).find(t => t._id === id);
     const questions = useSelector(state => state.questions.questions).filter(q => test.questions.includes(q._id));
-    const [viewedTest, setViewedTest] = useState();
     const [questionsViews] = useState([]);
-    const [currectQuestion, setCurrectQuestion] = useState(-1);
+    const [currentQuestion, setCurrentQuestion] = useState(-1);
 
-    const setInitialTest = useCallback(() => {
-        setViewedTest(test);
-    }, [setViewedTest,test])
+    const onPrev = () => setCurrentQuestion(prevState => { return prevState - 1 })
+    const onNext = () => setCurrentQuestion(prevState => { return prevState + 1 })
 
-    const onPrev = () => setCurrectQuestion(prevState => { return prevState - 1 })
-    const onNext = () => setCurrectQuestion(prevState => { return prevState + 1 })
-
-    const renderQuestions = () => {
-        if (!viewedTest) { return (< h1 >Loading Data...</h1 >) }
-        if (+currectQuestion >= 0) {
-            return (<div >
-                {questionsViews[currectQuestion]}
-                <Btn onClick={onPrev}>Previous</Btn>
-                {questionsViews.length <= currectQuestion ? <Btn>Submit</Btn> : <Btn onClick={onNext}>Next</Btn>}
-            </div>)
-        }
-        return (
-            <div>
-                <h1>{viewedTest?.header}</h1>
-                <Btn onClick={onNext}>Start</Btn>
-            </div>
-        );
+    //side effects
+    useEffect(() => {
+        initialQuestionsComponents();
+    }, []);
+    
+    //methods
+    const handleSubmit = () => {
+        console.log('submitted');
     }
-
-    const initialQuestionsComponents = useCallback(() => {
+    
+    const initialQuestionsComponents = () => {
         const temp = questions?.map((q) => (
             <QuestionViewer key={q._id} {...q} />
         ));
         questionsViews.push(...temp);
-    },[questions,questionsViews])
+    }
+    //render
+    const renderQuestions = () => {
+        if (!test) return (< h1 >Loading Data...</h1 >)
 
-    useEffect(() => {
-        setInitialTest();
-        initialQuestionsComponents();
-    }, [setInitialTest,initialQuestionsComponents]);
+        if (+currentQuestion >= 0) {
+            return (<div >
+                {questionsViews[currentQuestion]}
+                <Btn onClick={onPrev}>Previous</Btn>
+                {questionsViews.length - currentQuestion === 1 ? <Btn onClick={handleSubmit}>Submit</Btn> : <Btn onClick={onNext}>Next</Btn>}
+            </div>)
+        }
+        return (
+            <div>
+                <h1>{test?.header}</h1>
+                <Btn onClick={onNext}>Start</Btn>
+            </div>
+        );
+    }
 
     return renderQuestions();
 }
