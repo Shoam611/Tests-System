@@ -1,53 +1,44 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useReducer, useState } from "react";
 import { useSelector } from "react-redux";
 import QuestionItem from "./questionItem";
 import { Btn, Checkbox, Input } from "UIKit";
 
-const QuestionsForTest = (props) => {
+const QuestionsForTest = ({ onQuestionSelected, selectedQuestios, prev }) => {
     //states
-    const [fetchedData, setFetchedData] = useState([]);
     const [list, setList] = useState([]);
-    const [selectedCounter, setSelectedCounter] = useState(0);
     const questions = useSelector(state => state.questions.questions);
     const topic = useSelector(state => state.topic.topic);
-    useEffect(() => { setFetchedData(questions); }, [questions, setFetchedData])
-
+    const [,forceUpdate] = useReducer(x=>x+1,0)
+    // const [count,setCount] = useState(0)
+    // useEffect(()=>{
+    //     setCount(selectedQuestios.length);
+    // },[selectedQuestios.length,setCount,forceUpdate])
     //handlers
-    const { onQuestionSelected } = props;
-
-    const questionSelectedHandler = useCallback((item, value) => {
-        onQuestionSelected(item, value);
-        value ? setSelectedCounter(prevState => { return prevState + 1 }) : setSelectedCounter(prevState => { return prevState - 1 });
-    }, [onQuestionSelected, setSelectedCounter])
-
     const buildDisplayList = useCallback((list) => {
         const temp = list.map((value, index) => ({
             id: value._id,
             render: <QuestionItem {...value} index={index} />,
             value: value,
-            isSelected: list.map(q => q).indexOf(value._id) > -1,
-            onChange: questionSelectedHandler,
+            isSelected: selectedQuestios.indexOf(value._id) > -1,
+            onChange: onQuestionSelected,
         }))
         setList(temp);
-    }, [questionSelectedHandler]);
+    }, [setList,selectedQuestios,onQuestionSelected]);
 
     const filterList = (e) => {
-        let tags = e.target.value.toUpperCase();
-        let tagsArray = tags.split(',')
-            .map(tag => tag.trim())
-            .filter(tag => (!!tag) && tag);
-
-        let newArray = fetchedData.filter(question => question.tags.find(tag => tagsArray.includes(tag.toUpperCase())));
-        buildDisplayList(newArray);
-        if (e.target.value.trim().length === 0) {
-            buildDisplayList(fetchedData);
-        }
+        const {value}= e.target
+        const tags = value.toLowerCase();
+        const newTagsArray = tags.split(',')
+                                .map(tag => tag.trim())
+                                .filter(tag => (!!tag) && tag);
+        const newArray = questions.filter(question => question.tags.find(tag => newTagsArray.includes(tag.toLowerCase())));
+        value.trim().length === 0 ? buildDisplayList(questions) : buildDisplayList(newArray);
     }
-
+const getCount =useCallback(()=>selectedQuestios.length , [selectedQuestios.length,selectedQuestios ]);
     //Side Effects
     useEffect(() => {
-        buildDisplayList(fetchedData);
-    }, [fetchedData, buildDisplayList]);
+        buildDisplayList(questions);
+    }, [questions, buildDisplayList]);
 
     return (
         <div className='AddTForm'>
@@ -55,9 +46,9 @@ const QuestionsForTest = (props) => {
                 <h1>Choose Questions</h1><div />
                 <h4>filter by tags:</h4>
                 <Input type="text" onChange={filterList} placeholder="Filter By Tags..." />
-                <h4>Questions Selected:{props.questions.length}</h4>
-                {questions.length === 0 ? <h4>No Quesitons Found For Topic: {topic.name}</h4> : <Checkbox list={list} />}
-                <Btn i="chevron-left" onClick={() => props.prev()}>Back</Btn>
+                <h4>Questions Selected:{selectedQuestios.length} </h4>
+                {questions.length === 0 ? <h4>No Quesitons Found For Topic: {topic.name} </h4> : <Checkbox list={list} />}
+                <Btn i="chevron-left" onClick={() => prev()}>Back</Btn>
             </div>
         </div>
     );

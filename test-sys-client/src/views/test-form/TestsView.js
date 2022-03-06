@@ -1,6 +1,6 @@
 import NavLinkItem from "../../components/navLinkItem";
 import { Btn, GradientBorder } from "UIKit";
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import useInput from "hooks/useInput";
 import './QuestionsView.css';
 import CreateTestForm from "./createTestForm";
@@ -19,8 +19,7 @@ const TestsView = () => {
     const [toShowMistakes, setToShowMistakes] = useState(false);
     const [questions, setQuestions] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
-    const [, setSelectedCounter] = useState(0);
-
+    const [,forceUpdate] =useReducer(x=>x+1,0);
     const dispatch = useDispatch();
     let navigate = useNavigate();
     const topic = useSelector(state => state.topic.topic)
@@ -46,10 +45,7 @@ const TestsView = () => {
     const testTypeChangedHandler = (e) => setTestType(e);
     const langChangedHandler = (e) => setLang(e);
     const toShowChangedHandler = (e) => setToShowMistakes(!e);
-    const onSelectionChange = (item, value) => {
-        value ? questions.push(item._id) : questions.pop(item._id);
-        value ? setSelectedCounter(prevState => { return prevState + 1 }) : setSelectedCounter(prevState => { return prevState - 1 });
-    };
+    const onSelectionChange = (item, value) =>{ (value && questions.indexOf(item._id) === -1) ? questions.push(item._id) : questions.splice(questions.indexOf(item._id), 1) ; forceUpdate()};
     const handleSubmit = (e) => {
         e.preventDefault();
         if (formValidation()) {
@@ -65,7 +61,6 @@ const TestsView = () => {
         setLang(0);
         setToShowMistakes(false);
         setQuestions([]);
-        setSelectedCounter(0);
         fields.Manager_email.setValue('');
         fields.Test_name.setValue('');
         fields.Passing_grade.setValue('');
@@ -140,7 +135,7 @@ const TestsView = () => {
     //views
     const steps = [
         <CreateTestForm next={handleNextStep} onTestTypeChange={testTypeChangedHandler} onLangChange={langChangedHandler} onToShowChange={toShowChangedHandler} data={testData} {...fields} />
-        , <QuestionsForTest prev={handlePrevStep} next={handleNextStep} onQuestionSelected={onSelectionChange} data={testData} questions={questions} />
+        , <QuestionsForTest prev={handlePrevStep} onQuestionSelected={onSelectionChange} selectedQuestios={questions} count ={questions.length} />
     ]
     return (
         <div className="QuestionView">

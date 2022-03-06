@@ -102,21 +102,15 @@ const EditTestView = () => {
     const checkedHandler = () => setNewShowIfWrong(!newShowIfWrong);
 
     const questionSelectedHandler = useCallback((item, value) => {
-        if (!value) {
-            const filtered = newQuestions.filter(q => q !== item._id);
-            setQuestions(filtered);
-        }
-        else {
-            newQuestions.push(item._id);
-        }
-    }, [setQuestions, newQuestions])
+        (value) ? newQuestions.push(item._id) : newQuestions.splice(newQuestions.indexOf(item._id), 1)
+    }, [newQuestions]);
 
     const setListValue = useCallback(() => {
         const temp = questions.map((value, index) => ({
             id: value._id,
             render: <QuestionShortened {...value} index={index} />,
             value: value,
-            isSelected: newQuestions.map(q => q).indexOf(value._id) > -1,
+            isSelected: newQuestions.indexOf(value._id) > -1,
             onChange: questionSelectedHandler,
         }))
         setList(temp);
@@ -126,8 +120,8 @@ const EditTestView = () => {
 
     const setIninitalQuestions = useCallback(() => {
         test?.questions.forEach(q => newQuestions.push(q));
-    }, [newQuestions,test?.questions])
-    
+    }, [newQuestions, test?.questions])
+
     useEffect(() => {
         setIninitalQuestions();
         setListValue();

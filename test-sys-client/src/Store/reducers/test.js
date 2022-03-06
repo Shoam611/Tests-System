@@ -8,7 +8,7 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD:
             const tests = state.tests;
-            tests.push(action.newTest)
+            tests.push({...action.newTest,updatedAt:new Date().toISOString()})
             return { ...state, tests: tests }
 
         case FETCH:
