@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useReducer, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import QuestionItem from "./questionItem";
 import { Btn, Checkbox, Input } from "UIKit";
@@ -8,11 +8,7 @@ const QuestionsForTest = ({ onQuestionSelected, selectedQuestios, prev }) => {
     const [list, setList] = useState([]);
     const questions = useSelector(state => state.questions.questions);
     const topic = useSelector(state => state.topic.topic);
-    const [,forceUpdate] = useReducer(x=>x+1,0)
-    // const [count,setCount] = useState(0)
-    // useEffect(()=>{
-    //     setCount(selectedQuestios.length);
-    // },[selectedQuestios.length,setCount,forceUpdate])
+    
     //handlers
     const buildDisplayList = useCallback((list) => {
         const temp = list.map((value, index) => ({
@@ -34,7 +30,7 @@ const QuestionsForTest = ({ onQuestionSelected, selectedQuestios, prev }) => {
         const newArray = questions.filter(question => question.tags.find(tag => newTagsArray.includes(tag.toLowerCase())));
         value.trim().length === 0 ? buildDisplayList(questions) : buildDisplayList(newArray);
     }
-const getCount =useCallback(()=>selectedQuestios.length , [selectedQuestios.length,selectedQuestios ]);
+    
     //Side Effects
     useEffect(() => {
         buildDisplayList(questions);

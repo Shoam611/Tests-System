@@ -6,8 +6,8 @@ import './manageTestsView.css';
 
 const ManageQuestionView = props => {
     const topic = useSelector(state => state.topic.topic);
-    const [viewedTests, setViewedTests] = useState([]);
     const tests = useSelector(state => state.tests.tests);
+    const [viewedTests, setViewedTests] = useState([]);
 
     useEffect(() => { setViewedTests(tests); }, [setViewedTests, tests]);
 
@@ -35,7 +35,6 @@ const ManageQuestionView = props => {
     }
     const renderHeader = () => (
         <div className='tests-table-header'>
-            {/* <div /> */}
             <Box onClick={sortByName}>     <h4> Test Name</h4> </Box>
             <Box onClick={sortByQuestions}>     <h4> No. of Questions</h4> </Box>
             <Box onClick={sortByDateString.bind(this, 'updatedAt')}> <h4> Updated at</h4> </Box>
