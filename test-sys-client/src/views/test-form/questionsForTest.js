@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import QuestionItem from "./questionItem";
-import { Btn, Checkbox, Input } from "UIKit";
+import { Btn, Checkbox, Input, Line } from "UIKit";
 
 const QuestionsForTest = (props) => {
     //states
@@ -51,12 +51,11 @@ const QuestionsForTest = (props) => {
 
     return (
         <div className='AddTForm'>
-            <h1>Choose Questions</h1>
             <div className="form-container">
-                <div className="inline-button-text">
-                    Questions Selected:{selectedCounter}
-                    <Input type="text" onChange={filterList} placeholder="Filter By Tags..." />
-                </div>
+                <h1>Choose Questions</h1><div />
+                <h4>filter by tags:</h4>
+                <Input type="text" onChange={filterList} placeholder="Filter By Tags..." />
+                <h4>Questions Selected:{selectedCounter}</h4>
                 {fetchedData.length === 0 ? <h4>No Quesitons Found For Topic: {topic.name}</h4> : <Checkbox list={list} />}
                 <Btn i="chevron-left" onClick={() => props.prev()}>Back</Btn>
             </div>

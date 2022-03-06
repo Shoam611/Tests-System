@@ -20,7 +20,7 @@
   grid-template-columns: max-content 1fr ;
   height: auto;
   gap: var(--gap-l);
-  width: inherit;
+  width:calc(inherit - var(--gap-l)) ;
   padding: 0 var(--gap-m);
   margin-bottom: var(--gap-m);
 }
