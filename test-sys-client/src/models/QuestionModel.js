@@ -14,5 +14,33 @@ class Question {
         this.presentaionAxisId = presentaionAxis;
         this.isAnActiveQuestion = isAnActiveQuestion;
     }
+
+    validate() {
+        if (+this.questionType < 1 || +this.questionType > 3)
+            return [false, 'Please Choose a Question Types.'];
+        if (!this.topic)
+            return [false, 'Please Choose a Topic.'];
+
+        if (this.questionText.length === 0)
+            return [false, 'Question Text Cannot be Empty.'];
+
+        if (this.textAbove.length === 0)
+            return [false, 'Text Above Question Be Empty.'];
+
+        if (this.textBelow.length === 0)
+            return [false, 'Text Below Question Be Empty.'];
+
+        if (this.tags.length === 0)
+            return [false, 'You Must Enter At Least One Tag.'];
+
+        for (let answer of this.answers)
+            if (answer.value.length === 0)
+                return [false, 'Answers Cannot Be Empty.'];
+
+        if (this.correctAnswerIds.length === 0)
+            return [false, 'You Must Choose Right Answer/s.'];
+
+        return [true, 'Preceding Create Question...'];
+    }
 }
 export default Question;

@@ -18,12 +18,12 @@ const TestView = () => {
     useEffect(() => {
         initialQuestionsComponents();
     }, []);
-    
+
     //methods
     const handleSubmit = () => {
         console.log('submitted');
     }
-    
+
     const initialQuestionsComponents = () => {
         const temp = questions?.map((q) => (
             <QuestionViewer key={q._id} {...q} />
@@ -53,3 +53,12 @@ const TestView = () => {
 }
 
 export default TestView;
+
+/*
+UserId,
+Date of Taking The Test,
+TestId,
+Questions:[{ questionId, selectedAnswersIds[], wasRight}],
+Score
+
+*/

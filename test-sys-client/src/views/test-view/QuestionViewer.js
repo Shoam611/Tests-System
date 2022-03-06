@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useReducer, useState } from "react"
 import AnswerChoice from "views/question-form/answerChoice";
 import AnswersViewer from "./answerViewer";
+import TestAnswerChoice from "./testAnswerChoice";
 
 const QuestionViewer = props => {
     const [, forceUpdate] = useReducer(x => x + 1, 0);
@@ -32,22 +33,19 @@ const QuestionViewer = props => {
         const id = getId();
         const newAnswer = {
             id: id,
-            render: <AnswerChoice id={id}
+            render: <TestAnswerChoice id={id}
                 onChange={awnserContentChangedHandler} />,
             value: '',
             isSelected: false
         };
         answers.push(newAnswer);
         forceUpdate();
-    }, [answers, awnserContentChangedHandler, getId]);
-
-
-    
+    }, [answers, awnserContentChangedHandler, getId]);    
 
     useEffect(() => {
         renderQuestions();
     }, [renderQuestions]);
-    
+
     return (
         <div>
             <h4>{props.textAbove}</h4>

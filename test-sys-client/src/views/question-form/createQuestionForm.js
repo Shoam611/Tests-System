@@ -110,18 +110,20 @@ const CreateQuestionForm = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (formValidation()) {
-            const selectedAxisId = axis.find(item => item.isSelected === true).id;
-            const newQuestion = new Question(topic, questionType, Question_text.value, Text_above_question.value, Text_below_question.value, tags.value, answers.map(({ value }, index) => ({ value, id: index })), getIndexes(answers), selectedAxisId,);
-            dispatch(addQuestion(newQuestion))
-            clear()
+        const selectedAxisId = axis.find(item => item.isSelected === true).id;
+        const newQuestion = new Question(topic, questionType, Question_text.value, Text_above_question.value, Text_below_question.value, tags.value, answers.map(({ value }, index) => ({ value, id: index })), getIndexes(answers), selectedAxisId,);
+        const [value, message] = newQuestion.validate();
+        if (value) {
+            dispatch(addQuestion(newQuestion));
+            clear();
         }
+        setErrorMessage(message);
     }
     //side-effects
     useEffect(() => {
         onAddingAwnser(); onAddingAwnser();
         setQuestionTypes([{ id: 1, value: 'Single choice' }, { id: 2, value: 'Multi Choice' }]);
-    }, [onAddingAwnser]);   
+    }, [onAddingAwnser]);
 
     //renderers
     return (
@@ -129,7 +131,7 @@ const CreateQuestionForm = () => {
             <form onSubmit={handleSubmit} >
                 <div className='form-container' >
                     <h1>New Question</h1>
-                    <Line justify ="around">
+                    <Line justify="around">
                         <h2>topic : {topic.name}</h2>
                     </Line>
                     <label >Question type:</label>
@@ -153,7 +155,7 @@ const CreateQuestionForm = () => {
                     }
                     <Input type="submit" value="Submit" />
                 </div>
-                    <p className='ErrorMessage'>{errorMessage}</p>
+                <p className='ErrorMessage'>{errorMessage}</p>
             </form>
         </div >
     )
