@@ -1,4 +1,4 @@
-const { Topic } = require('./schemas/index');
+const { Topic } = require('./schemas/createConnection.js');
 class TopicRepository {
     //Create
     async addAsync(newDoc) {

@@ -1,4 +1,4 @@
-const { User } = require('./schemas/index');
+const { User } = require('./schemas/createConnection.js');
 
 class UserRepository {
 

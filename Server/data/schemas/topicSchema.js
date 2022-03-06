@@ -1,5 +1,5 @@
-import { Schema } from 'mongoose';
-export const createTopicModel=(connection)=>{
+const { Schema, model }=require( 'mongoose') ;
+module.exports = createTopicModel=(connection)=>{
     const topicSchema = new Schema({
         name: String
     }, { timestamps: true });

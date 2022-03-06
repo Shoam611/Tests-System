@@ -1,6 +1,5 @@
 const { Schema } = require('mongoose');
-// const {testsDb} = require('../../services/mongoHandler');
-const createTestModel = (connection) => {
+module.export = createTestModel = (connection) => {
     const testSchema = new Schema({
         testType: Number,
         lang: Number,
@@ -21,4 +20,3 @@ const createTestModel = (connection) => {
     const Test = connection.model('Test', testSchema);
     return Test;
 }
-module.exports= createTestModel

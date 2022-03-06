@@ -8,5 +8,10 @@ const port = process.env.port ?  process.env.port : 8080;
 require('./app-container').setup();
 //app
 const app = require('./app');
-//swagger//server-startup
+//swagger
+//db - stratup
+const { createDataConnection } = require('./data/schemas/createConnection.js');
+createDataConnection();
+// createDataConnection();
+//server-startup
 app.listen(port, () => console.log(`Server is running on PORT: ${port}`));

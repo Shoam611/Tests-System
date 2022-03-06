@@ -1,6 +1,6 @@
-const { Schema } = require('mongoose');
-// const {usersDb} = require('../../services/mongoHandler');
-const createUserModel = (connection) => {
+const { Schema }=require( 'mongoose') ;
+
+module.exports = createUserModel = (connection) => {
     const userSchema = new Schema({
         firstName: String,
         lastName: String,
@@ -10,10 +10,6 @@ const createUserModel = (connection) => {
         testsIds: Array,
     }, { timestamps: true });
     userSchema.statics.deleteByIdAsync = async (id) => this.deleteOne({ _id: id });
-
     const User = connection.model('Users', userSchema);
     return User
 }
-// module.exports = {
-//     User
-// };
