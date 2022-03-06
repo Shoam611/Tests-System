@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { runPostRequest } from 'services/httpInvoker'
-export const ADD = 'ADDTEST';
-export const FETCH = 'FETCHTEST';
-export const DELETE = 'DELETETEST';
-export const UPDATE = 'UPDATETEST';
+export const ADD = 'ADDUSER';
+export const FETCH = 'FETCHUSER';
+export const DELETE = 'DELETEUSER';
+export const UPDATE = 'UPDATEUSER';
 
 export const addUser = (newUser) => {
     return async (dispatch, getState) => {
@@ -15,8 +15,7 @@ export const addUser = (newUser) => {
 
 export const fetchUsers = () => {
     return async (dispatch, getState) => {
-        const topic = getState().topic.topic;
-        const response = await axios.get(`http://localhost:4200/users?topic=${topic._id}`);
+        const response = await axios.get(`http://localhost:4200/users`);
         const responseData = await response.data;
         dispatch({ type: FETCH, newUser: responseData });
     }
