@@ -140,7 +140,7 @@ const TestsView = () => {
     //views
     const steps = [
         <CreateTestForm next={handleNextStep} onTestTypeChange={testTypeChangedHandler} onLangChange={langChangedHandler} onToShowChange={toShowChangedHandler} data={testData} {...fields} />
-        , <QuestionsForTest prev={handlePrevStep} next={handleNextStep} onQuestionSelected={onSelectionChange} data={testData} questions={questions} />
+        , <QuestionsForTest prev={handlePrevStep} next={handleNextStep} onQuestionSelected={onSelectionChange} data={testData} selectedQuestios={questions} />
     ]
     return (
         <div className="QuestionView">

@@ -1,53 +1,49 @@
 import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import QuestionItem from "./questionItem";
-import { Btn, Checkbox, Input, Line } from "UIKit";
+import { Btn, Checkbox, Input } from "UIKit";
 
 const QuestionsForTest = (props) => {
     //states
-    const [fetchedData, setFetchedData] = useState([]);
     const [list, setList] = useState([]);
-    const [selectedCounter, setSelectedCounter] = useState(0);
     const questions = useSelector(state => state.questions.questions);
     const topic = useSelector(state => state.topic.topic);
-    useEffect(() => { setFetchedData(questions); }, [questions, setFetchedData])
 
     //handlers
-    const { onQuestionSelected } = props;
+    // const { onQuestionSelected } = props;
 
     const questionSelectedHandler = useCallback((item, value) => {
-        onQuestionSelected(item, value);
-        value ? setSelectedCounter(prevState => { return prevState + 1 }) : setSelectedCounter(prevState => { return prevState - 1 });
-    }, [onQuestionSelected, setSelectedCounter])
+        props.onQuestionSelected(item, value);
+    }, [props]);
 
     const buildDisplayList = useCallback((list) => {
         const temp = list.map((value, index) => ({
             id: value._id,
             render: <QuestionItem {...value} index={index} />,
             value: value,
-            isSelected: list.map(q => q).indexOf(value._id) > -1,
+            isSelected: props.selectedQuestios.indexOf(value._id) > -1,
             onChange: questionSelectedHandler,
         }))
         setList(temp);
-    }, [questionSelectedHandler]);
+    }, [questionSelectedHandler, props.selectedQuestios]);
 
     const filterList = (e) => {
         let tags = e.target.value.toUpperCase();
-        let tagsArray = tags.split(',')
+        let newTagsArray = tags.split(',')
             .map(tag => tag.trim())
             .filter(tag => (!!tag) && tag);
 
-        let newArray = fetchedData.filter(question => question.tags.find(tag => tagsArray.includes(tag.toUpperCase())));
+        let newArray = questions.filter(question => question.tags.find(tag => newTagsArray.includes(tag.toUpperCase())));
         buildDisplayList(newArray);
         if (e.target.value.trim().length === 0) {
-            buildDisplayList(fetchedData);
+            buildDisplayList(questions);
         }
     }
 
     //Side Effects
     useEffect(() => {
-        buildDisplayList(fetchedData);
-    }, [fetchedData, buildDisplayList]);
+        buildDisplayList(questions);
+    }, [questions, buildDisplayList]);
 
     return (
         <div className='AddTForm'>
@@ -55,8 +51,8 @@ const QuestionsForTest = (props) => {
                 <h1>Choose Questions</h1><div />
                 <h4>filter by tags:</h4>
                 <Input type="text" onChange={filterList} placeholder="Filter By Tags..." />
-                <h4>Questions Selected:{selectedCounter}</h4>
-                {fetchedData.length === 0 ? <h4>No Quesitons Found For Topic: {topic.name}</h4> : <Checkbox list={list} />}
+                <h4>Questions Selected:{props.selectedQuestios.length}</h4>
+                {questions.length === 0 ? <h4>No Quesitons Found For Topic: {topic.name}</h4> : <Checkbox list={list} />}
                 <Btn i="chevron-left" onClick={() => props.prev()}>Back</Btn>
             </div>
         </div>

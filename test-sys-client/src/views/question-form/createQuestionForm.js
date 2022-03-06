@@ -122,7 +122,6 @@ const CreateQuestionForm = () => {
 
     //side-effects
     useEffect(() => {
-        console.log(topic);
         onAddingAwnser(); onAddingAwnser();
         setQuestionTypes([{ id: 1, value: 'Single choice' }, { id: 2, value: 'Multi Choice' }]);
     }, [onAddingAwnser]);
