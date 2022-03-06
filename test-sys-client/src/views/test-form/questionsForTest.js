@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useReducer, useState } from "react";
 import { useSelector } from "react-redux";
 import QuestionItem from "./questionItem";
 import { Btn, Checkbox, Input } from "UIKit";
@@ -8,6 +8,11 @@ const QuestionsForTest = ({ onQuestionSelected, selectedQuestios, prev }) => {
     const [list, setList] = useState([]);
     const questions = useSelector(state => state.questions.questions);
     const topic = useSelector(state => state.topic.topic);
+    const [,forceUpdate] = useReducer(x=>x+1,0)
+    // const [count,setCount] = useState(0)
+    // useEffect(()=>{
+    //     setCount(selectedQuestios.length);
+    // },[selectedQuestios.length,setCount,forceUpdate])
     //handlers
     const buildDisplayList = useCallback((list) => {
         const temp = list.map((value, index) => ({
@@ -29,7 +34,7 @@ const QuestionsForTest = ({ onQuestionSelected, selectedQuestios, prev }) => {
         const newArray = questions.filter(question => question.tags.find(tag => newTagsArray.includes(tag.toLowerCase())));
         value.trim().length === 0 ? buildDisplayList(questions) : buildDisplayList(newArray);
     }
-
+const getCount =useCallback(()=>selectedQuestios.length , [selectedQuestios.length,selectedQuestios ]);
     //Side Effects
     useEffect(() => {
         buildDisplayList(questions);
@@ -41,8 +46,8 @@ const QuestionsForTest = ({ onQuestionSelected, selectedQuestios, prev }) => {
                 <h1>Choose Questions</h1><div />
                 <h4>filter by tags:</h4>
                 <Input type="text" onChange={filterList} placeholder="Filter By Tags..." />
-                <h4>Questions Selected:{selectedQuestios.length}</h4>
-                {questions.length === 0 ? <h4>No Quesitons Found For Topic: {topic.name}</h4> : <Checkbox list={list} />}
+                <h4>Questions Selected:{selectedQuestios.length} </h4>
+                {questions.length === 0 ? <h4>No Quesitons Found For Topic: {topic.name} </h4> : <Checkbox list={list} />}
                 <Btn i="chevron-left" onClick={() => prev()}>Back</Btn>
             </div>
         </div>
