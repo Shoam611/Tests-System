@@ -19,7 +19,6 @@ const TestsView = () => {
     const [toShowMistakes, setToShowMistakes] = useState(false);
     const [questions, setQuestions] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
-    const [, setSelectedCounter] = useState(0);
 
     const dispatch = useDispatch();
     let navigate = useNavigate();
@@ -47,8 +46,7 @@ const TestsView = () => {
     const langChangedHandler = (e) => setLang(e);
     const toShowChangedHandler = (e) => setToShowMistakes(!e);
     const onSelectionChange = (item, value) => {
-        value ? questions.push(item._id) : questions.pop(item._id);
-        value ? setSelectedCounter(prevState => { return prevState + 1 }) : setSelectedCounter(prevState => { return prevState - 1 });
+        (value && questions.indexOf(item._id) === -1) ? questions.push(item._id) : questions.splice(questions.indexOf(item._id),1);
     };
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -65,7 +63,6 @@ const TestsView = () => {
         setLang(0);
         setToShowMistakes(false);
         setQuestions([]);
-        setSelectedCounter(0);
         fields.Manager_email.setValue('');
         fields.Test_name.setValue('');
         fields.Passing_grade.setValue('');
