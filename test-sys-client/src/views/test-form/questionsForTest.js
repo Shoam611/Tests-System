@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import QuestionItem from "./questionItem";
-import { Btn, Checkbox, Input, Line } from "UIKit";
+import { Btn, Checkbox, Input } from "UIKit";
 
 const QuestionsForTest = (props) => {
     //states
@@ -55,8 +55,8 @@ const QuestionsForTest = (props) => {
                 <h1>Choose Questions</h1><div />
                 <h4>filter by tags:</h4>
                 <Input type="text" onChange={filterList} placeholder="Filter By Tags..." />
-                <h4>Questions Selected:{selectedCounter}</h4>
-                {fetchedData.length === 0 ? <h4>No Quesitons Found For Topic: {topic.name}</h4> : <Checkbox list={list} />}
+                <h4>Questions Selected:{props.questions.length}</h4>
+                {questions.length === 0 ? <h4>No Quesitons Found For Topic: {topic.name}</h4> : <Checkbox list={list} />}
                 <Btn i="chevron-left" onClick={() => props.prev()}>Back</Btn>
             </div>
         </div>

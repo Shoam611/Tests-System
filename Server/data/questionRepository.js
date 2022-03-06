@@ -13,7 +13,7 @@ constructor({logger}){
         } catch (err) {
             const newErr = new Error(`error while trying to ad question to the db.\n original error ${err.message}`)
             this.logger.error(newErr);
-            throw newErr
+            return newErr
         }
     }
     //Delete
@@ -28,9 +28,8 @@ constructor({logger}){
     }
     //Update
     async updateOneAsync(id, newQuestion) {
-        try {
-            await Question.updateOne({ _id: id }, newQuestion);
-        } catch (err) { throw new Error(`error while trying to update questions from the db.\n original error ${err.message}`); }
+        try { await Question.updateOne({ _id: id }, newQuestion);} 
+        catch (err) { throw new Error(`error while trying to update questions from the db.\n original error ${err.message}`); }
     }
 }
 module.exports = MongoRepository

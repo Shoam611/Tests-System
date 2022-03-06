@@ -7,7 +7,8 @@ function createLogger (){
         defaultMeta:{service: 'Server' },
         format:winston.format.json(),
         transports:[
-            new winston.transports.File({filename:'logs/error.log'}) ]
+            new winston.transports.File({filename:'logs/error.log'}) ,
+            new winston.transports.File({filename:'logs/warning.log'}) ]
     })
 }
 function testLogger(){

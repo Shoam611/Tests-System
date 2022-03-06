@@ -21,7 +21,7 @@ app.delete('/questions', async (req, res) => { questionsController.deleteQuestio
 app.put('/questions', async (req, res) => { questionsController.updateQuestion(req); res.send(200) });
 
 const testsController = container.resolve('testsController');
-app.post('/tests', async (req, res) => { testsController.addTest(req); res.send(200) });
+app.post('/tests', async (req, res) => { const succseeded = testsController.addTest(req); res.send(succseeded?200:500) });
 app.get('/tests', async (req, res) => { const result = await testsController.getTests(req); res.send(result).status(200) });
 app.delete('/tests', async (req, res) => { testsController.deleteTest(req); res.send(200) });
 app.put('/tests', async (req, res) => { const id = await testsController.updateTest(req); res.send(id.toString()).status(200); });
