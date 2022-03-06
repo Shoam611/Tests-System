@@ -45,9 +45,7 @@ const TestsView = () => {
     const testTypeChangedHandler = (e) => setTestType(e);
     const langChangedHandler = (e) => setLang(e);
     const toShowChangedHandler = (e) => setToShowMistakes(!e);
-    const onSelectionChange = (item, value) => {
-        (value && questions.indexOf(item._id) === -1) ? questions.push(item._id) : questions.splice(questions.indexOf(item._id),1);
-    };
+    const onSelectionChange = (item, value) => (value && questions.indexOf(item._id) === -1) ? questions.push(item._id) : questions.splice(questions.indexOf(item._id), 1);
     const handleSubmit = (e) => {
         e.preventDefault();
         if (formValidation()) {
