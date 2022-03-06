@@ -35,7 +35,7 @@ const ManageQuestionView = props => {
     }
     const renderHeader = () => (
         <div className='tests-table-header'>
-            <div />
+            {/* <div /> */}
             <Box onClick={sortByName}>     <h4> Test Name</h4> </Box>
             <Box onClick={sortByQuestions}>     <h4> No. of Questions</h4> </Box>
             <Box onClick={sortByDateString.bind(this, 'updatedAt')}> <h4> Updated at</h4> </Box>

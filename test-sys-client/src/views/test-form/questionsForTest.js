@@ -9,10 +9,6 @@ const QuestionsForTest = ({ onQuestionSelected, selectedQuestios, prev }) => {
     const questions = useSelector(state => state.questions.questions);
     const topic = useSelector(state => state.topic.topic);
     //handlers
-    // const questionSelectedHandler = useCallback((item, value) => {
-    //     onQuestionSelected(item, value);
-    // }, [onQuestionSelected]);
-
     const buildDisplayList = useCallback((list) => {
         const temp = list.map((value, index) => ({
             id: value._id,
