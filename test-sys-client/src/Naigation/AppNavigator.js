@@ -2,9 +2,9 @@ import { Route, Routes } from "react-router-dom";
 import App from "App";
 import DefaultView from "views/defaultView";
 import TestsView from "../views/test-form/TestsView";
-import ManageQuestionView from "views/manageQuestionsView";
+import ManageQuestionView from "views/questions-manager/manageQuestionsView";
 import ManageTestsView from "views/tests-manager/manageTestsView";
-import EditQuestionView from "views/editQuestionView";
+import EditQuestionView from "views/questions-manager/editQuestionView";
 import EditTestView from "views/tests-manager/editTestView"
 import QuizReport from "views/reports/quizReport";
 import NewUserForm from "views/test-view/newUserForm";

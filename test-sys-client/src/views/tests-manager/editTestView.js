@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Btn, Dropdown, Input } from "UIKit";
 import { testTypes, languages } from "models/presentationAxis";
-import '../editQuestionView.css'
+import '../questions-manager/editQuestionView.css'
 import useInput from "hooks/useInput";
 import { useCallback, useEffect, useState } from "react";
 import Test from "models/TestModel";

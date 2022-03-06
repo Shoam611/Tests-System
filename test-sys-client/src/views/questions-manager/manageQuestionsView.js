@@ -1,4 +1,4 @@
-import Question from '../components/Question';
+import Question from '../../components/Question';
 import { useSelector } from 'react-redux';
 import { Box, Input, Line } from 'UIKit';
 import './manageQuestionsView.css'
