@@ -7,9 +7,6 @@
   display: block;
 }
 
-.AddQForm h1 {
-  color: var(--accent);
-}
 .form-container h3,.Input[type="submit"]{
   grid-column: span 2;
   margin: 0;
