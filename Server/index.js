@@ -10,8 +10,7 @@ require('./app-container').setup();
 const app = require('./app');
 //swagger
 //db - stratup
-const { createDataConnection } = require('./data/schemas/createConnection.js');
-createDataConnection();
-// createDataConnection();
+require('./data/schemas/createConnection.js').createDataConnection();
+
 //server-startup
 app.listen(port, () => console.log(`Server is running on PORT: ${port}`));
