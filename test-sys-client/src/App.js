@@ -31,7 +31,7 @@ function App() {
   }, [loadData, loadTopic])
 
   return (
-    isLoading ? (<div><h1>Loading data...</h1></div>) :
+    isLoading ? (<div><h1>Our servers are down ;( try to refresh later</h1></div>) :
       <div className="App">
         <Rows>
           {/* top bar */}
