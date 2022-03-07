@@ -42,7 +42,7 @@ const EditTestView = () => {
             navigate(-1);
         }
     }
-    
+
     //RegEx validation
     const ValidateEmail = (mail) => {
         if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(mail)) {
@@ -110,7 +110,7 @@ const EditTestView = () => {
     const setListValue = useCallback(() => {
         const temp = questions.map((value, index) => ({
             id: value._id,
-            render: <QuestionShortened {...value} index={index} />,
+            render: <QuestionShortened key={value._id} {...value} index={index} />,
             value: value,
             isSelected: newQuestions.indexOf(value._id) > -1,
             onChange: questionSelectedHandler,

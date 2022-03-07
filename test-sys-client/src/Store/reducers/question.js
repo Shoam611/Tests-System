@@ -7,17 +7,18 @@ const reducer = (state = initialState, action) => {
 
     switch (action.type) {
         case ADD:
-
-            const questions = state.questions;
-            questions.push({ ...action.newQuestion, updatedAt: new Date().toISOString })
-            return { ...state, questions: questions }
+            const tempQuestions = state.questions;
+            tempQuestions.push({ ...action.newQuestion, updatedAt: new Date().toISOString() })
+            return { ...state, questions: tempQuestions }
 
         case FETCH:
             if (action.newQuestions) {
                 return { ...state, questions: action.newQuestions }
             }
             return state;
+
         case DELETE: return state;
+
         case UPDATE:
             const temp = state.questions;
             const index = temp.findIndex(q => q._id === action.id);

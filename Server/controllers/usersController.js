@@ -16,11 +16,8 @@ class UsersController {
         return await this.userRepository.UpdateUser(id, newTest);
     }
 
-    getUser = async ({ query }) => {
-        const { topic } = query;
-        let filter = {};
-        if (topic) filter = { topic: topic }
-        return await this.userRepository.getAsync(filter);
+    getUsers = async () => {
+        return await this.userRepository.getAsync();
     }
 }
 

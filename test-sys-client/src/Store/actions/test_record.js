@@ -17,4 +17,4 @@ export const setUser = (user) => {
     }
 }
 
-const compareUsers = (user, array) => array.find(u => u.email === user.email);
+const compareUsers = (user, array) => array.find(u => u.email === user.email && u.phoneNumber === user.phoneNumber);
