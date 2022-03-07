@@ -10,7 +10,6 @@ export const addUser = (newUser) => {
         const response = await runPostRequest('http://localhost:4200/users', { newUser: newUser });
         const _id = await response;
         dispatch({ type: ADD, newUser: {...newUser, _id } })
-        console.log('finished creating a user');
     }
 }
 
