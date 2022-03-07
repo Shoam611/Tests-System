@@ -3,10 +3,10 @@ class UsersController {
         this.userRepository = userRepository;
     }
 
-    addUser = ({ body }) => {
+    addUser = async ({ body }) => {
         const { newUser, } = body;
         if (!newUser) { return null; }
-        this.userRepository.addAsync(newUser);
+        return await this.userRepository.addAsync(newUser);
     }
 
     deleteUser = ({ body }) =>  this.userRepository.DeleteOneAsync(body.id) 

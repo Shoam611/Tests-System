@@ -1,5 +1,4 @@
-import { ADD, FETCH, DELETE, UPDATE } from "Store/actions/test_record";
-
+import { FETCH, DELETE, UPDATE, SET } from "Store/actions/test_record";
 const initialState = {
     questionRecords: [],
     user: {},

@@ -16,6 +16,7 @@ class UserRepository {
         const { User } = getModels();
         User.deleteByIdAsync(id);
     }
+
     //Update
     async UpdateUser(id, newUser) {
         const { User } = getModels();
@@ -23,6 +24,7 @@ class UserRepository {
         await doc.save();
         return doc._id;
     }
+    
     //Read
     async getAsync() {
         const { User } = getModels();

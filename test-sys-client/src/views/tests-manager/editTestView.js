@@ -110,7 +110,7 @@ const EditTestView = () => {
     const setListValue = useCallback(() => {
         const temp = questions.map((value, index) => ({
             id: value._id,
-            render: <QuestionShortened key={value._id} {...value} index={index} />,
+            render: <QuestionShortened {...value} index={index} />,
             value: value,
             isSelected: newQuestions.indexOf(value._id) > -1,
             onChange: questionSelectedHandler,

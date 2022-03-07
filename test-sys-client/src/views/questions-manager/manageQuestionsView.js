@@ -6,8 +6,6 @@ import { useEffect, useState } from 'react';
 const ManageQuestionView = (props) => {
     const topic = useSelector(state => state.topic.topic);
     const questions = useSelector(state => state.questions.questions);
-    
-    useEffect(() => { console.log(questions); }, []);
 
     const [viewedQuestions, setViewedQuestions] = useState([]);
     useEffect(() => { setViewedQuestions(questions) }, [setViewedQuestions, questions]);

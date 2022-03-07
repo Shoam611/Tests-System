@@ -3,10 +3,10 @@ class TestsController {
         this.testsRepository = testsRepository;
     }
 
-    addTest = ({ body }) => {
+    addTest = async ({ body }) => {
         const { newTest, } = body;
-        if (!newTest) {  return; }
-        this.testsRepository.addAsync(newTest);
+        if (!newTest) { return null; }
+        return await this.testsRepository.addAsync(newTest);
     }
 
     deleteTest = ({ body }) => {
