@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react"
-import {  useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { questionTypes } from '../models/presentationAxis'
 import QuestionModal from "./QuestionComponent"
 import { Box, Btn, Icon } from "UIKit"
@@ -19,14 +19,14 @@ const Question = (props) => {
 
 
     return (
-        <Box >
+        <Box key={props._id}>
             {isModalOn && <QuestionModal {...props} />}
             <div className='questions-container-item'>
-                {props.isAnActiveQuestion ? <Icon i={'check'} /> :  <div />}
-                    <h4 onClick={showModal}> {props.questionText}</h4>
+                {props.isAnActiveQuestion ? <Icon i={'check'} /> : <div />}
+                <h4 onClick={showModal}> {props.questionText}</h4>
                 <h4> {new Date(props.updatedAt).toDateString()}</h4>
                 <h4> {questionTypes.find(type => type.id === props.questionType).value}</h4>
-                <Btn onClick={()=>{navigate(`editQuestion/${props._id}`)}}>Edit</Btn>
+                <Btn onClick={() => { navigate(`editQuestion/${props._id}`) }}>Edit</Btn>
             </div>
         </Box>
     )

@@ -4,9 +4,10 @@ import { useDispatch } from 'react-redux';
 import { Rows, Columns } from 'UIKit';
 import Header from 'components/header';
 import SideNav from './components/SideNav';
+import { fetchTopic } from 'Store/actions/topic';
 import { fetchQuestions } from 'Store/actions/question';
 import { fetchTests } from 'Store/actions/test';
-import { fetchTopic } from 'Store/actions/topic';
+import { fetchUsers } from 'Store/actions/user';
 import './App.css';
 function App() {
   const [isLoading, setIsLoading] = useState();
@@ -17,8 +18,9 @@ function App() {
   }, [dispatch]);
 
   const loadData = useCallback(async () => {
-    await dispatch(fetchQuestions());
-    await dispatch(fetchTests());
+    dispatch(fetchQuestions());
+    dispatch(fetchTests());
+    dispatch(fetchUsers());
   }, [dispatch]);
 
   useEffect(() => {
@@ -31,7 +33,7 @@ function App() {
   }, [loadData, loadTopic])
 
   return (
-    isLoading ? (<div><h1>Loading data...</h1></div>) :
+    isLoading ? (<div><h1>Our servers are down ;( try to refresh later</h1></div>) :
       <div className="App">
         <Rows>
           {/* top bar */}

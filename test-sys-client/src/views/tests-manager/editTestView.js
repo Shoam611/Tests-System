@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Btn, Dropdown, Input } from "UIKit";
 import { testTypes, languages } from "models/presentationAxis";
-import '../editQuestionView.css'
+import '../questions-manager/editQuestionView.css'
 import useInput from "hooks/useInput";
 import { useCallback, useEffect, useState } from "react";
 import Test from "models/TestModel";
@@ -30,7 +30,7 @@ const EditTestView = () => {
     const newEmailSubOnFail = useInput(test?.emailSubOnFail);
     const newEmailBodyOnFail = useInput(test?.emailBodyOnFail);
     const [errorMessage, setErrorMessage] = useState("");
-    const [newQuestions, setQuestions] = useState([]);
+    const [newQuestions,] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [list, setList] = useState([]);
 
@@ -42,6 +42,7 @@ const EditTestView = () => {
             navigate(-1);
         }
     }
+
     //RegEx validation
     const ValidateEmail = (mail) => {
         if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(mail)) {
@@ -98,6 +99,7 @@ const EditTestView = () => {
         setErrorMessage('');
         return true;
     }
+
     //methods
     const checkedHandler = () => setNewShowIfWrong(!newShowIfWrong);
 

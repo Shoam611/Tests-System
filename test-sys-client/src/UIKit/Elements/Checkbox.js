@@ -1,13 +1,13 @@
 import { useState } from "react";
 import Line from "UIKit/Layouts/Line";
-import './Checkbox.css'
+import './Checkbox.css';
 const Checkbox = ({ list }) => {
 
     const onSelctionChanged = (id, value) => {
         list.forEach(item => {
             if (item.id === id) {
                 item.isSelected = value;
-                item.onChange && item.onChange(item.value, value);
+                item.onChange && item.onChange(item.value, value, item.father);
             }
         });
     }
@@ -17,11 +17,12 @@ const Checkbox = ({ list }) => {
             id={value.id}
             selected={value.isSelected}
             onChange={onSelctionChanged}
+            father={value.father}
             render={value.render} />);
     }
 
     return (
-        <div style={{width:'100%'}}>
+        <div style={{ width: '100%' }}>
             <ul>
                 {renderListOptions()}
             </ul>
@@ -43,7 +44,7 @@ const CheckboxItem = ({ onChange, render, id, selected }) => {
                 <div className="iconContainer" onClick={() => { onSelectionHandler() }}>
                     <i className={isSelected ? "fas fa-check-square " : "far fa-check-square"} />
                 </div>
-                <div style={{width:'100%'}} >{toRender}</div>
+                <div style={{ width: '100%' }} >{toRender}</div>
             </Line>
         </li>
     )

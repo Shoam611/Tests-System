@@ -108,18 +108,17 @@ const CreateQuestionForm = () => {
     const getIndexes = (answers) => {
         return answers.map(({ isSelected }, index) => ({ isCorrect: isSelected, index })).filter(({ isCorrect }) => isCorrect).map(({ index }) => index);
     }
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (formValidation()) {
-            const selectedAxisId = axis.find(item => item.isSelected === true).id;
-            const newQuestion = new Question(topic, questionType, Question_text.value, Text_above_question.value, Text_below_question.value, tags.value, answers.map(({ value }, index) => ({ value, id: index })), getIndexes(answers), selectedAxisId,);
-            dispatch(addQuestion(newQuestion))
-            clear()
+        const selectedAxisId = axis.find(item => item.isSelected === true).id;
+        const newQuestion = new Question(topic, questionType, Question_text.value, Text_above_question.value, Text_below_question.value, tags.value, answers.map(({ value }, index) => ({ value, id: index })), getIndexes(answers), selectedAxisId,);
+        const [value, message] = newQuestion.validate();
+        if (value) {
+            dispatch(addQuestion(newQuestion));
+            clear();
         }
+        setErrorMessage(message);
     }
-
-
     //side-effects
     useEffect(() => {
         onAddingAwnser(); onAddingAwnser();
@@ -132,20 +131,20 @@ const CreateQuestionForm = () => {
             <form onSubmit={handleSubmit} >
                 <div className='form-container' >
                     <h1>New Question</h1>
-                    <Line justify ="around">
-                        <h2>topic : {topic.name}</h2>
+                    <Line justify="around">
+                        <h2>Topic: {topic.name}</h2>
                     </Line>
-                    <label >Question type:</label>
+                    <label >Question Type:</label>
                     <Dropdown list={questionTypes} selected={questionType} onChange={handleQuestionTypeChanged} />
-                    <label >Question text:</label>
+                    <label >Question Text:</label>
                     <Input placeholder="Question text:"        {...Question_text} />
-                    <label >Question above question:</label>
+                    <label >Question Above Question:</label>
                     <Input placeholder="Text above question:"  {...Text_above_question} />
-                    <label >Question below question: </label>
+                    <label >Question Below Question: </label>
                     <Input placeholder="Text below question:"  {...Text_below_question} />
-                    <label >Question presentaion axis : </label>
+                    <label >Answers layout: </label>
                     <RadioButton list={axis} />
-                    <label >tags : </label>
+                    <label >Tags : </label>
                     <Input placeholder="tags (seperate with , charecter)" {...tags} />
                     <hr />
                     {questionType && <>
@@ -156,7 +155,7 @@ const CreateQuestionForm = () => {
                     }
                     <Input type="submit" value="Submit" />
                 </div>
-                    <p className='ErrorMessage'>{errorMessage}</p>
+                <p className='ErrorMessage'>{errorMessage}</p>
             </form>
         </div >
     )

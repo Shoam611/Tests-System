@@ -1,14 +1,14 @@
-import Question from '../components/Question';
+import Question from '../../components/Question';
 import { useSelector } from 'react-redux';
 import { Box, Input, Line } from 'UIKit';
 import './manageQuestionsView.css'
 import { useEffect, useState } from 'react';
 const ManageQuestionView = (props) => {
     const topic = useSelector(state => state.topic.topic);
-    const questions = useSelector(state => state.questions.questions)
+    const questions = useSelector(state => state.questions.questions);
 
     const [viewedQuestions, setViewedQuestions] = useState([]);
-    useEffect(() =>{ setViewedQuestions(questions)}, [setViewedQuestions,questions]);
+    useEffect(() => { setViewedQuestions(questions) }, [setViewedQuestions, questions]);
     const renderQuestions = () => {
         return (viewedQuestions.length === 0 ? <h2>No Questions Available For The Selected Topic: {topic.name}.</h2> :
             viewedQuestions.map((q) => <Question key={q._id} {...q} />))
@@ -29,7 +29,7 @@ const ManageQuestionView = (props) => {
         let tagsArray = tags.split(',').map(tag => tag.trim()).filter(tag => (!!tag) && tag);
         const newArray = questions.filter(question => question.tags.find(tag => tagsArray.includes(tag.toUpperCase())));
         setViewedQuestions(newArray)
-        if (e.target.value.trim().length === 0) {setViewedQuestions(questions)}
+        if (e.target.value.trim().length === 0) { setViewedQuestions(questions) }
     }
     const renderHeader = () => (
         <div className='questions-table-header'>

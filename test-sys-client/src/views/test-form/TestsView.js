@@ -46,6 +46,7 @@ const TestsView = () => {
     const langChangedHandler = (e) => setLang(e);
     const toShowChangedHandler = (e) => setToShowMistakes(!e);
     const onSelectionChange = (item, value) =>{ (value && questions.indexOf(item._id) === -1) ? questions.push(item._id) : questions.splice(questions.indexOf(item._id), 1) ; forceUpdate()};
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         if (formValidation()) {

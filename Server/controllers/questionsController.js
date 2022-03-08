@@ -5,7 +5,7 @@ class QuestionsController {
   }
   addQuestion = async ({ body }) => {
     const { newQuestion, } = body;
-    if (!newQuestion) { return; }
+    if (!newQuestion) { return null; }
     return await this.questionRepository.addAsync(newQuestion);
   }
 

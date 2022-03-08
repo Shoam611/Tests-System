@@ -6,9 +6,9 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD:
-            const users = state.users;
-            users.push(action.newUser);
-            return { ...state, users: users }
+            const usersTemp = state.users;
+            usersTemp.push(action.newUser);
+            return { ...state, users: usersTemp }
 
         case FETCH:
             if (action.newUser) {
@@ -17,8 +17,8 @@ const reducer = (state = initialState, action) => {
             return state;
 
         case UPDATE:
-            const newUsers = state.users;
-            newUsers.filter(u => u._id !== action.id);
+            const temp = state.users;
+            const newUsers = temp.filter(u => u._id !== action.id);
             newUsers.push({ ...action.newUser, _id: action.id, updatedAt: new Date().toISOString() });
             return { ...state, users: newUsers }
 

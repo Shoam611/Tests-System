@@ -4,10 +4,10 @@ import { useSelector } from "react-redux";
 import { Box, Input, Line } from "UIKit";
 import './manageTestsView.css';
 
-const ManageQuestionView = props => {
+const ManageTestView = props => {
     const topic = useSelector(state => state.topic.topic);
-    const [viewedTests, setViewedTests] = useState([]);
     const tests = useSelector(state => state.tests.tests);
+    const [viewedTests, setViewedTests] = useState([]);
 
     useEffect(() => { setViewedTests(tests); }, [setViewedTests, tests]);
 
@@ -35,7 +35,6 @@ const ManageQuestionView = props => {
     }
     const renderHeader = () => (
         <div className='tests-table-header'>
-            {/* <div /> */}
             <Box onClick={sortByName}>     <h4> Test Name</h4> </Box>
             <Box onClick={sortByQuestions}>     <h4> No. of Questions</h4> </Box>
             <Box onClick={sortByDateString.bind(this, 'updatedAt')}> <h4> Updated at</h4> </Box>
@@ -53,7 +52,7 @@ const ManageQuestionView = props => {
 
             <Line>
                 <div style={{ width: '250px', margin: 'var(--gap-m) 0', padding: 0 }}>
-                    <Input type="text" onChange={filterListHandler} placeholder="Filter by key words" />
+                    <Input type="text" onChange={filterListHandler} placeholder="Filter by Key Words..." />
                 </div>
             </Line>
 
@@ -67,4 +66,4 @@ const ManageQuestionView = props => {
     );
 }
 
-export default ManageQuestionView;
+export default ManageTestView;

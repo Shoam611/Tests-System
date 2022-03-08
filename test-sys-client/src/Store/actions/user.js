@@ -1,23 +1,21 @@
 import axios from 'axios';
 import { runPostRequest } from 'services/httpInvoker'
-export const ADD = 'ADDTEST';
-export const FETCH = 'FETCHTEST';
-export const DELETE = 'DELETETEST';
-export const UPDATE = 'UPDATETEST';
+export const ADD = 'ADDUSER';
+export const FETCH = 'FETCHUSER';
+export const DELETE = 'DELETEUSER';
+export const UPDATE = 'UPDATEUSER';
 
 export const addUser = (newUser) => {
     return async (dispatch, getState) => {
         const response = await runPostRequest('http://localhost:4200/users', { newUser: newUser });
-        const _id = await response.data;
-        dispatch({ type: ADD, newUser: { _id, ...newUser } })
+        const _id = await response;
+        dispatch({ type: ADD, newUser: {...newUser, _id } })
     }
 }
 
 export const fetchUsers = () => {
     return async (dispatch, getState) => {
-        const topic = getState().topic.topic;
-        const response = await axios.get(`http://localhost:4200/users?topic=${topic._id}`);
-        const responseData = await response.data;
-        dispatch({ type: FETCH, newUser: responseData });
+        const response = await axios.get(`http://localhost:4200/users`);
+        dispatch({ type: FETCH, newUser: response });
     }
 }

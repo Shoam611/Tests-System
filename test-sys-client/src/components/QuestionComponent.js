@@ -21,20 +21,19 @@ const QuestionComponentOverlay = (props) => {
         <h2>{props.questionText}</h2>
       </header>
       <div className="content">
-        <h3>Topic: {props.topic}</h3>
+        <h3>Topic: {props.topic.name}</h3>
         <p>Question Type: {props.questionType === 1 ? "Single Answer" : "Multi Answer Type"}</p>
         <p>Text Above Question: {props.textAbove}</p>
         <p>Question Text: {props.questionText}</p>
         <p>Text Below Question: {props.textBelow}</p>
         <ul>Answers:
           {props.answers.map((answer, index) => (
-            <li key={answer._id}>
+            <li key={answer.id}>
               <Line>{index + 1}) {answer.value} {props.correctAnswerIds.includes(answer.id) && <p className="correct_indexer">- Correct Answer</p>}</Line>
             </li>)
           )}
         </ul>
         <p>Tags: {props.tags.join(', ')}</p>
-        {/* <p>Created At: {normalizeDate(props.createdAt)}</p> */}
         <p>Last update: {normalizeDate(props.updatedAt)}</p>
       </div>
       <footer className="actions">

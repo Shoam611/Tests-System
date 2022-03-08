@@ -4,7 +4,10 @@ const RadioButton = ({ list }) => {
     const [, forceUpdate] = useReducer(x => x + 1, 0);
     const onSelectionChanged = (id) => {
         list.forEach(element => {
-            element.isSelected = (id === element.id)
+            element.isSelected = (id === element.id);
+            if (element.id === id) {
+                element.onChange && element.onChange(element.value, element.isSelected, element.father);
+            }
         });
         forceUpdate();
     }
@@ -13,8 +16,8 @@ const RadioButton = ({ list }) => {
             id={item.id}
             render={item.render}
             isSelected={item.isSelected}
+            father={item.father}
             onChange={onSelectionChanged} />) : null
-
     };
     return (
         <div>
@@ -36,7 +39,7 @@ const RadioItem = ({ id, render, onChange, isSelected }) => {
                 <div onClick={onSelectionChangedHandler}>
                     <i className={isSelected ? "fas fa-circle" : "far fa-circle"}></i>
                 </div>
-                <div style={{width:'100%'}}>{render}</div>
+                <div style={{ width: '100%' }}>{render}</div>
             </Line>
         </li>)
 }

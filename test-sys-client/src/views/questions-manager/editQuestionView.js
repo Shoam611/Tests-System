@@ -1,18 +1,15 @@
-import { useEffect, useReducer, useState, useCallback } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
 import { updateQuestion } from "Store/actions/question";
 
 import { presentationAxis, questionTypes } from "models/presentationAxis";
-import Question from "models/QuestionModel";
-
-import useInput from "hooks/useInput";
-import AnswersSelector from "./question-form/answerSelector";
-import AnswerChoice from './question-form/answerChoice';
-import { Btn, Input, Line, RadioButton } from "UIKit";
-
 import './editQuestionView.css'
+import AnswersSelector from "../question-form/answerSelector";
+import AnswerChoice from '../question-form/answerChoice';
+import useInput from "hooks/useInput";
+import { useEffect, useReducer, useState, useCallback } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import Question from "models/QuestionModel";
+import { Btn, Input, RadioButton } from "UIKit";
 
 const EditQuestionView = () => {
     //hooks
@@ -68,15 +65,15 @@ const EditQuestionView = () => {
         });
     }, [addingAnswerHandler, question?.answers]);
     const onSubmitHandler = () => {
-        if (true) { //futere to be validate
-            const selectedAxis = axis.find(item => item.isSelected === true).id
-            const newQuestion = new Question(topic._id, question.questionType, newQuestionText.value, newTextAbove.value, newTextBelow.value, tags.value, newAnswers.map(({ value }, index) => ({ value, id: index })), getIndexes(newAnswers), selectedAxis);
+        const selectedAxis = axis.find(item => item.isSelected === true).id
+        const newQuestion = new Question(topic._id, question.questionType, newQuestionText.value, newTextAbove.value, newTextBelow.value, tags.value, newAnswers.map(({ value }, index) => ({ value, id: index })), getIndexes(newAnswers), selectedAxis);
+        const [value,message] =newQuestion.validate()
+        if (value) {
             dispatch(updateQuestion(newQuestion, question._id));
-            
             navigate(-1);
         }
+        else alert(message);
     }
-
     //side effects
     useEffect(() => { !question && navigate(-1) }, [question, navigate])
     useEffect(() => { setInitialAnswers() }, [setInitialAnswers]);
@@ -116,8 +113,7 @@ const EditQuestionView = () => {
                 <Btn onClick={navigate.bind(this, -1)}>Go back</Btn>
                 <Btn onClick={onSubmitHandler}>Submit</Btn>
             </div>
-            <Line>
-            </Line>
+            <div />
         </div>
     )
 }
