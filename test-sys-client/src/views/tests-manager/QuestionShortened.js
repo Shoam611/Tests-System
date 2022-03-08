@@ -2,7 +2,7 @@ import { Box } from "UIKit";
 import '../test-form/questionItem.css';
 const QuestionShortened = props => {
     return (
-        <Box className="question-item">
+        <Box key={props.key} className="question-item">
             <div className='question-index'>{props.index + 1}</div>
             <div className="question-item__description">
                 <h4>{props.questionText}</h4>

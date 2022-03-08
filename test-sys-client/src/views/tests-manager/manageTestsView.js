@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Box, Input, Line } from "UIKit";
 import './manageTestsView.css';
 
-const ManageQuestionView = props => {
+const ManageTestView = props => {
     const topic = useSelector(state => state.topic.topic);
     const tests = useSelector(state => state.tests.tests);
     const [viewedTests, setViewedTests] = useState([]);
@@ -52,7 +52,7 @@ const ManageQuestionView = props => {
 
             <Line>
                 <div style={{ width: '250px', margin: 'var(--gap-m) 0', padding: 0 }}>
-                    <Input type="text" onChange={filterListHandler} placeholder="Filter by key words" />
+                    <Input type="text" onChange={filterListHandler} placeholder="Filter by Key Words..." />
                 </div>
             </Line>
 
@@ -66,4 +66,4 @@ const ManageQuestionView = props => {
     );
 }
 
-export default ManageQuestionView;
+export default ManageTestView;

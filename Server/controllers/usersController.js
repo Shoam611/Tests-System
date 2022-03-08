@@ -3,10 +3,10 @@ class UsersController {
         this.userRepository = userRepository;
     }
 
-    addUser = ({ body }) => {
+    addUser = async ({ body }) => {
         const { newUser, } = body;
         if (!newUser) { return null; }
-        this.userRepository.addAsync(newUser);
+        return await this.userRepository.addAsync(newUser);
     }
 
     deleteUser = ({ body }) =>  this.userRepository.DeleteOneAsync(body.id) 
@@ -16,11 +16,8 @@ class UsersController {
         return await this.userRepository.UpdateUser(id, newTest);
     }
 
-    getUser = async ({ query }) => {
-        const { topic } = query;
-        let filter = {};
-        if (topic) filter = { topic: topic }
-        return await this.userRepository.getAsync(filter);
+    getUsers = async () => {
+        return await this.userRepository.getAsync();
     }
 }
 

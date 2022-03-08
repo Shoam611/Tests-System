@@ -8,7 +8,8 @@ const TestView = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const test = useSelector(state => state.tests.tests).find(t => t._id === id);
-    const questions = useSelector(state => state.questions.questions).filter(q => test.questions.includes(q._id));
+    const questions = useSelector(state => state.questions.questions).filter(q => test?.questions.includes(q._id));
+    const user = useSelector(state => state.user)
     const [questionsViews] = useState([]);
     const [currentQuestion, setCurrentQuestion] = useState(-1);
     const [orderOfQuestions, setOrderOfQuestions] = useState([]);
@@ -20,20 +21,20 @@ const TestView = () => {
     //handlers
     const handleSubmit = () => {
         console.log('submitted');
+        console.log(user);
     }
 
     const onAnsweredHandler = useCallback((item, value, id) => {
-        console.log('item', item, 'value', value, 'id:', id);
-
+        // console.log('item', item, 'value', value, 'id:', id);
+        console.log(questionsViews.length);
         // const wasRightTemp = questions.find(q => q._id == id).correctAnswerIds.every(a => a === item.id);
         // console.log('wasRight', wasRightTemp);
-        console.log('question example', questions[1]);
-        value ?
-            answeredQuestions.push({ id: id, selectedAnswersIds: item.id }) :
-            answeredQuestions.splice(answeredQuestions.indexOf(item._id), 1);
+        // console.log('question example', questions[1]);
 
-        console.log(answeredQuestions);
-    }, [answeredQuestions, currentQuestion, questionsViews])
+        const newAnsweredQuestion = { questionId: id, selectedAnswersIds: [item.id], wasRight: false }
+        value ? answeredQuestions.push(newAnsweredQuestion) : answeredQuestions.splice(answeredQuestions.indexOf(item._id), 1);
+        // console.log('answered object >', answeredQuestions, 'new question >', newAnsweredQuestion);
+    }, [answeredQuestions, questionsViews])
 
     const shuffle = arr => {
         return [...arr].map((_, i, arrCopy) => {
@@ -44,6 +45,9 @@ const TestView = () => {
     };
 
     const initialQuestionsComponents = useCallback(() => {
+        console.log('was called');
+        console.log(questionsViews.length);
+
         let shuffeledQuestions = shuffle(questions);
         const orderOfQuestionsTemp = shuffeledQuestions.map((q) => (q._id));
         orderOfQuestions.push(...orderOfQuestionsTemp);

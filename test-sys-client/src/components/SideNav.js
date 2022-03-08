@@ -8,7 +8,7 @@ const SideNav = () => {
     return (
         <div className='SideNav'>
             <GradientBorder right >
-                <NavLinkListItem title={"Manage questions"} >
+                <NavLinkListItem title={"Manage Questions"} >
                     <NavLinkItem to="/questions/questions">New Question </NavLinkItem>
                     <NavLinkItem to="/questions/edit">Edit a Questions    </NavLinkItem>
                 </NavLinkListItem>

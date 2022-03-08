@@ -8,8 +8,9 @@ export const UPDATE = 'UPDATEQUESTION';
 export const addQuestion = (newQuestion) => {
     return async (dispatch, getState) => {
         const response = await runPostRequest('http://localhost:4200/questions', { newQuestion: newQuestion });
-        const _id = await response.data;
-        dispatch({ type: ADD, newQuestion: { _id, ...newQuestion } })
+        const _id = await response;
+        console.log(response);
+        dispatch({ type: ADD, newQuestion: { ...newQuestion, _id } })
     }
 }
 
@@ -25,7 +26,7 @@ export const fetchQuestions = () => {
 export const updateQuestion = (newQuestion, id) => {
     return async (dispatch) => {
         try {
-             await axios.put('http://localhost:4200/questions', { newQuestion, id });
+            await axios.put('http://localhost:4200/questions', { newQuestion, id });
             dispatch({ type: UPDATE, newQuestion, id });
         } catch { console.error('falied sending put request to server'); dispatch({ type: 'x' }) }
     }
