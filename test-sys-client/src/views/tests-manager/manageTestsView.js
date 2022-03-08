@@ -52,7 +52,7 @@ const ManageTestView = props => {
 
             <Line>
                 <div style={{ width: '250px', margin: 'var(--gap-m) 0', padding: 0 }}>
-                    <Input type="text" onChange={filterListHandler} placeholder="Filter by key words" />
+                    <Input type="text" onChange={filterListHandler} placeholder="Filter by Key Words..." />
                 </div>
             </Line>
 

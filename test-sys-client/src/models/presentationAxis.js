@@ -1,6 +1,6 @@
 export const presentationAxis = [
-    { id: 1, value: 'vertical' },
-    { id: 2, value: 'horizontal' }
+    { id: 1, value: 'Vertical' },
+    { id: 2, value: 'Horizontal' }
 ]
 export const questionTypes = [
     { id: 1, value: 'Single choice' },

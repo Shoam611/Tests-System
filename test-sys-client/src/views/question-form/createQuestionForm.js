@@ -132,19 +132,19 @@ const CreateQuestionForm = () => {
                 <div className='form-container' >
                     <h1>New Question</h1>
                     <Line justify="around">
-                        <h2>topic : {topic.name}</h2>
+                        <h2>Topic: {topic.name}</h2>
                     </Line>
-                    <label >Question type:</label>
+                    <label >Question Type:</label>
                     <Dropdown list={questionTypes} selected={questionType} onChange={handleQuestionTypeChanged} />
-                    <label >Question text:</label>
+                    <label >Question Text:</label>
                     <Input placeholder="Question text:"        {...Question_text} />
-                    <label >Question above question:</label>
+                    <label >Question Above Question:</label>
                     <Input placeholder="Text above question:"  {...Text_above_question} />
-                    <label >Question below question: </label>
+                    <label >Question Below Question: </label>
                     <Input placeholder="Text below question:"  {...Text_below_question} />
-                    <label >Question presentaion axis : </label>
+                    <label >Answers layout: </label>
                     <RadioButton list={axis} />
-                    <label >tags : </label>
+                    <label >Tags : </label>
                     <Input placeholder="tags (seperate with , charecter)" {...tags} />
                     <hr />
                     {questionType && <>

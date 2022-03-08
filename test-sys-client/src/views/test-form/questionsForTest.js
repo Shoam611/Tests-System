@@ -40,11 +40,11 @@ const QuestionsForTest = ({ onQuestionSelected, selectedQuestios, prev }) => {
         <div className='AddTForm'>
             <div className="form-container">
                 <h1>Choose Questions</h1><div />
-                <h4>filter by tags:</h4>
+                <h4>Filter by Tags:</h4>
                 <Input type="text" onChange={filterList} placeholder="Filter By Tags..." />
                 <h4>Questions Selected:{selectedQuestios.length} </h4>
                 {questions.length === 0 ? <h4>No Quesitons Found For Topic: {topic.name} </h4> : <Checkbox list={list} />}
-                <Btn i="chevron-left" onClick={() => prev()}>Back</Btn>
+                <Btn i="chevron-left" onClick={() => prev()}>Previous</Btn>
             </div>
         </div>
     );
