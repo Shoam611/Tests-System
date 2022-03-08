@@ -7,7 +7,7 @@ export const UPDATE = 'UPDATEQUESTIONRECORD';
 
 export const setUser = (user) => {
     return async (dispatch, getState) => {
-        const users = getState().users.users.data;
+        const users = getState().users.users;
         let temp = compareUsers(user, users);
         if (!temp) {
             const response = await runPostRequest('http://localhost:4200/users', { newUser: user });
@@ -15,6 +15,7 @@ export const setUser = (user) => {
             dispatch({ type: ADD, newUser: { ...user, _id } });
             temp = { ...user, _id }
         }
+        console.log(temp);
         dispatch({ type: SET, user: temp });
     }
 }

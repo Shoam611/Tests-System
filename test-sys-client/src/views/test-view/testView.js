@@ -9,7 +9,7 @@ const TestView = () => {
     const dispatch = useDispatch();
     const test = useSelector(state => state.tests.tests).find(t => t._id === id);
     const questions = useSelector(state => state.questions.questions).filter(q => test?.questions.includes(q._id));
-    const user = useSelector(state => state.user)
+    const user = useSelector(state => state.testRecord.user);
     const [questionsViews] = useState([]);
     const [currentQuestion, setCurrentQuestion] = useState(-1);
     const [orderOfQuestions, setOrderOfQuestions] = useState([]);
@@ -22,7 +22,17 @@ const TestView = () => {
     const handleSubmit = () => {
         console.log('submitted');
         console.log(user);
+        console.log(questions);
+        console.log(test);
     }
+
+    /*
+    UserId,
+    Date of Taking The Test,
+    TestId,
+    Questions:[{ questionId, selectedAnswersIds[], wasRight}],
+    Score
+    */
 
     const onAnsweredHandler = useCallback((item, value, id) => {
         // console.log('item', item, 'value', value, 'id:', id);
@@ -45,17 +55,17 @@ const TestView = () => {
     };
 
     const initialQuestionsComponents = useCallback(() => {
-        console.log('was called');
-        console.log(questionsViews.length);
-
         let shuffeledQuestions = shuffle(questions);
         const orderOfQuestionsTemp = shuffeledQuestions.map((q) => (q._id));
-        orderOfQuestions.push(...orderOfQuestionsTemp);
+
+        if (questionsViews.length === 0)
+            orderOfQuestions.push(...orderOfQuestionsTemp);
 
         const temp = shuffeledQuestions.map((q) => (
             <QuestionViewer onChange={onAnsweredHandler} key={q._id} {...q} />
         ));
-        questionsViews.push(...temp);
+        if (questionsViews.length === 0)
+            questionsViews.push(...temp);
     }, [onAnsweredHandler, orderOfQuestions, questions, questionsViews]);
 
     //side effects
@@ -89,10 +99,3 @@ const TestView = () => {
 
 export default TestView;
 
-/*
-UserId,
-Date of Taking The Test,
-TestId,
-Questions:[{ questionId, selectedAnswersIds[], wasRight}],
-Score
-*/
