@@ -15,9 +15,11 @@ router.get('/', async (req, res) => {
 });
 
 router.delete('/', async (req, res) => {
-    try {
-        questionsController.deleteQuestion(req); res.send(200)
-    } catch (err) { res.send(err.message).status(500) }
+    try { questionsController.deleteQuestion(req); res.send(200) }
+    catch (err) { res.send(err.message).status(500) }
 });
-router.put('/', async (req, res) => { questionsController.updateQuestion(req); res.send(200) });
+router.put('/', async (req, res) => {
+    try { questionsController.updateQuestion(req); res.send(200); }
+    catch (err) { res.send(err.message).status(500) }
+});
 module.exports = router;
