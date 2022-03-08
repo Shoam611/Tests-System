@@ -10,7 +10,7 @@ const reducer = (state = initialState, action) => {
 
     switch (action.type) {
         case SET:
-            return { ...state, user: action.user };
+            return { ...state, user: { ...action.user, updatedAt: new Date().toISOString() } };
 
         case FETCH:
             console.log(state);
@@ -18,8 +18,8 @@ const reducer = (state = initialState, action) => {
 
         case DELETE: return state;
 
-        case UPDATE:
-            break;
+        case UPDATE: return state;
+
         default: return state;
     }
 }

@@ -7,7 +7,7 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD:
             const usersTemp = state.users;
-            usersTemp.push(action.newUser);
+            usersTemp.push({ ...action.newUser, updatedAt: new Date().toISOString() });
             return { ...state, users: usersTemp }
 
         case FETCH:
@@ -23,6 +23,7 @@ const reducer = (state = initialState, action) => {
             return { ...state, users: newUsers }
 
         case DELETE: break;
+        
         default: return state;
     }
 }
