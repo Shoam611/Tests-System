@@ -36,7 +36,7 @@ const QuizReport = () => {
             viewedTests.map((t) => <TestItem key={t._id} {...t} />))
     }
     const renderHeader = () => (
-        <div className='tests-table-header'>
+        <div className='report-tests-table-header'>
             <div />
             <Box onClick={sortByKey.bind(this, 'name')}> <h4> Test</h4> </Box>
             <Box onClick={sortByArrayLength.bind(this, 'questions')}> <h4> Num. of question</h4> </Box>
@@ -44,12 +44,18 @@ const QuizReport = () => {
             <div />
         </div>
     )
+
+    const filterListHandler =(e)=>{
+        let keyWords = e.target.value.toUpperCase();
+        setViewedTests(tests.filter(test => test.name.toUpperCase().includes(keyWords)));
+        if (keyWords.trim().length === 0) setViewedTests(tests);
+    }
     const renderFilters = () => (
         <Line justify="between">
             <Line>
-                <label>tags:</label>
+                <label>filter:</label>
                 <div style={{ width: '250px', margin: 'var(--gap-m) 0', padding: 0 }}>
-                    <Input placeholder="Search by tags..." onChange={() => { }} />
+                    <Input placeholder="Search by name..." onChange={filterListHandler} />
                 </div>
             </Line>
             <Line> from: <Input type="date" {...minDate} /> to: <Input type="date" {...maxDate} /> </Line>
@@ -59,9 +65,9 @@ const QuizReport = () => {
         <div className="report-by-quiz-view">
             <h2>Report By Quiz</h2>
             {renderFilters()}
-            <div className='tests-wrapper'>
+            <div className='report-tests-wrapper'>
                 {renderHeader()}
-                <div className='tests-container'>
+                <div className='report-tests-container'>
                     {renderTests()}
                 </div>
             </div>
@@ -76,7 +82,7 @@ const TestItem = (props) => {
     const generateReport = () => { }
     return (
         <Box>
-            <div className="tests-container-item" onClick={generateReport}>
+            <div className="report-tests-container-item" onClick={generateReport}>
                 <div />
                 <h4>{props.name}</h4>
                 <h4>{props?.questions.length} questions</h4>
