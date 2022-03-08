@@ -66,45 +66,6 @@ const CreateQuestionForm = () => {
         forceUpdate();
     }, [answers, awnserContentChangedHandler, handleRemoveAwnser, getId])
 
-    const formValidation = () => {
-        if (+questionType < 1 || +questionType > 3) {
-            setErrorMessage('Please Choose a Question Types.');
-            return false;
-        }
-        if (!topic) {
-            setErrorMessage('Please Choose a Topic.');
-            return false;
-        }
-        if (Question_text.value.trim().length === 0) {
-            setErrorMessage('Question Text Cannot be Empty.');
-            return false;
-        }
-        if (Text_above_question.value.trim().length === 0) {
-            setErrorMessage('Text Above Question Be Empty.');
-            return false;
-        }
-        if (Text_below_question.value.trim().length === 0) {
-            setErrorMessage('Text Below Question Be Empty.');
-            return false;
-        }
-        if (tags.value.trim().length === 0) {
-            setErrorMessage('You Must Enter At Least One Tag.');
-            return false;
-        }
-        for (let answer of answers) {
-            if (answer.value.trim().length === 0) {
-                setErrorMessage('Answers Cannot Be Empty.');
-                return false;
-            }
-        }
-        if (getIndexes(answers).length === 0) {
-            setErrorMessage('You Must Choose Right Answer/s.');
-            return false;
-        }
-
-        setErrorMessage('');
-        return true;
-    }
     const getIndexes = (answers) => {
         return answers.map(({ isSelected }, index) => ({ isCorrect: isSelected, index })).filter(({ isCorrect }) => isCorrect).map(({ index }) => index);
     }
@@ -154,8 +115,8 @@ const CreateQuestionForm = () => {
                     </>
                     }
                     <Input type="submit" value="Submit" />
-                </div>
                 <p className='ErrorMessage'>{errorMessage}</p>
+                </div>
             </form>
         </div >
     )

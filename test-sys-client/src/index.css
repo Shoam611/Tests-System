@@ -15,6 +15,7 @@
   --font-weight-l: 400;
   --font-weight-m: 500;
   --font-weight-h: 700;
+  --text-color-error:red;
   --text-color-light: rgb(223, 223, 223);
   --text-color-dark: rgb(87, 87, 87);
   --font-size-s: 8px;

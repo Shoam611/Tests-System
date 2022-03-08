@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Box, Input, Line } from "UIKit";
 import './manageTestsView.css';
 
-const ManageTestView = props => {
+const ManageTestView = () => {
     const topic = useSelector(state => state.topic.topic);
     const tests = useSelector(state => state.tests.tests);
     const [viewedTests, setViewedTests] = useState([]);

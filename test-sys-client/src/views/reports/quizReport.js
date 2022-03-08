@@ -1,7 +1,7 @@
 import useInput from "hooks/useInput";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Box, Input, Line } from "UIKit";
+import { Box, Btn, Input, Line } from "UIKit";
 import './quizReport.css'
 const QuizReport = () => {
     const topic = useSelector(state => state.topic.topic)
@@ -12,7 +12,7 @@ const QuizReport = () => {
     const maxDate = useInput();
     useEffect(() => {
         setViewedTests(tests)
-    }, [setViewedTests,tests])
+    }, [setViewedTests, tests])
 
     //sorts
     const sortByKey = (key) => {
@@ -36,7 +36,7 @@ const QuizReport = () => {
             viewedTests.map((t) => <TestItem key={t._id} {...t} />))
     }
     const renderHeader = () => (
-        <div className='questions-table-header'>
+        <div className='tests-table-header'>
             <div />
             <Box onClick={sortByKey.bind(this, 'name')}> <h4> Test</h4> </Box>
             <Box onClick={sortByArrayLength.bind(this, 'questions')}> <h4> Num. of question</h4> </Box>
@@ -44,26 +44,24 @@ const QuizReport = () => {
             <div />
         </div>
     )
+    const renderFilters = () => (
+        <Line justify="between">
+            <Line>
+                <label>tags:</label>
+                <div style={{ width: '250px', margin: 'var(--gap-m) 0', padding: 0 }}>
+                    <Input placeholder="Search by tags..." onChange={() => { }} />
+                </div>
+            </Line>
+            <Line> from: <Input type="date" {...minDate} /> to: <Input type="date" {...maxDate} /> </Line>
+        </Line>
+    )
     return (
         <div className="report-by-quiz-view">
             <h2>Report By Quiz</h2>
-            <Line justify="between">
-                <Line>
-                    <label>tags:</label>
-                    <div style={{ width: '250px', margin: 'var(--gap-m) 0', padding: 0 }}>
-                        <Input placeholder="Search by tags..." onChange={() => { }} />
-                    </div>
-                </Line>
-                <Line>
-                    from:
-                    <Input type="date" {...minDate}/>
-                    to:
-                    <Input type="date" {...maxDate}/>
-                </Line>
-            </Line>
+            {renderFilters()}
             <div className='tests-wrapper'>
                 {renderHeader()}
-                <div className='tests-container '>
+                <div className='tests-container'>
                     {renderTests()}
                 </div>
             </div>
@@ -81,8 +79,9 @@ const TestItem = (props) => {
             <div className="tests-container-item" onClick={generateReport}>
                 <div />
                 <h4>{props.name}</h4>
-                <h4>{props?.questions.length} s</h4>
+                <h4>{props?.questions.length} questions</h4>
                 <h4>{normalizeDate(props.updatedAt)}</h4>
+                <Btn>Create report</Btn>
             </div>
         </Box>
     )

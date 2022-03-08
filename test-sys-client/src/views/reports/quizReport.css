@@ -13,6 +13,16 @@ height: 100%;
   padding: 0 var(--gap-m);
   border-radius: 2em;
 }
+.tests-container-item{
+  display :grid;
+  grid-template-rows: 1fr;
+  grid-template-columns:var(--gap-s) 1fr 140px max-content 220px
+  
+}
+.tests-table-header{
+  display: grid;
+  grid-template-columns:var(--gap-m) 1fr 120px max-content 220px
+}
 .tests-container {
   border-radius: 2em;
   background-color: var(--background-light);
