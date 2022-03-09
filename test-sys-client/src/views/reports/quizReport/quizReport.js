@@ -1,20 +1,22 @@
+import { render } from "@testing-library/react";
 import useInput from "hooks/useInput";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Box, Btn, Input, Line } from "UIKit";
 import './quizReport.css'
 const QuizReport = () => {
+    //states
     const topic = useSelector(state => state.topic.topic)
     const tests = useSelector(state => state.tests.tests);
     const [viewedTests, setViewedTests] = useState([]);
     const [orderBy, setOrderBy] = useState(1);
     const minDate = useInput();
     const maxDate = useInput();
+    //side effects
     useEffect(() => {
         setViewedTests(tests)
     }, [setViewedTests, tests])
-
-    //sorts
+    //sorts & filter
     const sortByKey = (key) => {
         const temp = tests.sort((q1, q2) => q1[key] > q2[key] ? orderBy : -orderBy);
         setViewedTests(temp);
@@ -29,6 +31,15 @@ const QuizReport = () => {
         const temp = tests.sort((q1, q2) => q1[key].length > q2[key].length ? orderBy : -orderBy);
         setOrderBy(-orderBy);
         setViewedTests(temp)
+    }
+    const filterListHandler = (e) => {
+        let keyWords = e.target.value.toUpperCase();
+        setViewedTests(tests.filter(test => test.name.toUpperCase().includes(keyWords)));
+        if (keyWords.trim().length === 0) setViewedTests(tests);
+    }
+    //handelers
+    const generateReport = () => {
+
     }
     //renderers
     const renderTests = () => {
@@ -45,11 +56,6 @@ const QuizReport = () => {
         </div>
     )
 
-    const filterListHandler =(e)=>{
-        let keyWords = e.target.value.toUpperCase();
-        setViewedTests(tests.filter(test => test.name.toUpperCase().includes(keyWords)));
-        if (keyWords.trim().length === 0) setViewedTests(tests);
-    }
     const renderFilters = () => (
         <Line justify="between">
             <Line>
@@ -75,11 +81,17 @@ const QuizReport = () => {
     )
 }
 const TestItem = (props) => {
+    //handelers
     const normalizeDate = (inputDate) => {
         const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
         return new Date(inputDate).toLocaleDateString('en-EN', options);
     }
-    const generateReport = () => { }
+
+    const dispatch = useDispatch()
+    const generateReport = () => {
+        
+    }
+    //render
     return (
         <Box>
             <div className="report-tests-container-item" onClick={generateReport}>
