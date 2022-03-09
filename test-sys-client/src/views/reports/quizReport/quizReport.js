@@ -3,6 +3,7 @@ import useInput from "hooks/useInput";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Btn, Input, Line } from "UIKit";
+import TestItem from './testItem.js'
 import './quizReport.css'
 const QuizReport = () => {
     //states
@@ -80,35 +81,4 @@ const QuizReport = () => {
         </div>
     )
 }
-const TestItem = (props) => {
-    //handelers
-    const normalizeDate = (inputDate) => {
-        const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
-        return new Date(inputDate).toLocaleDateString('en-EN', options);
-    }
-
-    const dispatch = useDispatch()
-    const generateReport = () => {
-        
-    }
-    //render
-    return (
-        <Box>
-            <div className="report-tests-container-item" onClick={generateReport}>
-                <div />
-                <h4>{props.name}</h4>
-                <h4>{props?.questions.length} questions</h4>
-                <h4>{normalizeDate(props.updatedAt)}</h4>
-                <Btn>Create report</Btn>
-            </div>
-        </Box>
-    )
-}
-
-
-
-
-
-
-
 export default QuizReport;
