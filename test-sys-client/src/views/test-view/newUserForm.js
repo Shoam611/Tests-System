@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { Btn, Input } from "UIKit";
-import { setUser } from "Store/actions/test_record";
+import { setUser } from "Store/actions/test_event";
 
 const NewUserForm = props => {
     const dispatch = useDispatch();

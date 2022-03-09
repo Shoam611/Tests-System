@@ -1,10 +1,16 @@
 import axios from 'axios';
 import { runPostRequest, runPutRequest } from 'services/httpInvoker';
+//--
 export const ADD = 'ADDUSER';
 export const SET = 'SETQUESTIONRECORD';
 export const FETCH = 'FETCHQUESTIONRECORDS';
 export const DELETE = 'DELETEQUESTIONRECORDS';
 export const UPDATE = 'UPDATEQUESTIONRECORDS';
+//---
+//new Actions
+export const SETINITIALS = 'SETSETINITIALS';
+export const ADDRECORD='ADDRECORD';
+export const EDITRECORD = 'EDITRECORD';
 
 export const setUser = (user) => {
     return async (dispatch, getState) => {
@@ -24,13 +30,6 @@ export const setUser = (user) => {
     }
 }
 
-export const fetchQuestionRecords = () => {
-    return async (dispatch, getState) => {
-        const response = await axios.get('http://localhost:4200/questionReport');
-        dispatch({ type: FETCH, newQuestionReports: response.data });
-    }
-}
-
 const compareUsers = (user, array) => array.find(u => u.email.toLowerCase() === user.email.toLowerCase() || u.phoneNumber === user.phoneNumber);
 
 const addTest = (temp, user) => {
@@ -40,3 +39,10 @@ const addTest = (temp, user) => {
     return temp;
 }
 
+export const updateQuestion =()=>{
+
+}
+
+const calcScore =() => {
+
+}

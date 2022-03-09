@@ -1,9 +1,10 @@
-import { FETCH, DELETE, UPDATE, SET } from "Store/actions/test_record";
+import { FETCH, DELETE, UPDATE, SET } from "Store/actions/test_event";
+import QuestionRecord from "models/questionRecord";
 const initialState = {
     questionRecords: [],
     user: {},
     testTaken: '',
-    score: NaN
+    score: NaN,
 }
 
 const reducer = (state = initialState, action) => {
@@ -13,17 +14,13 @@ const reducer = (state = initialState, action) => {
             temp.user = { ...action.user, updatedAt: new Date().toISOString() };
             return { ...state, questionRecords: temp };
 
-        case FETCH:
-            if (action.newQuestionReports) {
-                return { ...state, questionRecords: action.newQuestionReports };
-            }
-            else
-                return state;
-
-        case DELETE: return state;
-
         case UPDATE: return state;
-
+        // case FETCH:
+        //     if (action.newQuestionReports) {
+        //         return { ...state, questionRecords: action.newQuestionReports };
+        //     }
+        //     else
+        //         return state;
         default: return state;
     }
 }
