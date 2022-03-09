@@ -6,7 +6,7 @@ import ManageQuestionView from "views/questions-manager/manageQuestionsView";
 import ManageTestsView from "views/tests-manager/manageTestsView";
 import EditQuestionView from "views/questions-manager/editQuestionView";
 import EditTestView from "views/tests-manager/editTestView"
-import QuizReport from "views/reports/quizReport";
+import QuizReport from "views/reports/quizReport/quizReport";
 import NewUserForm from "views/test-view/newUserForm";
 import TestView from "views/test-view/testView";
 import CreateQuestionForm from "views/question-form/createQuestionForm";

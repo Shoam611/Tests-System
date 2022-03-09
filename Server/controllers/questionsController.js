@@ -1,7 +1,6 @@
 class QuestionsController {
-
   constructor({ questionRepository }) {
-    this.questionRepository = questionRepository;
+    this.questionRepository = questionRepository; 
   }
   addQuestion = async ({ body }) => {
     const { newQuestion, } = body;
@@ -25,7 +24,6 @@ class QuestionsController {
     const { newQuestion, id } = body;
     await this.questionRepository.updateOneAsync(id, newQuestion)
   }
-
 }
 
 module.exports = QuestionsController;

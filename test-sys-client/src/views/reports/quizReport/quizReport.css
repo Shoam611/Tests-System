@@ -1,0 +1,38 @@
+.report-by-quiz-view {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 150px 50px 1fr var(--gap-l);
+  padding: 0 10%;
+  max-height: auto;
+  background-color: var(--background-light);
+height: 100%;
+}
+.report-tests-wrapper{
+  height: max-content;
+  background-color: #fff;
+  padding: 0 var(--gap-m);
+  border-radius: 2em;
+}
+.report-tests-container-item{
+  display :grid;
+  grid-template-rows: 1fr;
+  grid-template-columns:var(--gap-s) 1fr 140px 120px 220px
+}
+.report-tests-table-header{
+  display: grid;
+  grid-template-columns:var(--gap-m) 1fr 140px 120px 220px ;
+  padding:0;
+  margin: var(--gap-m) 0;
+  color: var(--accent);
+}
+.report-tests-table-header h4 {
+  word-wrap: normal;
+  align-self: center;
+  margin: 0;
+  padding: 0;
+}
+
+.report-tests-container {
+  border-radius: 2em;
+  background-color: var(--background-light);
+}

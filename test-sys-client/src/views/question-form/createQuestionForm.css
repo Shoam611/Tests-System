@@ -49,6 +49,6 @@ hr {
   width: 5em;
   background: var(--light-color);
 }
-.ErrorMessage {
+.ErrorMessage{
   color: var(--text-color-error);
 }
