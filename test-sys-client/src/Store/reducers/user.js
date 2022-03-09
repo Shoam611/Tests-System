@@ -11,10 +11,11 @@ const reducer = (state = initialState, action) => {
             return { ...state, users: usersTemp }
 
         case FETCH:
-            if (action.newUser) {
-                return { ...state, users: action.newUser }
+            if (action.newUsers) {
+                return { ...state, users: action.newUsers }
             }
-            return state;
+            else
+                return state;
 
         case UPDATE:
             const temp = state.users;
@@ -23,7 +24,7 @@ const reducer = (state = initialState, action) => {
             return { ...state, users: newUsers }
 
         case DELETE: break;
-        
+
         default: return state;
     }
 }

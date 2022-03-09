@@ -1,4 +1,5 @@
 const { getModels } = require('./schemas/createConnection.js');
+const { logger } = require('../app-logger.js');
 
 class QuestionReportRepository {
 
@@ -25,8 +26,15 @@ class QuestionReportRepository {
 
     //Read
     async getAsync() {
-        const { QuestionReport } = getModels();
-        return QuestionReport.find({ sort: '-createdAt' });
+        try {
+            const { QuestionReport } = getModels();
+            return await QuestionReport.find({ sort: '-createdAt' });
+        }
+        catch (err) {
+            const newErr = new Error(`error while trying to fetch questionReports from the db at qr-repository. original error ${err.message}`);
+            logger.error(newErr.message);
+            return null;
+        }
     }
 }
 

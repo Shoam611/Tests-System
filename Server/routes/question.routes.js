@@ -7,12 +7,7 @@ router.post('/', async (req, res) => {
     catch (err) { res.send(err.message).status(500) }
 });
 
-router.get('/', async (req, res) => {
-    try {
-        const result = await questionsController.getQuestions(req);
-        res.send(result).status(200)
-    } catch (err) { res.send(err.message).status(500) }
-});
+router.get('/', async (req, res) => { res.send(await questionsController.getQuestions(req)).status(200); });
 
 router.delete('/', async (req, res) => {
     try {

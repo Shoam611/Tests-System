@@ -36,7 +36,6 @@ const TestView = () => {
 
     const onAnsweredHandler = useCallback((item, value, id) => {
         // console.log('item', item, 'value', value, 'id:', id);
-        console.log(questionsViews.length);
         // const wasRightTemp = questions.find(q => q._id == id).correctAnswerIds.every(a => a === item.id);
         // console.log('wasRight', wasRightTemp);
         // console.log('question example', questions[1]);

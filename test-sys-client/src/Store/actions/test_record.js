@@ -2,9 +2,9 @@ import axios from 'axios';
 import { runPostRequest, runPutRequest } from 'services/httpInvoker';
 export const ADD = 'ADDUSER';
 export const SET = 'SETQUESTIONRECORD';
-export const FETCH = 'FETCHQUESTIONRECORD';
-export const DELETE = 'DELETEQUESTIONRECORD';
-export const UPDATE = 'UPDATEQUESTIONRECORD';
+export const FETCH = 'FETCHQUESTIONRECORDS';
+export const DELETE = 'DELETEQUESTIONRECORDS';
+export const UPDATE = 'UPDATEQUESTIONRECORDS';
 
 export const setUser = (user) => {
     return async (dispatch, getState) => {
@@ -22,10 +22,10 @@ export const setUser = (user) => {
     }
 }
 
-export const fetchCurrentUser = () => {
+export const fetchQuestionRecords = () => {
     return async (dispatch, getState) => {
-        const response = await axios.get(`http://localhost:4200/users`);
-        dispatch({ type: FETCH, newUser: response.data });
+        const response = await axios.get('http://localhost:4200/questionReport');
+        dispatch({ type: FETCH, newQuestionReports: response.data });
     }
 }
 

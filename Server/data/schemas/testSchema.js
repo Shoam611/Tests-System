@@ -1,6 +1,7 @@
 const { Schema } = require('mongoose');
 module.exports = createTestModel = (connection) => {
     const testSchema = new Schema({
+        topic: String,
         testType: Number,
         lang: Number,
         managerEmail: String,
@@ -16,6 +17,7 @@ module.exports = createTestModel = (connection) => {
         emailSubOnSucc: String,
         questions: Array,
     }, { timestamps: true });
+
     testSchema.statics.deleteByIdAsync = async (id) => this.deleteOne({ _id: id });
     const Test = connection.model('Test', testSchema);
     return Test;

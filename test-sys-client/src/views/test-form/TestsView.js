@@ -19,7 +19,7 @@ const TestsView = () => {
     const [toShowMistakes, setToShowMistakes] = useState(false);
     const [questions, setQuestions] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
-    const [,forceUpdate] =useReducer(x=>x+1,0);
+    const [, forceUpdate] = useReducer(x => x + 1, 0);
     const dispatch = useDispatch();
     let navigate = useNavigate();
     const topic = useSelector(state => state.topic.topic)
@@ -45,16 +45,18 @@ const TestsView = () => {
     const testTypeChangedHandler = (e) => setTestType(e);
     const langChangedHandler = (e) => setLang(e);
     const toShowChangedHandler = (e) => setToShowMistakes(!e);
-    const onSelectionChange = (item, value) =>{ (value && questions.indexOf(item._id) === -1) ? questions.push(item._id) : questions.splice(questions.indexOf(item._id), 1) ; forceUpdate()};
-    
+    const onSelectionChange = (item, value) => { (value && questions.indexOf(item._id) === -1) ? questions.push(item._id) : questions.splice(questions.indexOf(item._id), 1); forceUpdate() };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (formValidation()) {
-            const newTest = new Test(testType, lang, fields.Manager_email.value, fields.Test_name.value, fields.Passing_grade.value, fields.Test_header.value, fields.Text_msgOnSuccess.value, fields.Text_msgOnFailure.value, toShowMistakes, fields.Email_succSub.value, fields.Email_succBody.value, fields.Email_failSub.value, fields.Email_failBody.value, questions);
+        const newTest = new Test(topic, testType, lang, fields.Manager_email.value, fields.Test_name.value, fields.Passing_grade.value, fields.Test_header.value, fields.Text_msgOnSuccess.value, fields.Text_msgOnFailure.value, toShowMistakes, fields.Email_succSub.value, fields.Email_succBody.value, fields.Email_failSub.value, fields.Email_failBody.value, questions);
+        const [value, message] = newTest.validate();
+        if (value) {
             dispatch(addTest(newTest));
             resetForms();
             navigate('/qweezes/create/form');
         }
+        setErrorMessage(message);
     }
     const resetForms = () => {
         setTestData('');
@@ -73,70 +75,11 @@ const TestsView = () => {
         fields.Email_failSub.setValue('');
         fields.Email_failBody.setValue('');
     }
-    //RegEx validation
-    const ValidateEmail = (mail) => {
-        if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(mail)) {
-            return true;
-        }
-        return false;
-    }
-    //validations
-    const formValidation = () => {
-        if (+fields.testType < 1 || +fields.testType > 3) {
-            setErrorMessage('Please Choose a Test Type.');
-            return false;
-        }
-        if (+fields.lang < 1 || +fields.lang > 2) {
-            setErrorMessage('Please Choose a Language.');
-            return false;
-        }
-        if (fields.Manager_email.value.trim().length === 0) {
-            setErrorMessage('Email Address Cannot Be Empty!');
-            return false;
-        }
-        if (!ValidateEmail(fields.Manager_email.value)) {
-            setErrorMessage('Invalid Email Address!');
-            return false;
-        }
-        if (fields.Test_name.value.trim().length === 0) {
-            setErrorMessage('Test Name Cannot Be Empty!');
-            return false;
-        }
-        if (+fields.Passing_grade.value < 1 || +fields.Passing_grade.value > 100) {
-            setErrorMessage('Invalid Passing Grade! Must Be Between 1 and 100.');
-            return false;
-        }
-        if (fields.Test_header.value.trim().length === 0) {
-            setErrorMessage('Test Header Cannot Be Empty!');
-            return false;
-        }
-        if (fields.Text_msgOnSuccess.value.trim().length === 0) {
-            setErrorMessage('Message On Succes Cannot Be Empty!');
-            return false;
-        }
-        if (fields.Text_msgOnFailure.value.trim().length === 0) {
-            setErrorMessage('Message On Failure Cannot Be Empty!');
-            return false;
-        }
-        if (fields.Email_succBody.value.trim().length === 0 || fields.Email_succSub.value.trim().length === 0) {
-            setErrorMessage('Email On Succes Cannot Be Empty!');
-            return false;
-        }
-        if (fields.Email_failBody.value.trim().length === 0 || fields.Email_failSub.value.trim().length === 0) {
-            setErrorMessage('Email On Failure Cannot Be Empty!');
-            return false;
-        }
-        if (questions.length === 0) {
-            setErrorMessage('Must Select Questions In The "Manage Questions" Tab.');
-            return false;
-        }
-        setErrorMessage('');
-        return true;
-    }
+
     //views
     const steps = [
         <CreateTestForm next={handleNextStep} onTestTypeChange={testTypeChangedHandler} onLangChange={langChangedHandler} onToShowChange={toShowChangedHandler} data={testData} {...fields} />
-        , <QuestionsForTest prev={handlePrevStep} onQuestionSelected={onSelectionChange} selectedQuestios={questions} count ={questions.length} />
+        , <QuestionsForTest prev={handlePrevStep} onQuestionSelected={onSelectionChange} selectedQuestios={questions} count={questions.length} />
     ]
     return (
         <div className="QuestionView">
