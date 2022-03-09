@@ -1,7 +1,7 @@
 class QuestionsController {
 
-  constructor({ questionRepository, logger }) {
-    this.questionRepository = questionRepository; this.logger = logger
+  constructor({ questionRepository }) {
+    this.questionRepository = questionRepository;
   }
   addQuestion = async ({ body }) => {
     const { newQuestion, } = body;
