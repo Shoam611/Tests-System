@@ -1,18 +1,10 @@
-import axios from 'axios';
 import { runPostRequest, runPutRequest } from 'services/httpInvoker';
-//--
 export const ADD = 'ADDUSER';
-export const SET = 'SETQUESTIONRECORD';
-export const FETCH = 'FETCHQUESTIONRECORDS';
-export const DELETE = 'DELETEQUESTIONRECORDS';
-export const UPDATE = 'UPDATEQUESTIONRECORDS';
-//---
-//new Actions
-export const SETINITIALS = 'SETSETINITIALS';
-export const ADDRECORD='ADDRECORD';
-export const EDITRECORD = 'EDITRECORD';
+export const SETINITIALS = 'SETSETINITIALS'; // testId and user
+export const ADDRECORD = 'ADDEVENT'; // on first adding
+export const EDITRECORD = 'EDITEVENT'; // replace with new one everytime
 
-export const setUser = (user) => {
+export const setInitial = (user, testId) => {
     return async (dispatch, getState) => {
         const users = getState().users.users;
         let temp = compareUsers(user, users);
@@ -26,10 +18,17 @@ export const setUser = (user) => {
             const id = temp._id;
             _id = await runPutRequest('http://localhost:4200/users', { newUser: temp, id });
         }
-        dispatch({ type: SET, user: { ...temp, _id } });
+        dispatch({ type: SETINITIALS, initial: { user: { ...temp, _id }, testId: testId } });
     }
 }
 
+export const updateQuestion = () => {
+
+}
+
+const calcScore = () => {
+    // calc method: 100 / number of questions with wasRight value === true;
+}
 const compareUsers = (user, array) => array.find(u => u.email.toLowerCase() === user.email.toLowerCase() || u.phoneNumber === user.phoneNumber);
 
 const addTest = (temp, user) => {
@@ -37,12 +36,4 @@ const addTest = (temp, user) => {
         temp.testsIds = [...temp.testsIds, user.testsIds];
     }
     return temp;
-}
-
-export const updateQuestion =()=>{
-
-}
-
-const calcScore =() => {
-
 }

@@ -1,16 +1,15 @@
 import { useCallback, useEffect, useReducer, useState } from "react";
-import { Box } from "UIKit";
+import { Line } from "UIKit";
 import AnswersViewer from "./answerViewer";
 
 const QuestionViewer = props => {
-    const [, forceUpdate] = useReducer(x => x + 1, 0);
     const [list, setList] = useState([]);
     const [answers] = useState([]);
 
     const renderQuestions = useCallback(() => {
         const temp = props.answers.map((answer) => ({
             id: answer._id,
-            render: <Box>{answer.value}</Box>,
+            render: <Line>{answer.value}</Line>,
             value: answer,
             isSelected: false,
             father: props._id,

@@ -1,5 +1,6 @@
-import { FETCH, DELETE, UPDATE, SET } from "Store/actions/test_event";
+import { SETINITIALS, ADDRECORD, EDITRECORD } from "Store/actions/test_event";
 import QuestionRecord from "models/questionRecord";
+
 const initialState = {
     questionRecords: [],
     user: {},
@@ -9,18 +10,18 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET:
+        case SETINITIALS:
             const temp = state;
-            temp.user = { ...action.user, updatedAt: new Date().toISOString() };
+            temp.testTaken = action.initial.testId;
+            temp.user = { ...action.initial.user, updatedAt: new Date().toISOString() };
             return { ...state, questionRecords: temp };
 
-        case UPDATE: return state;
-        // case FETCH:
-        //     if (action.newQuestionReports) {
-        //         return { ...state, questionRecords: action.newQuestionReports };
-        //     }
-        //     else
-        //         return state;
+        case ADDRECORD:
+            return state;
+
+        case EDITRECORD:
+            return state;
+
         default: return state;
     }
 }

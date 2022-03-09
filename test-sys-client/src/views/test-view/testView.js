@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { Box, Btn } from "UIKit";
+import { Box, Btn, Line } from "UIKit";
 import QuestionViewer from "./QuestionViewer";
 import './testView.css'
 const TestView = () => {
@@ -15,35 +15,27 @@ const TestView = () => {
     const [orderOfQuestions, setOrderOfQuestions] = useState([]);
     const [answeredQuestions, setAnsweredQuestions] = useState([]);
 
-    const onPrev = () => setCurrentQuestion(prevState => { return prevState - 1 });
-    const onNext = () => setCurrentQuestion(prevState => { return prevState + 1 });
+    const onPrev = () => {
+        setCurrentQuestion(prevState => { return prevState - 1 });
+    }
+    const onNext = () => {
+        setCurrentQuestion(prevState => { return prevState + 1 });
+    }
 
     //handlers
     const handleSubmit = () => {
         console.log('submitted');
-        console.log(user);
-        console.log(questions);
-        console.log(test);
+        console.log('User >', user);
+        console.log('Questions >', questions);
+        console.log('Test >', test);
     }
 
-    /*
-    UserId,
-    Date of Taking The Test,
-    TestId,
-    Questions:[{ questionId, selectedAnswersIds[], wasRight}],
-    Score
-    */
-
     const onAnsweredHandler = useCallback((item, value, id) => {
-        // console.log('item', item, 'value', value, 'id:', id);
-        // const wasRightTemp = questions.find(q => q._id == id).correctAnswerIds.every(a => a === item.id);
-        // console.log('wasRight', wasRightTemp);
-        // console.log('question example', questions[1]);
-
+        console.log('item', item, 'value', value, 'id:', id);
         const newAnsweredQuestion = { questionId: id, selectedAnswersIds: [item.id], wasRight: false }
         value ? answeredQuestions.push(newAnsweredQuestion) : answeredQuestions.splice(answeredQuestions.indexOf(item._id), 1);
-        // console.log('answered object >', answeredQuestions, 'new question >', newAnsweredQuestion);
-    }, [answeredQuestions, questionsViews])
+
+    }, [])
 
     const shuffle = arr => {
         return [...arr].map((_, i, arrCopy) => {
@@ -80,8 +72,10 @@ const TestView = () => {
             return (
                 <Box justify="center">
                     {questionsViews[currentQuestion]}
-                    <Btn onClick={onPrev}>Previous</Btn>
-                    {questionsViews.length - currentQuestion === 1 ? <Btn onClick={handleSubmit}>Submit</Btn> : <Btn onClick={onNext}>Next</Btn>}
+                    <Line>
+                        <Btn onClick={onPrev}>Previous</Btn>
+                        {questionsViews.length - currentQuestion === 1 ? <Btn onClick={handleSubmit}>Submit</Btn> : <Btn onClick={onNext}>Next</Btn>}
+                    </Line>
                 </Box>
             )
         }

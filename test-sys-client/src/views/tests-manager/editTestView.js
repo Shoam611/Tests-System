@@ -36,67 +36,13 @@ const EditTestView = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (formValidation()) {
-            const newTest = new Test(newTestType, newLanguage, newManagerEmail.value, newTestName.value, newPassingGrade.value, newHeader.value, newMsgOnSucc.value, newMsgOnFail.value, newShowIfWrong, newEmailSubOnSucc.value, newEmailBodyOnSucc.value, newEmailSubOnFail.value, newEmailBodyOnFail.value, newQuestions);
+        const newTest = new Test(topic, newTestType, newLanguage, newManagerEmail.value, newTestName.value, newPassingGrade.value, newHeader.value, newMsgOnSucc.value, newMsgOnFail.value, newShowIfWrong, newEmailSubOnSucc.value, newEmailBodyOnSucc.value, newEmailSubOnFail.value, newEmailBodyOnFail.value, newQuestions);
+        const [value, message] = newTest.validate();
+        if (value) {
             dispatch(updateTest(newTest, id));
             navigate(-1);
         }
-    }
-    //RegEx validation
-    const ValidateEmail = (mail) => {
-        if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(mail)) {
-            return true;
-        }
-        return false;
-    }
-    //validations
-    const formValidation = () => {
-        if (+newTestType < 1 || +newTestType > testTypes.length) {
-            setErrorMessage('Please Choose a Test Type.');
-            return false;
-        }
-        if (+newLanguage < 1 || +newLanguage > languages.length) {
-            setErrorMessage('Please Choose a Language.');
-            return false;
-        }
-        if (newManagerEmail.value.trim().length === 0) {
-            setErrorMessage('Email Address Cannot Be Empty!');
-            return false;
-        }
-        if (!ValidateEmail(newManagerEmail.value)) {
-            setErrorMessage('Invalid Email Address!');
-            return false;
-        }
-        if (newTestName.value.trim().length === 0) {
-            setErrorMessage('Test Name Cannot Be Empty!');
-            return false;
-        }
-        if (+newPassingGrade.value < 1 || +newPassingGrade.value > 100) {
-            setErrorMessage('Invalid Passing Grade! Must Be Between 1 and 100.');
-            return false;
-        }
-        if (newHeader.value.trim().length === 0) {
-            setErrorMessage('Test Header Cannot Be Empty!');
-            return false;
-        }
-        if (newMsgOnSucc.value.trim().length === 0) {
-            setErrorMessage('Message On Succes Cannot Be Empty!');
-            return false;
-        }
-        if (newMsgOnFail.value.trim().length === 0) {
-            setErrorMessage('Message On Failure Cannot Be Empty!');
-            return false;
-        }
-        if (newEmailSubOnSucc.value.trim().length === 0 || newEmailBodyOnSucc.value.trim().length === 0) {
-            setErrorMessage('Email On Succes Fields Cannot Be Empty!');
-            return false;
-        }
-        if (newEmailSubOnFail.value.trim().length === 0 || newEmailBodyOnFail.value.trim().length === 0) {
-            setErrorMessage('Email On Failure Fields Cannot Be Empty!');
-            return false;
-        }
-        setErrorMessage('');
-        return true;
+        setErrorMessage(message);
     }
 
     //methods
