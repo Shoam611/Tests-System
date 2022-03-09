@@ -6,7 +6,7 @@ import Header from 'components/header';
 import SideNav from './components/SideNav';
 import { fetchTopic } from 'Store/actions/topic';
 import { fetchQuestions } from 'Store/actions/question';
-import { fetchTests } from 'Store/actions/test';
+import { fetchTests } from './Store/actions/test';
 import { fetchUsers } from 'Store/actions/user';
 import './App.css';
 function App() {

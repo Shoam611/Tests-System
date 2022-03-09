@@ -1,4 +1,4 @@
-import { FETCH, DELETE, UPDATE, SET } from "Store/actions/test_event";
+import { UPDATE, SET } from "Store/actions/test_event";
 import QuestionRecord from "models/questionRecord";
 const initialState = {
     questionRecords: [],
