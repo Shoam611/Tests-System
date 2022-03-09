@@ -6,7 +6,7 @@ const RadioButton = ({ list }) => {
         list.forEach(element => {
             element.isSelected = (id === element.id);
             if (element.id === id) {
-                element.onChange && element.onChange(element.value, element.isSelected, element.father);
+                element.onChange && element.onChange(element.value, element.isSelected);
             }
         });
         forceUpdate();
@@ -16,7 +16,6 @@ const RadioButton = ({ list }) => {
             id={item.id}
             render={item.render}
             isSelected={item.isSelected}
-            father={item.father}
             onChange={onSelectionChanged} />) : null
     };
     return (

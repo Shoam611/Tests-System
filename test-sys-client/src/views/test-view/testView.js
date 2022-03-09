@@ -11,15 +11,22 @@ const TestView = () => {
     const questions = useSelector(state => state.questions.questions).filter(q => test?.questions.includes(q._id));
     const user = useSelector(state => state.testRecord.user);
     const [questionsViews] = useState([]);
-    const [currentQuestion, setCurrentQuestion] = useState(-1);
+    const [currentQuestionIndex, setCurrentQuestion] = useState(-1);
     const [orderOfQuestions, setOrderOfQuestions] = useState([]);
     const [answeredQuestions, setAnsweredQuestions] = useState([]);
+    const [answersList, setAnswersList] = useState([]);
 
     const onPrev = () => {
+        updateSelectedAnswers(currentQuestionIndex - 1);
         setCurrentQuestion(prevState => { return prevState - 1 });
     }
     const onNext = () => {
+        updateSelectedAnswers(currentQuestionIndex + 1);
         setCurrentQuestion(prevState => { return prevState + 1 });
+    }
+
+    const updateSelectedAnswers = (index) => {
+        console.log('index > ', index, 'question >', orderOfQuestions[index]);
     }
 
     //handlers
@@ -31,7 +38,7 @@ const TestView = () => {
     }
 
     const onAnsweredHandler = useCallback((item, value, id) => {
-        console.log('item', item, 'value', value, 'id:', id);
+        // console.log('item', item, 'value', value, 'question >', questionsViews[currentQuestionIndex]);
         const newAnsweredQuestion = { questionId: id, selectedAnswersIds: [item.id], wasRight: false }
         value ? answeredQuestions.push(newAnsweredQuestion) : answeredQuestions.splice(answeredQuestions.indexOf(item._id), 1);
 
@@ -47,14 +54,23 @@ const TestView = () => {
 
     const initialQuestionsComponents = useCallback(() => {
         let shuffeledQuestions = shuffle(questions);
-        const orderOfQuestionsTemp = shuffeledQuestions.map((q) => (q._id));
 
         if (questionsViews.length === 0)
-            orderOfQuestions.push(...orderOfQuestionsTemp);
+            orderOfQuestions.push(...shuffeledQuestions);
+
+        const tempList = shuffeledQuestions.answers?.map((answer) => ({
+            id: answer._id,
+            render: <Line>{answer.value}</Line>,
+            value: answer,
+            isSelected: false,
+            onChange: onAnsweredHandler
+        }));
+        setAnswersList(tempList);
 
         const temp = shuffeledQuestions.map((q) => (
-            <QuestionViewer onChange={onAnsweredHandler} key={q._id} {...q} />
+            <QuestionViewer onChange={onAnsweredHandler} key={q._id} list={answersList} {...q} />
         ));
+
         if (questionsViews.length === 0)
             questionsViews.push(...temp);
     }, [onAnsweredHandler, orderOfQuestions, questions, questionsViews]);
@@ -64,31 +80,27 @@ const TestView = () => {
         initialQuestionsComponents();
     }, [initialQuestionsComponents]);
 
-    //render
-    const renderQuestions = () => {
-        if (!test) return (< h1 >Loading Data...</h1 >)
+    return (
+        <div>
+            {!test && < h1 >Loading Data...</h1 >}
 
-        if (+currentQuestion >= 0) {
-            return (
-                <Box justify="center">
-                    {questionsViews[currentQuestion]}
+            {+currentQuestionIndex >= 0 ?
+                (<Box justify="center">
+                    {questionsViews[currentQuestionIndex]}
                     <Line>
-                        <Btn onClick={onPrev}>Previous</Btn>
-                        {questionsViews.length - currentQuestion === 1 ? <Btn onClick={handleSubmit}>Submit</Btn> : <Btn onClick={onNext}>Next</Btn>}
+                        {currentQuestionIndex >= 1 && <Btn onClick={onPrev}>Previous</Btn>}
+                        {questionsViews.length - currentQuestionIndex === 1 ? <Btn onClick={handleSubmit}>Submit</Btn> : <Btn onClick={onNext}>Next</Btn>}
                     </Line>
-                </Box>
-            )
-        }
-        return (
-            <div>
-                <h1>{test?.header}</h1>
-                <Btn onClick={onNext}>Start</Btn>
-            </div>
-        );
-    }
+                </Box>)
+                :
+                <div>
+                    <h1>{test?.header}</h1>
+                    <Btn onClick={onNext}>Start</Btn>
+                </div>}
 
-    return renderQuestions();
+        </div>
+
+    )
 }
 
 export default TestView;
-
