@@ -1,20 +1,16 @@
 import { FETCH, DELETE, UPDATE, SET } from "Store/actions/test_record";
 const initialState = {
-    questionRecords: [
-        {
-            questions: [],
-            user: {},
-            testTaken: '',
-            score: NaN
-        }
-    ]
+    questionRecords: [],
+    user: {},
+    testTaken: '',
+    score: NaN
 }
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case SET:
             const temp = state;
-            temp.user.splice(0, 0, { ...action.user, updatedAt: new Date().toISOString() });
+            temp.user = { ...action.user, updatedAt: new Date().toISOString() };
             return { ...state, questionRecords: temp };
 
         case FETCH:

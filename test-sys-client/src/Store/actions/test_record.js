@@ -10,14 +10,16 @@ export const setUser = (user) => {
     return async (dispatch, getState) => {
         const users = getState().users.users;
         let temp = compareUsers(user, users);
+        let _id = '';
         if (!temp) {
             const response = await runPostRequest('http://localhost:4200/users', { newUser: user });
-            const _id = await response;
+            _id = await response;
             dispatch({ type: ADD, newUser: { ...temp, _id } });
+        } else {
+            addTest(temp, user);
+            const id = temp._id;
+            _id = await runPutRequest('http://localhost:4200/users', { newUser: temp, id });
         }
-        addTest(temp, user);
-        const id = temp._id;
-        const _id = await runPutRequest('http://localhost:4200/users', { newUser: temp, id });
         dispatch({ type: SET, user: { ...temp, _id } });
     }
 }
