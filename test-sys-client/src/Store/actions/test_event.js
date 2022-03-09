@@ -2,7 +2,7 @@ import { runPostRequest, runPutRequest } from 'services/httpInvoker';
 export const ADD = 'ADDUSER';
 export const SETINITIALS = 'SETSETINITIALS'; // testId and user
 export const ADDRECORD = 'ADDEVENT'; // on first adding
-export const EDITRECORD = 'EDITEVENT'; // replace with new one everytime
+export const UPDATERECORD = 'UPDATEEVENT'; // replace with new one everytime
 
 export const setInitial = (user, testId) => {
     return async (dispatch, getState) => {
@@ -22,8 +22,10 @@ export const setInitial = (user, testId) => {
     }
 }
 
-export const updateQuestion = () => {
-
+export const updateQuestion = (questionIndex, selectedAnswersIndexes) => {
+    return (dispatch, getState) => {
+        dispatch({ type: UPDATERECORD, questionIndex, selectedAnswersIndexes });
+    }
 }
 
 const calcScore = () => {

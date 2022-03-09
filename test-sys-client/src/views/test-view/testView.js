@@ -1,15 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
+import { updateQuestion } from "Store/actions/test_event";
 import { Box, Btn, Line } from "UIKit";
 import QuestionViewer from "./QuestionViewer";
-import './testView.css'
+import './testView.css';
 const TestView = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const test = useSelector(state => state.tests.tests).find(t => t._id === id);
     const questions = useSelector(state => state.questions.questions).filter(q => test?.questions.includes(q._id));
     const user = useSelector(state => state.testRecord.user);
+    const pickedAnswers = useSelector(state => state.testRecord.questionRecords);
     const [questionsViews] = useState([]);
     const [currentQuestionIndex, setCurrentQuestion] = useState(-1);
     const [orderOfQuestions, setOrderOfQuestions] = useState([]);
@@ -17,17 +19,19 @@ const TestView = () => {
     const [answersList, setAnswersList] = useState([]);
 
     const onPrev = () => {
-        updateSelectedAnswers(currentQuestionIndex - 1);
+        updateSelectedAnswers();
         setCurrentQuestion(prevState => { return prevState - 1 });
     }
     const onNext = () => {
-        updateSelectedAnswers(currentQuestionIndex + 1);
+        updateSelectedAnswers();
         setCurrentQuestion(prevState => { return prevState + 1 });
     }
 
-    const updateSelectedAnswers = (index) => {
-        // console.log('index > ', index, 'question >', orderOfQuestions[index]);
-        console.log(answersList.map(a => ({ id, isSelected: a.isSelected })));
+    const updateSelectedAnswers = () => {
+        const selectedAnswersIndexes = answersList.filter(a => a.isSelected).map(a => ({ id: a.id }));
+
+        if (currentQuestionIndex < 0 || currentQuestionIndex >= orderOfQuestions.length) return;
+        dispatch(updateQuestion(currentQuestionIndex, selectedAnswersIndexes));
     }
 
     //handlers
@@ -51,6 +55,8 @@ const TestView = () => {
             orderOfQuestions.push(...shuffle(questions));
 
         if (currentQuestionIndex < 0 || currentQuestionIndex >= orderOfQuestions.length) return null;
+
+        //take the value from use selector and if it exits mark it true so the answered things stay answered
 
         const currentAnswers = (orderOfQuestions.map((q) => (q.answers))[currentQuestionIndex]).map(answer => ({
             id: answer.id,

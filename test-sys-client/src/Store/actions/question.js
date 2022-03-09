@@ -22,7 +22,7 @@ export const fetchQuestions = () => {
     }
 }
 
-export const updateQuestion = (newQuestion, id) => {
+export const editQuestion = (newQuestion, id) => {
     return async (dispatch) => {
         try {
             await axios.put('http://localhost:4200/questions', { newQuestion, id });

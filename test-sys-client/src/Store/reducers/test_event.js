@@ -1,4 +1,4 @@
-import { SETINITIALS, ADDRECORD, EDITRECORD } from "Store/actions/test_event";
+import { SETINITIALS, ADDRECORD, UPDATERECORD } from "Store/actions/test_event";
 import QuestionRecord from "models/questionRecord";
 
 const initialState = {
@@ -19,8 +19,21 @@ const reducer = (state = initialState, action) => {
         case ADDRECORD:
             return state;
 
-        case EDITRECORD:
-            return state;
+        case UPDATERECORD:
+            const tempArray = state.questionRecords;
+            const element = (tempArray.find(qr => qr.questionId === action.questionIndex));
+
+            if (element) {
+                element.selectedAnswersIds = action.selectedAnswersIndexes;
+                console.log(tempArray);
+                return { ...state, questionRecords: tempArray };
+            }
+            else {
+                const questionRecord = new QuestionRecord(action.questionIndex, action.selectedAnswersIndexes);
+                tempArray.push(questionRecord);
+                console.log(tempArray);
+                return { ...state, questionRecords: tempArray };
+            }
 
         default: return state;
     }
