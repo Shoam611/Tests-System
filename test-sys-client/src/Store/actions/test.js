@@ -9,7 +9,6 @@ export const addTest = (newTest) => {
     return async (dispatch) => {
         const response = await runPostRequest('http://localhost:4200/tests', { newTest: newTest });
         const _id = await response;
-        console.log(_id);
         dispatch({ type: ADD, newTest: { ...newTest, _id } })
     }
 }

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { runPostRequest } from 'services/httpInvoker'
+import { runPostRequest } from 'services/httpInvoker';
 export const ADD = 'ADDQUESTION';
 export const FETCH = 'FETCHQUESTION';
 export const DELETE = 'DELETEQUESTION';
@@ -9,7 +9,6 @@ export const addQuestion = (newQuestion) => {
     return async (dispatch, getState) => {
         const response = await runPostRequest('http://localhost:4200/questions', { newQuestion: newQuestion });
         const _id = await response;
-        console.log(response);
         dispatch({ type: ADD, newQuestion: { ...newQuestion, _id } })
     }
 }

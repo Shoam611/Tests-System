@@ -14,7 +14,7 @@ function App() {
 
   const dispatch = useDispatch();
   const loadTopic = useCallback(async () => {
-    await dispatch(fetchTopic())
+    await dispatch(fetchTopic());
   }, [dispatch]);
 
   const loadData = useCallback(async () => {

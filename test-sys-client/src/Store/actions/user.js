@@ -16,6 +16,6 @@ export const addUser = (newUser) => {
 export const fetchUsers = () => {
     return async (dispatch, getState) => {
         const response = await axios.get(`http://localhost:4200/users`);
-        dispatch({ type: FETCH, newUser: response });
+        dispatch({ type: FETCH, newUsers: response.data });
     }
 }

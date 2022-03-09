@@ -1,5 +1,5 @@
-// const { Test } = require('./schemas/createConnection.js');
 const { getModels } = require('./schemas/createConnection.js');
+const { logger } = require('../app-logger.js');
 
 class TestsMongoRepository {
 
@@ -10,7 +10,7 @@ class TestsMongoRepository {
         await t.save();
         return t._id;
     }
-    
+
     //Delete
     async DeleteOneAsync(id) {
         const { Test } = getModels();
@@ -28,8 +28,13 @@ class TestsMongoRepository {
     //Read
     async getAsync(filterquery = {}) {
         const { Test } = getModels();
-        const query = Test.find({ sort: '-createdAt' }).where(filterquery);
-        return query;
+        try {
+            return await Test.find({ sort: '-createdAt' }).where(filterquery);
+        } catch (err) {
+            const newErr = new Error(`error while trying to fetch tests from the db at t-repository. original error ${err.message}`);
+            logger.error(newErr.message);
+            return null;
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 const awilix = require("awilix");
 const container = awilix.createContainer();
+const { logger } = require('./app-logger.js')
 const QuestionsController = require("./controllers/questionsController.js");
 const QuestionRepository = require('./data/questionRepository');
 
@@ -11,6 +12,9 @@ const UserRepository = require("./data/userRepository.js");
 
 const TopicController = require("./controllers/topicController.js");
 const TopicRepository = require('./data/topicsRepository.js');
+
+const QuestionReportsController = require("./controllers/questionReportsController.js");
+const QuestionReportRepository = require("./data/questionReportRepository.js");
 
 const setup = () => {
   container.register({
@@ -26,6 +30,10 @@ const setup = () => {
     topicRepository: awilix.asClass(TopicRepository).singleton(),
     topicController: awilix.asClass(TopicController).singleton(),
 
+    questionReportsController: awilix.asClass(QuestionReportsController).singleton(),
+    questionReportRepository: awilix.asClass(QuestionReportRepository).singleton(),
+
+    logger: awilix.asValue(logger),
   });
 };
 
