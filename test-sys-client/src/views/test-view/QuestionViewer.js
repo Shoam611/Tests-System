@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useReducer, useState } from "react";
-import { Line } from "UIKit";
+// import { useCallback, useEffect, useReducer, useState } from "react";
+// import { Line } from "UIKit";
 import AnswersViewer from "./answerViewer";
 
 const QuestionViewer = props => {
@@ -25,7 +25,7 @@ const QuestionViewer = props => {
             <h4>{props.textAbove}</h4>
             <h4>{props.questionText}</h4>
             <h4>{props.textBelow}</h4>
-            <AnswersViewer questionType={props.questionType} list={props.list} />
+            <AnswersViewer questionType={props.questionType} list={props?.list} />
         </div>
     );
 }

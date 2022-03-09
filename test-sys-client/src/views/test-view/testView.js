@@ -26,7 +26,8 @@ const TestView = () => {
     }
 
     const updateSelectedAnswers = (index) => {
-        console.log('index > ', index, 'question >', orderOfQuestions[index]);
+        // console.log('index > ', index, 'question >', orderOfQuestions[index]);
+        console.log(answersList.map(a => ({ id, isSelected: a.isSelected })));
     }
 
     //handlers
@@ -37,13 +38,6 @@ const TestView = () => {
         console.log('Test >', test);
     }
 
-    const onAnsweredHandler = useCallback((item, value, id) => {
-        // console.log('item', item, 'value', value, 'question >', questionsViews[currentQuestionIndex]);
-        const newAnsweredQuestion = { questionId: id, selectedAnswersIds: [item.id], wasRight: false }
-        value ? answeredQuestions.push(newAnsweredQuestion) : answeredQuestions.splice(answeredQuestions.indexOf(item._id), 1);
-
-    }, [])
-
     const shuffle = arr => {
         return [...arr].map((_, i, arrCopy) => {
             var rand = i + (Math.floor(Math.random() * (arrCopy.length - i)));
@@ -52,33 +46,23 @@ const TestView = () => {
         })
     };
 
-    const initialQuestionsComponents = useCallback(() => {
-        let shuffeledQuestions = shuffle(questions);
+    const initialQuestionsComponents = () => {
+        if (orderOfQuestions.length === 0)
+            orderOfQuestions.push(...shuffle(questions));
 
-        if (questionsViews.length === 0)
-            orderOfQuestions.push(...shuffeledQuestions);
+        if (currentQuestionIndex < 0 || currentQuestionIndex >= orderOfQuestions.length) return null;
 
-        const tempList = shuffeledQuestions.answers?.map((answer) => ({
-            id: answer._id,
+        const currentAnswers = (orderOfQuestions.map((q) => (q.answers))[currentQuestionIndex]).map(answer => ({
+            id: answer.id,
             render: <Line>{answer.value}</Line>,
             value: answer,
             isSelected: false,
-            onChange: onAnsweredHandler
         }));
-        setAnswersList(tempList);
 
-        const temp = shuffeledQuestions.map((q) => (
-            <QuestionViewer onChange={onAnsweredHandler} key={q._id} list={answersList} {...q} />
-        ));
+        answersList.splice(0, answersList.length, ...currentAnswers);
 
-        if (questionsViews.length === 0)
-            questionsViews.push(...temp);
-    }, [onAnsweredHandler, orderOfQuestions, questions, questionsViews]);
-
-    //side effects
-    useEffect(() => {
-        initialQuestionsComponents();
-    }, [initialQuestionsComponents]);
+        return <QuestionViewer key={orderOfQuestions[currentQuestionIndex]._id} list={answersList} {...orderOfQuestions[currentQuestionIndex]} />;
+    }
 
     return (
         <div>
@@ -86,10 +70,11 @@ const TestView = () => {
 
             {+currentQuestionIndex >= 0 ?
                 (<Box justify="center">
-                    {questionsViews[currentQuestionIndex]}
+                    {/* {questionsViews[currentQuestionIndex]} */}
+                    {initialQuestionsComponents()}
                     <Line>
                         {currentQuestionIndex >= 1 && <Btn onClick={onPrev}>Previous</Btn>}
-                        {questionsViews.length - currentQuestionIndex === 1 ? <Btn onClick={handleSubmit}>Submit</Btn> : <Btn onClick={onNext}>Next</Btn>}
+                        {orderOfQuestions.length - currentQuestionIndex === 1 ? <Btn onClick={handleSubmit}>Submit</Btn> : <Btn onClick={onNext}>Next</Btn>}
                     </Line>
                 </Box>)
                 :
