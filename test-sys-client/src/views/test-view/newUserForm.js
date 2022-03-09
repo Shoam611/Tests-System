@@ -61,7 +61,7 @@ const NewUserForm = props => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (formValidation()) {
-            const newUser = new User(userFirstName.value, userLastName.value, userEmail.value, userPhoneNumber.value, id, ['User']);
+            const newUser = new User(userFirstName.value, userLastName.value, userEmail.value, userPhoneNumber.value, id, ['Student']);
             dispatch(setUser(newUser));
 
             navigate(`/qweezes/run/viewTest/${id}`);
