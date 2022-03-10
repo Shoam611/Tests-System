@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { submitRecord, updateQuestion } from "Store/actions/test_event";
 import { Box, Btn, Line } from "UIKit";
+import Card from "UIKit/Layouts/Card";
 import QuestionViewer from "./QuestionViewer";
 import './testView.css';
 const TestView = () => {
@@ -13,8 +14,8 @@ const TestView = () => {
     const user = useSelector(state => state.testRecord.user);
     const pickedAnswers = useSelector(state => state.testRecord.questionRecords);
     const [currentQuestionIndex, setCurrentQuestion] = useState(-1);
-    const [orderOfQuestions, setOrderOfQuestions] = useState([]);
-    const [answersList, setAnswersList] = useState([]);
+    const [orderOfQuestions] = useState([]);
+    const [answersList] = useState([]);
 
     const onPrev = () => {
         updateSelectedAnswers();
@@ -24,7 +25,6 @@ const TestView = () => {
         updateSelectedAnswers();
         setCurrentQuestion(prevState => { return prevState + 1 });
     }
-
     const updateSelectedAnswers = () => {
         const selectedAnswersIndexes = answersList.filter(a => a.isSelected).map(a => ({ id: a.id }));
 
@@ -70,14 +70,18 @@ const TestView = () => {
             {!test && < h1 >Loading Data...</h1 >}
 
             {+currentQuestionIndex >= 0 ?
-                (<Box justify="center">
-                    {/* {questionsViews[currentQuestionIndex]} */}
-                    {initialQuestionsComponents()}
+                (<div>
+
+                    <Card >
+                        {initialQuestionsComponents()}
+                    </Card>
                     <Line>
                         {currentQuestionIndex >= 1 && <Btn onClick={onPrev}>Previous</Btn>}
                         {orderOfQuestions.length - currentQuestionIndex === 1 ? <Btn onClick={handleSubmit}>Submit</Btn> : <Btn onClick={onNext}>Next</Btn>}
                     </Line>
-                </Box>)
+                    <br />
+                </div>
+                )
                 :
                 <div>
                     <h1>{test?.header}</h1>
