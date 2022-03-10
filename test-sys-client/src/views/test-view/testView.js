@@ -46,6 +46,11 @@ const TestView = () => {
         })
     };
 
+    const renderQuestionNavigation = () => {
+        orderOfQuestions.map(q => q);
+        return null;
+    }
+
     const initialQuestionsComponents = () => {
         if (orderOfQuestions.length === 0)
             orderOfQuestions.push(...shuffle(questions));
@@ -78,7 +83,9 @@ const TestView = () => {
                         {currentQuestionIndex >= 1 && <Btn onClick={onPrev}>Previous</Btn>}
                         {orderOfQuestions.length - currentQuestionIndex === 1 ? <Btn onClick={handleSubmit}>Submit</Btn> : <Btn onClick={onNext}>Next</Btn>}
                     </Line>
-
+                    <Line>
+                        {renderQuestionNavigation()}
+                    </Line>
                 </div>
                 )
                 :
