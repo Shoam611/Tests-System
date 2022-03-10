@@ -1,49 +1,42 @@
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { Box, Btn } from "UIKit";
+import { submitRecord, updateQuestion } from "Store/actions/test_event";
+import { Article, Btn, Line } from "UIKit";
+import Card from "UIKit/Layouts/Card";
 import QuestionViewer from "./QuestionViewer";
-import './testView.css'
+import './testView.css';
 const TestView = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const test = useSelector(state => state.tests.tests).find(t => t._id === id);
     const questions = useSelector(state => state.questions.questions).filter(q => test?.questions.includes(q._id));
     const user = useSelector(state => state.testRecord.user);
-    const [questionsViews] = useState([]);
-    const [currentQuestion, setCurrentQuestion] = useState(-1);
-    const [orderOfQuestions, setOrderOfQuestions] = useState([]);
-    const [answeredQuestions, setAnsweredQuestions] = useState([]);
+    const pickedAnswers = useSelector(state => state.testRecord.questionRecords);
+    const [currentQuestionIndex, setCurrentQuestion] = useState(-1);
+    const [orderOfQuestions] = useState([]);
+    const [answersList] = useState([]);
 
-    const onPrev = () => setCurrentQuestion(prevState => { return prevState - 1 });
-    const onNext = () => setCurrentQuestion(prevState => { return prevState + 1 });
+    const onPrev = () => {
+        updateSelectedAnswers();
+        setCurrentQuestion(prevState => { return prevState - 1 });
+    }
+    const onNext = () => {
+        updateSelectedAnswers();
+        setCurrentQuestion(prevState => { return prevState + 1 });
+    }
+    const updateSelectedAnswers = () => {
+        const selectedAnswersIndexes = answersList.filter(a => a.isSelected).map(a => ({ id: a.id }));
+
+        if (currentQuestionIndex < 0 || currentQuestionIndex >= orderOfQuestions.length) return;
+        dispatch(updateQuestion(orderOfQuestions[currentQuestionIndex]._id, selectedAnswersIndexes));
+    }
 
     //handlers
     const handleSubmit = () => {
-        console.log('submitted');
-        console.log(user);
-        console.log(questions);
-        console.log(test);
+        updateSelectedAnswers();
+        dispatch(submitRecord(user._id, test._id, questions, pickedAnswers));
     }
-
-    /*
-    UserId,
-    Date of Taking The Test,
-    TestId,
-    Questions:[{ questionId, selectedAnswersIds[], wasRight}],
-    Score
-    */
-
-    const onAnsweredHandler = useCallback((item, value, id) => {
-        // console.log('item', item, 'value', value, 'id:', id);
-        // const wasRightTemp = questions.find(q => q._id == id).correctAnswerIds.every(a => a === item.id);
-        // console.log('wasRight', wasRightTemp);
-        // console.log('question example', questions[1]);
-
-        const newAnsweredQuestion = { questionId: id, selectedAnswersIds: [item.id], wasRight: false }
-        value ? answeredQuestions.push(newAnsweredQuestion) : answeredQuestions.splice(answeredQuestions.indexOf(item._id), 1);
-        // console.log('answered object >', answeredQuestions, 'new question >', newAnsweredQuestion);
-    }, [answeredQuestions, questionsViews])
 
     const shuffle = arr => {
         return [...arr].map((_, i, arrCopy) => {
@@ -53,48 +46,57 @@ const TestView = () => {
         })
     };
 
-    const initialQuestionsComponents = useCallback(() => {
-        let shuffeledQuestions = shuffle(questions);
-        const orderOfQuestionsTemp = shuffeledQuestions.map((q) => (q._id));
-
-        if (questionsViews.length === 0)
-            orderOfQuestions.push(...orderOfQuestionsTemp);
-
-        const temp = shuffeledQuestions.map((q) => (
-            <QuestionViewer onChange={onAnsweredHandler} key={q._id} {...q} />
-        ));
-        if (questionsViews.length === 0)
-            questionsViews.push(...temp);
-    }, [onAnsweredHandler, orderOfQuestions, questions, questionsViews]);
-
-    //side effects
-    useEffect(() => {
-        initialQuestionsComponents();
-    }, [initialQuestionsComponents]);
-
-    //render
-    const renderQuestions = () => {
-        if (!test) return (< h1 >Loading Data...</h1 >)
-
-        if (+currentQuestion >= 0) {
-            return (
-                <Box justify="center">
-                    {questionsViews[currentQuestion]}
-                    <Btn onClick={onPrev}>Previous</Btn>
-                    {questionsViews.length - currentQuestion === 1 ? <Btn onClick={handleSubmit}>Submit</Btn> : <Btn onClick={onNext}>Next</Btn>}
-                </Box>
-            )
-        }
-        return (
-            <div>
-                <h1>{test?.header}</h1>
-                <Btn onClick={onNext}>Start</Btn>
-            </div>
-        );
+    const renderQuestionNavigation = () => {
+        orderOfQuestions.map(q => q);
+        return null;
     }
 
-    return renderQuestions();
+    const initialQuestionsComponents = () => {
+        if (orderOfQuestions.length === 0)
+            orderOfQuestions.push(...shuffle(questions));
+
+        if (currentQuestionIndex < 0 || currentQuestionIndex >= orderOfQuestions.length) return null;
+
+        const indexesOfPickedAnswers = pickedAnswers[currentQuestionIndex];
+        const currentAnswers = (orderOfQuestions.map((q) => (q.answers))[currentQuestionIndex]).map(answer => ({
+            id: answer.id,
+            render: <Line>{answer.value}</Line>,
+            value: answer,
+            isSelected: indexesOfPickedAnswers ? indexesOfPickedAnswers.selectedAnswersIds.find(a => a.id === answer.id) : false,
+        }));
+
+        answersList.splice(0, answersList.length, ...currentAnswers);
+
+        return <QuestionViewer key={orderOfQuestions[currentQuestionIndex]._id} list={answersList} {...orderOfQuestions[currentQuestionIndex]} />;
+    }
+
+    return (
+        <div>
+            {!test && < h1 >Loading Data...</h1 >}
+
+            {+currentQuestionIndex >= 0 ?
+                (<div>
+                    <Card >
+                        {initialQuestionsComponents()}
+                    </Card>
+                    <Line>
+                        {currentQuestionIndex >= 1 && <Btn onClick={onPrev}>Previous</Btn>}
+                        {orderOfQuestions.length - currentQuestionIndex === 1 ? <Btn onClick={handleSubmit}>Submit</Btn> : <Btn onClick={onNext}>Next</Btn>}
+                    </Line>
+                    <Line>
+                        {renderQuestionNavigation()}
+                    </Line>
+                </div>
+                )
+                :
+                <div>
+                    <Article><h1>{test?.header}</h1></Article>
+                    <Btn onClick={onNext}>Start</Btn>
+                </div>}
+
+        </div>
+
+    )
 }
 
 export default TestView;
-

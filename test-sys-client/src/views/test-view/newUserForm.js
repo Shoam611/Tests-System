@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { Btn, Input } from "UIKit";
-import { setUser } from "Store/actions/test_event";
+import { setInitial } from "Store/actions/test_event";
 
 const NewUserForm = props => {
     const dispatch = useDispatch();
@@ -62,7 +62,7 @@ const NewUserForm = props => {
         e.preventDefault();
         if (formValidation()) {
             const newUser = new User(userFirstName.value, userLastName.value, userEmail.value, userPhoneNumber.value, id, ['Student']);
-            dispatch(setUser(newUser));
+            dispatch(setInitial(newUser, id));
 
             navigate(`/qweezes/run/viewTest/${id}`);
         }
