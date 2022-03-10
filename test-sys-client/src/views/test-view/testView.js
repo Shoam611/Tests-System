@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { submitRecord, updateQuestion } from "Store/actions/test_event";
-import { Box, Btn, Line } from "UIKit";
+import { Article, Btn, Line } from "UIKit";
 import Card from "UIKit/Layouts/Card";
 import QuestionViewer from "./QuestionViewer";
 import './testView.css';
@@ -71,7 +71,6 @@ const TestView = () => {
 
             {+currentQuestionIndex >= 0 ?
                 (<div>
-
                     <Card >
                         {initialQuestionsComponents()}
                     </Card>
@@ -79,12 +78,12 @@ const TestView = () => {
                         {currentQuestionIndex >= 1 && <Btn onClick={onPrev}>Previous</Btn>}
                         {orderOfQuestions.length - currentQuestionIndex === 1 ? <Btn onClick={handleSubmit}>Submit</Btn> : <Btn onClick={onNext}>Next</Btn>}
                     </Line>
-                    <br />
+
                 </div>
                 )
                 :
                 <div>
-                    <h1>{test?.header}</h1>
+                    <Article><h1>{test?.header}</h1></Article>
                     <Btn onClick={onNext}>Start</Btn>
                 </div>}
 
