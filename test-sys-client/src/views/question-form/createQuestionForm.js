@@ -56,9 +56,7 @@ const CreateQuestionForm = () => {
         const id = getId();
         const newAnswer = {
             id: id,
-            render: <AnswerChoice id={id}
-                onRemove={handleRemoveAwnser}
-                onChange={awnserContentChangedHandler} />,
+            render: <AnswerChoice id={id} onRemove={handleRemoveAwnser} onChange={awnserContentChangedHandler} />,
             value: '',
             isSelected: false
         };

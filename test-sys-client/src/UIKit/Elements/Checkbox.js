@@ -7,7 +7,7 @@ const Checkbox = ({ list }) => {
         list.forEach(item => {
             if (item.id === id) {
                 item.isSelected = value;
-                item.onChange && item.onChange(item.value, value, item.father);
+                item.onChange && item.onChange(item.value, value);
             }
         });
     }
@@ -17,7 +17,6 @@ const Checkbox = ({ list }) => {
             id={value.id}
             selected={value.isSelected}
             onChange={onSelctionChanged}
-            father={value.father}
             render={value.render} />);
     }
 

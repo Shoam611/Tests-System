@@ -13,7 +13,6 @@ const QuestionViewer = props => {
             render: <Box>{answer.value}</Box>,
             value: answer,
             isSelected: false,
-            father: props._id,
             onChange: props.onChange
         }));
         setList(temp);

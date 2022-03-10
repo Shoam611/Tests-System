@@ -1,12 +1,14 @@
-import { render } from "@testing-library/react";
 import useInput from "hooks/useInput";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Btn, Input, Line } from "UIKit";
+import {useNavigate} from 'react-router-dom'
+import { Box, Input, Line } from "UIKit";
 import TestItem from './testItem.js'
 import './quizReport.css'
 const QuizReport = () => {
     //states
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const topic = useSelector(state => state.topic.topic)
     const tests = useSelector(state => state.tests.tests);
     const [viewedTests, setViewedTests] = useState([]);
@@ -39,9 +41,7 @@ const QuizReport = () => {
         if (keyWords.trim().length === 0) setViewedTests(tests);
     }
     //handelers
-    const generateReport = () => {
-
-    }
+ 
     //renderers
     const renderTests = () => {
         return (viewedTests.length === 0 ? <h2>No Tests Available For The Selected Topic: {topic.name}.</h2> :

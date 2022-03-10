@@ -10,6 +10,7 @@ import QuizReport from "views/reports/quizReport/quizReport";
 import NewUserForm from "views/test-view/newUserForm";
 import TestView from "views/test-view/testView";
 import CreateQuestionForm from "views/question-form/createQuestionForm";
+import ReportView from "views/reports/quizReport/reportView";
 const AppNavigator = () => {
   return (
     <div id="AppNavigatorContainer">
@@ -29,6 +30,8 @@ const AppNavigator = () => {
           <Route path="topics/edit" element={<DefaultView />} />
 
           <Route path="reports/qweezes" element={<QuizReport />} />
+          <Route path="reports/qweezes/:id" element={<ReportView />} />
+
           <Route path="reports/respondant" element={<DefaultView />} />
           <Route path="reports/statistics" element={<DefaultView />} />
 
