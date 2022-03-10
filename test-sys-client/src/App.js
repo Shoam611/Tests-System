@@ -45,7 +45,6 @@ function App() {
               <SideNav />
               {/* content placeholder*/}
               <div className='app-outlet-container'>
-                Welcome to Qweezit!
                 <Outlet />
               </div>
             </Columns>
