@@ -28,7 +28,12 @@ const reducer = (state = initialState, action) => {
             }
 
         case SUBMITRECORD:
-            return { ...action.record }
+            return {
+                questionRecords: [],
+                user: {},
+                testTaken: '',
+                score: NaN,
+            }
 
         default: return state;
     }

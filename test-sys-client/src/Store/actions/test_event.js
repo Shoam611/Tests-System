@@ -33,11 +33,10 @@ export const submitRecord = (userId, testId, questions, pickedAnswers) => {
         console.log('submitted');
         const questionRecord = getState().testRecord.questionRecords;
         const score = calcScore(questions, pickedAnswers);
-        const recordForRedux = { questionRecords: questionRecord, user: userId, testTaken: testId, score: score };
         const recordForServer = { questions: questionRecord, userId: userId, testId: testId, score: score };
         const response = await runPostRequest("http://localhost:4200/testRecords", { newTestReport: recordForServer });
         console.log(response);
-        dispatch({ type: SUBMITRECORD, record: recordForRedux });
+        dispatch({ type: SUBMITRECORD });
     }
 }
 const compareUsers = (user, array) => array.find(u => u.email.toLowerCase() === user.email.toLowerCase() || u.phoneNumber === user.phoneNumber);
