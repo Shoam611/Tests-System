@@ -12,10 +12,8 @@ const TestView = () => {
     const questions = useSelector(state => state.questions.questions).filter(q => test?.questions.includes(q._id));
     const user = useSelector(state => state.testRecord.user);
     const pickedAnswers = useSelector(state => state.testRecord.questionRecords);
-    const [questionsViews] = useState([]);
     const [currentQuestionIndex, setCurrentQuestion] = useState(-1);
     const [orderOfQuestions, setOrderOfQuestions] = useState([]);
-    const [answeredQuestions, setAnsweredQuestions] = useState([]);
     const [answersList, setAnswersList] = useState([]);
 
     const onPrev = () => {
@@ -57,13 +55,15 @@ const TestView = () => {
         if (currentQuestionIndex < 0 || currentQuestionIndex >= orderOfQuestions.length) return null;
 
         //take the value from use selector and if it exits mark it true so the answered things stay answered
-
+        const indexesOfPickedAnswers = pickedAnswers[currentQuestionIndex];
+        console.log('indexesOfPickedAnswers >', pickedAnswers[currentQuestionIndex]);
         const currentAnswers = (orderOfQuestions.map((q) => (q.answers))[currentQuestionIndex]).map(answer => ({
             id: answer.id,
             render: <Line>{answer.value}</Line>,
             value: answer,
-            isSelected: false,
+            isSelected: indexesOfPickedAnswers ? indexesOfPickedAnswers.selectedAnswersIds.find(a => a.id === answer.id) : false,
         }));
+        console.log(currentAnswers)
 
         answersList.splice(0, answersList.length, ...currentAnswers);
 

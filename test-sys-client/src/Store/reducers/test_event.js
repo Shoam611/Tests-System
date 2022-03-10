@@ -14,7 +14,7 @@ const reducer = (state = initialState, action) => {
             const temp = state;
             temp.testTaken = action.initial.testId;
             temp.user = { ...action.initial.user, updatedAt: new Date().toISOString() };
-            return { ...state, questionRecords: temp };
+            return { ...state, testTaken: temp.testTaken, user: temp.user };
 
         case ADDRECORD:
             return state;
@@ -25,13 +25,11 @@ const reducer = (state = initialState, action) => {
 
             if (element) {
                 element.selectedAnswersIds = action.selectedAnswersIndexes;
-                console.log(tempArray);
                 return { ...state, questionRecords: tempArray };
             }
             else {
                 const questionRecord = new QuestionRecord(action.questionIndex, action.selectedAnswersIndexes);
                 tempArray.push(questionRecord);
-                console.log(tempArray);
                 return { ...state, questionRecords: tempArray };
             }
 
