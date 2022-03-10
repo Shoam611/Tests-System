@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { submitRecord, updateQuestion } from "Store/actions/test_event";
-import { Article, Btn, Line } from "UIKit";
+import { Article, Box, Btn, Line } from "UIKit";
 import Card from "UIKit/Layouts/Card";
 import QuestionViewer from "./QuestionViewer";
 import './testView.css';
 const TestView = () => {
+    // const [, forceUpdate] = useReducer(x => x + 1, 0);
     const { id } = useParams();
     const dispatch = useDispatch();
     const test = useSelector(state => state.tests.tests).find(t => t._id === id);
@@ -26,16 +27,43 @@ const TestView = () => {
         setCurrentQuestion(prevState => { return prevState + 1 });
     }
     const updateSelectedAnswers = () => {
-        const selectedAnswersIndexes = answersList.filter(a => a.isSelected).map(a => ({ id: a.id }));
-
         if (currentQuestionIndex < 0 || currentQuestionIndex >= orderOfQuestions.length) return;
+        const selectedAnswersIndexes = answersList.filter(a => a.isSelected).map(a => ({ id: a.id }));
         dispatch(updateQuestion(orderOfQuestions[currentQuestionIndex]._id, selectedAnswersIndexes));
     }
 
     //handlers
     const handleSubmit = () => {
         updateSelectedAnswers();
-        dispatch(submitRecord(user._id, test._id, questions, pickedAnswers));
+        const score = calcScore(questions, pickedAnswers);
+        dispatch(submitRecord(user._id, test._id, score));
+    }
+
+    const calcScore = (questions, pickedAnswers) => {
+        let score = 100;
+        let answers = [];
+        let subtract = 100 / questions.length;
+        for (let i = 0; i < questions.length; i++) {
+            for (let j = 0; j < pickedAnswers.length; j++) {
+                if (questions[i]._id === pickedAnswers[j].questionId) {
+                    if (questions[i].correctAnswerIds) {
+                        const result = questions[i].correctAnswerIds.map(a => pickedAnswers[j].selectedAnswersIds.some(ab => a === ab.id));
+                        if (result.every(r => r === true)) {
+                            pickedAnswers[j].wasRight = true;
+                            answers.push(true);
+                        }
+                        else {
+                            pickedAnswers[j].wasRight = false;
+                            answers.push(false);
+                        }
+                    }
+                }
+            }
+        }
+        answers.forEach(element => (
+            element === true ? '' : score -= subtract
+        ))
+        return score;
     }
 
     const shuffle = arr => {
@@ -46,10 +74,15 @@ const TestView = () => {
         })
     };
 
-    const renderQuestionNavigation = () => {
-        orderOfQuestions.map(q => q);
-        return null;
+    const questionNavigation = (index) => {
+        updateSelectedAnswers();
+
+        setCurrentQuestion(index);
     }
+
+    const renderQuestionNavigation = () => orderOfQuestions.map((q, index) => (
+        <Box key={q._id} onClick={() => { questionNavigation(index) }}> {index + 1} </Box>
+    ));
 
     const initialQuestionsComponents = () => {
         if (orderOfQuestions.length === 0)
@@ -58,11 +91,11 @@ const TestView = () => {
         if (currentQuestionIndex < 0 || currentQuestionIndex >= orderOfQuestions.length) return null;
 
         const indexesOfPickedAnswers = pickedAnswers[currentQuestionIndex];
-        const currentAnswers = (orderOfQuestions.map((q) => (q.answers))[currentQuestionIndex]).map(answer => ({
+        const currentAnswers = orderOfQuestions[currentQuestionIndex].answers.map(answer => ({
             id: answer.id,
             render: <Line>{answer.value}</Line>,
             value: answer,
-            isSelected: indexesOfPickedAnswers ? indexesOfPickedAnswers.selectedAnswersIds.find(a => a.id === answer.id) : false,
+            isSelected: indexesOfPickedAnswers ? indexesOfPickedAnswers.selectedAnswersIds.findIndex(a => a.id === answer.id) > -1 : false,
         }));
 
         answersList.splice(0, answersList.length, ...currentAnswers);
@@ -86,16 +119,12 @@ const TestView = () => {
                     <Line>
                         {renderQuestionNavigation()}
                     </Line>
-                </div>
-                )
-                :
+                </div>) :
                 <div>
                     <Article><h1>{test?.header}</h1></Article>
                     <Btn onClick={onNext}>Start</Btn>
                 </div>}
-
         </div>
-
     )
 }
 

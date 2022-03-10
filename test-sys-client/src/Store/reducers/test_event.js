@@ -15,8 +15,7 @@ const reducer = (state = initialState, action) => {
 
         case UPDATERECORD:
             const tempArray = state.questionRecords;
-            const element = (tempArray.find(qr => qr.questionId === action.questionIndex));
-
+            const element = tempArray.find(qr => qr.questionId === action.question_id);
             if (element) {
                 element.selectedAnswersIds = action.selectedAnswersIndexes;
                 return { ...state, questionRecords: tempArray };
