@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { updateQuestion } from "Store/actions/test_event";
+import { submitRecord, updateQuestion } from "Store/actions/test_event";
 import { Box, Btn, Line } from "UIKit";
 import QuestionViewer from "./QuestionViewer";
 import './testView.css';
@@ -29,15 +29,13 @@ const TestView = () => {
         const selectedAnswersIndexes = answersList.filter(a => a.isSelected).map(a => ({ id: a.id }));
 
         if (currentQuestionIndex < 0 || currentQuestionIndex >= orderOfQuestions.length) return;
-        dispatch(updateQuestion(currentQuestionIndex, selectedAnswersIndexes));
+        dispatch(updateQuestion(orderOfQuestions[currentQuestionIndex]._id, selectedAnswersIndexes));
     }
 
     //handlers
     const handleSubmit = () => {
-        console.log('submitted');
-        console.log('User >', user);
-        console.log('Questions >', questions);
-        console.log('Test >', test);
+        updateSelectedAnswers();
+        dispatch(submitRecord(user._id, test._id, questions, pickedAnswers));
     }
 
     const shuffle = arr => {
@@ -54,16 +52,13 @@ const TestView = () => {
 
         if (currentQuestionIndex < 0 || currentQuestionIndex >= orderOfQuestions.length) return null;
 
-        //take the value from use selector and if it exits mark it true so the answered things stay answered
         const indexesOfPickedAnswers = pickedAnswers[currentQuestionIndex];
-        console.log('indexesOfPickedAnswers >', pickedAnswers[currentQuestionIndex]);
         const currentAnswers = (orderOfQuestions.map((q) => (q.answers))[currentQuestionIndex]).map(answer => ({
             id: answer.id,
             render: <Line>{answer.value}</Line>,
             value: answer,
             isSelected: indexesOfPickedAnswers ? indexesOfPickedAnswers.selectedAnswersIds.find(a => a.id === answer.id) : false,
         }));
-        console.log(currentAnswers)
 
         answersList.splice(0, answersList.length, ...currentAnswers);
 

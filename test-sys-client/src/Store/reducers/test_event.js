@@ -1,4 +1,4 @@
-import { SETINITIALS, ADDRECORD, UPDATERECORD } from "Store/actions/test_event";
+import { SETINITIALS, SUBMITRECORD, UPDATERECORD } from "Store/actions/test_event";
 import QuestionRecord from "models/questionRecord";
 
 const initialState = {
@@ -11,13 +11,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case SETINITIALS:
-            const temp = state;
-            temp.testTaken = action.initial.testId;
-            temp.user = { ...action.initial.user, updatedAt: new Date().toISOString() };
-            return { ...state, testTaken: temp.testTaken, user: temp.user };
-
-        case ADDRECORD:
-            return state;
+            return { ...state, testTaken: action.initial.testId, user: { ...action.initial.user, updatedAt: new Date().toISOString() } };
 
         case UPDATERECORD:
             const tempArray = state.questionRecords;
@@ -28,10 +22,13 @@ const reducer = (state = initialState, action) => {
                 return { ...state, questionRecords: tempArray };
             }
             else {
-                const questionRecord = new QuestionRecord(action.questionIndex, action.selectedAnswersIndexes);
+                const questionRecord = new QuestionRecord(action.question_id, action.selectedAnswersIndexes);
                 tempArray.push(questionRecord);
                 return { ...state, questionRecords: tempArray };
             }
+
+        case SUBMITRECORD:
+            return { ...action.record }
 
         default: return state;
     }
