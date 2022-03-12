@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { submitRecord, updateQuestion } from "Store/actions/test_event";
-import { Article, Box, Btn, Line } from "UIKit";
+import { Article, Box, Btn, GradientBorder, Line } from "UIKit";
 import Card from "UIKit/Layouts/Card";
 import QuestionViewer from "./QuestionViewer";
 import './testView.css';
@@ -17,7 +17,10 @@ const TestView = props => {
     const [currentQuestionIndex, setCurrentQuestion] = useState(-1);
     const [orderOfQuestions] = useState([]);
     const [answersList] = useState([]);
+    const [score, setScore] = useState(0);
+    const [answeredRight, setAnsweredRight] = useState(0);
     const [showModal, setShowModal] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     const onPrev = () => {
         updateSelectedAnswers();
@@ -36,8 +39,10 @@ const TestView = props => {
     //handlers
     const handleSubmit = () => {
         updateSelectedAnswers();
-        const score = calcScore(questions, pickedAnswers);
-        dispatch(submitRecord(user._id, test._id, score));
+        const tempTcore = calcScore(questions, pickedAnswers);
+        setScore(tempTcore);
+        dispatch(submitRecord(user._id, test._id, tempTcore));
+        setIsSubmitted(true);
     }
 
     const calcScore = (questions, pickedAnswers) => {
@@ -61,9 +66,11 @@ const TestView = props => {
                 }
             }
         }
+        let answeredRightTemp = 0;
         answers.forEach(element => (
-            element === true ? '' : score -= subtract
+            element === true ? answeredRightTemp++ : score -= subtract
         ))
+        setAnsweredRight(answeredRightTemp);
         return score;
     }
 
@@ -78,7 +85,7 @@ const TestView = props => {
     const onFullShowHandler = () => {
         setShowModal(!showModal);
     }
-    
+
     //renders
     const questionNavigation = (index) => {
         updateSelectedAnswers();
@@ -109,30 +116,60 @@ const TestView = props => {
         return <QuestionViewer key={orderOfQuestions[currentQuestionIndex]._id} list={answersList} {...orderOfQuestions[currentQuestionIndex]} />;
     }
 
-    return (
-        <div>
-            {!test && < h1 >Loading Data...</h1 >}
+    const renderQweez = () => {
+        return (
+            <div>
+                {!test && < h1 >Loading Data...</h1 >}
 
-            {+currentQuestionIndex >= 0 ?
-                (<div>
-                    <Card >
-                        {initialQuestionsComponents()}
-                    </Card>
-                    <Line>
-                        {currentQuestionIndex >= 1 && <Btn onClick={onPrev}>Previous</Btn>}
-                        {orderOfQuestions.length - currentQuestionIndex === 1 ? <Btn onClick={onFullShowHandler}>Submit</Btn> : <Btn onClick={onNext}>Next</Btn>}
-                        {showModal ? <SubmittingModal onConfirm={onFullShowHandler} onSubmit={handleSubmit} /> : ''}
-                    </Line>
-                    
-                    <Line>
-                        {renderQuestionNavigation()}
-                    </Line>
-                </div>) :
-                <div>
-                    <Article><h1>{test?.header}</h1></Article>
-                    <Btn onClick={onNext}>Start</Btn>
-                </div>}
-        </div>
+                {+currentQuestionIndex >= 0 ?
+                    (<>
+                        <Card >
+                            {initialQuestionsComponents()}
+                        </Card>
+
+                        <Line justify="space-between">
+                            {currentQuestionIndex >= 1 && <Btn onClick={onPrev}>Previous</Btn>}
+                            {orderOfQuestions.length - currentQuestionIndex === 1 ? <Btn onClick={onFullShowHandler}>Submit</Btn> : <Btn onClick={onNext}>Next</Btn>}
+                            {showModal ? <SubmittingModal onConfirm={onFullShowHandler} onSubmit={handleSubmit} /> : ''}
+                        </Line>
+
+                        <GradientBorder to="left" top>
+                            <Line >
+                                {renderQuestionNavigation()}
+                            </Line>
+                        </GradientBorder>
+                    </>) :
+                    <>
+                        <Article><h1>{test?.header}</h1></Article>
+                        <Btn onClick={onNext}>Start</Btn>
+                    </>}
+            </div>
+        );
+    }
+
+    const showWhereWasWrong = () => {
+        return (
+            <div>
+               
+            </div>
+        );
+    }
+
+    const renderPostQweez = () => {
+        return (
+            <div>
+                <h1>{score >= test.passingGrade ? test.msgOnSucc : test.msgOnFail}</h1>
+                <h3>You Scored {score}.</h3>
+                <h4>Answered {answeredRight} Out of {questions.length} Questions Right!</h4>
+                {test.showIfWrong ? showWhereWasWrong() : ''}
+            </div>
+        );
+    }
+
+    return (
+        <>
+            {!isSubmitted ? renderQweez() : renderPostQweez()}
+        </>
     )
 }
 

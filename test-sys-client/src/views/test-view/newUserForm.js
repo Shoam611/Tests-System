@@ -3,7 +3,7 @@ import User from "models/UserModel";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
-import { Btn, Input } from "UIKit";
+import { Article, Btn, Input, Line } from "UIKit";
 import { setInitial } from "Store/actions/test_event";
 
 const NewUserForm = props => {
@@ -69,19 +69,21 @@ const NewUserForm = props => {
     }
 
     return (
-        <>
+        <Article>
             <h2>Personal Information For Test {id}</h2>
             <h4>First Name</h4>
-            <Input placeholder="First name" {...userFirstName} />
+            <Input className="place-holder-center" placeholder="First name" {...userFirstName} />
             <h4>Last Name</h4>
-            <Input placeholder="Last Name" {...userLastName} />
+            <Input className="place-holder-center" placeholder="Last Name" {...userLastName} />
             <h4>Email</h4>
-            <Input placeholder="Email" {...userEmail} />
+            <Input className="place-holder-center" placeholder="Email" {...userEmail} />
             <h4>Phone Number</h4>
-            <Input placeholder="Phone Number" {...userPhoneNumber} />
+            <Input className="place-holder-center" placeholder="Phone Number" {...userPhoneNumber} />
             <p>{errorMessage}</p>
-            <Btn onClick={handleSubmit}>Submit</Btn>
-        </>);
+            <Line justify="around">
+                <Btn onClick={handleSubmit}>Submit</Btn>
+            </Line>
+        </Article>);
 }
 
 export default NewUserForm;
