@@ -1,4 +1,5 @@
-import { useReducer, useState } from "react";
+import SubmittingModal from "components/SubmittingModal";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { submitRecord, updateQuestion } from "Store/actions/test_event";
@@ -6,8 +7,7 @@ import { Article, Box, Btn, Line } from "UIKit";
 import Card from "UIKit/Layouts/Card";
 import QuestionViewer from "./QuestionViewer";
 import './testView.css';
-const TestView = () => {
-    // const [, forceUpdate] = useReducer(x => x + 1, 0);
+const TestView = props => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const test = useSelector(state => state.tests.tests).find(t => t._id === id);
@@ -17,6 +17,7 @@ const TestView = () => {
     const [currentQuestionIndex, setCurrentQuestion] = useState(-1);
     const [orderOfQuestions] = useState([]);
     const [answersList] = useState([]);
+    const [showModal, setShowModal] = useState(false);
 
     const onPrev = () => {
         updateSelectedAnswers();
@@ -74,6 +75,11 @@ const TestView = () => {
         })
     };
 
+    const onFullShowHandler = () => {
+        setShowModal(!showModal);
+    }
+    
+    //renders
     const questionNavigation = (index) => {
         updateSelectedAnswers();
 
@@ -114,8 +120,10 @@ const TestView = () => {
                     </Card>
                     <Line>
                         {currentQuestionIndex >= 1 && <Btn onClick={onPrev}>Previous</Btn>}
-                        {orderOfQuestions.length - currentQuestionIndex === 1 ? <Btn onClick={handleSubmit}>Submit</Btn> : <Btn onClick={onNext}>Next</Btn>}
+                        {orderOfQuestions.length - currentQuestionIndex === 1 ? <Btn onClick={onFullShowHandler}>Submit</Btn> : <Btn onClick={onNext}>Next</Btn>}
+                        {showModal ? <SubmittingModal onConfirm={onFullShowHandler} onSubmit={handleSubmit} /> : ''}
                     </Line>
+                    
                     <Line>
                         {renderQuestionNavigation()}
                     </Line>

@@ -33,9 +33,9 @@ export const submitRecord = (userId, testId, score) => {
         console.log('submitted');
         const questionRecord = getState().testRecord.questionRecords;
         const recordForServer = { questions: questionRecord, userId: userId, testId: testId, score: score };
-        const response = await runPostRequest("http://localhost:4200/testRecords", { newTestReport: recordForServer });
-        console.log(response);
-        dispatch({ type: SUBMITRECORD });
+        await runPostRequest("http://localhost:4200/testRecords", { newTestReport: recordForServer });
+
+        // dispatch({ type: SUBMITRECORD });
     }
 }
 const compareUsers = (user, array) => array.find(u => u.email.toLowerCase() === user.email.toLowerCase() || u.phoneNumber === user.phoneNumber);

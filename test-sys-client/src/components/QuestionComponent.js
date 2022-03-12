@@ -21,7 +21,7 @@ const QuestionComponentOverlay = (props) => {
         <h2>{props.questionText}</h2>
       </header>
       <div className="content">
-        <h3>Topic: {props.topic.name}</h3>
+        <h3>Topic: {props.topicName}</h3>
         <p>Question Type: {props.questionType === 1 ? "Single Answer" : "Multi Answer Type"}</p>
         <p>Text Above Question: {props.textAbove}</p>
         <p>Question Text: {props.questionText}</p>
