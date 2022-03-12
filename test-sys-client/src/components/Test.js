@@ -13,7 +13,7 @@ const Test = (props) => {
         <Box>
             <div className='tests-container-item'>
                 <h4>{props.name}</h4>
-                <h4>{props.questions.length} Questions</h4>
+                <h4>{props.questions?.length} Questions</h4>
                 <h4>{normalizeDate(props.updatedAt)}</h4>
                 <div className="actions">
                     <Btn i='' onClick={() => { navigate(`editTest/${props._id}`, { replace: false }) }}>Edit</Btn>

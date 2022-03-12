@@ -1,5 +1,6 @@
 .Article {
     text-align: center;
+    inline-size: 90%;
 }
 
 .Article .content {

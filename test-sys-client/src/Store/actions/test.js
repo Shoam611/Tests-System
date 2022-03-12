@@ -28,5 +28,3 @@ export const updateTest = (newTest, id) => {
         dispatch({ type: UPDATE, newTest, id });
     }
 }
-
-

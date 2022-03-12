@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { updateQuestion } from "Store/actions/question";
+import { editQuestion } from "Store/actions/question";
 
 import { presentationAxis, questionTypes } from "models/presentationAxis";
 import './editQuestionView.css'
@@ -69,7 +69,7 @@ const EditQuestionView = () => {
         const newQuestion = new Question(topic._id, question.questionType, newQuestionText.value, newTextAbove.value, newTextBelow.value, tags.value, newAnswers.map(({ value }, index) => ({ value, id: index })), getIndexes(newAnswers), selectedAxis);
         const [value,message] =newQuestion.validate()
         if (value) {
-            dispatch(updateQuestion(newQuestion, question._id));
+            dispatch(editQuestion(newQuestion, question._id));
             navigate(-1);
         }
         else alert(message);

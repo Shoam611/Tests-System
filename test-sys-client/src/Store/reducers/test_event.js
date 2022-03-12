@@ -1,5 +1,6 @@
-import { FETCH, DELETE, UPDATE, SET } from "Store/actions/test_event";
+import { SETINITIALS, SUBMITRECORD, UPDATERECORD } from "Store/actions/test_event";
 import QuestionRecord from "models/questionRecord";
+
 const initialState = {
     questionRecords: [],
     user: {},
@@ -9,18 +10,30 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET:
-            const temp = state;
-            temp.user = { ...action.user, updatedAt: new Date().toISOString() };
-            return { ...state, questionRecords: temp };
+        case SETINITIALS:
+            return { ...state, testTaken: action.initial.testId, user: { ...action.initial.user, updatedAt: new Date().toISOString() } };
 
-        case UPDATE: return state;
-        // case FETCH:
-        //     if (action.newQuestionReports) {
-        //         return { ...state, questionRecords: action.newQuestionReports };
-        //     }
-        //     else
-        //         return state;
+        case UPDATERECORD:
+            const tempArray = state.questionRecords;
+            const element = tempArray.find(qr => qr.questionId === action.question_id);
+            if (element) {
+                element.selectedAnswersIds = action.selectedAnswersIndexes;
+                return { ...state, questionRecords: tempArray };
+            }
+            else {
+                const questionRecord = new QuestionRecord(action.question_id, action.selectedAnswersIndexes);
+                tempArray.push(questionRecord);
+                return { ...state, questionRecords: tempArray };
+            }
+
+        case SUBMITRECORD:
+            return {
+                questionRecords: [],
+                user: {},
+                testTaken: '',
+                score: NaN,
+            }
+
         default: return state;
     }
 }

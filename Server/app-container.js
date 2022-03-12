@@ -13,8 +13,8 @@ const UserRepository = require("./data/userRepository.js");
 const TopicController = require("./controllers/topicController.js");
 const TopicRepository = require('./data/topicsRepository.js');
 
-const QuestionReportsController = require("./controllers/questionReportsController.js");
-const QuestionReportRepository = require("./data/questionReportRepository.js");
+const TestRecordsController = require("./controllers/testRecordsController.js");
+const TestRecordRepository = require("./data/testRecordRepository.js");
 
 const setup = () => {
   container.register({
@@ -30,8 +30,8 @@ const setup = () => {
     topicRepository: awilix.asClass(TopicRepository).singleton(),
     topicController: awilix.asClass(TopicController).singleton(),
 
-    questionReportsController: awilix.asClass(QuestionReportsController).singleton(),
-    questionReportRepository: awilix.asClass(QuestionReportRepository).singleton(),
+    testRecordsController: awilix.asClass(TestRecordsController).singleton(),
+    testRecordRepository: awilix.asClass(TestRecordRepository).singleton(),
 
     logger: awilix.asValue(logger),
   });
