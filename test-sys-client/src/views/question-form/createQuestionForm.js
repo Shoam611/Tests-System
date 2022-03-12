@@ -79,6 +79,7 @@ const CreateQuestionForm = () => {
             clear();
         }
         setErrorMessage(message);
+        setTimeout(() => { setErrorMessage(''); }, 7000);
     }
     //side-effects
     useEffect(() => {

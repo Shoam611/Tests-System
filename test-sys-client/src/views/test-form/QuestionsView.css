@@ -55,3 +55,7 @@ ul[display="row"] {
 .inline-button-text {
   display: inline-flex;
 }
+
+.error-message {
+  color: red;
+}

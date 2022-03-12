@@ -71,7 +71,7 @@ const TestView = props => {
             element === true ? answeredRightTemp++ : score -= subtract
         ))
         setAnsweredRight(answeredRightTemp);
-        return score;
+        return Math.floor(score);
     }
 
     const shuffle = arr => {
@@ -147,21 +147,12 @@ const TestView = props => {
         );
     }
 
-    const showWhereWasWrong = () => {
-        return (
-            <div>
-               
-            </div>
-        );
-    }
-
     const renderPostQweez = () => {
         return (
             <div>
                 <h1>{score >= test.passingGrade ? test.msgOnSucc : test.msgOnFail}</h1>
                 <h3>You Scored {score}.</h3>
                 <h4>Answered {answeredRight} Out of {questions.length} Questions Right!</h4>
-                {test.showIfWrong ? showWhereWasWrong() : ''}
             </div>
         );
     }

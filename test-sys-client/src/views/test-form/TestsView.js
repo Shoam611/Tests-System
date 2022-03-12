@@ -57,6 +57,7 @@ const TestsView = () => {
             navigate('/qweezes/create/form');
         }
         setErrorMessage(message);
+        setTimeout(() => { setErrorMessage(''); }, 10000);
     }
     const resetForms = () => {
         setTestData('');
@@ -94,7 +95,7 @@ const TestsView = () => {
             <div className="questions-view-outlet-container">
                 <div className="inline-button-text">
                     <Btn onClick={handleSubmit} i="chevron-down">Submit</Btn>
-                    <p className='errorMessage'> {errorMessage}</p>
+                    <p className='error-message'> {errorMessage}</p>
                 </div>
                 <Routes >
                     <Route path="/" element={steps[0]} />
