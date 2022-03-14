@@ -13,7 +13,6 @@ const ReportView = () =>{
     return (
         <div>
             <h1>Report for quiz :{id?id:'quizId'}</h1>
-
         </div>
     )
 }

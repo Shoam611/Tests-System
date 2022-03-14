@@ -1,14 +1,14 @@
 import useInput from "hooks/useInput";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {useNavigate} from 'react-router-dom'
+import { useSelector } from "react-redux";
+// import {useNavigate} from 'react-router-dom'
 import { Box, Input, Line } from "UIKit";
 import TestItem from './testItem.js'
 import './quizReport.css'
 const QuizReport = () => {
     //states
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
+    // const navigate = useNavigate();
+    // const dispatch = useDispatch();
     const topic = useSelector(state => state.topic.topic)
     const tests = useSelector(state => state.tests.tests);
     const [viewedTests, setViewedTests] = useState([]);
@@ -41,11 +41,31 @@ const QuizReport = () => {
         if (keyWords.trim().length === 0) setViewedTests(tests);
     }
     //handelers
- 
+    const validateDateRange = () => {
+        //has date
+        if (minDate.value.trim().length === 0) {
+            alert('please ensure you selected a valid date for "from" date')
+            return false;
+        }
+        if (maxDate.value.trim().length === 0){
+            alert('please ensure you selected a valid date for "to" date')
+            return false;
+        }
+        //both must be no more then today
+    };
+    const generateReport = (testId) => {
+        console.log(testId);
+        const isValidDateRage = validateDateRange();
+        if(isValidDateRage){
+            console.log(minDate.value);
+            console.log(maxDate.value);
+            // if(test)
+        }
+    }
     //renderers
     const renderTests = () => {
         return (viewedTests.length === 0 ? <h2>No Tests Available For The Selected Topic: {topic.name}.</h2> :
-            viewedTests.map((t) => <TestItem key={t._id} {...t} />))
+            viewedTests.map((t) => <TestItem key={t._id} {...t} onGenerateReport={generateReport} />))
     }
     const renderHeader = () => (
         <div className='report-tests-table-header'>

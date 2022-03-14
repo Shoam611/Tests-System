@@ -11,7 +11,8 @@ const TestItem = (props) => {
         return new Date(inputDate).toLocaleDateString('en-EN', options);
     }
     const generateReport = () => {
-      navigate(props._id);
+        props.onGenerateReport(props._id);
+        // navigate(props._id);
     }
     //render
     return (
