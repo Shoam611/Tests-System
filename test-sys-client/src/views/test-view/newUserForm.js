@@ -18,9 +18,9 @@ const NewUserForm = props => {
 
     //RegEx validation
     const ValidateEmail = (mail) => {
-        if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(mail)) {
+        if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(mail))
             return true;
-        }
+
         return false;
     }
     const ValidatePhoneNumber = (phoneNumber) => {

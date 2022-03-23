@@ -18,7 +18,7 @@ const CreateQuestionForm = () => {
     const [questionType, setQuestionType] = useState(null);   //selected q type
     const [answers] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
-    //inputs
+    //inputsD
     const Question_text = useInput();
     const Text_above_question = useInput();
     const Text_below_question = useInput();
