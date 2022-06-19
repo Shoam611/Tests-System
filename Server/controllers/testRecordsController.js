@@ -8,18 +8,17 @@ class TestRecordsController {
         if (!newTestReport) { return null; }
         return await this.testRecordRepository.addAsync(newTestReport);
     }
-
-    deleteTestReport = ({ body }) => this.testRecordRepository.DeleteOneAsync(body.id);
-
-    updateTestReport = async ({ body }) => {
-        const { id } = body;
-        const { newTestReport } = body;
-        return await this.testRecordRepository.UpdateTestReport(id, newTestReport);
-    }
-
-    getTestReports = async () => {
+    
+    getTestReport = async ({id}) => {
+        //go to service () //not repository;
         return await this.testRecordRepository.getAsync();
     }
+    // deleteTestReport = ({ body }) => this.testRecordRepository.DeleteOneAsync(body.id);
+    // updateTestReport = async ({ body }) => {
+    //     const { id } = body;
+    //     const { newTestReport } = body;
+    //     return await this.testRecordRepository.UpdateTestReport(id, newTestReport);
+    // }
 }
 
 module.exports = TestRecordsController;

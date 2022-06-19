@@ -17,8 +17,7 @@
     letter-spacing: var(--letter-space-s);
     border: none;
 }
-
-.Input input, .Input input:active {
+.Input input, .Input input:active{
     border: none;
     outline: none;
 }
@@ -38,7 +37,7 @@
     opacity: 0.8;
 }
 
-.Input input:focus[type="submit"] {
+.Input input:focus[type="submit"]{
     opacity: 0.9;
     border: none;
 }

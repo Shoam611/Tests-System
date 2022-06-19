@@ -1,16 +1,18 @@
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 import { Box, Btn } from "UIKit";
 
 const TestItem = (props) => {
+    const dispatch = useDispatch();
+    const navigate =useNavigate();
     //handelers
     const normalizeDate = (inputDate) => {
         const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
         return new Date(inputDate).toLocaleDateString('en-EN', options);
     }
-
-    const dispatch = useDispatch()
     const generateReport = () => {
-        
+        props.onGenerateReport(props._id);
+        // navigate(props._id);
     }
     //render
     return (
