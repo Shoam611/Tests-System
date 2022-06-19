@@ -8,7 +8,7 @@
     letter-spacing: var(--letter-space-s);
     border: none;
 }
-.Input input,.Input input:active{
+.Input input, .Input input:active{
     border: none;
     outline: none;
 }
@@ -22,10 +22,10 @@
     color: #fff;
     letter-spacing: var(--letter-space-m);
 }
+
 .Input input:hover[type="submit"] {
     opacity: 0.8;    
 }
-
 
 .Input input:focus[type="submit"]{
     opacity: 0.9;

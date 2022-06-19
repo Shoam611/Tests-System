@@ -18,7 +18,6 @@ a{
   text-decoration:none;
   font-weight: var(--font-weight-m);
 }
-
 .active {
   color:var(--accent);
 }
@@ -41,5 +40,3 @@ input :active ,input:focus{
   margin: 0;
   padding: 0;
 }
-/* h3{
-} */
