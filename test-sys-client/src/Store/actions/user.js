@@ -12,10 +12,10 @@ export const addUser = (newUser) => {
         dispatch({ type: ADD, newUser: {...newUser, _id } })
     }
 }
-
 export const fetchUsers = () => {
     return async (dispatch, getState) => {
         const response = await axios.get(`http://localhost:4200/users`);
-        dispatch({ type: FETCH, newUsers: response.data });
+        const resData = await response.data
+        dispatch({ type: FETCH, newUsers: resData });
     }
 }
